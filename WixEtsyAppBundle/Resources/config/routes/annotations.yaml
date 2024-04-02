@@ -1,0 +1,12 @@
+wixetsyapp:
+    resource: '@WixEtsyAppBundle/Controller/'
+    type: annotation
+    prefix: '/{_locale}/{platform}/app/{app_code}/{storeHash}/{area}'
+    requirements: { _locale: '%app_locales%', platform: wix, app_code: wixetsy, area: admin }
+    defaults: { _locale: '%app_locales%', platform: wix, app_code: wixetsy, area: admin }
+sampleapproute:
+    resource: '@WixEtsyAppBundle/Controller/'
+    type: annotation
+    prefix: '/{_locale}/{platform}/app/{app_code}/{storeHash}/{area}'
+    requirements: { _locale: '%app_locales%', platform: wix, app_code: wixetsy, area: admin }
+    defaults: { _locale: '%app_locales%', platform: wix, app_code: wixetsy, area: admin }

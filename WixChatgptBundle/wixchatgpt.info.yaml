@@ -1,0 +1,8 @@
+name: ChatGPT-SEO And Product Content
+app_id: wixchatgptcontent
+description: This application will help the admin to write automatic desciption of any product.
+version: 1.0.0
+author: Webkul
+load_redirect: wixchatgptcontent_settings_general
+auth_redirect: wixchatgptcontent_settings_general
+app_path: Modules/Wix/WixChatgptBundle

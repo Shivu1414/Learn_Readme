@@ -1,0 +1,19 @@
+name: Etsy Integration
+app_id: wixetsy
+description: Wix Etsy Connector
+version: 1.0.0
+author: Webkul
+load_redirect: wixetsy_app_setting
+auth_redirect: wixetsy_app_setting
+app_path: Modules/Wix/WixEtsyAppBundle
+plan_features:
+    max_products:
+       label: maximum_number_of_products
+       input:
+         type: input
+         class: wk-integer
+         default: 4
+routes:
+  sampleapproute: 
+    controller: "Controller/"
+    area: admin

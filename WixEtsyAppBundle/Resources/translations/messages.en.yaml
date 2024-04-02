@@ -1,0 +1,98 @@
+sampleapp_dashboard: Sample Application Dashboard
+wixetsy_integration_dashboard: Etsy Integration Dashboard
+app_setting: App Settings
+wixetsy_keystring: Key String
+sync_status: Sync Status
+wixetsy_connection: Etsy Connection
+wixesty_disconnect: Disconnect
+wixetsy_setting_save_success: Setting Saved Successfully !
+wixesty_connect: Authenticate Etsy Shop
+wixetsy_setting_save_first: Kindly Save the Settings First !!
+wixetsy_setting_data_miss: Some Setting Data is missing !!
+etsy_redirect_uri: Redirect URL
+sync_product: Sync from Wix
+wixetsy_authenticated_successfully: Connected Successfully !
+wixetsy_shop_data_synced_successfully: Shop Data Synced Successfully !
+shop_setting: Shop Setting
+set_shop_data: Please save shop data first!
+other_setting: Other Setting
+select_etsy_shop: Select Etsy Shop
+select_shipping_profile: Select Your Fixed Shipping Profile
+sync_shop_data: Sync Shop Data
+shipping_profiles_synced_successfully: Shipping Profiles Synced Successfully !
+set_default_shop_first: Please set the Default Shop and Save the Changes !!
+shipping_profiles_not_found_for_selected_shop: Shipping Profiles Not Found for the selected shops !!
+shops_synced_successfully: Etsy Shops Synced Successfully!
+shop_not_found: Shop Not Found !!
+default_shop_set_successfully: Default Shop Set Successfully !!
+default_shipping_profile_set_successfully: Default Shipping Profile Set Successfully !!
+resync: Sync to Etsy
+select_payment_status: Select Payment Status
+paid: Paid
+not_paid: Not Paid
+select_shipment_status: Select Shipment Status
+shipped: Shipped
+not_shipped: Not Shipped
+select: Select
+receipt_id_comma_separated: Receipt Id (comma separated)
+receipt_id: Receipt Id
+buyer_email: Buyer Email
+ship_status: Ship Status
+category_mapping: Category Mapping
+category_mapping_list: Category Mapping List
+catalog: Category
+sync_data: Sync Data
+sync_wix_categories: Sync Wix Categories
+sync_etsy_categories: Sync Etsy Categories
+sync_etsy_shops: Sync Etsy Shops
+sync_etsy_shipping_profiles: Sync Etsy Shipping Profiles
+wix_category: Wix Category
+select_wix_category: Select Wix Category
+etsy_category: Etsy Category
+select_etsy_category: Select Etsy Category
+category_mappings: Category Mapping List
+please_select_categories_first: Please select Categories first !
+select_default_etsy_category: Select Default Etsy Category
+not_synced: Not Synced
+import_to_etsy: Sync to Etsy
+last_synced: Last Synced
+settings_updated_successfully: Shop Settings Updated Successfully  !
+wix_category_updated_successfully: Wix Categories Synced Successfully !
+etsy_category_updated_successfully: Etsy Categories Synced Successfully !
+category_mapping_added_successfully: Category Mapping added Successfully !
+add_category_mapping: Add Category Mapping
+cannot_delete_category_mapping: Can't delete Category Mapping !
+etsy_authentication_issue: Etsy Authentication Related Issue !
+something_went_wrong_with_etsy_receipts_data: Something went wrong with etsy order data !
+order_not_synced_successfully: Order not synced successfully !
+order_synced_successfully: Order synced successfully !
+wix_order_no: Wix Order
+order_already_exist_on_wix: Order Already Exist on Wix !
+import_to_wix: Sync to Wix
+userguide: User Guide
+userguide_blog_setup: Blog User Guide
+userguide_video_setup: Video User Guide
+save_this_redirecturi_in_esty_app: Save this Redirect URI in the Etsy App
+sync_etsy_shops_in_app: Sync Etsy shop on the end of the app
+sync_etsy_shipping_profiles_in_app: Synchronize Etsy Shipping Profiles in the App
+sync_wix_categories_in_app: Synchronize Wix Categories in the App
+sync_etsy_categories_in_app: Synchronize Etsy Categories in the App
+select_etsy_shop_tooltip: Select the Etsy shop to sync store data
+select_etsy_shipping_profile_tooltip: Select Default Etsy Shipping Profile to Synchronize the Order Data
+select_default_etsy_category_tooltip: Select Default Etsy Category to Synchronize the Order Data
+plan_quota_exhausted: Plan Quota exhausted, Please upgrade your plan first
+not_authenticated: Not Authenticated !
+etsy_not_connected: Please Authenticate your etsy shop first !
+weight_can_not_be_empty: Product Weight should be greater than 0
+sku_length_cannot: SKU length should be less than or Equal to 32 characters including space
+price_cannot_be_more: 'Price must be below max price $50,000.00 USD (Product : Product )' 
+general_setting: General Setting
+etsy_orders: Etsy Orders
+comp: Completed
+not_completed: Not Completed
+set_other_setting: Please Set Other Setting First
+set_other_setting_category: Set default category in other settings!
+product_has_variants: SKU is not available because the product has diffrent sku for each product variant. 
+auto_sync_product_etsy: Auto Sync Product To Etsy
+product_auto_sync_tooltip: This will automatically sync the product to Etsy 
+auto_sync_prots_etsy : Auto Sync Setting

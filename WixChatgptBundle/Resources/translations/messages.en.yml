@@ -1,0 +1,45 @@
+wixchatgptcontent_product_description : Product Description
+wixchatgptcontent_product_header_title : AI Content Generator (ChatGPT)
+wixchatgptcontent_product_name : Product Name
+wixchatgptcontent_product_additional_information : Additional Information
+wixchatgptcontent_number_of_word : Number of Words
+wixchatgptcontent_product_description_type : Description Type (Voice)
+wixchatgptcontent_description_type_conversational :  Conversational
+wixchatgptcontent_description_type_professional :  Professional
+wixchatgptcontent_description_type_informative : Informative
+wixchatgptcontent_description_type_storytelling :  Storytelling
+wixchatgptcontent_description_type_humorous :  Humorous
+wixchatgptcontent_description_type_persuasive :  Persuasive
+wixchatgptcontent_description_type_emotional :  Emotional
+wixchatgptcontent_description_type_sensory :  Sensory
+wixchatgptcontent_description_type_comparative :  Comparative
+wixchatgptcontent_description_type_custom : Custom
+wixchatgptcontent_generate_description : Generate Description
+wixchatgptcontent_ai_product_description : Generated Product Description
+wixchatgptcontent_save_product_description : Save Product Description
+wixchatgptcontent_api_secret : Chat GPT API Secret Key
+wixchatgptcontent_button_save : Save
+wixchatgptcontent_general_settings_saved_successfully : Settings saved successfully
+wixchatgptcontent_chat_gpt_content : Chat GPT Content
+wixchatgptcontent_auto_decription_genereate : Auto-matic Description Generate value
+wixchatgptcontent_number_of_word_title : Description length
+wixchatgptcontent_product_additional_information_title : Write additional information about the product (this is optional)
+wixchatgptcontent_userguide: User Guide
+wixchatgptcontent_userguide_blog_setup: Blog User Guide
+# SEO Page
+wixchatgptcontent_product_seo : Product SEO
+wixchatgptcontent_product_seo_header_title : AI SEO Generator (ChatGPT)
+wixchatgptcontent_generate_seo_tag : Generate SEO Tag
+wixchatgptcontent_product_seo_switch : Automatic SEO
+wixchatgptcontent_product_seo_by_product_name : SEO BY PRODUCT NAME
+wixchatgptcontent_product_seo_by_product_description : SEO BY PRODUCT DESCRIPTION
+wixchatgptcontent_product_seo_tag_generate : Tags Generate
+wixchatgptcontent_product_seo_url_slag : URL Slag
+wixchatgptcontent_product_seo_title_tag : Title tag
+wixchatgptcontent_product_seo_meta_desc : Meta Description
+wixchatgptcontent_product_seo_save_button : Save
+wixchatgptcontent_product_seo_meta_desc_title : Meta Description length
+wixchatgptcontent_product_seo_title_tag-title : Title tag length
+wixchatgptcontent_general_settings_value_empty : API SECRET Key Empty
+wixchatgptcontent_setting_api_key_example : API Secret Key
+wixchatgptcontent_seo_additional_information_title : Generate product SEO using Product name or Product description

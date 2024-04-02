@@ -1,0 +1,9 @@
+wixchatgptcontent_general:
+  fields:
+    wixchatgptcontent_api_secret:
+      type: text
+      id: wixchatgptcontent_secret_key
+      class: form-control
+      label_class: wk-required
+    
+

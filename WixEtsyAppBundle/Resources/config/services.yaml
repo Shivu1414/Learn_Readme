@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Webkul\Modules\Wix\WixEtsyAppBundle\:
+        resource: '../../../WixEtsyAppBundle/*'
+        exclude: '../../../WixEtsyAppBundle/{Entity}'
+
+    Webkul\Modules\Wix\WixEtsyAppBundle\Twig\AppRuntime:
+        public: false
+        tags: ['twig.runtime']

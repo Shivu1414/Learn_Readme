@@ -1,0 +1,2 @@
+Version 1.0
+Are you a store owner looking to enhance your customer's shopping experience and enhance sales? Look no further! We are thrilled to introduce "Virtual try-on", the app that brings the power of try-on to your online store. With "Virtual try-on", your customers can now visualize themselves wearing sunglasses, bindi's, and lipsticks, all from the comfort of their own homes. Virtual Try-On empowers your customers to make confident buying decisions by virtually trying on various products.

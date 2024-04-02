@@ -1,0 +1,60 @@
+<div class="tile">
+    <div class="row">
+        <div class="col-md-5 order-md-2">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tile-title-w-btn">
+                            <h5 class="title"></h5>
+                            <div class="btn-group"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                    {% if  authData is null %}
+                        <h2 class="">Authenticate Your Etsy Shop</h2>
+                        <p>Please click on the below button and then click on the "Grant Access" button.</p>
+                        <small>
+                            * This application uses the Etsy API but is not endorsed or certified by Etsy, Inc.
+                        </small>
+                        <div class="form-controll">
+                            <div class="text-center">
+                                <div class="">
+                                    <a href ="{{ path('wixetsy_app_setting_connect', {'storeHash': company.storeHash, 'event' : 'wixetsy_connect'}) }}" class="btn btn-success"  id="connect_wixetsy">{{ 'wixesty_connect' | trans }} </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% elseif  authData.getAccessToken is defined and authData.getAccessToken is null or authData.getAccessToken == "" %}
+                        <h2 class="">Authenticate Your Etsy Shop</h2>
+                        <p>Please click on the below button and then click on the "Grant Access" button.</p>
+                        <small>
+                            * This application uses the Etsy API but is not endorsed or certified by Etsy, Inc.
+                        </small>
+                        <div class="form-controll">
+                            <div class="text-center">
+                                <div class="">
+                                    <a href ="{{ path('wixetsy_app_setting_connect', {'storeHash': company.storeHash, 'event' : 'wixetsy_connect'}) }}" class="btn btn-success"  id="connect_wixetsy">{{ 'wixesty_connect' | trans }} </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <h2 class="text-success">Etsy Store Authenticated Succesfully</h2>
+                            <small>
+                                * This application uses the Etsy API but is not endorsed or certified by Etsy, Inc.
+                            </small></br></br>
+                            <div class="text-center">
+                                <div class="">
+                                    <a href ="{{ path('wixetsy_app_setting_disconnect', {'storeHash': company.storeHash, 'event' : 'wixetsy_disconnect'}) }}" class="btn btn-danger"  id="connect_wixetsy">{{ 'wixesty_disconnect' | trans }} </a>
+                                </div>
+                            </div>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 d-flex align-items-start justify-content-end order-md-1 mt-2">
+            <img class="" width="110%" src="{{ asset('resource/images/submodules/wix/etsy/connection.svg') }}" alt="">
+        </div>
+    </div>
+</div>

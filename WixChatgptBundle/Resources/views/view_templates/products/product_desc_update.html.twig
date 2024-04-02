@@ -1,0 +1,80 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="tile" style="border: 1px solid lightgray">
+			<h4 class="tile-header"> {{ 'wixchatgptcontent_product_header_title'|trans }} </h4>
+			<hr class="divider-solid">
+            <div class="tile-body">
+
+				<form id="chat-gpt-form">
+					<div class="row p-4">
+
+						<div class="col-lg-12 col-sm-12">
+
+							<div class="form-group">
+								<label for="product-name"> {{ 'wixchatgptcontent_product_name'|trans }} <span class="span-required"> * </span> </label>
+								<div class="form-group loader-group">
+                                    <input type="text" class="form-control" id="product-name" name="product-name" data-search-url="{{ path('wixchatgptcontent_product_search', {app_code: app_code, storeHash: storeHash}) }}" placeholder="Search Product Name">
+									<ul id="productLiveSearch" class="list-group product-list" hidden=""></ul>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label placeholder="Additional Information"> {{ 'wixchatgptcontent_product_additional_information'|trans }} <i class="fa fa-info-circle" title="{{ 'wixchatgptcontent_product_additional_information_title'|trans }}"></i> </label>
+								<textarea id="additional-info" class="form-control"  rows="6"></textarea>
+							</div>
+
+							<div class="form-group required">
+								<label class="wk-required" for="num-words"> {{ 'wixchatgptcontent_number_of_word'|trans }}  
+									<i class="fa fa-info-circle" title="{{ 'wixchatgptcontent_number_of_word_title'|trans }}"></i> 
+								</label>
+								<input type="number" class="form-control number-field" id="word-limit" onpaste="return false;" value="80">
+							</div>
+
+							<div class="form-group">
+								<label for="description-type"> {{ 'wixchatgptcontent_product_description_type'|trans }} <span class="span-required"> * </span> </label>
+								<div class="description-type-block">
+									<select class="form-control" id="description-type">
+										<option value="Conversational"> {{ 'wixchatgptcontent_description_type_conversational'|trans }} </option>
+										<option value="Professional"> {{ 'wixchatgptcontent_description_type_professional'|trans }} </option>
+										<option value="Informative"> {{ 'wixchatgptcontent_description_type_informative'|trans }} </option>
+										<option value="Storytelling"> {{ 'wixchatgptcontent_description_type_storytelling'|trans }} </option>
+										<option value="Humorous"> {{ 'wixchatgptcontent_description_type_humorous'|trans }} </option>
+										<option value="Persuasive"> {{ 'wixchatgptcontent_description_type_persuasive'|trans }} </option>
+										<option value="Emotional"> {{ 'wixchatgptcontent_description_type_emotional'|trans }} </option>
+										<option value="Sensory"> {{ 'wixchatgptcontent_description_type_sensory'|trans }} </option>
+										<option value="Comparative"> {{ 'wixchatgptcontent_description_type_comparative'|trans }} </option>
+										<option value="custom" data-value="20 letters max"> {{ 'wixchatgptcontent_description_type_custom'|trans }} </option>
+                                    </select>
+									<input type="text" class="form-control my-2" id="custom-Description" placeholder="Write Description Type" >
+                                </div>
+							</div>
+
+							<div class="form-group">
+								<div class="button-loader loader-group">
+									<button type="button" id="gererate_description_button" class="btn btn-primary"> {{ 'wixchatgptcontent_generate_description'|trans }} </button>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-lg-12 col-sm-12">
+
+							<div class="form-group">
+								<label for="product-description"> {{ 'wixchatgptcontent_ai_product_description'|trans }} </label>
+								<textarea class="form-control" name="description"  id="product-description" placeholder="{{ 'wixchatgptcontent_ai_product_description'|trans }}" rows="10"></textarea>
+                                <small class="form-text"> {{ 'wixchatgptcontent_auto_decription_genereate'|trans }} </small>
+							</div>
+
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary"> {{ 'wixchatgptcontent_save_product_description'|trans }} </button>
+							</div>
+
+						</div>
+
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>

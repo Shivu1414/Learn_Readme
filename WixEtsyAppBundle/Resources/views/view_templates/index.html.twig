@@ -1,0 +1,57 @@
+{% extends 'application/index.html.twig' %}
+
+{% block head_stylesheet %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('Wix/WixEtsyAppBundle/assets/css/style') }}
+{% endblock %}
+
+{% block head_script %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('Wix/WixEtsyAppBundle/assets/js/script') }}
+{% endblock %}
+
+{# {% block header %}
+    {% if header is defined and header == true %}
+        {% include app_path_prefix ~ '/view_templates/helpers/header.html.twig' %}
+    {% endif %}
+{% endblock %} #}
+
+{% block menu %}
+    {% if menu is defined and menu == true %}
+        <!-- Sidebar menu-->
+        <div class="app-sidebar__overlay" data-toggle="sidebar">
+        </div>
+        <aside class="app-sidebar">
+            {# include user profile summary here #}
+            {% if app.user %}
+                {% include 'application/views/common/user_profile_summary.html.twig' %}
+            {% endif %}
+            
+            {% if area == 'mp-wix-seller' %}
+                {% include app_path_prefix ~ '/view_templates/common/menu.html.twig' %}
+            {% else %}
+                {% include 'application/views/common/menu.html.twig' %}
+            {% endif %}
+        </aside>
+    {% endif %}
+{% endblock %}
+
+{% block main_content %}
+    {# <div class="wk-hidden wk-overlay"> #}
+    <div class="wk-overlay">
+        <div class="m-loader mr-4 text-center">
+            <svg class="m-circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"/>
+            </svg>
+        </div>
+    </div>
+    <main class="app-content">
+        {% if breadcrums is defined and breadcrums == true %}
+            {% include 'application/views/common/breadcrums.html.twig' %}
+        {% endif %}
+        {# {% include app_path_prefix ~ '/view_templates/' ~ template_name ~ '.html.twig' %} #}
+        
+        {% set include_path = get_file_path_to_include(app_path_prefix, '/view_templates/' , template_name) %}
+        {% include include_path %}
+    </main>
+{% endblock %}

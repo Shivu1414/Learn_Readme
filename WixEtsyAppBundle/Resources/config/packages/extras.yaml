@@ -1,0 +1,2 @@
+twig:
+    paths: { '%kernel.project_dir%/Modules/Wix/WixEtsyAppBundle/Resources/views/': wixetsy_twig }

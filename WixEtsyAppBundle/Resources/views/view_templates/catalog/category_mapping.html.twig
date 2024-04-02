@@ -1,0 +1,86 @@
+{# {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{{ form_start(form) }}
+{{ form_errors(form) }} #}
+<form method = "POST">
+    <div class="row">    
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-title-w-btn"></div>
+                <div class="tile-title-w-btn"></div>
+                <div class="tile-body">
+                    <div class = "row">
+                        <div class = "col-md-5">
+                            <div class="form-group">
+                                {# {% include 'common/select_combo_box.html.twig'  with {
+                                    data: {
+                                        params:search,
+                                        name:'wix_category',
+                                        label:'wix_category',
+                                        options:wixCategories,
+                                        ajax:true,
+                                        all_option: "No",
+                                        id: "wixCategory"
+                                    }
+                                } %} #}
+                                                       
+                                <label class="form-control-label" for="wix_category">{{"wix_category"|trans}}</label>
+                                <select id="wixCategory" class="form-control" name="wix_category" >
+                                    <option value = "">{{"select_wix_category"|trans}}</option>
+                                    {% for wixCategory in wixCategories %}
+                                        <option value = "{{ wixCategory.categoryId }}">{{ wixCategory.category }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class = "col-md-5">
+                            <div class="form-group">
+                                <label class="form-control-label" for="etsy_category">{{"etsy_category"|trans}}</label>
+                                <select id="etsyCategory" class="form-control" name="etsy_category">
+                                    <option value = "">{{"select_etsy_category"|trans}}</option>
+                                    {% for etsyCategory in etsyCategories %}
+                                        <option value = "{{ etsyCategory.categoryId }}">{{ etsyCategory.category }}</option>
+                                    {% endfor %}
+                                </select>
+                                {# {% include 'common/select_combo_box.html.twig'  with {
+                                    data: {
+                                        params:search,
+                                        name:'etsy_category',
+                                        label:'etsy_category',
+                                        options:etsyCategories,
+                                        ajax:true,
+                                        all_option: "No",
+                                        id: "etsyCategory"
+                                    }
+                                } %} #}
+                            </div>
+                        </div>
+                        <div class = "col-md-2">
+                            <div class="form-group">
+                                <span class="add-delete-buttons">
+                                    <font size = "5"><span class="fa fa-plus-circle wk-pointer" id="wixEtsyCateMapAdd" style="padding-top: 30px;margin-left:34%;"><span></font>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <span id = "wixEtsyMapTable"></span>
+                    {# {{ form_row(form.category_mapping, {attr : {"name" : "abc"}}) }} #}
+                    {# <input type = "text" name = "category_mapping[category_mapping][]" value = "123"> #}
+                    <input type = "submit" value = "Save" class = "btn btn-primary" name = "etsyWixCategorySave">
+                    {# <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th width="15%">{{ 'wix_category'|trans }}</th>
+                                <th width="10%">{{ 'etsy_category'|trans }}</th>
+                                <th width="5%"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="wixEtsyCateMapTBody">
+                        <tbody>
+                    </table> #}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{# {{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }} #}

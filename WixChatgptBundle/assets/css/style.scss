@@ -1,0 +1,141 @@
+hr.divider-solid {
+    border-top:1px solid 1px #ced4da;;
+}
+
+.product-list {
+    list-style: none;
+    height: 110px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #2758ea;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+  
+  /* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.span-required {
+    color: red;
+}
+
+.button-loader {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 225px;
+}
+
+.wix-chtgpt {
+    margin: 0px;
+    padding: 0px;
+}
+
+.wk-auto-seo{
+    margin-right: 50px;
+}
+
+
+.wix-automatic-seo {
+    position: relative;
+    width: 60px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  .wix-automatic-seo-checkbox {
+    display: none;
+  }
+
+  .wix-automatic-seo-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+  }
+
+  .wix-automatic-seo-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+  }
+
+  .wix-automatic-seo-inner:before,
+  .wix-automatic-seo-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    box-sizing: border-box;
+  }
+
+  .wix-automatic-seo-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #34A7C1;
+    color: #FFFFFF;
+  }
+
+  .wix-automatic-seo-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE;
+    color: #888888;
+    text-align: right;
+  }
+
+  .wix-automatic-seo-switch {
+    display: block;
+    width: 18px;
+    margin: 6px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 36px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+  }
+
+  .wix-automatic-seo-checkbox:checked + .wix-automatic-seo-label .wix-automatic-seo-inner {
+    margin-left: 0;
+  }
+
+  .wix-automatic-seo-checkbox:checked + .wix-automatic-seo-label .wix-automatic-seo-switch {
+    right: 0px;
+  }
+
+  .number-field {
+    appearance: none; // Disable default styling
+    -webkit-appearance: none; // For Safari and Chrome
+    -moz-appearance: textfield; // For Firefox
+  }
+
+  .swal-modal .swal-text {
+    text-align: center;
+  }

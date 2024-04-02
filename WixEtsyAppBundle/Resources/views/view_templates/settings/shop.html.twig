@@ -1,0 +1,51 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-title-w-btn">
+                    <h5 class="title"></h5>
+                    <div class="btn-group"></div>
+                </div>
+                <div class="tile-body">
+                    
+                    <div class="form-group">
+
+                        <div class = "row">
+                            <div class = "col-md-3">
+                                <label for="custom_form_refresh_order">{{ 'sync_etsy_shops'|trans }}
+                                    <i class="fa fa-info-circle general-setting-tooltip" title="{{ 'sync_etsy_shops_in_app'|trans }}"></i>
+                                </label>
+                            </div>
+                            <div class = "col-md-9">
+                                <a class="btn btn-success" title="{{ 'sync'|trans }}" href="{{ path('wixetsy_setting_sync_data', {storeHash:company.storeHash, 'object': 'etsy_shops'}) }}"><i class="app-menu__icon fa fa-refresh"></i></a>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class = "row">
+                            <div class = "col-md-3">
+                                {{ form_label(form.shop,'select_etsy_shop'|trans,{label_attr:{class:''}}) }} <span class="text-danger">*</span>
+                                <i class="fa fa-info-circle general-setting-tooltip" title="{{ 'select_etsy_shop_tooltip'|trans }}"></i>
+                            </div>
+                            <div class = "col-md-4">
+                                <select class="form-control wk-input" name = "setting[shop]">
+                                    <option value = "">{{ 'select_etsy_shop'|trans }}</option>
+                                    {% for key,value in etsyShops %}
+                                        <option value = {{ key }} {% if selectedData['shop'] is defined and key == selectedData['shop'] %} selected = "selected" {% endif %}> {{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                    </div>
+                </div>
+                <div class="tile-footer">
+                    <input type="submit" name="save" value="Save Changes" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </div>
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

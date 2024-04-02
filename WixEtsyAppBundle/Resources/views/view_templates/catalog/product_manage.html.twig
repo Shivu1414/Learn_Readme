@@ -1,0 +1,133 @@
+{% set controller_prefix = 'wixetsy_products_' %}
+{% set batch_options = [{id:'import_to_etsy',text:'Import on Etsy'}] %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="row">    
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title">
+                    {% include 'common/list_items.html.twig' %}
+                </h5>
+                <div class="btn-group">
+                    <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}">
+                        <i class="fa fa-filter"></i>
+                    </span>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cog"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <span id="sync-products" data-toggle="ajaxjobs" class="dropdown-item wk-pointer" title="{{ 'sync'|trans }}" data-href="{{ path(controller_prefix ~ 'sync', {storeHash:storeHash}) }}">
+                            {{ "sync_product"|trans }}
+                        </span> 
+                    </div>
+                </div>
+            </div>
+            <div class="tile-title-w-btn">    
+                {# <div>  
+                    <div class="custom-control-inline">
+                        {% include 'common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'products'}} %}
+                    </div>
+                </div> #}
+                <div>
+                    <span class = "btn btn-primary" id="etsy-import-products" data-toggle="ajaxjobs" title="{{ 'sync'|trans }}" data-href="{{ path(controller_prefix ~ 'import', {storeHash:storeHash}) }}">{{ "import_to_etsy"|trans }}</span>
+                </div>
+                <span>
+                    {% if products is defined and products is not empty %}<b>{{ 'total_records'|trans ~ ": " ~ products.totalItemCount }}</b>{% endif %}
+                </span>
+            </div>
+            <div class="tile-body">
+                <table class="table table-responsive text-center" id="">
+                    <thead>
+                        <tr>
+                            <th width="1%">
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" name="check" title="check all" class="wk_checkbox_items"><span class="label-text"> </span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th width="5%">{{ 'image'|trans }}</th>
+                            <th width="15%">{{ 'name'|trans }}</th>
+                            <th width="10%">{{ 'sku'|trans }}</th>
+                            <th width="5%">{{ 'price'|trans }}</th>
+                            <th width="12%">{{ 'date'|trans }}</th>
+                            <th width="5%">{{ 'status'|trans }}</th>
+                            <th width="5%">{{ 'action'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            {# <tr data-row="product-{{ product.id }}" class="status-{{ product.status|lower }}"> #}
+                            <tr data-row="product-{{ product.id }}">
+                                <td>
+                                    <div class="animated-checkbox">
+                                        <label>                                        
+                                            <input type="checkbox" name="product_ids[]" value="{{ product.id }}" class="wk_checkbox_item"><span class="label-text"> </span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="wk-mp-product-thumb">
+                                    <img src = "{{ product.image }}"  style="width: 3rem; height: 3rem;">
+                                </td>
+                                <td>{{ product.name }}</td>
+                                {% if product.sku is null %}
+                                <td>Sku Not Available <svg class="wk-wix-tooltip"viewBox="0 0 24 24" fill="currentColor"  data-toggle="tooltip" data-placement="top" title="{{'product_has_variants'|trans}}" width="24" height="24">
+                                    <path d="M13,15 L13,10 L11,10 L10,12 L11,12 L11,15 L10,16 L10,17 L14,17 L14,16 L13,15 Z M11,9 L13,9 L13,7 L11,7 L11,9 Z M12,20 C7.589,20 4,16.411 4,12 C4,7.589 7.589,4 12,4 C16.411,4 20,7.589 20,12 C20,16.411 16.411,20 12,20 L12,20 Z M12,3 C7.029,3 3,7.029 3,12 C3,16.971 7.029,21 12,21 C16.971,21 21,16.971 21,12 C21,7.029 16.971,3 12,3 L12,3 Z"></path>
+                                </svg></td>
+                                {% else %}
+                                <td>{{ product.sku }}</td>    
+                                {% endif %}            
+                                <td>{{ product.price|wk_price('app', storeHash)|raw }}</td>
+                                <td>{{ product.updatedAt|wk_time }}</td>
+                                <td>
+                                    {% if product.syncStatus == 1 %}
+                                      <font color = "green" size = "4"><i data-toggle="tooltip" data-placement="top" title="{{ "last_synced"| trans }} {{ product.updatedAt|wk_time }}"  class="fa fa-check-circle" aria-hidden="true"></i></font>
+                                        {# <font color = "green" size = "4"><i class="fa fa-check-circle" aria-hidden="true"></i></font> #}
+                                    {% else %}
+                                        {% if product.syncMessage is defined and product.syncMessage is not empty %}
+                                            {% set syncMessage =  product.syncMessage %}
+                                        {% else %}
+                                            {% set syncMessage =  "not_synced"|trans %}
+                                        {% endif %}
+                                        <font color = "red" size = "4"><i data-toggle="tooltip" data-placement="top" title=" {{ syncMessage }}" class="fa fa-exclamation-circle wk-pointer" aria-hidden="true"></i></font>
+                                    {% endif %}
+                                </td>       
+                                <td>
+                                    <a href = "{{ path(controller_prefix ~ 're_import', {storeHash:storeHash, productId:product.id }) }}"><font color = "blue" size = "4"><i class="fa fa-refresh wk-pointer" aria-hidden="true" data-toggle="tooltip" data-placement="top" title=" {{ "resync"|trans }}"></i></font></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <tfoot>
+                <div class="navigation">
+                    <tr>
+                        <td colspan="3"> {{ knp_pagination_render(products) }} </td>
+                        <td colspan="2">
+                            <div class="mt-1 d-flex float-right">
+                                <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <b>* Mandatory Field to Sync Product to Etsy</b>
+                                </a>
+                            </div>
+                    </td>
+                    </tr>
+                </div>
+                </tfoot>
+            </div>
+        <div>
+    </div>
+</div>
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}
+
+{% include 'common/filter.html.twig' with {include_path: app_path_prefix ~ '/view_templates/catalog/components/search.html.twig', search: search} %}
+{% include  {include_path: app_path_prefix ~ '/view_templates/catalog/components/manadatory_field.html.twig'} %}
+
+                        

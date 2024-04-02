@@ -1,0 +1,141 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="tile" style="border: 1px solid lightgray">
+			<h4 class="tile-header"> {{ 'wixchatgptcontent_product_seo_header_title'|trans }} </h4>
+			<hr class="divider-solid">
+            <div class="tile-body">
+
+				<form id="chat-gpt-seo-form">
+					<div class="row p-4">
+					
+						<div class="col-lg-12 col-sm-12">
+
+							<div class="form-group">
+								<label class="wk-required"> {{ 'wixchatgptcontent_product_seo_switch'|trans }} </label>
+								<div class="wix-automatic-seo">
+									<input type="checkbox" name="auto_seo_switch" class="wix-automatic-seo-checkbox" id="seo_switch" checked>
+									<label class="wix-automatic-seo-label" for="seo_switch">
+										<span class="wix-automatic-seo-inner"></span>
+										<span class="wix-automatic-seo-switch"></span>
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="product-name"> {{ 'wixchatgptcontent_product_name'|trans }} <span class="span-required"> * </span> </label>
+								<div class="form-group loader-group">
+                                    <input type="text" class="form-control" id="product-name" name="product-name" data-search-url="{{ path('wixchatgptcontent_product_search', {app_code: app_code, storeHash: storeHash}) }}" placeholder="Search Product Name">
+									<ul id="productLiveSearch" class="list-group product-list" hidden=""></ul>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="description-type"> {{ 'wixchatgptcontent_product_description_type'|trans }} <span class="span-required"> * </span> </label>
+								<div class="description-type-block">
+									<select class="form-control" id="description-type" name="descriptionType">
+										<option value="Conversational"> {{ 'wixchatgptcontent_description_type_conversational'|trans }} </option>
+										<option value="Professional"> {{ 'wixchatgptcontent_description_type_professional'|trans }} </option>
+										<option value="Informative"> {{ 'wixchatgptcontent_description_type_informative'|trans }} </option>
+										<option value="Storytelling"> {{ 'wixchatgptcontent_description_type_storytelling'|trans }} </option>
+										<option value="Humorous"> {{ 'wixchatgptcontent_description_type_humorous'|trans }} </option>
+										<option value="Persuasive"> {{ 'wixchatgptcontent_description_type_persuasive'|trans }} </option>
+										<option value="Emotional"> {{ 'wixchatgptcontent_description_type_emotional'|trans }} </option>
+										<option value="Sensory"> {{ 'wixchatgptcontent_description_type_sensory'|trans }} </option>
+										<option value="Comparative"> {{ 'wixchatgptcontent_description_type_comparative'|trans }} </option>
+										<option value="custom" data-value="20 letters max"> {{ 'wixchatgptcontent_description_type_custom'|trans }} </option>
+                                    </select>
+									<input type="text" class="form-control my-2" id="custom-Description" name="customDesc" placeholder="Write Description Type" >
+                                </div>
+							</div>
+
+							<div class="form-group">
+								<label> Word Count </label>
+								<div class="form-group d-flex flex-row">
+									{# <div class="pr-3">
+										<label class="mb-0"> {{ 'wixchatgptcontent_product_seo_url_slag'|trans }} </label>
+										<input type="number" class="form-control" name="wordOfUrl" value="60" placeholder="60">
+									</div> #}
+									
+									<div class="pr-3">
+										<label class="mb-0"> {{ 'wixchatgptcontent_product_seo_title_tag'|trans }} <i class="fa fa-info-circle" title="{{ 'wixchatgptcontent_product_seo_title_tag-title'|trans }}"></i> </label>
+										<input type="number" class="form-control number-field" name="wordOfTitle" onpaste="return false;" value="60" placeholder="60">
+									</div>
+									
+									<div class="pr-3">
+										<label class="mb-0"> {{ 'wixchatgptcontent_product_seo_meta_desc'|trans }} <i class="fa fa-info-circle" title="{{ 'wixchatgptcontent_product_seo_meta_desc_title'|trans }}"></i> </label>
+										<input type="number" class="form-control number-field"  name="wordOfMeta" onpaste="return false;" value="100" placeholder="100">
+									</div>
+
+								</div>
+							</div>
+
+                            <div class="form-group">
+								<label class="wk-required" placeholder="Additional Information"> {{ 'wixchatgptcontent_product_additional_information'|trans }} <i class="fa fa-info-circle" title="{{ 'wixchatgptcontent_seo_additional_information_title'|trans }}"></i>  </label>
+								<select id="additional-info" name="additionalInfo" class="form-control">
+                                    <option value="productname"> {{ 'wixchatgptcontent_product_seo_by_product_name'|trans }} </option>
+                                    <option value="productdescription"> {{ 'wixchatgptcontent_product_seo_by_product_description'|trans }} </option>
+                                </select>
+							</div>
+
+                            <div class="form-group form-inline align-items-start">
+
+                                {# <label class="pr-3"> {{ 'wixchatgptcontent_product_seo_tag_generate'|trans }} </label>
+                                <div class="form-check justify-content-start pr-3">
+                                    <input class="form-check-input" name="urlCheck" type="checkbox" checked>
+                                    <label class="form-check-label" for="url-slug"> {{ 'wixchatgptcontent_product_seo_url_slag'|trans }} </label>
+                                </div> #}
+
+                                <div class="form-check justify-content-start pr-3">
+                                    <input class="form-check-input" name="titleCheck" type="checkbox" checked>
+                                    <label class="form-check-label" for="title-tag"> {{ 'wixchatgptcontent_product_seo_title_tag'|trans }} </label>
+                                </div>
+
+                                <div class="form-check justify-content-start pr-3">
+                                    <input class="form-check-input" name="metaCheck" type="checkbox" checked>
+                                    <label class="form-check-label" for="description-tag"> {{ 'wixchatgptcontent_product_seo_meta_desc'|trans }} </label>
+                                </div>
+
+                            </div>
+
+							<div class="form-group" id="seo-generate-button">
+								<div class="button-loader loader-group">
+									<button type="button" data-seo-url="{{ path('wixchatgptcontent_seo_generate', {app_code: app_code, storeHash: storeHash}) }}" id="gererate_seo_button" class="btn btn-primary"> {{ 'wixchatgptcontent_generate_seo_tag'|trans }} </button>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="col-lg-12 col-sm-12">
+
+							<div class="wix-seo-list">
+								{# <div class="form-group seo-result-url">
+									<label for="seo-url"> {{ 'wixchatgptcontent_product_seo_url_slag'|trans }} </label>
+									<input class="form-control" id="seo-url" name="seoUrl" placeholder="{{ 'wixchatgptcontent_product_seo_url_slag'|trans }}">
+								</div> #}
+								
+								<div class="form-group seo-result-url">
+									<label for="seo-url"> {{ 'wixchatgptcontent_product_seo_title_tag'|trans }} </label>
+									<input class="form-control" id="seo-title" name="seoTitle" placeholder="{{ 'wixchatgptcontent_product_seo_title_tag'|trans }}">
+								</div>
+								
+								<div class="form-group seo-result-url">
+									<label for="seo-url"> {{ 'wixchatgptcontent_product_seo_meta_desc'|trans }} </label>
+									<input class="form-control" id="seo-meta" name="seoMetaDesc" placeholder="{{ 'wixchatgptcontent_product_seo_meta_desc'|trans }}">
+								</div>
+							</div>
+							
+							<div class="wix-seo-list">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary"> {{ 'wixchatgptcontent_product_seo_save_button'|trans }} </button>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>

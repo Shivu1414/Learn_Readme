@@ -1,0 +1,6 @@
+wixchatgptcontent:
+    resource: '@WixChatgptBundle/Controller'
+    type: annotation
+    prefix: '/{_locale}/{platform}/app/{app_code}/{storeHash}'
+    requirements: { _locale: '%app_locales%', platform: wix, app_code: wixchatgptcontent }
+    defaults: { _locale: '%app_locales%', platform: wix, app_code: wixchatgptcontent }

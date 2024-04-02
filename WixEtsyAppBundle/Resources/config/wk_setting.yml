@@ -1,0 +1,7 @@
+wixetsy_config:
+  fields:
+    wixetsy_keystring:
+      type: TextType
+      id: wixetsy_keystring
+      class: form-control
+      label_class: wk-required

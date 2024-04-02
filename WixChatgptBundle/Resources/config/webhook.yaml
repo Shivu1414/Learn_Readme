@@ -1,0 +1,7 @@
+information:
+
+product:
+  - store/product/*
+  - store/product/created
+  - store/product/updated
+  

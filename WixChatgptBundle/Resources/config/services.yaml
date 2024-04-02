@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+    Webkul\Modules\Wix\WixChatgptBundle\:
+        resource: "../../../WixChatgptBundle/*"
+        exclude: "../../../WixChatgptBundle/{Entity}"

@@ -1,0 +1,132 @@
+{% set controller_prefix = 'wixetsy_orders_' %}
+{% set batch_options = [{id:'import_to_etsy',text:'Import on Etsy'}] %}
+
+{# {% form_theme form 'bootstrap_4_layout.html.twig' %} #}
+{# {{ form_start(form) }}
+{{ form_errors(form) }} #}
+<div class="row">    
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title">
+                    {% include 'common/list_items.html.twig' %}
+                </h5>
+                <div class="btn-group">
+                    <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}">
+                        <i class="fa fa-filter"></i>
+                    </span>
+                    {# <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cog"></i>
+                    </button> #}
+                    {# <div class="dropdown-menu">
+                        {# <span id="sync-orders" data-toggle="ajaxjobs" class="dropdown-item wk-pointer" title="{{ 'sync'|trans }}" data-href="{{ path(controller_prefix ~ 'sync', {storeHash:storeHash}) }}">
+                            {{ "sync_orders"|trans }}
+                        </span> 
+
+                        
+                    </div> #}
+                    <span id="etsy-sync-orders" class="btn btn-success icon-btn" title="{{ 'sync'|trans }}"  href="#" data-toggle="modal" data-target="#etsyOrderSyncModal">
+                        <i class="fa fa-refresh"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="tile-title-w-btn">    
+                {# <div>  
+                    <div class="custom-control-inline">
+                        {% include 'common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'products'}} %}
+                    </div>
+                </div> #}
+                <div>
+                    <span class = "btn btn-primary" id="wix-import-orders"  title="{{ 'sync'|trans }}" data-href="{{ path(controller_prefix ~ 'import', {storeHash:storeHash}) }}">{{ "import_to_wix"|trans }}</span>
+                </div>
+                <span>
+                    {% if orders is defined and orders is not empty %}<b>{{ 'total_records'|trans ~ ": " ~ orders.totalItemCount }}</b>{% endif %}
+                </span>
+            </div>
+            <div class="tile-body">
+                <table class="table table-responsive" id="">
+                    <thead>
+                        <tr>
+                            <th width="1%">
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" name="check" title="check all" class="wk_checkbox_items"><span class="label-text"> </span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th class="" width="5%">{{ 'receipt_id'|trans }}</th>
+                            <th class="" width="5%">{{ 'wix_order_no'|trans }}</th>
+                            <th width="15%">{{ 'buyer_email'|trans }}</th>
+                            <th width="10%">{{ 'order_status'|trans }}</th>
+                            <th width="5%">{{ 'ship_status'|trans }}</th>
+                            <th width="12%">{{ 'created_at'|trans }}</th>
+                            <th width="5%">{{ 'sync_status'|trans }}</th>
+                            <th width="5%">{{ 'action'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            {# <tr data-row="product-{{ product.id }}" class="status-{{ product.status|lower }}"> #}
+                            <tr data-row="product-{{ order.id }}">
+                                <td>
+                                    <div class="animated-checkbox">
+                                        <label>                                        
+                                            <input type="checkbox" name="order_ids[]" value="{{ order.receiptId }}" class="wk_checkbox_item"><span class="label-text"> </span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="">{{ order.receiptId }}</td>
+                                <td class="">{{ order.wixOrderNo }}</td>
+                                <td>{{ order.buyerEmail }}</td>
+                                <td>
+                                    {% if order.orderStatus is defined and order.orderStatus is not  empty %}
+                                        {% if order.orderStatus == 'Completed' %}
+                                            {{ 'comp'|trans }}
+                                        {% else %} 
+                                            {{ 'not_completed'|trans }}
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if order.isShipped is defined and order.isShipped is not empty %}
+                                        {%  if order.isShipped == 1 %}
+                                            {{ "shipped"|trans }}
+                                        {% endif %}
+                                        {% if order.isShipped == 2 %}
+                                            {{ "not_shipped"|trans }}
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>{{ order.createdAt|wk_time }}</td>
+                                <td>
+                                    {% if order.syncStatus == 1 %}
+                                        <font color = "green" size = "4"><i data-toggle="tooltip"  class="fa fa-check-circle" title = "{{ "last_synced" | trans }} {{ order.createdAt| wk_time }}"  aria-hidden="true"></i></font>
+                                    {% else %}
+                                        <font color = "red" size = "4"><i data-toggle="tooltip" data-placement="top" title=" {{ order.syncMessage }}" class="fa fa-exclamation-circle wk-pointer" aria-hidden="true"></i></font>
+                                    {% endif %}
+                                </td>       
+                                <td>
+                                    <a href = "{{ path(controller_prefix ~ 're_import', {storeHash:storeHash, orderId:order.receiptId }) }}"><font color = "blue" size = "4"><i class="fa fa-refresh wk-pointer" aria-hidden="true" data-toggle="tooltip" data-placement="top" title=" {{ "import_to_wix"|trans }}"></i></font></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="9" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation">
+                    {{ knp_pagination_render(orders) }}
+                </div>
+            </div>
+        <div>
+    </div>
+</div>
+{# {{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }} #}
+
+{% set import_include_path = get_file_path_to_include(app_path_prefix, '/view_templates/' , 'order/components/_sync_order_modal') %}
+{% include import_include_path %}
+
+{% include 'common/filter.html.twig' with {include_path: app_path_prefix ~ '/view_templates/order/components/search.html.twig', search: search} %}    

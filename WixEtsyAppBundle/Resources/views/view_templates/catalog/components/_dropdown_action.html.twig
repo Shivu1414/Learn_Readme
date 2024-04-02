@@ -1,0 +1,6 @@
+<div class="dropdown show">
+    <a class="btn dropdown-toggle" href="#" role="button" id="dropdown-action-{{ object.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+    <div class="dropdown-menu dropdown-menu-arrow" aria-labelledby="dropdown-action-{{ object.id }}">
+        <a class="dropdown-item wk-delete-row-js" href="#" data-url="{{ path(controller_prefix ~ 'delete', {storeHash:  storeHash, id:object.id}) }}" >{{ 'delete'|trans }}</a>
+    </div>
+</div>

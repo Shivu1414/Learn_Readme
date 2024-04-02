@@ -1,0 +1,13 @@
+{% extends 'mail_base.html.twig' %}
+
+{% block header %}
+   {% include 'root_admin/mail/common/header.html.twig' %}
+{% endblock %}
+
+{% block main_content %}
+    {% include '@' ~ application.code ~ '_twig/mail_template/' ~ tempate_name ~ '.html.twig' %}
+{% endblock %}
+
+{% block footer %}
+ {% include 'root_admin/mail/common/footer.html.twig' %}
+{% endblock %}

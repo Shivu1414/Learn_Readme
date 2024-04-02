@@ -1,0 +1,51 @@
+{% if settingValues.wixchatgptcontent_api_secret is defined and settingValues.wixchatgptcontent_api_secret is not empty %}
+	{% set api_secret = settingValues.wixchatgptcontent_api_secret %}
+{% else %}
+	{% set api_secret = '' %}
+{% endif %}
+
+{{ form_start(form) }}
+<div class="tile">
+	{{ form_errors(form) }}
+	<div class="tile-body">
+	
+		{{ form_row(form._token) }}
+		<label for="custom_form_api_secret" class="col-form-label wk-required">{{'wixchatgptcontent_api_secret'|trans}}</label>
+		<div class="inpur-elm">
+			{{ form_widget(form.wixchatgptcontent_api_secret,{attr:{class:'form-control col-md-6', value: api_secret, required: 'required'}})}}
+			<small> How to get API Secret key? <a href="#" data-toggle="modal" data-target="#get-api-secret-key"> Help </a> </small>
+		</div>
+		
+	</div>
+	
+	<div class="tile-footer">
+    	<input type="submit" name="save" value="{{ 'wixchatgptcontent_button_save'|trans }}" class="btn btn-primary"/>
+    </div>
+
+</div>
+{{ form_end(form, {'render_rest': false}) }}
+
+	<div class="modal fade show" id="get-api-secret-key" tabindex="-1" style="padding-right: 15px;" aria-modal="true" role="dialog">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h5 class="modal-title"> {{ 'wixchatgptcontent_setting_api_key_example'|trans }} </h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<span> 1. Go to Link <a href="https://platform.openai.com/" target="_blank"> https://platform.openai.com/ </a> <br></span>
+					<span> 2. If you have already account then login or click on sign up. <br></span>
+					<span> 3. Click on profile icon. <br></span>
+					<span> 4. Click on "View API Keys". <br></span>
+					<span> 5. Click on "Create new secret key" button. <br></span>
+					<span> 6. Generate Secret key and copy it. <br></span>
+									
+				</div>
+
+			</div>
+		</div>
+	</div>

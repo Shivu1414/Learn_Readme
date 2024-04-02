@@ -1,0 +1,134 @@
+<style>
+    .select2-container--default .select2-search--dropdown {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        width: 100%;
+        }
+</style>
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-title-w-btn">
+                    <h5 class="title"></h5>
+                    <div class="btn-group"></div>
+                </div>
+                <div class="tile-body">
+                    
+                    <div class="form-group">
+                        <br>
+
+                        <div class = "row">
+                            <div class = "col-md-3">
+                                <label for="custom_form_refresh_pro">{{ 'sync_etsy_shipping_profiles'|trans }} <span class="text-danger">*</span>
+                                    <i class="fa fa-info-circle general-setting-tooltip" title="{{ 'sync_etsy_shipping_profiles_in_app'|trans }}"></i>
+                                </label>
+                            </div>
+                            <div class = "col-md-9">
+                                <a class="btn btn-success" title="{{ 'sync'|trans }}" href="{{ path('wixetsy_setting_sync_data', {storeHash:company.storeHash, 'object': 'etsy_shipping_profiles'}) }}" ><i class="app-menu__icon fa fa-refresh"></i></a>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class = "row">
+                            <div class = "col-md-3">
+                                {{ form_label(form.shipping_profile,'select_shipping_profile'|trans,{label_attr:{class:''}}) }} <span class="text-danger">*</span>
+                                <i class="fa fa-info-circle general-setting-tooltip" title="{{ 'select_etsy_shipping_profile_tooltip'|trans }}"></i>
+                            </div>
+                            <div class = "col-md-4">
+                                <select class="form-control wk-input" name = "setting[shipping_profile]">
+                                    <option value = "">{{ 'select_shipping_profile'|trans }}</option>
+                                    {% for key,value in etsyShippingProfiles %}
+                                        <option value = {{ key }} {% if selectedData['shipping_profile'] is defined and key == selectedData['shipping_profile'] %} selected = "selected" {% endif %}> {{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class = "row">
+                            <div class = "col-md-3">
+                                <label for="custom_form_refresh_pro">{{ 'sync_etsy_categories'|trans }} <span class="text-danger">*</span>
+                                    <i class="fa fa-info-circle general-setting-tooltip" title="{{ 'sync_etsy_categories_in_app'|trans }}"></i>
+                                </label>
+                            </div>
+                            <div class = "col-md-9">
+                                <a class="btn btn-success" title="{{ 'sync'|trans }}" href="{{ path('wixetsy_setting_sync_data', {storeHash:company.storeHash, 'object': 'etsy_categories'}) }}" ><i class="app-menu__icon fa fa-refresh"></i></a>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class = "row">
+                            <div class = "col-md-3">
+                                {{ form_label(form.etsy_category,'select_default_etsy_category'|trans,{label_attr:{class:''}}) }} <span class="text-danger">*</span>
+                                <i class="fa fa-info-circle general-setting-tooltip" title="{{ 'select_default_etsy_category_tooltip'|trans }}"></i>
+                            </div>
+                            <div class = "col-md-4">
+                                <select class="form-control wk-input esty-subcategory" name = "setting[etsy_category]">
+                                    <option value = "">{{ 'select_default_etsy_category'|trans }}</option>
+                                    {% for key,etsyCategory in etsyCategories %}
+                                        <option value = {{ etsyCategory.id }} {% if selectedData['etsy_category'] is defined and etsyCategory.id == selectedData['etsy_category'] %} selected = "selected" {% endif %}> {{ etsyCategory.category }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class = "row">
+                            <div class = "col-md-3">
+                                <label for="custom_form_refresh_order">{{ 'sync_wix_categories'|trans }}  <span class="text-danger">*</span>
+                                    <i class="fa fa-info-circle general-setting-tooltip" title="{{ 'sync_wix_categories_in_app'|trans }}"></i>
+                                </label>
+                            </div>
+                            <div class = "col-md-9">
+                                <a class="btn btn-success" title="{{ 'sync'|trans }}" href="{{ path('wixetsy_setting_sync_data', {storeHash:company.storeHash, 'object': 'wix_categories'}) }}"><i class="app-menu__icon fa fa-refresh"></i></a>
+                            </div>
+                        </div>
+
+                        <br>
+                    {# <div class="wix-etsy-setting-fields">
+                        <label for="custom_form_refresh_order">{{ 'sync_wix_categories'|trans }}
+                            <i class="fa fa-info-circle general-setting-tooltip" title="{{ 'sync_wix_categories_in_app'|trans }}"></i>
+                        </label>
+                        <a class="btn btn-success" title="{{ 'sync'|trans }}" href="{{ path('wixetsy_setting_sync_data', {storeHash:company.storeHash, 'object': 'wix_categories'}) }}"><i class="app-menu__icon fa fa-refresh"></i></a>
+                    </div> #}
+                </div>
+                
+            </div>
+        </div>
+        <div class="tile">
+          <div class="tile-title-w-btn">
+             <h5 class="title">{{'auto_sync_prots_etsy'|trans}}</h5>
+             <div class="btn-group"></div>
+          </div>
+          <div class="tile-body">
+             <div class="form-group"> 
+                <div class = "row">
+                    <div class = "col-md-3 p-3">
+                        {{ form_label(form.auto_sync_prots_etsy,'auto_sync_product_etsy'|trans,{label_attr:{class:''}}) }}
+                        <i class="fa fa-info-circle general-setting-tooltip" title="{{ 'product_auto_sync_tooltip'|trans }}"></i>
+                    </div>
+                    <div class = "col-md-4">
+                        {% if selectedData['auto_sync_prots_etsy'] is defined and  selectedData['auto_sync_prots_etsy'] == '1'%}
+                            {{ form_widget(form.auto_sync_prots_etsy , {attr:{checked:'checked',class:'wk-bam-switch-input'}}) }}
+                            <label for="setting_auto_sync_prots_etsy" class="wk-bam-switch-label"></label>
+                        {% else %}
+                            {{ form_widget(form.auto_sync_prots_etsy , {attr:{class:'wk-bam-switch-input'}}) }}
+                            <label for="setting_auto_sync_prots_etsy" class="wk-bam-switch-label"></label>
+                        {% endif %}
+                    </div>
+                 </div>
+              </div>
+              <div class="tile-footer">
+                   <input type="submit" name="save" value="Save Changes" class="btn btn-primary">
+               </div>
+         </div> 
+        </div>
+    </div>
+{{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

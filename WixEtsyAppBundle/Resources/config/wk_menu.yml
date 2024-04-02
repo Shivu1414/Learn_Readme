@@ -1,0 +1,67 @@
+# dashboard:
+#   icon_class: fa fa-dashboard
+#   route: wixetsy_dashboard
+#   child: null
+app_setting:
+  icon_class: fa fa-cogs
+  routes:
+    - wixetsy_app_setting
+    - wixetsy_setting_shop
+    - wixetsy_setting_other
+    # - wixetsy_setting_sync_setting
+  child:
+    general_setting:
+      icon_class: fa fa-cog
+      route: wixetsy_app_setting
+      child: null
+    # sync_data:
+    #   icon_class: fa fa-cog
+    #   route: wixetsy_setting_sync_setting
+    #   child: null
+    shop_setting:
+      icon_class: fa fa-shopping-bag
+      route: wixetsy_setting_shop
+      child: null
+    other_setting:
+      icon_class: fa fa-cog fa-lg
+      route: wixetsy_setting_other
+      child: null
+products:
+  icon_class: fa fa-product-hunt
+  route: wixetsy_products_manage
+  child: null
+catalog:
+  icon_class: fa fa-list
+  routes:
+    - wixetsy_category_mapping
+    - wixetsy_category_manage
+  child:
+    category_mapping:
+      icon_class: fa fa-list
+      route: wixetsy_category_mapping
+      child: null
+    category_mapping_list:
+      icon_class: fa fa-list
+      route: wixetsy_category_manage
+      child: null
+orders:
+  icon_class: fa fa-shopping-cart
+  route: wixetsy_orders_manage
+  child: null
+support:
+  icon_class: fa fa-cog
+  route: wixetsy_support
+  child: null
+userguide: 
+  icon_class: fa fa-book
+  routes:
+    - wixetsy_userguide_blog
+    # - wixetsy_userguide_video
+  target: _blank
+  child:
+    userguide_blog_setup:
+      icon_class: fa fa-rss-square
+      route: wixetsy_userguide_blog
+    # userguide_video_setup:
+    #   icon_class: fa fa-play
+    #   route:  wixetsy_userguide_video

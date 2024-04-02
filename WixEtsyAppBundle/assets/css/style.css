@@ -1,0 +1,15 @@
+.wix-etsy-setting-fields {
+    padding: 10px 15px
+}
+
+.wix-etsy-setting-fields label {
+    min-width: 250px
+}
+.disabled-row{
+    opacity: 0.5;
+}
+.disabled-link{
+    pointer-events: none; 
+    opacity: 0.5; 
+    cursor: not-allowed;
+}

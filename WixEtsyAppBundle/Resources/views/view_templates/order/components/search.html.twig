@@ -1,0 +1,43 @@
+<form method="get">
+    <div class="filter-fields">
+        <div class="form-group">
+            <label for="search_name">{{ 'receipt_id'|trans }}</label>
+            <input type="number" class="form-control" id="receipt_id" name="receipt_id" value="{% if filter.receipt_id is defined %}{{ filter.receipt_id }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="search_name">{{ 'wix_order_no'|trans }}</label>
+            <input type="number" class="form-control" id="wix_order_no" name="wix_order_no" value="{% if filter.wix_order_no is defined %}{{ filter.wix_order_no }}{% endif %}">
+        </div>
+        {# <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="transaction_id">{{ 'created_start_date'|trans }}</label>
+                    <input type="text" class="form-control wix_end_date" value="{% if search['start_date'] is defined %}{{ search['start_date'] }}{% endif %}" name="start_date">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="transaction_id">{{ 'created_end_date'|trans }}</label>
+                    <input type="text" class="form-control wix_end_date" value="{% if search['end_date'] is defined %}{{ search['end_date'] }}{% endif %}" name="end_date">
+                </div>
+            </div>
+        </div> #}
+        {# <div class="form-group">
+            {% include 'common/select_combo_box.html.twig'  with {data: {params:filter,name:'fullordering',label:'fullordering_order_by',options:[{id:'id ASC',text:'id_asc'},{id:'id DESC',text:'id_desc'},{id:'name ASC',text:'name_asc'},{id:'name DESC',text:'name_desc'},{id:'status ASC',text:'status_asc'},{id:'status DESC',text:'status_desc'}]}} %}
+        </div> #}
+        <div class="form-group">
+            {% include 'common/select_combo_box.html.twig'  with {data: {params:filter,name:'status',label:'Sync status',options:[{id:'2',text:'not_synced'},{id:'1',text:'synced'}]}} %}
+        </div>
+        <div class="form-group">
+            {% include 'common/select_combo_box.html.twig' with {data: {params:filter,name:'shipment',label:'Shipment Status',options:[{id:'2',text:'not_shipped'},{id:'1',text:'shipped'}]}} %}
+        </div>
+        <div class="form-group">
+             {% include 'common/select_combo_box.html.twig' with {data: {params:filter,name:'order',label:'Order Status',options:[{id:'Not Completed',text:'not_completed'},{id:'Completed',text:'comp'}]}} %}
+        </div>
+    </div>
+    <div class="filter-btn-block">
+        <button type="submit" class="btn btn-primary">{{ 'submit'|trans }}</button>
+        <button type="button" class="btn btn-danger btn-clear">{{ 'search.clear'|trans }}</button>
+        <button type="button" class="btn btn-secondary filter-close">{{ 'cancel'|trans }}</button>
+    </div>
+</form>

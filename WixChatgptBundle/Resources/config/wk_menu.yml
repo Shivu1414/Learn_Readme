@@ -1,0 +1,34 @@
+wixchatgptcontent_chat_gpt_content:
+  icon_class: fa fa-code
+  routes: 
+    - wixchatgptcontent_index
+    - wixchatgptcontent_product_seo
+  child:
+    wixchatgptcontent_product_description:
+      icon_class: fa fa-product-hunt
+      route: wixchatgptcontent_index
+      child: null
+    wixchatgptcontent_product_seo:
+      icon_class: fa fa-bullhorn
+      route: wixchatgptcontent_product_seo
+      child: null
+app_settings:
+  icon_class: fa fa-cogs
+  routes:
+    - wixchatgptcontent_settings_general
+  child:
+    general_sett:
+      icon_class: fa fa-cog
+      route: wixchatgptcontent_settings_general
+    support:
+      icon_class: fa fa-cog
+      route: wixchatgptcontent_settings_support
+wixchatgptcontent_userguide:
+  icon_class: fa fa-book
+  routes:
+    - wixchatgptcontent_userguide_blog
+  target: _blank
+  child:
+    wixchatgptcontent_userguide_blog_setup:
+      icon_class: fa fa-rss-square
+      route: wixchatgptcontent_userguide_blog     
