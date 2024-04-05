@@ -1,0 +1,19 @@
+{{ "hello"|trans }},
+
+<p>{{ "seller_plan_changed_successfully"|trans }}</p>
+<hr style="color:#E4E4E4">
+<div>
+<table style="font-size:12px">
+    <tbody>
+        <tr><th style="text-align:left">{{ 'seller'|trans }}:</th><td>{{ seller.seller }}</td></tr>
+        <tr><th style="text-align:left">{{ 'Email'|trans }}:</th><td>{{ seller.email }}</td></tr>
+        <tr><th style="text-align:left">{{ 'phone'|trans }}:</th><td>{{ seller.phone }}</td></tr>
+        <tr><th style="text-align:left">{{ 'address'|trans }}:</th><td>{{ seller.address }}, {{ seller.address2 }}</td></tr>
+        <tr><th style="text-align:left">{{ 'city'|trans }}:</th><td>{{ seller.city }}</td></tr>
+        <tr><th style="text-align:left">{{ 'state'|trans }}:</th><td>{{ seller.state }}</td></tr>
+        <tr><th style="text-align:left">{{ 'country'|trans }}:</th><td>{{ seller.country }}</td></tr>
+        <tr><th style="text-align:left">{{ 'zipcode'|trans }}:</th><td>{{ seller.zipcode }}</td></tr>
+        <tr><th style="text-align:left">{{ 'plan'|trans }}:</th><td>{{ seller.currentPlan.plan }} ({{ seller.currentPlan.code }})</td></tr>
+    </tbody>
+</table>
+</div>

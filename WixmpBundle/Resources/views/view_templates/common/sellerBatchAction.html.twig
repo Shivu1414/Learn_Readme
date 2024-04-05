@@ -1,0 +1,65 @@
+{% if not data is defined %}    
+    {% set data = [] %}
+{% endif %}
+
+{% set 
+    defaut_data = {
+        id:'',
+        formName:'',
+        name:'batch_action',
+        label:false,
+        placeholder:"label.batch_action_select",
+        options:[],
+        text: 'text',
+        value: 'id',
+        minimumResultsForSearch:10
+        
+    } 
+%}
+{% set data = defaut_data|merge(data) %}
+
+{% if data.formName is not empty %} 
+    {% set fieldName = data.formName ~ "[" ~ data.name ~ "]" %}
+{% else %}
+    {% set fieldName = data.name %}
+{% endif %}
+{% if data.options is not empty  %}
+    {% if not newTheme %}
+        <div class="wix-batch-action">
+            <div class="form-group">
+    {% endif %}
+            <select  class="form-control wk-batch-action" id="{{data.id}}" name="{{fieldName}}" data-placeholder="{{data.placeholder|trans}}" data-toggle="select2"  data-minimum-results-for-Search="{{data.minimumResultsForSearch}}">
+                <option value="">{{'label.batch_action_select'|trans}}</option>                
+                {% for option in data.options %} 
+                    {% if data.text == null %}  {# for 1d non associative array array  #}
+                        {% set text = option %}
+                        {% set value = option %}
+                    {% else %}
+                        {% if attribute(option,data.value) is defined %} 
+                            {% set value = attribute(option,data.value) %}
+                        {% else %}
+                            {% set value = "" %}
+                        {% endif %}
+
+                        {% if attribute(option,data.text) is defined %} 
+                            {% set text = attribute(option,data.text) %}
+                        {% else %}
+                            {# fallback for text #}
+                            {% if option.name is defined %} 
+                                {% set text = option.name %}
+                            {% else %}
+                                {# fallback for text #}
+                                {% set text = "" %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    <option value="{{ value }}">
+                        {{text|trans}}
+                    </option>
+                {% endfor %}                
+            </select>
+    {% if not newTheme %}
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

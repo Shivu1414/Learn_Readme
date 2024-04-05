@@ -1,0 +1,114 @@
+<h4>{{ 'filter'|trans }}</h4>
+<form method="get">
+    <div class="filter-fields">
+        <div class="form-group">
+            <label for="search_id">
+                {{ 'id'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_id'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="search_id" name="id" value="{% if search.id is defined %}{{ search.id }}{% endif %}">
+        </div>
+           
+        <div class="form-group">
+            <label for="batch_id">
+                {{ 'batch_id'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_batch_id'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="batch_id" name="batch_id" value="{% if search.batch_id is defined %}{{ search.batch_id }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+            {% if area is defined and area != 'admin'%}
+                {% if villumi %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'status',label:'status',options:[
+                        {id:"OPEN",text: "open"},
+                        {id:"FAILED",text: "Failed"},
+                        {id:"PENDING",text: "Pending"},
+                        {id:"UNCLAIMED",text: "Unclaimed"},
+                        {id:"RETURNED",text: "Returned"},
+                        {id:"ONHOLD",text: "OnHold"},
+                        {id:"BLOCKED",text: "Blocked"},
+                        {id:"REFUNDED",text: "Refunded"},
+                        {id:"REVERSED",text: "Reversed"},
+                    ], tooltip: 'wixmp_status'|trans }} %}
+                {% else %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'status',label:'status',options:[
+                        {id:"OPEN",text: "open"},
+                        {id:"FAILED",text: "Failed"},
+                        {id:"PENDING",text: "Pending"},
+                        {id:"UNCLAIMED",text: "Unclaimed"},
+                        {id:"RETURNED",text: "Returned"},
+                        {id:"ONHOLD",text: "OnHold"},
+                        {id:"BLOCKED",text: "Blocked"},
+                        {id:"REFUNDED",text: "Refunded"},
+                        {id:"REVERSED",text: "Reversed"},
+                    ]}} %}
+                {% endif %}
+            {% else %}
+                {% if villumi %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'status',label:'status',options:[
+                        {id:"OPEN",text: "open"},
+                        {id:"DENIED",text: "Denied"},
+                        {id:"PENDING",text: "Pending"}, 
+                        {id:"SUCCESS",text: "Success"},
+                        {id:"PROCESSING",text: "Processing"},
+                        {id:"CANCELED",text: "Canceled"},
+                    ] , tooltip: 'wixmp_status'|trans }} %}
+                {% else %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'status',label:'status',options:[
+                        {id:"OPEN",text: "open"},
+                        {id:"DENIED",text: "Denied"},
+                        {id:"PENDING",text: "Pending"}, 
+                        {id:"SUCCESS",text: "Success"},
+                        {id:"PROCESSING",text: "Processing"},
+                        {id:"CANCELED",text: "Canceled"},
+                    ]}} %}
+                {% endif %}
+                
+            {% endif %}
+        </div>    
+        {# <div class="form-group">
+            {% include 'common/date_range_box.html.twig'  with {
+                data: {
+                    to_name       : 'end_date',
+                    from_name     : 'start_date',
+                    selected_to   : "now"|date('Y-m-d'),
+                    selected_from : "now"|date('Y-m-d')
+                }
+            } %}    
+        </div><br><br> #}
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="transaction_id">
+                        {{ 'created_start_date'|trans }}
+                        {% if villumi %}
+                            <i class="fa fa-info-circle" title="{{ 'wixmp_created_start_date'|trans }}" aria-hidden="true"></i>
+                        {% endif %}
+                    </label>
+                    <input type="text" class="form-control wix_end_date" value="{% if search['start_date'] is defined %}{{ search['start_date'] }}{% endif %}" name="start_date">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="transaction_id">
+                        {{ 'created_end_date'|trans }}
+                        {% if villumi %}
+                            <i class="fa fa-info-circle" title="{{ 'wixmp_created_end_date'|trans }}" aria-hidden="true"></i>
+                        {% endif %}
+                    </label>
+                    <input type="text" class="form-control wix_end_date" value="{% if search['end_date'] is defined %}{{ search['end_date'] }}{% endif %}" name="end_date">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="filter-btn-block">
+        <button type="submit" class="btn btn-primary">{{ 'submit'|trans }}</button>
+        <button type="button" class="btn btn-danger btn-clear">{{ 'search.clear'|trans }}</button>
+        <button type="button" class="btn btn-secondary filter-close">{{ 'cancel'|trans }}</button>
+    </div>
+</form>

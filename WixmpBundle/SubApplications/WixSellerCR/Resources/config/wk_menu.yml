@@ -1,0 +1,8 @@
+custom_field:
+  icon_class: fa fa-list
+  route: wixsellercr_index
+  child: null
+custom_field_create:
+  icon_class: fa fa-plus
+  route: wixsellercr_customfield_create
+  child: null

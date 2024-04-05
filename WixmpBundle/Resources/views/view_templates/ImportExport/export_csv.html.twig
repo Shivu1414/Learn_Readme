@@ -1,0 +1,40 @@
+{% if area == 'admin' %}
+    {% set path_name = 'wixmp_export_seller' %}
+{% endif %}
+<div class="row">
+    <div class="col-md-12">
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(form, {'action': path(path_name,{storeHash:storeHash,filterParams:app.request.query.get('filterParams')}), 'attr': {'id': formId}}) }}
+        <div class="tile-body">
+            <div class="form-group">
+                <h5><u>{{ 'wix_wixmp_general_info'|trans }}</u> :</h6>
+            </div>
+            {{ form_label(form.file_name, 'wix_wixmp_file_name') }}
+            {{ form_widget(form.file_name) }}
+
+            {{ form_label(form.output_type, 'wix_wixmp_output_type') }}
+            {{ form_widget(form.output_type) }}
+
+            {{ form_label(form.delimiter, 'wix_wixmp_delimiter') }}
+            {{ form_widget(form.delimiter) }}
+
+            <div class="form-group">
+                <h5><u>{{ 'seller_info'|trans }}</u> :</h5>
+            </div>
+            {# {{ form_row(form.categories_seperator) }} #}
+            {{ form_label(form.primary_fields, 'wix_wixmp_primary_fields') }}
+            {{ form_widget(form.primary_fields) }}
+
+            {{ form_label(form.other_fields, 'wix_wixmp_other_fields') }}
+            {{ form_widget(form.other_fields) }}
+
+            {# <hr /> #}
+            {# <div class="form-check">        
+                <input class="form-check-input" name="only_current_page" value="1" type="checkbox" id="only_current_page"/>
+                <label class="form-check-label" for="only_current_page">{{'label.export_only_current_page'|trans}}</label>
+            </div>                 #}
+        </div>         
+        {{ form_end(form) }}
+        <hr/>
+    </div>
+</div>

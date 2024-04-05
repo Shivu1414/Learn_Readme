@@ -1,0 +1,11 @@
+<div class="dropdown show">
+    <a class="btn dropdown-toggle" href="#" role="button" id="dropdown-action-{{ object.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+    <div class="dropdown-menu dropdown-menu-arrow" aria-labelledby="dropdown-action-{{ object.id }}">
+        {% if object.status == 'A' %}
+            {# <a class="dropdown-item" href="{{ object.name|bc_store_url(storeHash) }}" target="_blank"><i class="fa fa-eye"></i> {{ 'view_store_product'|trans }}</a> #}
+        {% endif %}
+        <a class="dropdown-item" href="{{ path(controller_prefix ~ 'update', {storeHash:  storeHash, product_id:object.id}) }}" >{{ 'edit'|trans }}</a>
+        
+        <a class="dropdown-item wk-delete-row-js" href="#" data-url="{{ path(controller_prefix ~ 'delete', {storeHash:  storeHash, product_id:object.id}) }}" >{{ 'delete'|trans }}</a>
+    </div>
+</div>

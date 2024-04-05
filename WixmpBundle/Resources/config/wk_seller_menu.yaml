@@ -1,0 +1,72 @@
+dashboard:
+  icon_class: fa fa-dashboard
+  route: wixmp_seller_dashboard
+  child: null
+orders:
+  icon_class: fa fa-shopping-cart
+  routes:
+    - wixmp_seller_sales_order_manage
+    #- mp_seller_sales_shipment_manage
+  child:
+    order:
+        icon_class: fa fa-shopping-cart
+        route: wixmp_seller_sales_order_manage
+    #shipment:
+        #icon_class: fa fa-truck
+        #route: mp_seller_sales_shipment_manage
+products:
+  icon_class: fa fa-product-hunt
+  routes:
+    - wixmp_seller_catalog_category_manage
+    - wixmp_seller_catalog_product_manage
+    #- mp_seller_catalog_product_options_manage
+  child:
+    categories:
+        icon_class: fa fa-list-ul
+        route: wixmp_seller_catalog_category_manage
+    product:
+        icon_class: fa fa-product-hunt
+        route: wixmp_seller_catalog_product_manage
+    # catalogue.product.options:
+    #     icon_class: fa fa-cubes
+    #     route: mp_seller_catalog_product_options_manage
+# seller_admin:
+#   icon_class: fa fa-user
+#   route: mp_seller_user_seller_manage
+#   child: null
+seller:
+  icon_class: fa fa-building
+  routes:
+    - wix_mp_seller_accounting_manage
+    - wixmp_seller_seller_manage
+    - wix_mp_seller_accounting_payout_item_transactions
+  child:
+    seller:
+        icon_class: fa fa-building
+        route: wixmp_seller_seller_manage
+    accounting:
+        icon_class: fa fa-calculator
+        route: wix_mp_seller_accounting_manage
+    payout_transactions:
+        icon_class: fa fa-money
+        route: wix_mp_seller_accounting_payout_item_transactions
+#         # available_stores: 
+#         #   [
+#         #     g49lb9sk5a,
+#         #     rdabko64cy            
+#         #   ]
+#     seller_reviews:
+#         icon_class: fa fa-star-half-o
+#         route: mp_seller_review_manage
+#         available_stores: 
+#           [
+#             gnuypjm22u
+#           ]
+setting:
+  icon_class: fa fa-cog
+  route: wixmp_seller_settings_general
+  child: null
+logout:
+  icon_class: fa fa-sign-out
+  route: mp_wix_seller_secure_logout
+  child: null

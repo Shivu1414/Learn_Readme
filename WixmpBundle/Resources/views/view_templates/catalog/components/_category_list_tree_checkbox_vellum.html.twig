@@ -1,0 +1,13 @@
+{% if fieldName is not defined %}
+    {% set fieldName = "form[categories][]" %}
+{% endif %}
+{% if required is not defined or required %}
+    {% set requiredClass = "wk-categories-required wk-categories-label" %}
+{% else %}
+    {% set requiredClass = "wk-categories-label" %}
+{% endif %}
+<select class="custom-select_vellum col-md-12" name="{{fieldName}}" style="width:100%;">
+        {% for category_data in categoryTree|sort %}
+            <option value="{{category_data.collectionId}}" {% if category_data.collectionId in selected %} selected {% endif %}>{{ category_data.name }}</option>
+        {% endfor %}
+</select>

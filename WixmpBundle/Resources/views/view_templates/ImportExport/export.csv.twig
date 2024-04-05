@@ -1,0 +1,1 @@
+{% if fields %}{{ fields | join(delimiter) | raw }}{{ eol }}{% endif %}{% for data in export_data %}{{ data | join(delimiter) | raw }}{{ eol }}{% endfor %}

@@ -1,0 +1,760 @@
+
+// Header Start
+.app-header {
+    background-color: #FFFFFF !important;
+    height: 48px;
+}
+
+@media (min-width: 768px) {
+    .app-header__logo {
+        background-color: #ffffff !important;
+    }
+}
+
+.app-header__logo {
+    background-color: #FFFFFF;
+    color: black;
+}
+
+.app-header__logo:focus,
+.app-header__logo:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.app-sidebar__toggle {
+    color: black;
+}
+
+.app-sidebar__toggle:focus,
+.app-sidebar__toggle:hover {
+    background-color: black !important;
+}
+
+.app-search a {
+    color: black !important;
+}
+
+.app-header__logo {
+    background-color: #FFFFFF !important;
+}
+
+.app-nav-upgrade {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+a.upgrade-button {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #fff;
+    border: 2px solid #aa4dc8;
+    color: #aa4dc8;
+    border-radius: 18px;
+    font-family: var(--wds-font-family-default, var(--wsr-font-family, Madefor, "Helvetica Neue", Helvetica, Arial, "\30E1\30A4\30EA\30AA", "meiryo", "\30D2\30E9\30AE\30CE\89D2\30B4pro w3", "hiragino kaku gothic pro", sans-serif));
+    font-size: 12px;
+    font-weight: 700;
+    height: 24px;
+    letter-spacing: unset;
+    line-height: 16px; /* Adjusted line height */
+    min-width: 60px;
+    padding: 3px 12px;
+}
+a.upgrade-button:hover {
+    background-color: #aa4dc8; /* Change color on hover */
+    color: #fff;
+}
+
+.plan-name {
+    color: #116dff;
+}
+
+#app-nav-sub-expire {
+    color: #116dff;
+}
+
+@media (max-width: 1010px) {
+    .app-nav-upgrade {
+        display: none;
+    }
+}
+
+// Header End
+
+// side nav bar start
+// #131720 color
+// #42454c active color
+
+.app-sidebar {
+    background-color: #131720 !important;
+}
+
+.app-menu__item.active,
+.app-menu__item:hover,
+.app-menu__item:focus {
+    background: #42454c;
+}
+
+.app-menu__item.active,
+.app-menu__item:hover,
+.app-menu__item:focus {
+    border-left-color: #42454c !important;
+}
+
+.sidebar-mini.sidenav-toggled .treeview:hover .app-menu__item {
+    background: #42454c !important;
+}
+
+.treeview.is-expanded [data-toggle="treeview"] {
+    border-left-color: #42454c !important;
+    background: #42454c
+}
+
+.treeview-item.active,
+.treeview-item:hover,
+.treeview-item:focus {
+    // background: #42454c;
+}
+
+.sidebar-mini.sidenav-toggled .app-menu__label {
+    background: #42454c !important;
+}
+
+.treeview-menu {
+    background: #42454c;
+}
+
+// side nav bar end
+
+// tile start
+.app-content {
+    background-color: #eceff3 !important;
+    margin-top: 0px;
+    padding: 63px;
+}
+
+.app-title {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    background-color: #eceff3;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+    color: #162D3D;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    margin-right: -30px;
+    margin-left: -30px;
+    padding: 20px 30px;
+
+}
+
+@media (min-width: 768px) {
+    .app-content {
+        margin-left: 230px;
+    }
+}
+
+.app-content {
+    min-height: calc(100vh - 50px);
+    transition: margin-left 0.3s ease;
+}
+
+.tile {
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.tile-header-text {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1em;
+    color: #162d3d;
+}
+
+.tile-header-add-text {
+    font-size: 16px;
+    line-height: 1.4em;
+    color: #577083;
+    margin-top: 3px;
+    font-weight: 400;
+
+}
+
+.tile-header {
+    border-bottom: 1px solid #dfe5eb;
+    padding: 5px 30px 20px 10px;
+    box-sizing: border-box;
+}
+
+.tile-body {
+    padding: 20px;
+    padding-left: 10px;
+}
+
+.tile-body-text {
+    font-size: 16px;
+    line-height: 1.4em;
+    color: #577083;
+    margin-top: 3px;
+    font-weight: 400;
+}
+
+.tile-table-text {
+    font-size: 16px;
+    line-height: 1.4em;
+    color: #162d3d;
+    margin-top: 3px;
+    margin-bottom: 6px;
+    font-weight: 400;
+}
+
+
+.app-title h1 {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 700;
+    letter-spacing: 0.03rem;
+    color: #162D3D;
+}
+
+.tile-title-w-btn {
+    margin-bottom: 0px !important;
+}
+
+.left-tiles {
+    display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+    .app-content {
+        background-color: #eceff3 !important;
+        margin-top: 0px;
+        padding: 18% 6%;
+    }
+}
+
+// tile end 
+
+// tile button group start
+
+#items_per_page {
+    background-color: white;
+    border-radius: 30px;
+    color: #33374f;
+    width: 176%;
+    border-color: #d6e6fe;
+    border-width: 1px;
+    font-weight: 500;
+}
+
+#items_per_page::after {
+    margin-left: 50%;
+    vertical-align: 3px;
+}
+
+#items_per_page:hover {
+    background-color: #E7F0FF !important;
+}
+
+.dropdown-menu.show {
+    border-radius: 10px;
+}
+
+.btn-group {
+    margin: 0 2% !important;
+    gap: 10px;
+}
+
+.wk-filter {
+    background-color: white;
+    border-radius: 30px !important;
+    color: #116dff;
+    width: 125%;
+    border-color: #d6e6fe;
+    border-width: 1px;
+    font-weight: 500;
+}
+
+.wk-filter:hover {
+    background-color: #116dff !important;
+    border-color: #116dff;
+}
+
+.wk-setting-btn {
+    background-color: white;
+    border-radius: 30px !important;
+    color: #116dff;
+    width: 125%;
+    border-color: #d6e6fe;
+    border-width: 1px;
+    font-weight: 500;
+}
+
+.wk-setting-btn:hover {
+    background-color: #116dff !important;
+    border-color: #116dff;
+}
+
+.show > .btn-secondary.dropdown-toggle {
+    color: #d6e6fe;
+    background-color: #116dff;
+    border-color: #116dff;
+}
+
+.btn-sync {
+    background-color: white;
+    border-radius: 30px !important;
+    color: #116dff;
+    width: 125%;
+    border-color: #d6e6fe;
+    border-width: 1px;
+    font-weight: 500;
+}
+
+.btn-sync:hover {
+    background-color: #116dff !important;
+    border-color: #116dff;
+}
+
+.btn-outline-custom {
+    background-color: #116dff;
+    color: #fff;
+    border-radius: 30px !important;
+}
+
+.btn-outline-custom:hover {
+    color: white;
+    background-image: linear-gradient(#0000001a 0 0);
+}
+
+.bulk-email {
+    background-color: white;
+    border-radius: 30px !important;
+    color: #116dff;
+    width: 125%;
+    border-color: #d6e6fe;
+    border-width: 1px;
+    font-weight: 500;
+}
+
+.bulk-email:hover {
+    background-color: #116dff !important;
+    border-color: #116dff;
+}
+
+.btn-outline-primary {
+    background-color: #116dff;
+    color: #fff;
+    border-color: #116dff;
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-color: #116dff;
+    border-color: #116dff;
+    background-image: linear-gradient(#0000001a 0 0);
+}
+
+.btn-primary:hover {
+    color: #FFF;
+    background-color: #116dff;
+    border-color: #116dff;
+}
+
+.btn-primary {
+    color: #FFF;
+    background-color: #116dff;
+    border-color: #116dff;
+}
+
+// tile button group end
+
+//  tile table head start
+.table thead th {
+    background-color: var(--wsr-color-B40, #DAEFFE);
+    box-shadow: inset 0 1px 0 0 var(--wsr-color-B30, #C1E4FE), inset 0 -1px 0 0 var(--wsr-color-B30, #C1E4FE);
+    width: 48px;
+    cursor: auto;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    height: 24px;
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
+    border: 0;
+}
+
+.tile-table > thead > tr {
+    text-align: center;
+}
+
+.tile-table > tbody > tr:hover {
+    background-color: #DAEFFE;
+}
+
+.tile-table > tbody > tr {
+    text-align: center;
+    border-bottom: 1px solid #e3e3e3;
+    cursor: pointer;
+}
+
+.tile-table > tbody > tr > td{
+    vertical-align: middle;
+}
+
+.tile-table > tbody > tr:hover .btn-group-action {
+    opacity: 1;
+}
+//  tile table head end
+
+// common start
+
+.title-total {
+    color: #7A92A5;
+}
+
+a {
+    color: #3181FF;
+}
+
+a:hover {
+    color: #3181FF;
+}
+
+.btn-outline-action {
+    background-color: #fff;
+    color: #116dff;
+    border-radius: 50% !important;
+    padding: 5px;
+}
+
+.btn-outline-action:hover {
+    background-color: #116dff;
+    color: #fff;
+}
+
+.btn-delete{
+    background-color: #fff;
+    color: #de404f;;
+    border-radius: 50% !important;
+    padding: 5px;
+}
+
+.btn-delete:hover {
+    background-color: #de404f;;
+    color: #fff;
+}
+
+.btn-save {
+    background-color: #116dff;
+    color: #fff;
+    border-radius: 999px !important;
+    padding: 5px 18px;
+}
+
+.btn-save:hover {
+    color: #fff;
+    background-image: linear-gradient(#0000001a 0 0);
+}
+
+.btn-group-action {
+    display: flex;
+    justify-content: center; 
+    opacity: 0.2;
+    gap: 5px;
+}
+
+.form-label {
+    font-size: 16px;
+    color: #37586f;
+    font-weight: 400;
+    line-height: 24px;
+    margin-right: 3px;
+}
+
+.form-input {
+	border: 1px solid #c1e4fe;
+    border-radius: 5px;
+    // width: 350px !important;
+
+}
+
+.form-input:hover {
+    background-color: #E7F0FF ;
+}
+
+.form-input:focus {
+    border-color: #3899ec;
+    box-shadow: 0 0 0 3px #AADBFC;
+}
+
+.btn-submit {
+    background-color: #116dff;
+    color: #fff;
+    border-radius: 999px !important;
+    padding: 5px 18px;
+}
+
+.btn-submit:hover {
+    color: #fff;
+    background-image: linear-gradient(#0000001a 0 0);
+}
+
+.tile-header .btn-group {
+    float: right;
+    margin: -40px !important;
+    border-bottom: 0;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.text-primary {
+    color: #116DFF !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .tile-header .btn-group {
+        float: right;
+    }
+}
+// common end
+
+// This css use only for image upload desing change start
+
+.image-preview {
+    margin: 10px;
+    padding: 10px;
+}
+
+.custom-file-upload {
+    position: relative;
+    // max-width: 360px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.custom-file-upload input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+}
+
+.upload-field {
+    display: block;
+    background: #F4FAFE;
+    padding: 12px;
+    border-radius: 11px;
+}
+
+.upload-field .file-thumbnail {
+    cursor: pointer;
+    border: 1px dashed #BBD9EC;
+    border-radius: 11px;
+    text-align: center;
+    padding: 20px;
+}
+
+.upload-field .file-thumbnail img {
+    width: 50px;
+}
+
+.upload-field .file-thumbnail h3 {
+    font-size: 12px;
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.upload-field .file-thumbnail p {
+    font-size: 12px;
+    color: #9ABCD1;
+    margin-bottom: 0;
+}
+// This css use only for image upload desing change end
+
+//checkbox start 
+
+.wk-bam-switch-label::before{
+    width: 32px;
+    height: 20px;
+    border-radius: 12px;
+    background-color: #3899ec;
+    opacity: 0.5;
+}
+.wk-bam-switch-label::after {
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    background-color: #fff;
+
+}
+.wk-bam-switch-input:checked + .wk-bam-switch-label::before {
+    background-color: #3899ec;
+    opacity: 1;
+}
+.wk-bam-switch-input:checked + .wk-bam-switch-label::after { 
+    background-color: #fff;
+}
+
+//checkbox end
+
+//checkbox label start
+
+.wk-bam-switch-label {
+    margin: 0px;
+    font-size: 16px;
+    color: #37586f;
+    font-weight: 400;
+    line-height: 24px;
+    margin-left: 12px;;
+}
+
+.wk-wix-tooltip {
+    color: #3899ec;
+    padding-bottom: 2px;
+}
+
+//checkbox label end
+
+// time select area start
+
+.input-group-append {
+    position: relative;
+}
+
+.input-group-append span{
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+    color: #9b9b9b;
+}
+
+// time select area end
+
+// For select 2 start 
+
+.select2-container--default .select2-selection--single {
+    border-color: #c1e4fe;
+}
+
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
+    border-color: #c1e4fe;
+}
+
+.select2-dropdown {
+    border-color: #c1e4fe;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #37586f;
+    color: white;
+}
+
+.select2-dropdown {
+    background-color: white;
+    border: 2px solid #c1e4fe;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #c1e4fe;
+    border-radius: 3px;
+}
+// For select 2 end
+
+.input-container-commission {
+    justify-content: center;
+}
+
+.nav.nav-tabs {
+    border: none;
+}
+//  pagination start here
+
+.pagination {
+    gap: 5px;
+}
+
+.pagination li {
+    padding: 5px 15px;
+    background: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,.1);
+}
+
+.pagination li:hover{
+    background: #116DFF;
+    color: #FFF;
+}
+
+.pagination li:hover a {
+    color: white;
+}
+
+.pagination li a {
+    border: none;
+    background: transparent;
+}
+
+.pagination li span {
+    border: none;
+    background: transparent;
+    color: #FFF;
+}
+
+.pagination li a:hover {
+    background: transparent;
+    color: white;
+}
+
+.pagination li.active {
+    color: #fff;
+    background: #116DFF;
+}
+
+.pagination li.active .page-link{
+    background-color: transparent;
+    border-color: none;
+}
+
+.pagination li.disabled .page-link {
+    background: transparent;
+}
+
+.pagination li.disabled:hover span {
+    color: #FFF;
+}
+
+.pagination .page-link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+@media only screen and (max-width: 768px) {
+    .pagination li {
+        padding: 5px 5px;
+        background: #ffffff;
+        border-radius: 25px;
+        box-shadow: 0px 5px 10px 0px rgba(0,0,0,.1);
+    }
+}
+
+// pagination end here
+.span-text-bold {
+    font-weight: 700;
+}

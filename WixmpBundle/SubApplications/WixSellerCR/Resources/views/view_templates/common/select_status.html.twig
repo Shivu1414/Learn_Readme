@@ -1,0 +1,36 @@
+{% if class is defined %}
+    {% set linkClass = class~'-' %}
+{% else %}
+    {% set linkClass = 'status-' %}
+{% endif %}
+
+
+<div class="dropdown">
+    <a class="btn dropdown-toggle" href="#" role="button" id="status-{{ object.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if status_list[ current_status ] is defined %}
+            {{ attribute(status_list,current_status)|trans }}
+        {% endif %}
+    </a>
+    <div class="dropdown-menu dropdown-menu-arrow" aria-labelledby="status-{{ object.id }}">
+        {% for key,value in status_list %}
+           
+            {% if key is not same as('N') %} {# WE DO NOT WANT TO SET NEW STATUS #}
+                {% if key == current_status %}
+                    {% set activeClass = 'disabled' %}
+                {% else %}
+                    {% set activeClass= '' %}
+                {% endif %}
+
+                <a class="dropdown-item {{ linkClass ~ key }} {{ activeClass }}" href="{{ path(route, {
+                        storeHash:storeHash,
+                        entity_id : object.id,
+                        status_from: current_status, 
+                        status_to:key, 
+                        current_url:current_url
+                    }) }}">
+                    {{ value|trans }}
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

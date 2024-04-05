@@ -1,0 +1,26 @@
+{% set menu_list = get_mp_seller_menu_list('app',app_code) %}
+{% set current_route = app.request.attributes.get('_route') %}
+<ul class="app-menu">
+    {% for menu_name,menu_data in menu_list %}
+        {% if menu_data.child %}
+            <li class="treeview {% if current_route in menu_data.routes %}is-expanded{% endif %}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon {{ menu_data.icon_class }}"></i><span class="app-menu__label">{{ menu_name|trans }}</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    {% for sub_menu_name,sub_menu_data in menu_data.child %}
+                        {% set continue = false %}
+                        {% if sub_menu_data.available_stores is defined and companyApplication is defined%}
+                            {% if companyApplication.company.storeHash not in sub_menu_data.available_stores %}
+                                {% set continue = true %}
+                            {% endif %}
+                        {% endif %}
+                        {% if not continue %}
+                            <li><a class="treeview-item {% if current_route == sub_menu_data.route %} active{% endif %}" href="{% if sub_menu_data.route %}{{ path(sub_menu_data.route, {storeHash: storeHash, app_code: app_code } ) }}{% endif %}"><i class="app-menu__icon {{ sub_menu_data.icon_class }}"></i>{{ sub_menu_name|trans }}</a></li>
+                        {% endif %}                        
+                    {% endfor %}
+                </ul>
+        {% else %}
+            <li>
+                <a class="app-menu__item {% if current_route == menu_data.route %} active{% endif %}" href="{% if menu_data.route %}{{ path(menu_data.route, {storeHash: storeHash, app_code: app_code } ) }}{% endif %}"><i class="app-menu__icon {{ menu_data.icon_class }}"></i><span class="app-menu__label">{{ menu_name|trans }}</span></a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

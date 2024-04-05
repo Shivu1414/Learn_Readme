@@ -1,0 +1,154 @@
+{# {{ dump(plan.conditions) }} #}
+{# {% if plan.conditions.commission_value_type is defined %}
+    {% set comission_value_type = plan.conditions.commission_value_type %}
+{% else %}
+    {% set comission_value_type = "" %}
+{% endif %}
+
+{{ dump(comission_value_type) }} #}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(form, {"attr": {"id": "wix_mp_seller_plan_form"}}) }}
+                <div class="tile-title-w-btn">
+                    <h5 class="title"></h5>
+                    <div class="btn-group"></div>
+                </div>
+                <div class="tile-body">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#general">{{ 'general'|trans }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#condition">{{ 'condition'|trans }}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <br>
+                        <div class="tab-pane active" id="general">
+                            <div class="form-group">
+                                {{ form_label(form.plan,'plan_title'|trans , {'label_attr': {'class': 'wk-required'}}) }}                            
+                                {{ form_widget(form.plan,{required:false,'attr':{'class':'form-control','placeholder': 'free' }}) }}                            
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.status,'status'|trans , {'label_attr': {'class': 'wk-required'}}) }}
+                                {{ form_widget(form.status,{required:false,'attr':{'class':'form-control vellum-select','placeholder': 'FREE-PLAN'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.code,'wix_wixmp_code'|trans , {'label_attr': {'class': 'wk-required'}}) }}
+                                {{ form_widget(form.code,{required:false,'attr':{'class':'form-control'}}) }}
+                                <div><small>{{ 'plan_code_hint'|trans }}</small></div>
+                            </div>
+                            {% set admin_currency = get_currency('app', storeHash) %}
+                            <div class="form-group">
+                                {{ form_label(form.price,'price'|trans, {'label_attr': {'class': 'wk-required wk-price'}}) }}
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text">{{ admin_currency.symbol }}</span></div>
+                                    {{ form_widget(form.price,{required:false,'attr':{'class':'form-control','placeholder': '20.00'}}) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.bestChoice,'best_choice'|trans, {'label_attr': {'class': ''}}) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.bestChoice,{required:false,'attr':{'class':'form-control','placeholder': '20.00'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.intervalType,'wix_wixmp_intervalType'|trans , {'label_attr': {'class': 'wk-form-plan-interval-type wk-required' }}) }}
+                                {{ form_widget(form.intervalType,{required:false,'attr':{'class':'form-control vellum-select'}}) }}
+                            </div>
+                            {% if plan.intervalValue is defined and plan.intervalValue is empty %} {% set intervalValue = 1 %} {% elseif plan.intervalValue is defined %} {% set intervalValue = plan.intervalValue %} {% else %} {% set intervalValue = 1 %} {% endif %}
+                            
+                            <div class="form-group">
+                                {{ form_label(form.intervalValue,'wix_wixmp_intervalValue'|trans , {'label_attr': {'class': 'wk-form-plan-interval-value wk-required'}}) }}
+                                {{ form_widget(form.intervalValue,{required:false,value:intervalValue,'attr':{'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.description,'description'|trans , {'label_attr': {'class': ''}}) }}
+                                {{ form_widget(form.description,{required:false,'attr':{'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="condition">
+                            {{ form_widget(form.conditions,{required:false,value:"dev",'attr':{'class':'form-control'}}) }}
+                            
+                            {% for name,data in plan_conditions %} 
+                                {% if name == 'commission' %}
+                                    <div class="form-group" id = "wk-wix-plan-commission">
+                                        {% if data.type == 'text' %}
+                                            <label class="{{ data.label_class }} form-control-label" for="seller_plan_condition_{{ name }}"> {{'commission_type'|trans }}</label>
+                                            {% if storeHash == 'DTMasterCarbon99fa' %}
+                                               <select id="options" name="seller_plan_form[conditions][commission_value_type]" class="form-control {{ data.class }}">
+                                                    <option value="percentage" selected>Percentage</option>
+                                                    <option value="fixed">Fixed</option>
+                                                </select> <br>
+                                                <label class="{{ data.label_class }} form-control-label" for="seller_plan_condition_{{ name }}">{{ name|trans }}</label>
+                                                <div class="input-group percentage" style="display:none">
+                                                    <div class="input-group-prepend"><span class="input-group-text">%</span></div>
+                                                    <input type="text" id="seller_plan_condition_{{ name }}" name="seller_plan_form[conditions][{{ name }}]" class="form-control {{ data.class }}" value="{% if plan is empty %}{{ data.default }}{% else %}{{ attribute(plan.conditions,name) }}{% endif %}" >
+                                                </div>
+                                                <div class="input-group flat" style="display:none">
+                                                    <div class="input-group-prepend"><span class="input-group-text">{{ admin_currency.symbol }}</span></div>
+                                                    <input type="text" id="seller_plan_condition_{{ name }}" name="seller_plan_form[conditions][{{ name }}]" class="form-control {{ data.class }}" value="{% if plan is empty %}{{ data.default }}{% else %}{{ attribute(plan.conditions,name) }}{% endif %}" >
+                                                </div>
+                                            {# {% endfor %} #}
+                                            {% else %}
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend"><span class="input-group-text">%</span></div>
+                                                    <input type="text" id="seller_plan_condition_{{ name }}" name="seller_plan_form[conditions][{{ name }}]" class="form-control {{ data.class }}" value="{% if plan is empty %}{{ data.default }}{% else %}{{ attribute(plan.conditions,name) }}{% endif %}" >
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                {% elseif (name == 'commission_type') %}
+                                    {# {% if (plan_application_data is defined and plan_application_data is not empty and (plan_application_data['commission_per_product']=='1' or plan_application_data['commission_per_category']=='1')) %} #}
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="seller_plan_condition_{{ name }}">{{ name|trans }}</label>
+                                            <div class = "input-group">
+
+                                                <select class="form-control" id="seller_plan_condition_{{ name }}" name="seller_plan_form[conditions][{{ name }}]">
+                                                    <option value="commission_per_order" {% if plan.conditions.commission_type is defined and (attribute(plan.conditions,name) == 'commission_per_order') %} selected = 'selected' {% endif %}>{{ 'commission_per_order'|trans }}</option>
+                                                    
+                                                    {% if (plan_application_data is defined and plan_application_data is not empty and plan_application_data['commission_per_category']=='1') %}
+                                                        <option value="commission_per_category" {% if plan.conditions.commission_type is defined and (attribute(plan.conditions,name) == 'commission_per_category') %} selected = 'selected' {% endif %}>{{ 'commission_per_category'|trans }}</option>
+                                                    {% endif %}
+
+                                                    {% if (plan_application_data is defined and plan_application_data is not empty and plan_application_data['commission_per_product']=='1') %}
+                                                        <option value="commission_per_product" {% if plan.conditions.commission_type is defined and (attribute(plan.conditions,name) == 'commission_per_product') %} selected = 'selected' {% endif %}>{{ 'commission_per_product'|trans }}</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    {# {% endif %} #}
+                                {% else %}
+                                    <div class="form-group">
+                                        {% if data.type == 'text' %}
+                                          <label class="{{ data.label_class }} form-control-label" for="seller_plan_condition_{{ name }}">{{ name|trans }}</label>
+                                          <input type="text" id="seller_plan_condition_{{ name }}" name="seller_plan_form[conditions][{{ name }}]" class="form-control {{ data.class }}" value="{% if plan is empty %}{{ data.default }}{% else %}{{ attribute(plan.conditions,name) }}{% endif %}" >
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="form-group" id = "seller_plan_category_comission_rate_type_div">
+                                <label class="form-control-label" for="seller_plan_category_comission_rate_type">{{ "category_comission_rate_type"|trans }}</label>
+                                <div class = "input-group">
+                                    <select class="form-control" id="seller_plan_category_comission_rate_type" name="seller_plan_form[conditions][category_comission_rate_type]">
+                                        <option value="highest_rate" {% if plan.conditions.category_comission_rate_type is defined and (attribute(plan.conditions,'category_comission_rate_type') == 'highest_rate') %} selected = 'selected' {% endif %}>{{ 'category_commission_highest_rate'|trans }}</option>
+
+                                        <option value="lowest_rate" {% if plan.conditions.category_comission_rate_type is defined and (attribute(plan.conditions,'category_comission_rate_type') == 'lowest_rate') %} selected = 'selected' {% endif %}>{{ 'category_commission_lowest_rate'|trans }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile-footer">
+                    <button class="btn btn-primary" type="submit">{% if plan is not empty and plan.id %}{{ 'save'|trans }}{% else %}{{ 'create'|trans }}{% endif %}</button>
+                    <a class="btn btn-secondary ml-2" href="{{ path('wixmp_seller_plan_manage',{storeHash:storeHash}) }}">{{ 'cancel'|trans }}</a>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{{ "hello"|trans }}, {{ seller.seller }}
+
+<p>{{ "your_seller_profile_updated_successfully"|trans }}</p>
+<p><b>{{ 'SELLER_APPLICATION_INFORMATION'|trans }}</b></p>
+<hr>
+<div>
+<table>
+    <tbody>
+        <tr><th>{{ 'seller'|trans }}:</th><td>{{ seller.seller }}</td></tr>
+        <tr><th style="text-align:left">{{ 'email'|trans }}:</th><td>{{ seller.email }}</td></tr>
+        <tr><th>{{ 'phone'|trans }}:</th><td>{{ seller.phone }}</td></tr>
+    </tbody>
+</table>
+</div>

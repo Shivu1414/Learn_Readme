@@ -1,0 +1,35 @@
+<div class="modal" id="new_theme_settings" tabindex="-1" aria-labelledby="newThemeSettingModalTitle" style="display: block; padding-left: 0px;" aria-modal="true" role="dialog">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+
+            <div class="modal-header">
+                <img src="/resource/images/radmin/logo/logo-webkul.png" alt="no-image" width="40%">
+			</div>
+
+			<div class="modal-body">
+                <div class="desc-update-block" style="">
+                    <div class="desc-block">
+                        <div class="new-update-note"> {{ 'wix_wixmp_new_update'|trans }} </div>
+                        <div class="new-update-note-sub">
+                            {{ 'wix_wixmp_we_are_providing_new_ui_ipdate'|trans }}
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="block-desc text-center"> {{ 'wix_wixmp_do_you_want_to_switch'|trans }} </div>
+                    <div class="text-center">
+                        <label>
+                            <input type="checkbox" id="dontShowAgainCheckbox"> {{ 'wix_wixmp_dont_show_again'|trans }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" id="new-ui-close" data-dismiss="modal"> {{'wix_wixmp_close'|trans }} </button>
+                <button type="submit" class="btn btn-success" id="new-ui-save" data-theme="UPDATEFEB10" data-href="{{ path('wixmp_update_theme',{storeHash:storeHash}) }}"> {{'wix_wixmp_apply'|trans }} </button>
+			</div>
+
+		</div>
+	</div>
+<div>

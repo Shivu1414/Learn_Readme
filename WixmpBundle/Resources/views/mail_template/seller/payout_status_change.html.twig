@@ -1,0 +1,41 @@
+{{ "hello"|trans }},
+
+<p>{{ "payout_status_updated_please_check_details"|trans }}</p>
+
+<hr style="color:#E4E4E4">
+<div>
+<table style="font-size:12px">
+    <tbody>
+        <tr><th style="text-align:left">{{ 'id'|trans }}:</th><td>{{ payout.id }}</td></tr>        
+        <tr><th style="text-align:left">{{ 'seller'|trans }}:</th><td>{{ seller.seller }}</td></tr>
+        <tr><th style="text-align:left">{{ 'Email'|trans }}:</th><td>{{ seller.email }}</td></tr>
+        <tr><th style="text-align:left">{{ 'phone'|trans }}:</th><td>{{ seller.phone }}</td></tr>
+        <tr><th style="text-align:left">{{ 'request_type'|trans }}:</th><td>{% if payout.payoutType == 'P' %}{{ 'payout'|trans }}{% elseif payout.payoutType == 'W' %}{{ 'withdraw'|trans }}{% else %}{{ 'order_placement'|trans }}{% endif %}</td></tr>
+        <tr><th style="text-align:left">{{ 'amount'|trans }}:</th><td>{% if payout.payoutType == 'P' or payout.payoutType == 'W' %}{{ payout.payoutAmount|wk_price('app', storeHash)|raw }}{% else %}{{ payout.orderAmount|wk_price('app', storeHash)|raw }}{% endif %}</td></tr>
+        <tr><th style="text-align:left">{{ 'note'|trans }}:</th><td>{{ payout.comment }}</td></tr>
+        {% if payout.orderId is not empty %}
+        <tr><th style="text-align:left">{{ 'order_id'|trans }}:</th><td>{{ payout.orderId }}</td></tr>
+        {% endif %}
+        <tr>
+            <th style="text-align:left">{{ 'status'|trans }}:</th>
+            <td>
+                {% if payout.status == 'A' %}
+                    {{ 'approved'|trans }}
+                {% elseif payout.status == 'P' %}
+                    {{ 'pending'|trans }}
+                {% elseif payout.status == 'D' %}
+                    {{ 'declined'|trans }}
+                {% elseif payout.status == 'I' %}
+                    {{ 'payment_initiated'|trans }}
+                {% elseif payout.status == 'X' %}
+                    {{ 'payment_cancel'|trans }}
+                {% elseif payout.status == 'c' %}
+                    {{ 'complete'|trans }}
+                {% else %}
+                    {{ 'disabled'|trans }}
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>

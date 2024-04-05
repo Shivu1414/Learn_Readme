@@ -1,0 +1,140 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title">
+                    {% include 'common/list_items.html.twig' %}
+                </h5>
+                <div class="btn-group">
+                    <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}">
+                        <i class="fa fa-filter"></i>
+                        {% if newTheme %}
+                            <span class="span-text-bold">
+                                {{ 'filter'|trans }}
+                            </span>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <div class="tile-body">
+                <section class="transaction">
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                                <table class="table {{ newTheme ? "tile-table" : "table-striped"}}">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                {{ 'id'|trans }}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_id'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{ "batch_id"|trans }}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_batch_id'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{ 'payment_status'|trans }}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_payment_status'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            
+                                            <th>
+                                                {{ 'amount'|trans }}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_amount'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{ 'date'|trans }}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_date'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{ 'updated_at'|trans }}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_updated_at'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            {% if area == 'admin' %}
+                                                <th>
+                                                    {{ 'sync'|trans }}
+                                                    {% if villumi %}
+                                                        <i class="fa fa-info-circle" title="{{ 'wixmp_sync'|trans }}" aria-hidden="true"></i>
+                                                    {% endif %}
+                                                </th>
+                                            {% endif %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in transactions %}
+                                            
+                                            <tr>
+                                                <td>
+                                                    #{{ order.id }}</a>
+                                                </td>           
+                                                <td>
+                                                    {{ order.batchId|default('-') }}
+                                                </td>
+                                                <td>
+                                                    {{ order.status }}
+                                                </td>
+                                                
+                                                <td>{{ order.amount|wk_price('app', storeHash)|raw }}</td>
+                                                <td>{{ order.createdAt|wk_time }}</td>
+                                                <td>{{ order.updatedAt|wk_time }}</td>
+                                                {% if area == 'admin' %}
+                                                    <td>
+                                                        {% if order.batchId is defined and order.batchId is not empty %}
+                                                            <div class="btn-group">
+                                                            {% if app.request.get('storeHash') == "Giverb3de9" %}
+                                                                    {% for paymentType in jsonDecode(order.extra) %}
+                                                                        {% if paymentType.payout.payment_method is defined and paymentType.payout.payment_method == "stripe" %}
+
+                                                                            <a class="btn btn-primary" href="{{ path('wixmp_seller_accounting_payout_sync',{id:order.id,current_url:app.request.uri,storeHash:storeHash,payment_platform:'stripe'}) }}">
+                                                                            {{ 'sync'|trans }}<i class="fa fa-cc-stripe" aria-hidden="true"></i>
+                                                                            </a>
+
+                                                                        {% else %}
+                                                                            <a class="btn btn-primary" href="{{ path('wixmp_seller_accounting_payout_sync',{id:order.id,current_url:app.request.uri,storeHash:storeHash,payment_platform:'paypal'}) }}">
+                                                                                {{ 'sync'|trans }}<i class="fa fa-paypal" aria-hidden="true"></i>
+                                                                            </a>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                            {% else %}
+                                                                <a href="{{ path('wixmp_seller_accounting_payout_sync',{id:order.id,current_url:app.request.uri,storeHash:storeHash}) }}">
+                                                                {{ 'sync'|trans }}</a>
+                                                            {% endif %}
+
+                                                            </div>
+                                                        {% endif %}                    
+                                                    </td>
+                                                {% endif %}
+                                                
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="8" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="navigation">
+                                    {{ knp_pagination_render(transactions) }}
+                                </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+{# filter modal  #}
+{% include 'common/filter.html.twig' with {
+    include_path : '@wixmp_twig/view_templates/seller/components/payout_transaction.html.twig',
+    search: search
+} %}

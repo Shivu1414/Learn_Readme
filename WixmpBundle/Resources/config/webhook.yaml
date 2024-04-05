@@ -1,0 +1,51 @@
+information:
+  #- store/information/updated
+order:
+  - store/order/*
+  - store/order/created
+  # - store/order/updated
+  # - store/order/archived
+  # - store/order/deleted
+  # - store/order/statusUpdated
+  # - store/order/message/created
+product:
+  - store/product/*
+  # - store/product/deleted
+  - store/product/created
+  # - store/product/updated
+#category:
+  #- store/category/*
+  # - store/category/created
+  # - store/category/updated
+  # - store/category/deleted
+#sku:
+  #- store/sku/*
+  # - store/sku/created
+  # - store/sku/updated
+  # - store/sku/deleted
+  # - store/sku/inventory/updated
+  # - store/sku/inventory/order/updated
+#customer:
+  # - store/customer/*
+  # - store/customer/created
+  # - store/customer/updated
+  # - store/customer/deleted
+#cart:
+  # - store/cart/lineItem/*
+  # - store/cart/lineItem/created
+  # - store/cart/lineItem/updated
+  # - store/cart/lineItem/deleted
+  # - store/cart/created
+  # - store/cart/updated
+  # - store/cart/deleted
+  # - store/cart/couponApplied
+  # - store/cart/abandoned
+  # - store/cart/converted
+#shipment:
+  #- store/shipment/*
+  # - store/order/created
+  # - store/order/updated
+  # - store/order/archived
+  # - store/order/deleted
+  # - store/order/statusUpdated
+  # - store/order/message/created

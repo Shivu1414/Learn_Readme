@@ -1,0 +1,262 @@
+{% set primaryCurrency = get_currency('app', storeHash) %}
+{% set extra_value = product is defined  and product is not empty ? unserialize(product.getExtraDetails) : "" %}
+
+{% set variety = '' %}
+{% set vintage = '' %}
+{% set awards = '' %}
+{% set bottleSize = '' %}
+{% set country = '' %}
+{% set region = '' %}
+{% set appellation = '' %}
+{% set classification = '' %}
+
+{% for row in extra_value %}
+    
+    {% if row.title == 'Grape Variety' %}
+        {% set variety = row.description %}
+    {% endif %}
+
+    {% if row.title == 'Vintage' %}
+        {% set vintage = row.description %}
+    {% endif %}
+
+    {% if row.title == 'Awards' %}
+        {% set awards = row.description|split(' ,') %}
+        {# {% set variable_name = awards|split(' ,') %} #}
+    {% endif %}
+
+    {% if row.title == 'BottleSize' %}
+        {% set bottleSize = row.description %}
+    {% endif %}
+
+    {% if row.title == 'Country' %}
+        {% set country = row.description %}
+    {% endif %}
+
+    {% if row.title == 'Region' %}
+        {% set region = row.description %}
+    {% endif %}
+
+    {% if row.title == 'Appellation' %}
+        {% set appellation = row.description %}
+    {% endif %}
+
+    {% if row.title == 'Classification' %}
+        {% set classification = row.description %}
+    {% endif %}
+
+{% endfor %}
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-6 select-vellum">
+            <label>{{ 'categories'|trans }}</label>
+            <br>
+            {% include app_path_prefix ~ '/view_templates/catalog/components/_category_list_tree_checkbox_vellum.html.twig' with {app_path_prefix:app_path_prefix, controller_prefix:controller_prefix, categoryTree: categoryTree, level: 0, selected:selected_cats, hide_status: true} %}
+        </div>
+        <div class="col-md-6">
+            {{ form_label(form.name,'name'|trans,{label_attr:{class:'wk-required'}}) }}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_name'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            {{ form_widget(form.name,{required:false,'attr':{'class':'', 'autocomplete':'off', 'required': true}}) }}
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-md-6">
+            {{ form_label(form.sku,'product_code'|trans,{label_attr:{class:'wk-required'}}) }}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_product_code'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            {{ form_widget(form.sku,{attr: {'class':' wk-required', 'required': true}}) }}
+            <input type="hidden" name="previous_sku" value="{{ form.sku.vars.data }}"/>
+        </div>
+        <div class="col-md-6">
+            {{ form_label(form.brand,'producer'|trans,{label_attr:{class:'wk-required'}}) }}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_producer'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            {{ form_widget(form.brand, {attr: {'class':' wk-required'}}) }}
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-md-6 select-vellum">
+            {{ form_label(form.grape_varity,'grape_varity'|trans) }}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_grape_varity'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            {{ form_widget(form.grape_varity, {attr: {'class':'form-control', 'data-value': variety}}) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_label(form.BottleSize,'bottle_size'|trans) }}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_bottle_size'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            <select id="{{ form.BottleSize.vars.id }}" name="{{ form.BottleSize.vars.full_name }}" class="form-control">
+                <option> {{'select_bottle_size'|trans}} </option>
+                {% for option in form.BottleSize.vars.choices %}
+                    <option {{ option.label == bottleSize ? 'selected' : '' }} value="{{ option.value }}">
+                        {{ option.label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-md-6">
+            <div class="country">
+                {{ form_label(form.country, 'country'|trans,{label_attr:{class:'wk-required'}}) }} 
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_country'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+                {{ form_widget(form.country, {attr: {'class': "form-control", id: "country-select", 'data-value': country}}) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="region">
+                {{ form_label(form.region, 'region'|trans,{label_attr:{class:'wk-required'}}) }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_region'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+                {{ form_widget(form.region, {'attr': {'class': "form-control", id: "region-select", 'data-value': region}}) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-md-6 appellation">
+            {{ form_label(form.appellation, 'Appellation'|trans) }}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_appellation'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            <div class="appellation">
+                {{ form_widget(form.appellation, {attr: {'class': 'form-control', id: "appellation-select", 'data-value': appellation}}) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            {{ form_label(form.vintage, 'Vintage'|trans,{label_attr:{class:'wk-required'}}) }}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_vintage'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            <div class="vintage">
+                {{ form_widget(form.vintage, {attr: {'class':" wk-required form-control", value:vintage}}) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+
+        <div class="col-md-6">
+            <div class="row">
+                {% for key, award in awards %}
+                    {% if (award != '' and awards|length >= 2) or (award == '' and awards|length == 1)  %}
+                        <div class="row col-12">
+                        
+                            {% set awardSplit = award|split(' -') %}
+                            <div class="col-sm-5 add-update-{{key}}">
+                                <label class="" for="form_awards"> {{ 'awards'|trans }} </label>
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_awards'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                                <select id="form_awards" name="form[awards][]" class="form-control form_awards">
+                                    <option value=""> {{'select_awards'|trans}} </option>
+                                    {% for item in awardsItems %}
+                                        <option {% if ( awardSplit[0] is defined and awardSplit[0] == item) %} selected="" {% endif %} value="{{ item }}"> {{ item }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="col-sm-5 add-update-{{key}}">
+                                <label class="" for="form_awardsValue"> {{ 'awards_value'|trans }} </label>
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_awards_value'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                                <select id="form_awardsValue" name="form[awardsValue][]" class="form-control form_awardsValue">
+                                    <option value=""> {{'select_awards_value'|trans}} </option>
+                                        {% for value in 1 .. 100 %}
+                                            <option {% if ( awardSplit[1] is defined and awardSplit[1] == value) %} selected="" {% endif %} value="{{ value }}"> {{ value }} </option>
+                                        {% endfor %}
+                                </select>
+                            </div>
+
+                            {% if (key == 0 ) %}
+                                <div class="col-sm-2">
+                                    <button type="button" id="award-add-button" class="btn btn-success" style="margin-top: 1.7rem !important;"> + </button>
+                                </div>
+                            {% else %}
+                                <div class="col-sm-2"> 
+                                    <button type="button" id="award-add-button-remove" class="btn btn-danger award-add-button-remove" data-remove="add-update-{{ key }}" style="margin-top: 1.7rem !important;"> - </button> 
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="row col-12">
+                        <div class="col-sm-5">
+                            <label class="" for="form_awards"> {{ 'awards'|trans }} </label>
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_awards'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            <select id="form_awards" name="form[awards][]" class="form-control form_awards">
+                                <option value=""> {{'select_awards'|trans}} </option>
+                                {% for item in awardsItems %}
+                                    <option value="{{ item }}"> {{ item }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <label class="" for="form_awardsValue"> {{ 'awards_value'|trans }} </label>
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_awards_value'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            <select id="form_awardsValue" name="form[awardsValue][]" class="form-control form_awardsValue">
+                                <option value=""> {{'select_awards_value'|trans}} </option>
+                                    {% for value in 1 .. 100 %}
+                                        <option value="{{ value }}"> {{ value }} </option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-sm-2">
+                            {# <button type="button" id="award-add-button" class="btn btn-success" style="margin-top: 55% !important;"> + </button> #}
+                            <button type="button" id="award-add-button" class="btn btn-success" style="margin-top: 1.7rem !important;"> + </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-6 classification">
+            {{ form_label(form.classification, 'classification'|trans) }} 
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_classification'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            <div class="classification">
+                {{ form_widget(form.classification, {attr: {'class': "form-control", id: "classification-select", 'data-value': classification}}) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-md-6">
+            {{ form_label(form.productType,'product_type'|trans) }}
+             {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_product_type'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+             {{ form_widget(form.productType, {attr: {'class': 'form-control', 'data-disabled-style': true} }) }}
+        </div>  
+
+        <div class="col-md-6">
+            <div id="productPhysicalType">
+                {% include app_path_prefix ~ '/view_templates/catalog/components/_product_physical.html.twig' with {controller_prefix: controller_prefix} %}
+            </div>
+        </div>
+    </div>
+
+</div>
+

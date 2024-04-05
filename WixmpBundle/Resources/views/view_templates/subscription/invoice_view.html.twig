@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile" style="border: 1px solid lightgray">
+            <div class="tile-header">
+                <div class="tile-header-text">{{'transaction_details'|trans }}</div>
+            </div>
+            <div class="tile-body tile-body-text"  style="padding-top: 10px;">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td  style="border-top:0px">
+                            <p><b>{{ 'id'|trans }}:</b> #{{ order.id }}</p>
+                            <p><b>{{ 'payment_transaction_id'|trans }}:</b> {{ order.transactionId|default('-') }}</p>
+                            <p><b>{{ 'date'|trans }}:</b> {{ order.createdAt|wk_time('app', storeHash, 'sms_notification') }}</p>
+                        </td>
+                        <td  style="border-top:0px">
+                            <p><b>{{ 'payment'|trans }}:</b> {% if order.payment.name is defined %}{{ order.payment.name }}{% else %}{{ 'none' }}{% endif %}</p>
+                            <p><b>{{ 'status'|trans }}:</b> {{ order.status|order_status_label }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <h5> Plan Details</h5>
+                            <table class="table">
+                                <tr>
+                                    <td>Subscription Plan</td>
+                                    {% if order.companyApplication.platform.code is defined and order.companyApplication.platform.code == "wix" %}
+                                        <td>{{order.subscription.planApplication.plan.name}}</td>
+                                    {% else %}
+                                        <td>{{order.subscription.planApplication.plan.name}} ({{ order.subscription.planApplication.plan.code }})</td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <td>Plan Price</td>
+                                    <td>{{ order.subscription.planApplication.plan.price|wk_price('super_admin')|raw }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Billing Cycle</td>
+                                    <td>{% if order.subscription.planApplication.plan.intervalType == 'Y' %}{{ 'yearly'|trans }}{% elseif order.subscription.planApplication.plan.intervalType == 'H' %}{{ 'half-yearly'|trans }}{% elseif order.subscription.planApplication.plan.intervalType == 'Q' %}{{ 'quarterly'|trans }}{% elseif order.subscription.planApplication.plan.intervalType == 'M' %}{{ 'monthly'|trans }}{% else %}{{ order.subscription.planApplication.plan.intervalValue }} {{ 'days'|trans }}{% endif %}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td colspan="2" class="text-right">
+                            <b>Total:</b>{{ order.subscription.planApplication.plan.price|wk_price('super_admin')|raw }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{#
+    <div class="col-md-12">
+        <div class="tile" style="border: 1px solid lightgray">
+            <h4 class="tile-header">Subscription Plan Details</h4>
+            <div class="tile-body">
+                <a href="{{ path('app_subscription_transactions', {platform: platform, subscription_id: order.subscription.id, app_code: app_code, storeHash: storeHash}) }}">view transactions</a>
+            </div>
+        </div>
+    </div> #}
+</div>

@@ -1,0 +1,11 @@
+name: Wix Seller Custom Registration
+short_name: Wix Seller CR
+app_id: wixsellercr
+description: wix_sellercr_description
+version: 1.0.0
+load_redirect: wix_sellercr_index
+auth_redirect: wix_sellercr_dashboard
+app_path: Modules/Wix/WixmpBundle/SubApplications/WixSellerCR
+bannerURL: /resource/images/subapplications/banner/wix-sellercr-banner.png
+logoUrl: /resource/images/subapplications/logo/wix-sellercr-logo.png
+position: 1

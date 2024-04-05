@@ -1,0 +1,30 @@
+{{ "hello"|trans }},
+
+{% if user.plainPassword is defined and user.plainPassword is not empty %}
+<p>{{ "your_profile_created_successfully"|trans }}</p>
+{% else %}
+<p>{{ "your_profile_updated_successfully"|trans }}</p>
+{% endif %}
+
+<p><b>{{ 'USER ACCOUNT INFORMATION'|trans }}</b></p>
+<hr>
+
+<table style="font-size:14px">
+    <tbody>
+        {# <tr><th>{{ 'Login URL'|trans }}:</th><td><a href='{{ url('mp_wix_seller_secure_login',{storeHash:company.storeHash}) }}'>{{ url('mp_wix_seller_secure_login',{storeHash:company.storeHash}) }}</a></td></tr> #}
+
+        {% if domain is defined and domain is not empty %}
+            <tr><th>{{ 'Login URL'|trans }}:</th><td><a href='{{ domain~path('mp_wix_seller_secure_login',{storeHash:company.storeHash}) }}'>{{ domain~path('mp_wix_seller_secure_login',{storeHash:company.storeHash}) }}</a></td></tr>
+        {% else %}
+            <tr><th>{{ 'Login URL'|trans }}:</th><td><a href='{{ url('mp_wix_seller_secure_login',{storeHash:company.storeHash}) }}'>{{ url('mp_wix_seller_secure_login',{storeHash:company.storeHash}) }}</a></td></tr>
+        {% endif %}
+
+        {# <tr><th>{{ 'Login URL'|trans }}:</th><td><a href='{{ url('mp_wix_seller_secure_login',{storeHash:company.storeHash}) }}'>{% if domain is defined and domain is not empty %}{{ domain~path('mp_wix_seller_secure_login',{storeHash:company.storeHash}) }} {% else %} {{ url('mp_wix_seller_secure_login',{storeHash:company.storeHash}) }} {% endif %}</a></td></tr> #}
+        <tr><th style="text-align:left">{{ 'name'|trans }}:</th><td>{{ user.firstname }} {{ user.lastname }}</td></tr>
+        <tr><th style="text-align:left">{{ 'email'|trans }}:</th><td>{{ user.email }}</td></tr>
+        <tr><th style="text-align:left">{{ 'username'|trans }}:</th><td>{{ user.username }}</td></tr>
+        <tr><th>{{ 'password'|trans }}:</th><td>{% if user.plainPassword is defined and user.plainPassword is not empty %}{{ user.plainPassword }}{% else %}***************{% endif %}</td></tr>
+    </tbody>
+</table>
+
+<hr>

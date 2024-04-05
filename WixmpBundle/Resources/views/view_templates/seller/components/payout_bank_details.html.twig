@@ -1,0 +1,48 @@
+<div class="form-group">
+
+	<div class="tile-title-w-btn col-sm-6">
+		<h5 class="title">
+			<u>{{ 'payout_bank_details'|trans }}</u>
+		</h5>
+	</div>
+
+	<div class="tile-body">
+        {% if seller_setting is defined and seller_setting is not empty%}
+        
+            <div class="form-group col-sm-6">
+                <label for="setting_form_payoutFirstName"> {{ 'first_name'|trans }} </label>
+                {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_first_name'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+                <input type="text" id="setting_form_payoutFirstName" class="form-control" value="{{ seller_setting.payoutFirstName ? seller_setting.payoutFirstName : '' }}" readonly>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label for="setting_form_payoutLastName"> {{ 'last_name'|trans }} </label>
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_last_name'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+                <input type="text" id="setting_form_payoutLastName" class="form-control" value="{{ seller_setting.payoutLastName ? seller_setting.payoutLastName : '' }}" readonly>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label for="setting_form_payoutBankName"> {{ 'bank_name'|trans }} </label>
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_bank_name'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+                <input type="text" id="setting_form_payoutBankName" class="form-control" value="{{ seller_setting.payoutBankName ? seller_setting.payoutBankName : '' }}" readonly>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label class="form-label" for="setting_form_payoutBankIBAN"> {{ 'bank_iban'|trans }} </label>
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_bank_iban'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+                <input type="text" id="setting_form_payoutBankIBAN" class="form-control" value="{{ seller_setting.payoutBankIBAN ? seller_setting.payoutBankIBAN : '' }}" readonly>
+            </div>
+
+        {% endif %}
+
+	</div>
+
+</div>

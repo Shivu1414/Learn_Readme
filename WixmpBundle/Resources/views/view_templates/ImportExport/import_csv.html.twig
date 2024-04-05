@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-md-12">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(form, {'attr': {'id': formId}}) }}
+            <div class="tile-body">
+                <div class="form-group">
+                    <h5><u>{{ 'wix_wixmp_general_info'|trans }}</u> :</h6>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.delimiter, "delimiter"|trans) }}
+                    {{ form_widget(form.delimiter) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.file, "file"|trans) }}
+                    {{ form_widget(form.file) }}
+                </div>
+
+                {# {{ form_row(form.skip_existing_products) }} #}
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" id="product_import_skip_existing_products" name="product_import[skip_existing_products]" checked="checked" class="form-check-input" value="1">
+                        <label class="form-check-label" for="product_import_skip_existing_products">{{'SKIP_EXISTING_PRODUCT'|trans}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5><u>{{ 'wix_wixmp_product_info'|trans }}</u> :</h5>
+                </div>
+                <fieldset class="form-group">
+                    <legend class="col-form-label required">{{'required_fields'|trans}}</legend>
+                    <div id="product_export_other_fields" class="wk-other-fields">
+                        {% for primary_field in primary_fields %}
+                            <div class="form-check">
+                            <label class="form-check-label" for="product_export_other_fields_0">
+                            {# <div class="mt-2 bg-primary text-white">{{ primary_field }}</div> #}
+                            <div class="mt-2"><b>{{ primary_field|trans }}</b></div>
+                            </label></div>
+                        {% endfor %}
+                    </div>
+                </fieldset>
+                {# {{ form_row(form.categories_seperator) }} #}
+            </div>
+            {{ form_end(form, {'render_rest': false}) }}
+            {# product image note: not imported if not exists  #}
+            {# <div class="product-image-note">
+                {{'product_image_import_note'|trans }}
+            </div> #}
+    </div>
+</div>

@@ -1,0 +1,12 @@
+wixmp:
+    resource: '@WixmpBundle/Controller/Admin/'
+    type: annotation
+    prefix: '/{_locale}/{platform}/app/{app_code}/{storeHash}/{area}'
+    requirements: { _locale: '%app_locales%', platform: wix, app_code: wixmp, area: admin }
+    defaults: { _locale: '%app_locales%', platform: wix, app_code: wixmp, area: admin }
+wixmp_seller:
+    resource: '@WixmpBundle/Controller/Seller/'
+    type: annotation
+    prefix: '/{_locale}/{platform}/app/{app_code}/{storeHash}/{area}'
+    requirements: { _locale: '%app_locales%', platform: wix, app_code: wixmp, area: mp-wix-seller }
+    defaults: { _locale: '%app_locales%', platform: wix, app_code: wixmp, area: mp-wix-seller }

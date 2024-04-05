@@ -1,0 +1,2 @@
+twig:
+    paths: { '%kernel.project_dir%/Modules/Wix/WixmpBundle/Resources/views/': wixmp_twig }

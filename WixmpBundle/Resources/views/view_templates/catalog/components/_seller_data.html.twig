@@ -1,0 +1,11 @@
+{% if area == 'admin' and seller is null%}
+    <div class="mt-4">
+        <span href="#" class="wk-ajax text-primary  btn btn-default" data-toggle="modal" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-target="#productWixSellerAssignModal">
+            {{ 'assign_seller'|trans }}
+        </span>
+    </div>
+{% elseif area == 'admin' %}
+    <div class="mt-4">
+        <b>{{ 'seller'|trans }}:</b> <small>{{ seller.seller }}</small>
+    </div>
+{% endif %}

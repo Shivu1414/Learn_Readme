@@ -1,0 +1,28 @@
+{% if company.storeHash == 'RishabhStore-SAAS727a' or  company.storeHash == 'VILLUMIb6f3'%}
+        {{ form_label(form.weight, 'product_weight'|trans ~ " (kg)",{label_attr:{class:'wk-required wk-price'}}) }}
+            {% if form.weight.vars.value == '' %}
+                {% set weight_val = 0.0 %}
+            {% else %}
+                {% set weight_val = form.weight.vars.value %}
+            {% endif %}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_product_weight'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            {{ form_widget(form.weight, {value : weight_val, required:false, attr: {class:"form-control",style:''}}) }}
+{% else %}
+<div class="form-group col-md-12">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form_label(form.weight, 'product_weight'|trans ~ " ( " ~ company.weightSymbol ~ " )",{label_attr:{class:'wk-required wk-price'}}) }}
+            {% if form.weight.vars.value == '' %}
+                {% set weight_val = 0.0 %}
+            {% else %}
+                {% set weight_val = form.weight.vars.value %}
+            {% endif %}
+            {{ form_widget(form.weight, {value : weight_val, required:false, attr: {class:"form-control"}}) }}
+        </div>
+        <!-- Other form groups go here -->
+    </div>
+</div>
+{% endif %}
+

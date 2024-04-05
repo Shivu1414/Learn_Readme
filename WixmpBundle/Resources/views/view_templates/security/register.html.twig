@@ -1,0 +1,215 @@
+<section class="material-half-bg">
+    <div class="cover"></div>
+</section>
+<div class="messages" style="display: none" id = "wix-reg-captcha-msg">
+  <div class="alert alert-dismissible alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <span id = "wix-reg-captcha-msg-span"></span>
+    </div>
+</div>
+<section class="login-content store-generic">
+    <div class="logo">
+        <div class="company-logo">
+            {% if company is not null and (company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3') %}
+                            <svg class="villum-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 514.6 144.14">
+                            <defs>
+                                <style>.cls-1, .cls-2 { fill: #fff; } .cls-2 { font-size: 30px; margin-left:10%; font-family: Montserrat-Light, Montserrat; font-weight: 300; letter-spacing: 0.1em; } .cls-3 { letter-spacing: 0.1em; } .cls-4 { letter-spacing: 0.1em; }</style>
+                            </defs>
+                            <g id="Layer_2" data-name="Layer 2">
+                                <g id="Capa_1" data-name="Capa 1">
+                                <path class="cls-1" d="M84.06,0,43.33,90.55H40.74L0,0H3L42,87.05,81.09,0Z"/>
+                                <path class="cls-1" d="M100.62,0h2.59V90.55h-2.59Z"/>
+                                <path class="cls-1" d="M137.61,0h2.58V88.09h53.93v2.46H137.61Z"/>
+                                <path class="cls-1" d="M212.62,0h2.58V88.09h53.93v2.46H212.62Z"/>
+                                <path class="cls-1" d="M477.61,0V90.55H475v-85L433.77,77.74h-1.55L391,5.83V90.55h-2.59V0h2.2L433,74.25,475.41,0Z"/>
+                                <path class="cls-1" d="M512,0h2.59V90.55H512Z"/>
+                                <path class="cls-1" d="M350.06,68.22a53,53,0,0,0,2.1-15.71V0h2.59V52.64q0,18.89-9.18,28.58t-25.74,9.7q-16.56,0-25.74-9.7t-9.18-28.58V0h2.59V52.51Z"/>
+                                <text class="cls-2" x="90" y="120">A</text>
+                                <text class="cls-2" style="text-transform:lowercase" x="140" y="120">drop of wine</text>
+                                </g>
+                            </g>
+                    </svg>
+                   {# <svg class="villum-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 514.6 144.14"><defs><style>.cls-1,.cls-2{fill:#fff;}.cls-2{font-size:23.08px;font-family:Montserrat-Light, Montserrat;font-weight:300;letter-spacing:0.17em;}.cls-3{letter-spacing:0.15em;}.cls-4{letter-spacing:0.17em;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Capa_1" data-name="Capa 1"><path class="cls-1" d="M84.06,0,43.33,90.55H40.74L0,0H3L42,87.05,81.09,0Z"/><path class="cls-1" d="M100.62,0h2.59V90.55h-2.59Z"/><path class="cls-1" d="M137.61,0h2.58V88.09h53.93v2.46H137.61Z"/><path class="cls-1" d="M212.62,0h2.58V88.09h53.93v2.46H212.62Z"/><path class="cls-1" d="M477.61,0V90.55H475v-85L433.77,77.74h-1.55L391,5.83V90.55h-2.59V0h2.2L433,74.25,475.41,0Z"/><path class="cls-1" d="M512,0h2.59V90.55H512Z"/><path class="cls-1" d="M350.06,68.22a53,53,0,0,0,2.1-15.71V0h2.59V52.64q0,18.89-9.18,28.58t-25.74,9.7q-16.56,0-25.74-9.7t-9.18-28.58V0h2.59V52.51Z"/><text class="cls-2" transform="translate(150.4 138.11)">A d<tspan class="cls-3" x="49.27" y="0">r</tspan><tspan x="61.87" y="0">op of wi</tspan><tspan class="cls-4" x="182.06" y="0">n</tspan><tspan x="201.45" y="0">e</tspan></text></g></g></svg> #}
+            {% endif %}
+            {% if company.logoUrl is not empty %}
+                <img src="{{ company.logoUrl }}" alt="" />
+            {% endif %}
+        </div>
+        {% if company is defined and (company.storehash != 'RishabhStore-SAAS727a' and company.storehash != 'VILLUMIb6f3')  %}
+            <h2>{{ company.name }}</h2>
+        {% endif %}
+    </div>
+    <div class="login-box mp-form" style="padding: 15px 30px">
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(form,{action:"",attr:{id:'wix-seller-reg-form'}}) }} 
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-edit"></i>{{ 'registration'|trans }}</h3>
+            <div class="tab">
+                <div class="row">
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.seller,'seller_company_name' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.seller,{'attr': {'class': 'wk-required','placeholder' : 'seller_company_name'},required:false, autofocus: "autofocus"}) }}
+                            <div class="seller-company-name-msg"></div>
+                        </div>
+                    </div>
+
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.email,'email' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.email,{'attr': {'class': 'wk-required','placeholder' : 'email'},required:false}) }}
+                            <div class="email-msg"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class = "col-md-12">
+                        <div class="form-group">
+                            {{ form_label(form.plan,'choose_plan' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.plan,{'attr': {'class': 'wk-required'},required:false}) }}
+                            <div class="plan-msg"></div>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.phone,'phone' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.phone,{'attr': {'class': 'wk-required','placeholder' : 'phone'},required:false}) }}
+                            <div class="phone-msg"></div>
+                        </div>
+                    </div>
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.address,'address' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.address,{'attr': {'class': 'wk-required','placeholder' : 'address'},required:false}) }}
+                            <div class="address-msg"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.address2,'address2' , {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.address2,{'attr': {'placeholder' : 'address2'},required:false}) }}
+                         </div>
+                    </div>
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.city,'city' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.city,{'attr': {'class': 'wk-required','placeholder' : 'city'},required:false}) }}
+                            <div class="city-msg"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class = "col-md-3">
+                        <div class="form-group">
+                            {{ form_label(form.state,'state' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.state,{'attr': {'class': 'wk-required','placeholder' : 'state'},required:false}) }}
+                            <div class="state-msg"></div>
+                        </div>
+                    </div>
+                    <div class = "col-md-3">
+                        <div class="form-group">
+                            {{ form_label(form.country,'country' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.country,{'attr': {'class': 'wk-required'},required:false}) }}
+                        </div>
+                    </div>
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.zipcode,'zipcode' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.zipcode,{'attr': {'class': 'wk-required','placeholder' : 'zipcode'},required:false}) }}
+                            <div class="zipcode-msg"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                        <small>{{'wix_wixmp_registration_password_text'|trans}}</small><br>
+                            {{ form_label(form.password,'password' , {'label_attr': {'class': 'wk-required'}}) }} 
+                            {{ form_widget(form.password,{'attr': {'class': 'wk-required','placeholder' : 'password'},required:false}) }}
+                            <div class="password-msg"><small>( 8 characters  one uppercase letter, one lowercase letter, one number, and one special character (e.g., @$!%*?&))</small></div>
+                         </div>
+                    </div>
+                    <div class = "col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.confirmPassword,'confirmPassword' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {{ form_widget(form.confirmPassword,{'attr': {'class': 'wk-required','placeholder' : 'confirmPassword'},required:false}) }}
+                                <small></small><br><br>    
+                            <div class="confirm-password-msg"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if custom_field_list is defined and custom_field_list is not empty %}
+                    {% include app_path_prefix ~ '/view_templates/security/components/customfield.html.twig' %}
+                {% endif %}
+                
+                {% set isBtnDisabled = false %}
+                {% if setting_data['enable_google_captcha'] is defined and setting_data['enable_google_captcha'].value == 1 %}
+                    
+                    {% set google_captcha_site_key = "" %}
+                    {% if setting_data['google_captcha_site_key'] is defined and setting_data['google_captcha_site_key'].value != null %}
+                        {% set google_captcha_site_key = setting_data['google_captcha_site_key'].value %}
+                    {% endif %}
+
+                    {% set google_captcha_secret_key = "" %}
+                    {% if setting_data['google_captcha_secret_key'] is defined and setting_data['google_captcha_secret_key'].value != null %}
+                        {% set google_captcha_secret_key = setting_data['google_captcha_secret_key'].value %}
+                    {% endif %}
+
+                    {% if google_captcha_site_key != "" and google_captcha_secret_key != "" %}
+                        {% set isBtnDisabled = true %}
+                        <div class="row">
+                            <div class = "col-md-4"></div>
+                            <div class = "col-md-4">
+                                <div class="g-recaptcha" id = "g-recaptcha-reg" data-callback = "reCaptchaCheck" data-expired-callback = "reCaptchaExpired" data-error-callback = "reCaptchaExpired" data-sitekey="{{ google_captcha_site_key }}" style = "transform:scale(0.77); transform-origin:0 0;" data-href = "{{ path('mp_wix_seller_secure_verify_captcha_cred',{storeHash:storeHash}) }}"></div>
+                            </div>
+                            <div class = "col-md-4"></div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                
+            </div>
+            {# <br> #}
+            <div class="row">
+                <div class = "col-md-4"></div>
+                <div class = "col-md-4">
+                    <center><button class="btn btn-primary" id = "wix_seller_register_btn" {% if isBtnDisabled %} disabled {% endif %}>
+                        <i class="fa fa-sign-in fa-lg fa-fw"></i>
+                        {{ "register"|trans }}
+                    </button></center>
+                </div>
+                <div class = "col-md-4"></div>
+            </div>
+            
+            {# <center><button class="btn btn-primary" id = "wix_seller_register_btn">
+                <i class="fa fa-sign-in fa-lg fa-fw"></i>
+                {{ "register"|trans }}
+            </button></center> #}
+
+            <div class="text-center">
+                <a href="{{ path('mp_wix_seller_secure_login',{storeHash:storeHash}) }}">{{ "login_here"|trans }}</a>
+            </div>
+
+            {{ form_widget(form._token) }}
+        {{ form_end(form, { 'render_rest': false}) }}
+    </div>
+</section>
+<script>
+    function reCaptchaCheck(){
+        document.getElementById("wix_seller_register_btn").removeAttribute("disabled");
+    }
+
+    function reCaptchaExpired(){
+        document.getElementById("wix_seller_register_btn").setAttribute("disabled", true);
+    }
+</script>

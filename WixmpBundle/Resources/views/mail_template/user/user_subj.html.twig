@@ -1,0 +1,1 @@
+{{ company.name }}: {{ seller.seller }}: {{ user.username }}: {% if user.plainPassword is defined and user.plainPassword is not empty %}{{ 'profile_created_successfully'|trans }}{% else %}{{ 'profile_updated_successfully'|trans }}{% endif %}

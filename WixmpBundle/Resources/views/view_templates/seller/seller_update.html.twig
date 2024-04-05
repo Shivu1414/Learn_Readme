@@ -1,0 +1,226 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(form,{action:""}) }}
+            <div class="tile-title-w-btn">
+                <h5 class="title"></h5>
+                <div class="btn-group"></div>
+            </div>
+            <div class="tile-body">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.get('selected_section') is defined and  app.request.get('selected_section') == 'general' %}active{% elseif app.request.get('selected_section') is empty %}active{% endif %}" data-toggle="tab" href="#general">{{ 'general'|trans }}</a>
+                    </li>
+                    {% if area == 'admin'  %}
+                        {% if seller is not empty and seller.id and seller.status != 'N' %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if app.request.get('selected_section') is defined and  app.request.get('selected_section') == 'plan' %}active{% endif %}" data-toggle="tab" href="#plan">{{ 'plan'|trans }}</a>
+                            </li>
+                            {% if villumi %}
+                                <li class="nav-item">
+                                    <a class="nav-link {% if app.request.get('selected_section') is defined and  app.request.get('selected_section') == 'payout_bank_details' %}active{% endif %}" data-toggle="tab" href="#payout_bank_details">{{ 'bank_details'|trans }}</a>
+                                </li>
+                            {% endif %}
+
+                        {% endif %}
+                    {% else %}
+                        {% if seller is not empty and seller.id  and app.user.isRoot == 'Y' %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if app.request.get('selected_section') is defined and  app.request.get('selected_section') == 'plan' %}active{% endif %}" data-toggle="tab" href="#plan">{{ 'plan'|trans }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+                <div class="tab-content">
+                    <br>
+                    <div class="tab-pane {% if app.request.get('selected_section') is defined and  app.request.get('selected_section') == 'general' %}active{% elseif app.request.get('selected_section') is empty %}active{% endif %}" id="general">
+                        <div class="form-group">
+                            <h5><u>{{ 'wix_wixmp_general_info'|trans }}</u> :</h5>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.seller,'seller_company_name' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_seller_company_name'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.seller,{required:false,'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        {% if seller is defined and seller.id is empty %}
+                        <div class="form-group">
+                            {{ form_label(form.plan,'choose_plan' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_choose_plan'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.plan,{required:false,'attr':{'class':'form-control vellum-select'}}) }}
+                        </div>
+                        {% else %}
+                            {% if seller.status == 'N' %}
+                                <div class="form-group">
+                                         {# Forcefully set the status to 'A' for new sellers #}
+                                    <input type="hidden" name="seller_form[status]" value="A">
+                                    {{ form_label(form.status, 'status', {'label_attr': {'class': ' wk-required'}}) }}
+                                    {{ form_widget(form.status, {
+                                        disabled: true,
+                                        required: false,
+                                        'attr': {'class': 'wk-hidden form-control'},
+                                        'value': 'A' 
+                                    }) }}
+                                    <span style="display:inline;">{{ 'new'|trans }}</span>
+                                </div>
+                            {% else %}
+                                <div class="form-group">
+                                    {% if area == 'mp-wix-seller' %}{% set status_disabled = true %}<input type="hidden" name="seller_form[status]" value="A">{% else %}{% set status_disabled = false %}{% endif %}
+                                    {{ form_label(form.status,'status' , {'label_attr': {'class': 'wk-required'}}) }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_status'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                    {{ form_widget(form.status,{disabled:status_disabled,required:false,'attr':{'class':'form-control vellum-select'}}) }}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                        <div class="form-group">
+                            {{ form_label(form.email,'email' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_email'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.email,{required:false,'attr':{'class':'form-control'}}) }}
+                        </div>
+                        
+                        {% if (mode is defined and mode == "update") and seller.status is defined and seller.status == "A" %}
+                            {% set username = "" %}
+                            {% if sellerUser.username is defined %}
+                                {% set username = sellerUser.username %}
+                            {% endif %}
+                            <div class="form-group">
+                                {{ form_label(form.username,'username' , {'label_attr': {'class': 'wk-required'}}) }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_username'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                                {{ form_widget(form.username,{required:false,'attr':{'class':'form-control','value' : username }}) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.password,'password' , {'label_attr': {'class': ''}}) }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_password'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                                {{ form_widget(form.password,{required:false,'attr':{'class':'form-control'}}) }}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            {{ form_label(form.phone,'phone' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_phone'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.phone,{required:false,'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <h5><u>{{ 'contact_info'|trans }}</u> :</h5>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.address,'address' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_address'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.address,{required:false,'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                         <div class="form-group">
+                            {{ form_label(form.address2,'address2' , {'label_attr': {'class': ''}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_address2'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.address2,{required:false,'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.city,'city' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_city'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.city,{required:false,'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.state,'state' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_state'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.state,{required:false,'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.country,'country' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_country'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.country,{required:false,'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.zipcode,'zipcode' , {'label_attr': {'class': 'wk-required'}}) }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_zipcode'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_widget(form.zipcode,{required:false,'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        {% if area == 'admin' %}
+                            {% set categoryTree = getWixCategoryTree() %}
+                            <div class="form-group wk-product-manage-category-tree">
+                                {{ form_label(form.allowedCategories,'allowed_collections') }}
+                                <div>
+                                    <div class="wk-category-tree-view">
+                                        {% include app_path_prefix ~ '/view_templates/catalog/components/_category_list_tree_checkbox.html.twig' with {
+                                            app_path_prefix : app_path_prefix,
+                                            controller_prefix: 'wixmp_seller_',
+                                            categoryTree: categoryTree,
+                                            level: 0,
+                                            selected: form.allowedCategories.vars.value,
+                                            hide_status: true,
+                                            fieldName: 'seller_form[allowed_categories][]',
+                                            required: false
+                                        } %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if custom_field_list is defined and custom_field_list is not empty %}
+                            {% include app_path_prefix ~ '/view_templates/security/components/customfield.html.twig' %}
+                        {% endif %}
+                    </div>
+                   
+                    {% if area == 'admin' and seller.status != 'N' %}
+                        {% if seller is not empty and seller.id %}
+                            <div class="tab-pane {% if app.request.get('selected_section') is defined and  app.request.get('selected_section') == 'plan' %}active{% else %}fade{% endif %}" id="plan">
+                                {% include "@wixmp_twig/view_templates/common/plan_list.html.twig" with  {plan_list:seller_plans,current_plan:seller.currentPlan,expiry_date:seller.expireAt} %}
+                            </div>
+                            
+                            <div class="tab-pane {% if app.request.get('selected_section') is defined and  app.request.get('selected_section') == 'payout_bank_details' %}active{% else %}fade{% endif %}" id="payout_bank_details">
+                                {% include "@wixmp_twig/view_templates/seller/components/payout_bank_details.html.twig" with  {plan_list:seller_plans,current_plan:seller.currentPlan,expiry_date:seller.expireAt} %}
+                            </div>
+
+                        {% endif %}
+                    {% elseif area == 'mp-wix-seller' %}
+                        {% if seller is not empty and seller.id and app.user.isRoot == 'Y'%}
+                            <div class="tab-pane {% if app.request.get('selected_section') is defined and  app.request.get('selected_section') == 'plan' %}active{% else %}fade{% endif %}" id="plan">
+                                {% include "@wixmp_twig/view_templates/common/plan_list.html.twig" with  {plan_list:seller_plans,current_plan:seller.currentPlan,expiry_date:seller.expireAt} %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="tile-footer">
+                <button class="btn btn-primary" type="submit">{% if seller is not empty and seller.id %}{{ 'save'|trans }}{% else %}{{ 'create'|trans }}{% endif %}</button>
+                <a class="btn btn-secondary ml-2" href="{% if area == 'mp-wix-seller' %}{{ path('wixmp_seller_seller_manage',{storeHash:storeHash}) }}{% else %}{{ path('wixmp_seller_manage',{storeHash:storeHash}) }}{% endif %}">{{ 'cancel'|trans }}</a>
+            </div>
+            {{ form_widget(form._token) }}
+            {{ form_end(form, { 'render_rest': false}) }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,805 @@
+admin_dashboard: Dashboard
+orders: Ordens
+products: Produtos
+product: Produto
+users: Utilizadores
+seller_admin: Seller Admin
+seller: Vendedor
+accounting: Contabilidade
+my_company: Minha Empresa
+company_profile: Perfil da Empresa
+company_setting: Configuração da empresa
+sales: Vendas
+commission: Comissão
+order_id: Order ID
+total: Total
+image: Imagem
+sku: SKU
+store_order_id: Store Order Id
+sync: Sync
+customer_name: Nome do Cliente
+seller_status: Status do vendedor
+pending: Pendente
+shipped: Enviado
+partial_shipped: Parcialmente Enviado
+refunded: Reembolso
+cancelled: Cancelado
+declined: Recusado
+awaiting_pickup: Aguardar Levantamento
+awaiting_shipment: Aguardar Envio
+completed: Concluído
+awaiting_fullfillment: Aguardando cumprimento
+manual_verification_required: Verificação manual necessária
+disputed: Disputada
+partial_refunded: Reembolsado Parcialmente
+order_details: detalhes do Pedido
+billing_details: Detalhes de Pagamento
+shipping_address: Morada de entrega
+platform_order_id: Platform Order ID
+shipping: Envio
+quantity: Quantidade
+payout: Pagamento
+subtotal: Subtotal
+categories: Categorias
+manage_page: Gerenciar página
+categories_manage_page: Gerenciar categorias
+parent: Pai
+product_manage_page: Gestão de Produto
+product_image: Imagem do Produto
+delete: Eliminar
+block: Bloqueado
+under_review: Em revisão
+details: Detalhes
+images: Imagens
+inventory: inventário
+custom_fields: Campos Personalizados
+extra_details: Detalhes adicionais
+summary: Resumo
+Name: Nome
+phone2: Contacto2
+seller_company_name: Nome da empresa Vendedora
+tax_class_id: Tax Class Id
+avalara_product_tax_code: Avalara Product Tax Code
+product_tax_code: Tax Provider Tax Code
+product_type: Tipo de Produto
+physical: Fisico
+digital: Digital
+downloadable_product: Produto Digital
+product_weight: Peso
+product_width: Largura
+product_height: Altura
+product_depth: Profundidade
+product_code: Product Code/SKU
+shipping_free: Envio Grátis
+free_shiipping_available_text: Envio Grátis
+fixed_cost_shipping_price: Preço de envio de custo fixo
+desciption: Descrição
+product_description: Descrição do Produto
+availability: Disponibilidade
+available: Disponível
+preorder: Pedido antecipado
+preorder_relase_date: Data de lançamento da pré-venda
+preorder_message: Mensagem de pré-encomenda
+is_preorder_only: É apenas pré-encomenda
+remove_preorder_status_on_this_date: Remover status de pré-encomenda nesta data
+inventory_tracking: Acompanhamento de inventário
+do_not_track_inventory: Não rastrear inventário
+track_inventory_with_option: Acompanhar Inventário com Opção
+track_inventory: Rastrear Inventário
+product_inventory_level: Nível de inventário do produto
+product_inventory_warning_level: Nível de Aviso de Inventário de Produto
+value: Valor
+no_records_found: Nenhum registro foi encontrado
+product_identifier: Identificador de produto
+Brand iBrandd: ID
+choose_an_existing_brand: Escolha uma marca existente
+Sagaform: Sagaform
+product_upc: UPC do produto
+other_details: Outros detalhes
+bin_picking_number: Número de coleta do compartimento
+product_warrenty: Garantia do produto
+product_layout_file: Ficheiro de layout do produto
+required: Obrigatório
+product_search_keyword: Palavra-chave de pesquisa de produtos
+product_availablity_description: Disponibilidade
+visible: Visível
+product_is_visible_on_site: O produto está visível no Website
+featured_product: produtos em destaque
+is_this_featured_product: Este produto em destaque
+product_sort_order: Ordem de classificação do produto
+product_condition: Condição do produto
+New: Novo
+Used: Usado
+Refurbished: Remodelado
+is_condition_shown: A condição é mostrada
+show_condition_at_product_page: Mostrar condição no produto
+product_order_minimum_quantity: Quantidade mínima do pedido do produto
+product_order_maximum_quantity: Quantidade máxima do pedido do produto
+product_image_file: Ficheiro de imagem do produto
+or: ou
+product_image_url: URL da imagem do produto
+add_image: Adicionar imagem
+is_root: é raiz
+yes: Sim
+no: Não
+update_seller_adminstrator: Atualizar administrador vendedor
+profile_info: Informações do perfil
+first_name: Primeiro Nome
+last_name: Último NOMES
+customer_company: Empresa do cliente
+store_credit: Crédito da loja
+ip: IP
+view: Visualizar
+customer_details: Detalhes do cliente
+notes: Notas
+updateAt: Uatualizado em
+createdAt: Criado em
+update_plan: Atualizar plano
+general_info: Informações geral
+contact_info: Informações de Morada
+year: Ano
+best_choice: Melhor Escolha
+buy_now: Comprar Agora
+current_plan: Plano atual
+expire_on: Expira em
+condition: Condição
+free: Gratis
+max_email: Max Email
+max_product: Max Product
+create_payout: Criar pagamento
+id: ID
+max_price: Preço máximo
+min_price: Preço mínimo
+type: Tipo
+reference: referência
+transaction_amount: Valor da transação
+order_placement: Colocação do pedido
+of: de
+amount: Quantia
+comment: Comente
+create: Criado
+close: Fechar
+total_sale: Venda total
+total_commission: Comissão total
+total_payout: Pagamento total
+total_withdraw: Levantamento Total
+balance: Saldo
+setting_seller: Configuração do vendedor
+setting_header_products: Configuração do produto
+auto_approve_product: Aprovação automática do produto
+message.email_Sent_Success: E-mail enviado com sucesso
+message.email_not_sent: E-mail não enviado
+wysiwyg: WYSIWYG
+plain: Plain
+tinymce: Tinymce
+setting_email: Configurando e-mail
+plan_upgrade_list: Planos
+buy: Comprar
+company_settings: Configurações da empresa
+message.product.sync.success_%s_result%__skip_%sk_result%: Store Product synced successfully. Success- s_result & Skipped- sk_result
+# Vendor Page
+seller_dashboard: Dashboard
+create_withdraw: Criar Levantamento
+approved: Aprovado
+withdraw: Levantamento
+msg.forgot.password.updated: A Sua senha foi redefinida com sucesso. Por favor verifique o seu e-mail.
+sorry_seller_cannot_add_more_products: Cota de limite de produto esgotada!
+message.product.update.updated_successfully: Dados atualizados com sucesso
+message.product.image.updated_successfully: Imagem atualizada com sucesso
+message.common.record_updated_successfully: Data atualizados com sucesso
+message.product.image.deleted_successfully: Imagem excluída com sucesso !!
+message.product.image.image_upload_manadatory: O upload da imagem é obrigatório
+update_seller: Atualizar vendedor
+message.common.plan_assigned_successfully: Plano atribuído com sucesso
+message.common.record_created_successfully: Dados criados com sucesso
+message.common.seller_setting_updated_successfully: Configurações do vendedor atualizadas com sucesso
+
+message.common.domain_not_valid: O domínio não é válido. Verifique seu domínio e crie o CNAME primeiro
+message.common.domain_not_exist: O domínio não existe. Insira um domínio válido
+message.common.testmail_sent: E-mail de teste enviado com sucesso
+message.common.testmail_not_sent: E-mail de teste não enviado
+message.common.required_fields: Por favor preencha os campos obrigatórios
+
+message.order.store_not_having_any_new_order_to_import: A loja não tem nenhum novo pedido para importar
+seller_control: Controlo do vendedor
+sorry_cannot_add_more_products: Limite de adição de produtos atingido
+manage_seller_companies: Empresas Vendedoras
+seller_settings: Configurações do vendedor
+seller_plans: Planos do vendedor
+email_conf: Configuração de e-mail
+max_products: Máximo de produtos
+max_sellers: Máximo de Vendedores
+message.seller_register.profile_is_under_review_update_soon_with_mail: O seu perfil está em análise. Será atualizado em breve com a confirmação por e-mail
+message.common.unable_to_change_status: Não foi possível alterar o status
+message.seller.assign.assigned_successfully: Vendedor atribuído com sucesso
+register_here: Registre-se aqui
+login_here: Faça login aqui
+seller_registration_url: URL de registro do vendedor
+seller_login_url: URL de login do vendedor
+settings_setup: Instruções de configuração
+add_seller_login_and_register_link: Formulário de login e registro do vendedor na Página Hompage
+add_seller_profile_page: Adicionar lista de vendedores/página de perfil
+create_plan: Criar Plano
+sync_successfully: Dados sincronizados com sucesso
+message.product.add.please_choose_a_category: Por favor, escolha uma categoria primeiro
+seller_account_registartion: Registro do Vendedor
+a_new_seller_account_required_action: Um novo vendedor registrado com sucesso, por favor revise seu perfil e tome medidas de acordo
+thanks_for_contacting_us_your_applciation_is_under_review_we_will_review_and_send_respose_accordiongly: Thanks for contacting us. Your profile is under review by admin.
+profile_updated_successfully: Perfil atualizado com sucesso
+your_seller_profile_updated_successfully: Perfil do vendedor atualizado com sucesso
+SELLER_APPLICATION_INFORMATION: INFORMAÇÕES DO APLICATIVO DO VENDEDOR
+status_update: Atualização de status
+withdraw_request_created: Pedido de retirada criado
+a_new_withdraw_request_created_check_details_below: Uma solicitação de retirada criada pelo vendedor, por favor revise detalhes
+message.common.unable_to_create_record: Incapaz de criar registro
+a_new_order_has_been_placed: Uma nova ordem foi colocada
+date: Date
+payout_created_successfully: Pagamento criado com sucesso
+request_type: Tipo de solicitação
+payout_status_change: Status de pagamento alterado com sucesso
+payout_status_updated_please_check_details: O status do pagamento mudou com sucesso, confira os detalhes abaixo
+seller_plan_changed_successfully: Plano de vendedor mudou com sucesso
+product_add_page: Adicionar produtos
+message.common.user_not_exist: O usuário não existe
+message.common.password_reset_successfully: Redefinição de senha com sucesso
+message.common.password_reset_mail_sent: Um novo e-mail foi gerado e enviado para o seu e-mail
+message.common.username_is_manadatory: O nome de usuário é manadatório
+message.seller_register.plan_not_found: O plano é manadatório.
+message.seller_register.unauthorized_access: Acesso não autorizado
+message.seller_register.under_review: Obrigado por se registrar conosco. Seu perfil está sob revisão. Vamos notificá-lo em breve.
+seller_add_quota_exceeded: Vendedor Adicionar cota excedida.
+seller_add_quota_exceeded_status_change: 'O status não pode ser alterado de novo. Limite de cota de vendedor excedido [maximum seller: max_seller]'
+sorry_cannot_add_more_sellers: Desculpe, não posso adicionar mais vendedores. Limite de cota de vendedor excedido.
+sorry_admin_cannot_add_more_products: Desculpe não é possível adicionar mais produtos. Entre em contato com o administrador da loja para obter mais informações
+no_seller_company_cannot_add_seller_admin: Cannot add seller admin. No seller company exists.
+message.order.unable_to_import_order: Não é possível importar pedido
+message.wix.product.unable_to_import_product: Incapaz de importar produto
+message.order.order_imported_successfully: contagem Ordem(s) importada com sucesso.
+create_seller: Criar vendedor
+use_as_thumbnail: Use como miniatura
+make_default: Tornar padrão
+create_seller_adminstrator: Criar vendedor
+add_product_page: Adicionar página do produto
+need_assistance_for_adding_code: Necessidade de assistência para integração de código
+embed_page: Incorporar página
+dashboard: Painel
+your_seller_account_updated_successfully: Conta do vendedor atualizada com sucesso
+profile_created_successfully: Perfil de vendedor criado com sucesso
+your_profile_created_successfully: Perfil de vendedor criado com sucesso
+assign_seller: Atribuir vendedor
+assign_seller_to_product: Atribuir vendedor ao produto
+seller_company: Empresa vendedora
+owner: Proprietário
+choose_plan: Escolha o Plano
+message.common.record_synced_successfully: Dados atualizados com sucesso
+catalogue.product.options: Opções
+product.options.manage.page: Opções de produtos
+catalog.option.name: Nome da opção
+catalog.option.displayname: Nome de exibição
+catalog.option.values: 'Values'
+catalog.option.optiontype: Tipo de opção
+catalog.option.filename: Nome do arquivo
+catalog.option.filesize: Tamanho do arquivo
+catalog.option.downloads: Downloads
+catalog.option.maximum_downloads: Downloads máximos
+catalog.option.disabled_after: Desativado depois
+options.Swatch: Amostra
+options.Multiple.choice: Múltipla Escolha
+options.Date.field : Campo de Data
+options.checkbox : Caixa de seleção
+options.Multi.line.text.field: Campo de texto de várias linhas
+options.File.upload.field:  Campo de upload de arquivos
+options.number.only : Somente número
+options.Text.field : Campo de texto
+options.Product.Pick.List : Lista de escolhas de produtos
+products.options : Opções de produtos
+product.options.optionset: Conjunto de opções
+none.option: Nenhum
+product.option.view.page: Opção de Produto
+sync_products: Produtos Sync
+csv_import_product: Produto de importação CSV
+export_product: Produtos de exportação
+product_info: Informação sobre o produto
+brand_id: Identificação da marca
+preorder_release_date: Data de lançamento da pré-compra
+inventory_level: Nível de inventário
+inventory_warning_level: Nível de aviso de inventário
+search_keywords: Pesquisar palavras-chave
+availability_description: Descrição da disponibilidade
+sort_order: Ordenar encomenda
+order_quantity_minimum: Quantidade mínima de encomenda
+order_quantity_maximum: Quantidade máxima da encomenda
+is_featured: Em destaque
+exported_successfully: Exportado com sucesso
+Product Image File : Imagem
+Product Image URL : URL da imagem
+Product Order Maximum Quantity: Quantidade máxima de ordem do produto
+Product Order Minimum Quantity : Quantidade mínima do pedido do produto
+Product Condition : Estado do produto
+Product Sort Order : Ordem de classificação do produto
+Availability : Disponibilidade
+Product Search Keyword : Palavra-chave de pesquisa de produto
+Product Warranty : Garantia do produto
+Bin Picking Number : Número de recolha
+Product UPC : UPC do produto
+Common Good : Bem Comum
+OFS : OFS
+brand : Marca
+sku.delete : Apagar
+sku.copy : Copiar
+sku.edit : Editar
+product.sku.variant: 'Variant'
+product.option.image_file : Imagem
+product.option.price : Preço
+product.option.cost_price : Preço de custo
+product.option.ean : UPC/EAN
+product.option.sku: SKU
+product.sku.purchasable: 'Purchasable'
+product.sku.action : Ação
+product.sku.default_price : Default Price
+product.sku.sales_price : Preço de venda
+product.sku.cost : Custo
+product.sku.bpn : BPN
+product.sku.mpn : MPN
+product.sku.upc : UPC
+product.sku.sku_text : SKU
+product.sku.msrp: 'MSRP'
+product.sku.image : Imagem
+product.sku.stock: 'Stock'
+product.sku.low_stock: 'Low Stock'
+Product Inventory Warning Level : Nível de aviso de inventário do produto
+Product Inventory Level : Nível de inventário do produto
+Preorder release date : Data de lançamento da pré-encomenda
+Preorder Message : Mensagem de pré-encomenda
+Product Description : Descrição do produto
+Fixed Cost Shipping Price : Preço de envio de custo fixo
+Product Code/SKU : Código/SKU do produto
+default_tax_class : Classe fiscal padrão
+product.option.options_for_this_sku : Opções para este SKU
+setting_header_products_identifier: Identificador de produto
+products_identifier_position: Posição
+products_identifier_position_value: Valorr
+products_identifier_position_value_for_custom: Valor personalizado
+products_identifier_joiner_value: Identificação de Marceneiro
+products_identifier_enable_product: Habilitar para o produto
+products_identifier_enable_sku: Habilitar para SKU
+prefix: Prefixo
+sufix: Sufixo
+seller_id: Id do Vendedor
+seller_name: Nome do Vendedor
+custom: Personalizar
+Product show seller field enable: Mostrar Vendedor
+Product location field enable: Mostrar Local
+sku_identifier_position: Posição
+sku_identifier_position_value: Valor
+sku_identifier_position_value_for_custom: Valor personalizado
+sku_identifier_joiner_value: Identificação de Marceneiro
+sku_identifier_enable_sku: Habilitar para SKU
+setting_header_sku_identifier: Identificador SKU
+registration: 'Registro'
+days: 'Dia(s)'
+unlimited: 'Ilimitado'
+plan.title: 'Título do plano'
+plan_code_hint: 'Pelo menos 3 caracteres, só pode conter a-z,0-9'
+label.username.email: 'Nome de usuário ou e-mail'
+forgot_username: 'Nome de usuário esquecido'
+message.common.forgot_username_details_send_successfully: "Detalhes do usuário enviados para o seu e-mail de registro"
+shipment: 'Remessa'
+shipment_id: 'Id da remessa'
+# seller order : mp-seller/sales/view
+
+payment_shipping_details: 'Detalhes de pagamento/remessa'
+create_shipment: 'Criar remessa'
+product_details: 'Detalhes do Produto'
+Tax: 'Imposto'
+ship_items: 'Envio de Itens'
+qty: 'Quantidade'
+qty_left_to_ship: 'Quantidade deixada para enviar'
+qty_to_ship: 'Quantidade para enviar'
+packing_slip_notes: 'Notas da embalagem'
+customer_paid: 'Cliente pago'
+for_shipping: ' para o transporte'
+how_would_you_like_to_ship: 'Como você gostaria de enviar'
+other: 'Outros'
+auspost: 'Auspost'
+canadapost: 'Canada Post'
+endicia: 'Endica'
+usps: 'USPS'
+fedex: 'FedEx'
+royalmail: 'Royal Mail'
+ups: 'UPS'
+upsready: 'UPS Ready'
+upsonline: 'UPS Online'
+shipperhq: 'ShipperHQ'
+other_carrier_tracking_option: 'Outro portador'
+tracking_number: 'Número de rastreamento'
+shipping_method: 'Descrição do método de envio'
+package.weight: 'Peso do pacote'
+package.dimension: 'Dimensão do pacote'
+package.already_shipped: 'Shipped'
+shipment_width: 'W'
+shipment_height: 'H'
+shipment_depth: 'D'
+no_shippable_product: 'Nenhum produto encontrado para enviar'
+manage_order_shipments: 'Gerenciar envios'
+shipment_details: 'Detalhes do envio'
+# add/update product
+product.basic_info: 'Informações Básicas'
+product.add_image: 'Adicionar Imagens'
+drag_drop_files: 'Arraste & deixe a imagem aqui'
+modal_close_text: 'Fechar'
+clear_images: 'Limpar'
+browse_files: 'Pesquisar Imagens'
+add_image_by_url: 'Adicionar'
+pimage_url_label: 'URL da imagem'
+product.add_custom_field: 'Adicionar Campos Personalizados'
+customfield_error_msg: 'O valor dos campos personalizados não são válidos'
+delete_item: 'Apagar este item!'
+are_you_sure: "Tem a certeza?"
+cancel_btn: 'Cancelar'
+ok_btn: 'Ok'
+product_image_modal_title: 'Upload da imagem do produto'
+
+# Product Options 
+
+configure_options: 'Configurar opções'
+product_option_modal_title: 'Configurar opções de produtos'
+product.add_options_btn: 'Adicionar Opções'
+product.option_type_radio_buttons: 'Radio'
+product.option_type_rectangles: 'Rectangless'
+product.option_type_swatch: 'Amostra'
+product.option_type_dropdown: 'Dropdown'
+product.add_option: 'Adicionar Opções'
+product.option_name: 'Nome'
+product.delete_option: 'Eliminar Opção'
+product.option_type: 'Tipo'
+product.option_values: 'Valor'
+product.add_option_value: 'Adicionar Valor'
+product.default_text: 'Padrão'
+product.option_one_color: 'Uma Cor'
+product.option_two_color: 'Duas Cores'
+product.option_three_color: 'Três Cores'
+product.option_pattern: 'Padrão'
+unique_value_required: 'Existe uma opção com o nome de exibição'
+required_field: 'Este campo é necessário'
+
+fullordering_order_by: 'Classificar por'
+sort_table_by: '--classificar por--'
+id_asc: 'Id Ascendente'
+id_desc: 'Id Descendente'
+name_asc: 'Nome Ascendente'
+name_desc: 'Nome Descendente'
+status_asc: 'Status Ascendente'
+status_desc: 'Status Descendente'
+
+# SUBSCRIPTIONS 
+transaction_start_date: 'Data de início'
+transaction_end_date: 'Data do fim'
+
+in_cache_exported_successfully: 'Exportados com sucesso, dados encontrados em cache. Se você quiser exportar de novo basta alterar o nome do arquivo antes de exportar'
+
+message.product.import.error.seller%pid: 'Csv product(pid) could not be imported due seller permissions'
+message.product.import.exists%pid: 'Csv product(pid) is skipped as it is already exists'
+message.product.import.updated%pid: 'Csv product(pid) updated successfully'
+message.product.import.created%pid: 'Csv product(pid) created successfully'
+message.product.import.failed%pid_%error_message: 'Csv product(pid) could not be imported due to - error_message'
+order.billto: 'Bill To'
+order.shipto: 'Envio para'
+your_profile_updated_successfully: 'Seu perfil de vendedor foi atualizado com sucesso'
+label.export_only_current_page: 'Exportar apenas a página atual'
+label.batch_action_select: 'Ação em lote'
+
+ajaxjobs.modal_title.disable_product: 'Desativando produtos vendedores'
+seller.disabled: 'Vendedor desativado com sucesso'
+cannot_delete_this_item_already_in_use_%seller_name: 'seller_name - Não pode excluir este vendedor está em uso'
+cannot_delete_this_item_%seller_name: 'seller_name - Não pode excluir este vendedor'
+seller_not_exists: 'Não Existe'
+cannot_delete_product_already_in_use: 'product_name(product_id) - Não é possível excluir este produto, ele tem dependências de outros recursos'
+cannot_delete_product: 'product_name(product_id) - Não é possível excluir este produto '
+message.product_delete_successfull: 'product_name(product_id) - excluido com sucesso'
+
+shipment_to: 'Enviado para'
+date_shipping: 'Data do Envio'
+tracking_no: 'Número de Rastreamento'
+order_date: 'Data da encomenda'
+view_details: 'Visualizar'
+seller_allowed_categories: 'Categorias de Vendedores Permitidas'
+product_image_required: 'Imagem do produto é obrigatória'
+Product image required: 'Imagem do produto é obrigatória'
+required_image_error_msg: 'A imagem do produto não pode estar vazia'
+product_image_import_note: 'Nota: As imagens do produto não podem ser importadas juntamente com o produto se não existirem na fonte'
+hello: 'Olá'
+batch_assign_seller: 'Vendedor de Atribuição de Lote'
+assign: 'Atribuir'
+message.product.seller_assign.success_%s_result%__skip_%sk_result%: Resultado atribuído ao vendedor. Success- s_result & Skipped- sk_result
+view_on_bigcommerce_store: 'Ver na loja'
+order_status: 'Estado da encomenda'
+avg_daily_sales: 'Avg. Venda diária'
+avg_monthly_sales: 'Avg. Venda Mensal'
+total_shipping: 'Total de envios'
+total_tax: 'Total de Impostos'
+order_count: 'Encomendas'
+no_seller_orders: 'Nenhum vendedor'
+SELLER_REPORT_SUMMARY: 'Relatório de vendas por vendedor'
+TOP_PRODUCTS_CHART: 'Tabela de Produtos de Topo'
+clear_store_data: 'Limpar dados da loja'
+clear_mp_store: 'Limpar'
+top_sold_seller_products: Produtos mais vendidos
+no_top_products: 'Não foi encontrado nenhum produto'
+view_all_seller_products: 'Ver todos os produtos'
+tax_included: 'Imposto Incluído no Total '
+enable_clear_btn: 'Activar esta ação'
+available_on: 'Disponível em'
+edit_product: 'Editar Produto'
+message.product.future_publish_schedule_message: 'Este produto está previsto para publicação em data futura, Primeiro Remover data futura para publicação imediata'
+message.product.publish_to_disable_message: 'Este produto está programado para ser publicado em data futura, Marcar como desativado por agora.'
+message.product.status_ignored_future_date_set%product_id%: 'Produto com id product_id foi ignorado por favor remova disponível em primeiro'
+message.product.status_forced_future_date_set%product_id%: 'Produto com id product_id tem data de publicação futura, desactivado por agora'
+mp_order_status_updated: 'O estado da encomenda foi alterado'
+message.product.update.required_fields_missing_%fields%: 'Dados obrigatórios em falta - campos'
+setting_header_layout: 'Configurações de layout'
+seller_card_layout: 'Cartão de Vendedor Contido'
+logo: 'Logotipo do vendedor'
+workingHours: 'Descrição das horas de trabalho'
+profileDescription: 'Descrição do perfil'
+profile_settings: 'Definições de Perfil'
+profile_gallery_labe: 'Galeria de Perfil (até 5 imagens)'
+# seller commission
+seller_commission: 'Comissão do Vendedor'
+manage_seller_commission: 'Gerir a Comissão de Vendedores'
+balance_not_sufficient: 'Saldo não suficiente'
+last_paid: 'Último Pagamento'
+last_paid_date: 'Último pagamento em'
+complete: 'Completo'
+with_balance: 'Ter balanço'
+pay_title: 'Pagar'
+pay_btn: 'Pagar agora'
+message.seller.payout_email_not_set: 'Vendedor(vendedor_id) não tem e-mail para pagamento PayPal'
+message.seller.payout_invalid_amount_or_payout_ids: 'Montante/pagamentos inválidos para Vendedor(seller_id)'
+enable_auto_pay: Habilitar pagamento automático ao vendedor
+auto_pay_order_status: Estado da encomenda para Pagamento Automático ao Vendedor
+message.payout.create_fail: 'A transacção de pagamento teve falhas'
+message.payout.empty_credentials: 'Credenciais de Pagamento Vazio'
+message.payout.no_payment_method: 'Nenhum método de pagamento encontrado para transacção'
+message.seller.payout_success: 'Pagamento feito com sucesso com with BatchId: batch_id and Status: status'
+payment_initiated: 'Pagamento Iniciado'
+payment_abort: 'Pagamento Cancelado'
+paypal_webhook_url: Webhook URL - Necessario definir na sua aplicação de pagamento PayPal
+payout_transactions: 'Transacções de pagamento'
+batch_id: Batch Id
+message.payout.sync_success: 'Sincronizado com sucesso'
+total_approved_sale: 'Venda Total Aprovada'
+shipping_details: 'Detalhes de envio'
+phone: Telefone
+order: Pedido
+ship_method: 'Método de envio'
+shipped_items: 'Itens Enviados'
+short_qty: Quantidade
+product_name: Nome do Produto
+order_not_found: Pedido não encontrado
+unable_to_print_slip: 'Incapaz de imprimir o talão'
+packaging_slip_for_shipment: 'Recipiente de Embarque para Embarque #'
+comments: 'Comentários'
+print: 'Print'
+profile_logo: 'Logo do Perfil'
+showTopSoldProducts: 'Mostrar os produtos mais vendidos'
+showSellerProducts: 'Mostrar produtos de venda'
+showWorkingHours: 'Mostrar horas de trabalho '
+showProfileDescription: 'Mostrar descrição do perfil'
+showProfileGallery: 'Mostrar galeria de perfil'
+paypalPayoutEmail: 'E-mail de pagamento Paypal'
+shipments: 'Envios'
+latest_orders: 'Últimos pedidos'
+latest_customers: 'Ultimos Clientes'
+latest_products: 'Ultimos Produtos'
+test_email: 'E-mail de teste'
+save_setting_before_send_test_mail: 'Nota: Por favor, guarde as definições antes de enviar o E-mail de teste.'
+seller_allowed_customer_details: 'Detalhes do Cliente Visíveis aos Vendedores'
+custom_information: 'Informação personalizada'
+message.product.copied_success: 'Produto copiado com sucesso !!'
+add_youtube_video: 'Adicionar vídeo do Youtube a partir do URL'
+only_youtube_url: 'Apenas URL do Youtube'
+product.add_video: 'Adicionar vídeo'
+video_url_label: 'Video URL'
+enter_valid_url: 'Por favor introduza o URL válido'
+message.product.video.deleted_successfully: 'Vídeo do Produto Eliminado com Sucesso !!'
+videos: 'Videos'
+country_of_origin: 'País de origem'
+commodity_description: 'Descrição das Mercadorias'
+destination_country: 'País de destino'
+hs_code: 'HS Code'
+product.add_hs_code: 'Adicionar HS Code'
+cutomer_detail_visible_to_seller: 'Detalhes do cliente visíveis para o vendedor'
+message.product.added_success: 'Produto adicionado com sucesso !!'
+seller_type: 'Tipo de Vendedor'
+product.tax: 'Imposto'
+commission_type: 'Tipo de Comissão'
+commission_per_product: 'Comissão por produto'
+commission_rate: 'Taxa de Comissão'
+discount: 'Desconto'
+manage_documents: 'Gerir documentos'
+documents: 'documentos'
+document: 'documento'
+document_name: 'Nome do documento'
+seller_document_update: 'Documento do vendedor atualizado'
+questions_answers: 'Questões / Respostas'
+answer_type: 'Tipo de resposta'
+options_comma_separated: 'Opções (Separadas por vírgula)'
+seller_question_update: 'Pergunta do Vendedor Atualizada'
+manage_questions: 'Gerir questões'
+skip: 'Ignorar'
+bulk_pricing: 'Bulk Pricing'
+discount_type: 'Tipo de Desconto'
+product.add_tier: 'Adicionar nível'
+showAboutUs: 'Mostrar a página sobre nós'
+aboutUs: 'sobre nós'
+showHub: 'Mostrar página do Hub'
+hub: 'Hub'
+showShippingLogistic: 'Mostrar página de envio e logística'
+shippingLogistic: 'Envio & Logística'
+seller_reviews: 'Análises de Vendedores'
+manage_reviews: 'Gerir Análises'
+review: 'Análises'
+seller_review_update: 'Análise do Vendedor Atualizado'
+rating: 'Classificação'
+publish: 'Publicado'
+unpublish: 'Não-Published'
+evidence: 'Prova'
+shown_on_seller_profile: 'Mostrar no Perfil do Vendedor'
+doc_skip_email_send_days: 'Documento do vendedor Ignorar dias de envio de e-mail'
+upload_docs: 'Carregar documentos'
+register: 'Registar'
+reviewer: 'Nome do revisor'
+isRequired: 'Obrigatório'
+showSellerReview: 'Mostrar Análise do Vendedor'
+showDocuments: 'Mostrar documentos'
+include_incomplete : 'Incluir Encomendas Incompletas'
+message.order_update_successfully : 'Pedido Actualizado com Sucesso'
+message.payout_update_successfully: 'Pagamento Actualizado com Sucesso'
+store_order: 'Encomenda da loja'
+view_on_bc: 'Ver no Bigcommerce'
+download_packaging_slip: 'Descarregar o talão de embalagem'
+message.seller_register.seller_exist: 'O vendedor com este e-mail já existe.'
+print_packaging_slip: 'Imprimir Recibo de embalagem'
+showWhyChooseUs: 'Mostrar porque nos escolheu'
+whyChooseUs: 'Porque nos escolher'
+showSellerStory: 'Mostrar História do Vendedor'
+sellerStory: 'História do Vendedor'
+showPhotosVideosNews&blogs : 'Mostrar fotos, vídeos, notícias e blogs'
+PhotosVideosNews&blogs: 'Fotos, Vídeos, Notícias & Blogs'
+showShipping&Returns: 'Mostrar envios e devoluções'
+Shipping&Returns: 'Envios e Devoluções'
+showReviews&Recognition: 'Mostrar Análises e Reconhecimento'
+showBusinessLicences&certifications: 'Mostrar licenças e certificações comerciais'
+print_packing_slip: 'Imprimir Nota de embalagem'
+showProductReviews: 'Mostrar Análises de Produtos'
+reviews&Recoginition: 'Análises & Reconhecimento'
+showAwardsRecoginition: 'Mostrar Prémios e Reconhecimento'
+awardsRecoginition: 'Prémios e Reconhecimento'
+businessLicences&certifications: 'Negócios, Licenças e Certificações'
+showTestimonial: Mostrar Testemunho
+testimonial: Testemunho
+banner: Imagem de Banner
+max_order_id:  Id Encomenda máxima na loja
+min_order_id: Id Encomenda Minima na loja
+
+prev: Anterior
+next: Próximo
+questions_answers_review: Pré-visualização de perguntas/respostas
+send_email_to_seller_manually: 'Enviar e-mail de encomenda ao Vendedor Manualmente'
+bulk_discount: Bulk Discount
+send_mail: Enviar e-mail
+message.common.mail_sent_successfully: Email enviado com socesso
+founder_pic: 'Foto do Fundador'
+seller_document_download: Download do documento do vendedor
+document_download: Download do documento
+select_item_for_download_packing_slip: Seleccione pelo menos uma fila para descarregar a nota de embalagem
+select_item_for_send_bulk_mail: Seleccione pelo menos uma fila para enviar correio em massa
+select_item_for_download_document: Seleccione pelo menos uma fila para descarregar o documento
+term_condition: "Termos & Condições"
+message.seller_register.term_condition_mandatory: "Por favor aceite os Termos & Condições"
+platform_order_no: "N.º de encomenda da plataforma"
+total_records: "Registos totais:"
+view_on_wix_store: "Ver na loja"
+select_seller: "Seleccionar Vendedor"
+fullfillment_status: "Situação de preenchimento"
+trackInventory: Rastrear Inventário 
+inStock: Em Stock
+settings_support: Suporte
+dev_info: Informação para desenvolvedores
+app_review: Análise da aplicação
+leave_review: Deixe-nos uma revisão no App Market
+review_us: Revise-nos
+enjoying_app: Gostando da nossa Aplicação ?
+need_help: Precisa de Ajuda ?
+contact: Contacto
+for_contact: Para Contacto
+latest_sellers: Últimos Vendedores
+select_interval: Seleccione Intervalo
+select_status: Seleccione o estado
+payment_cancel: Cancelamento do pagamento
+collections: Colecções
+collections_manage_page: Gestão de Colecções
+seller_allowed_collections: Colecções permitidas pelo vendedor
+allowed_collections: Colecções permitidas
+message.wix.product.unable_to_import_collections: Incapaz de Importar Colecções
+total_collections: Total de colecções
+message.collection.sync.success_%s_result%__skip_%sk_result%: Colecções de lojas sincronizadas com sucesso. Success- s_result & Skipped- sk_resultIs featured
+SALES_REPORT_MONTHLY_SUMMARY: Relatório Mensal de Vendas
+created_start_date:  Data de criação de
+created_end_date: Data de criação até
+wixmp_setup_note: 'Observação:'
+wixmp_setup_note_desc: Por favor, use as etapas acima para adicionar os dois links
+wixmp_setup_quickacess: "Goto <b>'Quick Access' -> 'Edit Site'</b>"
+wixmp_setup_openmenu: "Open <b>'Menu & Pages'</b> from Side Menu" 
+wixmp_setup_sitemenu: "Click on the <b>'Site Menu'</b> under the <b>'Site Pages'</b>" 
+wixmp_setup_addlink: "Click on the <b>'Add a Link'</b> Button"
+wixmp_setup_web_address: "Now add <b>'Web Address'</b>, then select <b>'New Window'</b> type" 
+wixmp_setup_publish: "In the last step click on the <b>'Publish'</b> button" 
+wixmp_app_review: Revisão do aplicativo
+setting_general: Configurações Gerais
+Yes: Sim
+note: Observação
+wixmp_test_mail: Oi Este é um e-mail de teste de
+deleted_successfully: Apagado com sucesso
+wixmp_js_not_working_error: JS não está funcionando corretamente no site
+ajaxjobs.modal_title: Tarefa em lote
+modal.close: Perto
+ajaxjobs.processing_jobs: 'Página de processamento'
+message_text: Mensagem
+ajaxjobs.cancel_running_jobs: 'A tarefa está em andamento. Deseja cancelar a tarefa atual?'
+alert.select_item_for_batch_action_title: Nenhum item selecionado
+alert.select_item_for_batch_action: Selecione pelo menos uma linha para executar a ação em lote
+warning_company_name_required: O nome da empresa é obrigatório
+warning_company_atleast3 : O nome da empresa deve ter pelo menos 3 caracteres
+warning_company_atmost40 : O nome da empresa deve ter no máximo 40 caracteres
+warning_email_required: O e-mail é obrigatório
+warning_enter_valid_email: por favor digite um email válido
+warning_phone_required: O número de telefone é obrigatório
+warning_phone_invalid: Por favor insira um número de telefone válido
+warning_phone_atleast8: O número de telefone deve ter pelo menos 8 dígitos
+warning_phone_atmost15: O número de telefone deve ter no máximo 15 dígitos
+warning_address_required: Endereço é necessário
+warning_city_required: A cidade é obrigatória
+warning_state_required: O estado é obrigatório
+warning_zip_required : O CEP é obrigatório
+warning_zip_invalid : Por favor insira um código postal válido
+warning_zip_atleast4 : O CEP deve ter pelo menos 4 dígitos
+warning_zip_atmost8 : O CEP deve ter no máximo 8 dígitos
+message.common.product_status_changed_successfully: Status do produto alterado com sucesso!!
+setting_header_google_captcha: Google ReCaptcha
+google_captcha_site_key: Google ReCaptcha Site Key
+google_captcha_secret_key: Google ReCaptcha Secret Key
+fullfilled: Fullfilled
+message.can_not_perform_this_action: Não é possível executar esta ação!
+contact_to_admin: Entre em contato com o Administrador!
+something_went_wrong_google_recaptcha_contact_to_admin: Algo deu errado com Google ReCaptcha. Entre em contato com o Administrador!
+or_refresh_the_page: OU Atualize a página.
+archieve: Arquivo
+message.order.already_exist: Pedido já existe!
+message.order.store_not_having_this_order_to_sync: A loja não tem este pedido para sincronizar!
+export_seller: "Vendedor de exportação"
+seller_info: "Informações do vendedor"
+export: "Exportar"
+commission_per_category: "Comissão por categoria"
+setting_header_commission: "Definição de comissão"
+commission_per_order_product: "Comissão por pedido / produto"
+commission_per_collection: "Comissão por cobrança"
+highest_rate: "Taxa mais alta"
+commission_per_order: Comissão por pedido
+wixmp_storeid_comma_separated: Id do pedido da loja (separado por vírgula)
+wixmp_archive_item_question: Arquive este item!
+wixmp_domain_cname_text: '<b>Observação:</b> Antes de adicionar o domínio, adicione cname'
+wixmp_userguide: Guia de usuario
+wixmp_userguide_blog_setup: Guia do usuário do blog
+wixmp_userguide_video_setup: Guia do usuário de vídeo
+inventory_status: Status
+in_stock: Em estoque
+inventory_quantity_validation: A quantidade do produto não deve estar vazia e não deve ser superior a 99.999
+zipcode: Zip Code
+wix_wixmp_update_seller: Atualizar vendedor
+wix_wixmp_general_info: General Info
+wix_wixmp_total_shipping: Informações geral
+wix_wixmp_total_tax: Total de Impostos
+wix_wixmp_csv_import_product: Produto de importação CSV
+wix_wixmp_product_info: Informação sobre o produto

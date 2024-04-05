@@ -1,0 +1,7 @@
+{% if image_url is empty %}
+    <img src="{{ asset('resource/images/placeholders/product-placeholder.jpg') }}" alt="&#x26F6;" width="100%" class="pro-img">
+{% else %}
+    {% set imagePath = image_url|split('fit/') %}
+    {% set image_url = imagePath[0] is defined ? imagePath[0] ~ 'fit/w_500,h_200,q_90/file.png' : image_url %}
+    <img src="{{ image_url }}" {% if thumbnail is defined and thumbnail == 1 %} width="100%" {% else %}  width="10%" {% endif %} alt="&#x26F6;" class="pro-img">
+{% endif %}

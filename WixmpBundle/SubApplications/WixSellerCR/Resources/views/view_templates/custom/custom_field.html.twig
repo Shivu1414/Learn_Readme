@@ -1,0 +1,68 @@
+{% set controller_prefix = 'wixsellercr_' %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                {% if area != 'seller' %}
+                    <h5 class="title">
+                        {% include 'common/list_items.html.twig' %}
+                    </h5>
+                {% endif %}
+                <div class="btn-group">
+                    <a href="{{ path('wixsellercr_customfield_create',{storeHash:storeHash}) }}" class="btn btn-primary icon-btn wk-pointer">
+                        <span class="" title="{{ 'add'|trans }}">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="tile-body">
+                <table class="table table-responsive" id="manage_user" width="100%">
+                    <thead>
+                        <tr>
+                            <th width="40%">{{ "wix_wixmp_field_name"|trans }}</th>
+                            <th width="35%">{{ "type"|trans }}</th>
+                            <th width="25%">{{ "status"|trans }}</th>
+                            <th width="20%" class="text-center">{{ "action"|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for custom_field in custom_field_list %}
+                            <tr data-row="seller-{{ custom_field.id }}" class="status-{{ custom_field.status|lower }}"> 
+                                <td><b>{{ custom_field.label }}</b></td>
+                                <td>{{ custom_field.type }}</td>
+                                <td>
+                                    <div wk-data-target="{{ path('wixsellercr_customfield_update_status',{custom_field_id:custom_field.id, storeHash:storeHash}) }}" wk-data-id="{{ custom_field.id }}">
+                                        {% if custom_field.status == 'A' %}
+                                            <a wk-data-r-status="D" class="wk-status wk-pointer" title="{{ 'active'|trans }}"><i class="fa fa-eye fa-lg text-success" aria-hidden="true"></i></a>
+                                        {% else %}
+                                            <a wk-data-r-status="A" class="wk-status wk-pointer" title="{{ 'disabled'|trans }}"><i class="fa fa-eye-slash fa-lg text-danger" aria-hidden="true"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group text-center float-right">
+                                        <a class="btn btn-info" href="{{ path('wixsellercr_customfield_update',{custom_field_id:custom_field.id, storeHash:storeHash}) }}" title="{{ 'edit'|trans }}">
+                                            <i class="fa fa-lg fa-edit"></i>
+                                        </a>
+                                        <a class="btn btn-info wk-delete-row-js" href="#" data-url="{{ path('wixsellercr_customfield_delete', {custom_field_id:custom_field.id, storeHash:storeHash}) }}">
+                                            <i class="fa fa-lg fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation">
+                    {{ knp_pagination_render(custom_field_list) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

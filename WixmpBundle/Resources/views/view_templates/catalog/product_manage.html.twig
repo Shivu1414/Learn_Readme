@@ -1,0 +1,264 @@
+{% if area == 'admin' %}
+    {% set controller_prefix = 'wixmp_catalog_product_' %}
+{% endif %}
+
+{% if filter.order_by == 'asc' %}
+    {% set order_by = 'desc' %}
+    {% set o_icon = 'wk-down-arrow' %}
+{% else %}
+    {% set order_by = 'asc' %}
+    {% set o_icon = 'wk-up-arrow' %}
+{% endif %}
+{% set filter_name = '' %}
+{% if filter.name is defined %}
+    {% set filter_name = filter.name %}
+{% endif %}
+{% set filter_priceMin = '' %}
+{% if filter.priceMin is defined %}
+    {% set filter_priceMin = filter.priceMin %}
+{% endif %}
+{% set filter_priceMax = '' %}
+{% if filter.priceMax is defined %}
+    {% set filter_priceMax = filter.priceMax %}
+{% endif %}
+{% set filter_stockMin = '' %}
+{% if filter.stockMin is defined %}
+    {% set filter_stockMin = filter.stockMin %}
+{% endif %}
+{% set filter_stockMax = '' %}
+{% if filter.stockMax is defined %}
+    {% set filter_stockMax = filter.stockMax %}
+{% endif %}
+
+{% if area == 'admin' %}
+    {% set controller_prefix = 'wixmp_catalog_product_' %}
+    {% set importexport_controller_prefix = 'wixmp_' %}
+    {# {% set status_list = {'A':'active'|trans,'D':'disabled'|trans,'B':'block'|trans } %} #}
+    {% set batch_options = [{id:'active',text:'active'},{id:'disable',text:'disabled'},{id:'delete',text:'delete'}] %}
+{% else %}
+    {% set controller_prefix = 'wixmp_seller_catalog_product_' %}
+    {% set importexport_controller_prefix = 'wixmp_seller_' %}
+    {# {% set status_list = {'A':'active'|trans,'D':'disabled'|trans} %} #}
+    {% if setting.value is defined %}
+        {% if setting.value == 'N' %}
+            {% set batch_options = [{id:'disable',text:'disabled'},{id:'delete',text:'delete'}] %}
+        {% else  %}
+            {% set batch_options = [{id:'active',text:'active'},{id:'disable',text:'disabled'},{id:'delete',text:'delete'}] %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+ 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="row">    
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-title-w-btn">
+                    <h5 class="title">
+                        {% include 'common/list_items.html.twig' %}
+                    </h5>
+                    <div class="btn-group">
+                        <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}" style="{{ newTheme ? "padding: 8px 15px 0px 15px;" : '' }}">
+                            <i class="fa fa-filter"></i>
+                            {% if newTheme %}
+                                <span class="span-text-bold">
+                                    {{ 'filter'|trans }}
+                                </span>
+                            {% endif %}
+                        </span>
+                        {% if newTheme%}
+                            {% if area == 'admin' %}
+                                <button type="button" class="btn btn-outline-custom" data-toggle="modal" data-target="#productWixSellerAssignModal">
+                                    {{'batch_assign_seller'|trans}}
+                                </button>
+                            {% endif %}
+
+                            {% if batch_options is defined and batch_options is not null %}
+                                {% include '@wixmp_twig/view_templates/common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'products'}} %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% if not newTheme %}
+                            <a class="btn btn-primary icon-btn wk-pointer" title="{{ 'add'|trans }}" href="{{ path(controller_prefix ~ 'add',{storeHash:storeHash}) }}">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                            
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-cog"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                {% if area == 'admin' %}
+                                    <span id="sync-products" data-toggle="ajaxjobs" class="dropdown-item wk-pointer" title="{{ 'sync'|trans }}" data-href="{{ path(controller_prefix ~ 'sync', {storeHash:storeHash}) }}">
+                                        {{ "sync_products"|trans }}
+                                    </span> 
+                                {% endif %}
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#csvImportWixProducts">
+                                    {{ 'wix_wixmp_csv_import_product'|trans }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% if not newTheme %}
+                    <div class="tile-title-w-btn">
+                        <div>  
+                            {% if batch_options is defined and batch_options is not null %}
+                                <div class="custom-control-inline">
+                                    {% include 'common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'products'}} %}
+                                </div>
+                            {% endif %}
+                            {% if area == 'admin' %}
+                                <div class="custom-control-inline">
+                                    <input class="btn btn-outline-primary" data-toggle="modal" data-target="#productWixSellerAssignModal" value="{{'batch_assign_seller'|trans}}"  type="button" />
+                                </div>
+                            {% endif %}
+                        </div>
+                        <span>
+                            {% if products is defined and products is not empty %}
+                                <b>
+                                    {{ 'total_records'|trans ~ ": " ~ products.totalItemCount }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_total_records'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </b>
+                            {% endif %}
+                        </span>
+                    </div>
+                {% endif %}
+
+                <div class="tile-body">
+                    <table class="table {{ newTheme ? 'tile-table' : 'table-responsive' }}" id="">
+                        <thead>
+                            <tr>
+                                <th width="1%">
+                                    <div class="animated-checkbox">
+                                        <label>
+                                            <input type="checkbox" name="check" title="check all" class="wk_checkbox_items"><span class="label-text"> </span>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th class="center" width="7%">
+                                    {{ 'image'|trans }} 
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_image'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                <th width="15%">
+                                    {{ 'name'|trans }} 
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_name'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                <th width="10%">
+                                    {{ 'sku'|trans }} 
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_sku'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                <th width="5%">
+                                    {{ 'price'|trans }} 
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_price'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                <th width="12%">
+                                    {{ 'date'|trans }} 
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_date'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                <th width="5%">
+                                    {{ 'status'|trans }} 
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_status'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                <th width="5%">
+                                    {{ 'action'|trans }} 
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_action'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                                <tr data-row="product-{{ product.id }}" class="status-{{ product.status|lower }}">
+                                    <td>
+                                        <div class="animated-checkbox">
+                                            <label>                                        
+                                                <input type="checkbox" name="product_ids[]" value="{{ product.id }}" class="wk_checkbox_item"><span class="label-text"> </span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center wk-mp-product-thumb">
+                                        {% include app_path_prefix ~ '/view_templates/catalog/components/_image.html.twig' with {image_url:product.image, thumbnail: 1} %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path(controller_prefix ~ 'update', {storeHash:  storeHash, product_id:product.id, return_uri: (app.request.requestUri|b64_encode) }) }}" class="" title="{{'edit_product'|trans}}">{{ product.name }}</a>
+                                        {% if product.status == 'A' and product.storeUrl is defined and product.storeUrl is not empty %}
+                                            <a class="float-right" href="{{product.storeUrl}}" target="_blank" title="{{'view_on_wix_store'|trans}}"> 
+                                                <i class="fa fa-external-link"></i>
+                                            </a>
+                                        {% endif %}
+                                        {% include app_path_prefix ~ '/view_templates/catalog/components/_seller_data.html.twig' with {seller:product.seller} %}
+                                            
+                                    </td>
+                                    <td>{{ product.sku }}</td>
+                                    <td>{{ product.price|wk_price('app', storeHash)|raw }}</td>
+                                    <td>
+                                        {{ product.timestamp|wk_time }}
+                                    </td>
+                                    <td>
+                                        {% if area == 'admin' %}
+                                            {% set status_list = {'A':'active'|trans,'D':'disabled'|trans } %}
+                                            {% if product.status == 'N' %}
+                                                {% set status_list = {'A':'active'|trans, 'N':'New' } %}
+                                            {% endif %}
+                                            {% include "@wixmp_twig/view_templates/common/select_status.html.twig" with {object:product, current_status:product.status, route: controller_prefix ~ 'update_status', status_list:status_list, current_url:app.request.uri } %}
+                                        {% else %}
+                                            {% set status_list = {'A':'active'|trans,'D':'disabled'|trans} %}
+                                            {% if setting.value is defined and product.status is defined %}
+                                                {% if setting.value == 'N' and product.status == 'D' %}
+                                                    {% set status_list = {'D':'disabled'|trans} %}
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if product.status == 'N' or product.status == 'B' %}
+                                                {% set status_list = {'A':'active'|trans,'D':'disabled'|trans, 'N':'under_review' } %}
+                                            {% endif %}
+                                            {% if product.status == 'A' or product.status == 'D' %}
+                                                {% include "@wixmp_twig/view_templates/common/select_status.html.twig" with {object:product, current_status:product.status, route: controller_prefix ~ 'update_status', status_list:status_list, current_url:app.request.uri } %}
+                                            {% else %}
+                                                 {{ attribute(status_list,product.status)|trans }}
+                                            {% endif %}
+                                        {% endif %} 
+                                    </td>
+                                    <td>
+                                        {% include "@wixmp_twig/view_templates/catalog/components/_dropdown_action.html.twig" with {object:product, controller_prefix:controller_prefix, extra:{} } %}
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="navigation">
+                        {{ knp_pagination_render(products) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_widget(form._token) }}
+    {# assign seller modal #}
+    {% include app_path_prefix ~ '/view_templates/catalog/components/assign_seller.html.twig' %}
+{{ form_end(form, {'render_rest': false}) }}
+
+{% include 'common/filter.html.twig' with {include_path: app_path_prefix ~ '/view_templates/catalog/components/search.html.twig', search: search} %}
+
+{% set import_include_path = get_file_path_to_include(app_path_prefix, '/view_templates/' , 'catalog/components/_csv_import_product') %}
+{% include import_include_path %}

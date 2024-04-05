@@ -1,0 +1,204 @@
+{% set app_path_prefix = twig_app_path() %}
+{% set app_store_hash = ['RishabhStore-SAAS727a', 'VILLUMIb6f3'] %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile" id="mp-seller-setting-form">
+            
+            {% if form is defined %}
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+
+                {% set active_tab = app.request.get('active_tab') %}
+                {% if active_tab == null %}
+                    {% set active_tab = 'paypalinfo' %}
+                {% endif %}
+                <input type="hidden" name="active_tab" value="{{ active_tab }}">
+
+                <div class="tile-body">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_tab == 'paypalinfo' %} active {% endif %}" data-toggle="tab" href="#paypalinfo">
+                                {{ 'paypal'|trans }}
+                            </a>
+                        </li>
+                        {% if app.request.get('storeHash') == "Giverb3de9" %}                           
+                            <li class="nav-item">
+                                <a class="nav-link {% if active_tab == 'stripeinfo' %} active {% endif %}" data-toggle="tab" href="#stripeinfo">
+                                    {{ 'stripe'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% if app.request.get('storeHash') in app_store_hash %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if active_tab == 'bankinfo' %} active {% endif %}" data-toggle="tab" href="#bankinfo">
+                                    {{ 'bank_details'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+                    <div class="tab-content">
+                        <br>
+                        <div class="tab-pane {% if active_tab == 'paypalinfo' %} active {% else %} fade {% endif %}" id="paypalinfo">
+                            {# {% if companyApplication.company.storeHash in ['g49lb9sk5a','rdabko64cy'] %} #}
+                            <div class="form-group">
+                                <div class="tile-title-w-btn">
+                                    <h5 class="title">
+                                        {{ 'setting_header_paypal_payout'|trans }}
+                                    </h5>
+                                </div>
+                                <div class="tile-body">
+                                    <div class="form-group">
+                                        {{ form_label(form.paypalPayoutEmail) }}
+                                        {{ form_widget(form.paypalPayoutEmail) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tile-footer">
+                                <button class="btn btn-primary" type="submit">
+                                    {{ 'save'|trans }}
+                                </button>
+                            </div>
+                        </div>
+                        {% if app.request.get('storeHash') == "Giverb3de9" %}
+                            <div class="tab-pane {% if active_tab == 'stripeinfo' %} active {% else %} fade {% endif %}" id="stripeinfo">
+                                <div class="form-group">
+                                    <div class="tile-title-w-btn">
+                                        <h5 class="title">
+                                            {{ 'setting_header_stripe_payout'|trans }}
+                                        </h5>
+                                    </div>
+                                    <div class="tile-body">
+                                        <div class="form-group">
+                                            {% if form.stripePayoutEmail.vars.value is defined %}
+                                                {{ form_label(form.stripePayoutEmail) }}
+                                                {{ form_widget(form.stripePayoutEmail) }}
+                                            {% endif %}     
+                                        </div>
+
+                                        {% if form.vars.value.getStripePayoutAccount is defined and form.vars.value.getStripePayoutAccount is not empty %}
+                                            <div class="form-group">
+                                                <label class="form-control-label"> 
+                                                    Stripe Connected Account Number :
+                                                </label><br>
+                                                <input type="text" class="form-control" value="{{form.vars.value.getStripePayoutAccount}}" readonly disabled></input>
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+
+                                <div class="tile-footer">
+                                    {{ form_widget(form.urlGenerate) }}
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        {% if app.request.get('storeHash') in app_store_hash %}
+                            <div class="tab-pane {% if active_tab == 'bankinfo' %} active {% else %} fade {% endif %}" id="bankinfo">
+                                <div class="form-group">
+                                    <div class="tile-title-w-btn">
+                                        <h5 class="title">
+                                            {{ 'payout_bank_details'|trans }}
+                                        </h5>
+                                    </div>
+                                    <div class="tile-body">
+
+                                        <div class="form-group">
+                                            {{ form_label(form.payoutFirstName, 'first_name'|trans, {label_attr: {class: 'form-label'}} ) }}
+                                            {{ form_widget(form.payoutFirstName) }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            {{ form_label(form.payoutLastName, 'last_name'|trans, {label_attr: {class: 'form-label'}} ) }}
+                                            {{ form_widget(form.payoutLastName) }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            {{ form_label(form.payoutBankName, 'bank_name'|trans, {label_attr: {class: 'form-label'}} ) }}
+                                            {{ form_widget(form.payoutBankName) }}
+                                        </div>
+
+                                        <div class="form-group">
+                                            {{ form_label(form.payoutBankIBAN, 'bank_iban'|trans, {label_attr: {class: 'form-label'}} ) }}
+                                            {{ form_widget(form.payoutBankIBAN) }}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="tile-footer">
+                                    {{ form_widget(form.urlGenerate) }}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                {{ form_widget(form._token) }}
+                {{ form_end(form, {'render_rest': false}) }}
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% if app.request.get('storeHash') == "Giverb3de9" %}
+    {% if accountLink.code is defined and accountLink.code == 200 %}
+        <div class="modal fade show" id="planApplicationModal" tabindex="-1" aria-labelledby="planApplicationLabel" style="display:  block;" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="planApplicationTitle">
+                            Stripe Opening Details
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                ×
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                  
+                        <div id="plan_form_application">
+                            <div class="plan-application-features pl-5">
+                                <h6>Stripe Connected Account:</h6>
+                                <br>
+                                <div class="form-group">
+                                    <label class="form-control-label"> 
+                                        Stripe Connected Account Number : &nbsp &nbsp 
+                                        {{accountLink.data.accountId}}
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        Acoount Kyc Details : &nbsp &nbsp
+                                    </label>
+                                    <a href="{{accountLink.data.acoount_open_url}}">Click To Open Account</a>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label">
+                                        Link Expired Time : &nbsp &nbsp
+                                        {{accountLink.data.expires_at|date}}
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endif %}
+                    

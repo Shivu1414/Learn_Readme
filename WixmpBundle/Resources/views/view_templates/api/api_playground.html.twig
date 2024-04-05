@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(form, {'name': 'wixmp_api_form','attr': {'id': 'wixmp-api-form'}}) }}
+            {{ form_errors(form) }}
+            <div class="tile-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form_label(form.apiUrl,'apiUrl'|trans, {label_attr:{class:''}}) }}
+                        {{ form_widget(form.apiUrl, {attr: { class:'wk-input-large'}}) }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form_label(form.method,'method'|trans, {label_attr:{class:''}}) }}
+                        {{ form_widget(form.method, {attr: { class:'wk-input-large'}}) }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form_label(form.body,'body'|trans, {label_attr:{class:''}}) }}
+                        {{ form_widget(form.body, {attr: { class:'wk-input-large'}}) }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        {% if apiResponse is defined and apiResponse is not empty %}{{ apiResponse|raw }} {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="tile-footer">
+                <button class="btn btn-primary" type="submit">
+                    {{ 'send'|trans }}
+                </button>
+            </div>
+            {# {{ form_widget(form._token) }} #}
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
+</div>

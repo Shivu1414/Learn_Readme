@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-md-12">
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(form) }}
+        <div class="tile">
+            <div class="tile-header">
+                <div class="tile-header-text">{{'company_details'|trans }}</div>
+            </div>
+            <div class="tile-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.name,'name' , {'label_attr': {'class': 'wix-wk-required auctions-form-label'}}) }}
+                                {{ form_widget(form.name,{'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.name)}}
+                            </div>    
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.storeHash,'storeHash', {'label_attr': {'class': 'auctions-form-label'}}) }}
+                                {{ form_widget(form.storeHash,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.storeHash)}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.storeFrontUrl,'storeFrontUrl', {'label_attr': {'class': 'auctions-form-label'}}) }}
+                                {{ form_widget(form.storeFrontUrl,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.storeFrontUrl)}}
+                            </div>  
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.email,'email' , {'label_attr': {'class': 'wix-wk-required auctions-form-label'}}) }}
+                                {{ form_widget(form.email,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.email)}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.logoUrl,'logoUrl', {'label_attr': {'class': 'auctions-form-label'}}) }}
+                                {{ form_widget(form.logoUrl,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.logoUrl)}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="tile">
+            <div class="tile-header">
+                <div class="tile-header-text">{{'company_description'|trans }}</div>
+            </div>
+            <div class="tile-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form_label(form.description,'description', {'label_attr': {'class': 'auctions-form-label'}}) }}
+                                {{ form_widget(form.description,{'values':'kcd', 'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.description)}}
+                            </div>
+                        </div>
+                    </div>    
+                </div>    
+            </div>    
+        </div>
+        <div class="tile">
+            <div class="tile-header">
+                <div class="tile-header-text">{{'company_address'|trans }}</div>
+            </div>
+            <div class="tile-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.address,'address' , {'label_attr': {'class': 'wix-wk-required auctions-form-label'}}) }}
+                                {{ form_widget(form.address,{ required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.address)}}
+                            </div>   
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                {{ form_label(form.address2,'address2', {'label_attr': {'class': 'auctions-form-label'}}) }}
+                                {{ form_widget(form.address2,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.address2)}}
+                            </div>
+                        </div>
+                    </div>        
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                {{ form_label(form.city,'city' , {'label_attr': {'class': 'wix-wk-required auctions-form-label'}}) }}
+                                {{ form_widget(form.city,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.city)}}
+                            </div> 
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                {{ form_label(form.state,'state' , {'label_attr': {'class': 'wix-wk-required auctions-form-label'}}) }}
+                                {{ form_widget(form.state,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.state)}}
+                            </div>
+                        </div>
+                    </div>        
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.country,'country' , {'label_attr': {'class': 'wix-wk-required auctions-form-label'}}) }}
+                                {{ form_widget(form.country,{'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.country) }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                {{ form_label(form.zipcode,'zipcode' , {'label_attr': {'class': 'wix-wk-required auctions-form-label'}}) }}
+                                {{ form_widget(form.zipcode,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.zipcode)}}
+                            </div>
+                        </div>
+                    </div>        
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.phone,'phone' , {'label_attr': {'class': 'wix-wk-required auctions-form-label'}}) }}
+                                {{ form_widget(form.phone,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.phone)}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_label(form.phone2,'phone2', {'label_attr': {'class': 'auctions-form-label'}}) }}
+                                {{ form_widget(form.phone2,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.phone2)}}
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                {{ form_label(form.fax,'fax', {'label_attr': {'class': 'auctions-form-label'}}) }}
+                                {{ form_widget(form.fax,{required:false,'attr':{'class':'form-control auctions-company-form-control'}}) }}
+                                {{ form_help(form.fax)}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>       
+                </div>     
+            </div>
+            <div style = "border-top:none;padding:0;margin-top:0;"class="tile-footer">
+                <button class="btn btn-submit" type="submit">{{ 'save'|trans }}</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>

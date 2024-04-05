@@ -1,0 +1,433 @@
+{% if area == 'admin' %}
+    {% set batch_options = [{id:'P', text:'pending'},{id:'A', text: 'approved'},{id:'D', text: 'declined'},{id:'I', text: 'payment_initiated'},{id:'X', text: 'payment_abort'},{id:'C', text: 'complete'}] %}
+
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+{% endif %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-title-w-btn">
+                    <h5 class="title">
+                        {% include 'common/list_items.html.twig' %}
+                    </h5>
+                    <div class="btn-group">
+                        {% if not newTheme %}
+                            <span data-toggle="modal" data-target="#add_payout" class="btn btn-primary icon-btn wk-pointer" title="{% if area == 'mp-wix-seller' %}{{ 'create_withdraw'|trans }}{% else %}{{ 'create_payout'|trans }}{% endif %}">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                        {% endif %}
+                        {% if newTheme %}
+                            <div class="btn-group">
+                                <span class="btn btn-secondary wk-filter" title="{{ 'filter'|trans }}" style="padding: 8px 15px 0px 15px; margin-bottom: 15px;">
+                                    <i class="fa fa-filter"></i>
+                                    {% if newTheme %}
+                                        <span class="span-text-bold">
+                                            {{ 'filter'|trans }}
+                                        </span>
+                                    {% endif %}
+                                </span>
+                            </div>
+                            {% if area == 'admin' %}
+                                <div class="custom-control-inline" style="margin-right: 0">
+                                    {% include 'common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'account_status'}} %}
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}">
+                                <i class="fa fa-filter"></i>
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if not newTheme %}
+                    {% if area == 'admin' %}
+                        <div class="tile-title-w-btn">  
+                            <div>  
+                                <div class="custom-control-inline">
+                                    {% include 'common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'account_status'}} %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                <div class="tile-body">
+                    <div class="table-responsive">
+                        <table class="table {{ newTheme ? "tile-table" : ""}}" id="manage_user">
+                            <thead>
+                                <tr>
+                                    {% if area == 'admin' %}
+                                        <th width="1%">
+                                            <div class="animated-checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="check" title="check all" class="wk_checkbox_items"><span class="label-text"> </span>
+                                                </label>
+                                            </div>
+                                        </th>
+                                    {% endif %}
+                                    <th>
+                                        {{ "id"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_id'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "status"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_status'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "type"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_type'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "seller"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_seller'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "reference"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_reference'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "commission"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_commission'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "transaction_amount"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_transaction_amount'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "date"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_date'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for payout in payout_list %}
+                                    <tr data-row="payout-{{ payout.id }}" class="status-{{ payout.status|lower }}">
+                                        {% if area == 'admin' %}
+                                            <td>
+                                                <div class="animated-checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="payout_ids[]" value="{{ payout.id }}" class="wk_checkbox_item"><span class="label-text"> </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        {% endif %}
+                                        <td>{{ payout.id }}</td>
+                                        <td>
+                                            {% if area == 'mp-wix-seller' %}
+                                                {% if payout.status == 'P' %}{{ "pending"|trans }}
+                                                {% elseif payout.status == 'A' %}{{ "approved"|trans }}
+                                                {% elseif payout.status == 'I' %}{{ "payment_initiated"|trans }}
+                                                {% elseif payout.status == 'X' %}{{ "payment_abort"|trans }}
+                                                {% elseif payout.status == 'C' %}{{ "complete"|trans }}
+                                                {% else %}{{ "declined"|trans }}
+                                                {% endif %}
+                                            {% else %}
+                                                {% if payout.status == 'P' %}
+                                                    {% include "@wixmp_twig/view_templates/common/select_status.html.twig" with {
+                                                        object : payout,
+                                                        current_status: payout.status,
+                                                        current_url: app.request.uri,
+                                                        route: 'wixmp_seller_accounting_status_change',
+                                                        status_list: {
+                                                            'P': 'pending',
+                                                            'A': 'approved',
+                                                            'D': 'declined',
+                                                            'I': 'payment_initiated',
+                                                            'X': 'payment_abort',
+                                                            'C': 'complete'
+                                                        }
+                                                    } %}
+                                                {% else %}
+                                                    {% include "@wixmp_twig/view_templates/common/select_status.html.twig" with {
+                                                        object : payout,
+                                                        current_status: payout.status,
+                                                        current_url: app.request.uri,
+                                                        route: 'wixmp_seller_accounting_status_change',
+                                                        status_list: {
+                                                            'A': 'approved',
+                                                            'D': 'declined',
+                                                            'I': 'payment_initiated',
+                                                            'X': 'payment_abort',
+                                                            'C': 'complete'
+                                                        }
+                                                    } %}
+                                                {% endif %}
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            {% if payout.payoutType == 'P' %}{{ 'payout'|trans }}
+                                            {% elseif payout.payoutType == 'W' %}{{ 'withdraw'|trans }}
+                                            {% else %}{{ 'order_placement'|trans }}
+                                            {% endif %}
+                                            <br>
+                                            <small>
+                                                {% if payout.comment %}{{ payout.comment }}
+                                                {% else %}-{% endif %}
+                                            </small>
+                                        </td>
+                                        <td>
+                                            {% if payout.seller is not empty %}
+                                                <a href="{% if area == 'mp-wix-seller' %}{{ path('wixmp_seller_seller_update',{seller_id:payout.seller.id,storeHash:storeHash}) }}{% else %}{{ path('wixmp_seller_update',{seller_id:payout.seller.id,storeHash:storeHash}) }}{% endif %}">{{ payout.seller.seller }}</a>
+                                            {% else %}
+                                                {{ 'seller_not_exists'|trans}}
+                                            {% endif %}                                        
+                                        </td>
+                                        <td>
+                                            {% if payout.payoutType == 'P' and payout.plan %}
+                                                {% if area == 'mp-wix-seller' %}
+                                                    {{ payout.plan.plan }}
+                                                {% else %}
+                                                    <a href="{{ path('wixmp_seller_plan_update',{id:payout.plan.id,storeHash:storeHash}) }}">
+                                                        {{ payout.plan.plan }}
+                                                    </a>
+                                                {% endif %}
+                                                
+                                            {% elseif payout.payoutType == 'O' %}
+                                                {% if area == "mp-wix-seller" %}
+                                                    <a href = "#" id="account_wix_order_view" data-url="{{url('wixmp_seller_sales_order_view',{storeHash:storeHash,order_id:payout.orderId,popup:1})}}">{{ 'order'|trans }} # {{ payout.orderId }}</a>
+                                                {% else %}
+                                                    <a href = "#" id="account_wix_order_view" data-url="{{url('wixmp_sales_order_view',{storeHash:storeHash,order_id:payout.orderId,popup:1})}}">
+                                                        {{ 'order'|trans }} # {{ payout.orderId }} ( {{ 'store_order'|trans }} # {{ orders[payout.orderId].storeOrderNo }} )
+                                                    </a>
+                                                    {# &nbsp; &nbsp;
+                                                    <a href="{{ company.storeFrontUrl }}/manage/orders/{{ orders[payout.orderId].storeOrderId }}/edit" target = "_blank" title = "{{ 'view_on_bc'|trans }}">
+                                                        <i class = "fa fa-external-link"></i>
+                                                    </a> #}
+                                                {% endif %}
+                                                
+                                            {% else %}-{% endif %}
+                                        </td>
+                                        <td>
+                                        {% if payout.seller.currentPlan.conditions["commission_value_type"] is defined and   storeHash == 'DTMasterCarbon99fa'  and payout.seller.currentPlan.conditions["commission_value_type"] == 'percentage' %}
+                                                   {{ payout.commissionAmount|wk_price('app', storeHash)|raw }}
+                                            {% if payout.commissionAmount > 0 and payout.isCommissionPerProduct == 0 %}<br>
+                                                <small> 
+                                                    {% if payout.commissionType == 'P' %}{{ payout.commission|wk_price('app', storeHash)|raw }}%{% else %}${{ payout.commission|wk_price('app', storeHash)|raw }}
+                                                    {% endif %}
+                                                    {{ 'of'|trans }}
+                                                    {{ payout.orderAmount|wk_price('app', storeHash)|raw }}</small>
+                                            {% endif %}
+                                        {% elseif payout.seller.currentPlan.conditions["commission_value_type"] is defined and storeHash == 'DTMasterCarbon99fa' and payout.seller.currentPlan.conditions["commission_value_type"] == 'fixed' %}
+                                                    {{ payout.commissionAmount|wk_price('app', storeHash)|raw }}
+                                            {% if payout.commissionAmount > 0 and payout.isCommissionPerProduct == 0 %}<br>
+                                                <small> 
+                                                    {% if payout.commissionType == 'P' %}{% else %}${{ payout.commission|wk_price('app', storeHash)|raw }}
+                                                    {% endif %}
+                                                    {{ 'of'|trans }}
+                                                    {{ payout.orderAmount|wk_price('app', storeHash)|raw }}</small>
+                                            {% endif %}
+                                        {% else %}
+                                                   {{ payout.commissionAmount|wk_price('app', storeHash)|raw }}
+                                            {% if payout.commissionAmount > 0 and payout.isCommissionPerProduct == 0 %}<br>
+                                                <small> 
+                                                    {% if payout.commissionType == 'P' %}{{ payout.commission|raw }}%{% else %}${{ payout.commission|wk_price('app', storeHash)|raw }}
+                                                    {% endif %}
+                                                    {{ 'of'|trans }}
+                                                    {{ payout.orderAmount|wk_price('app', storeHash)|raw }}</small>
+                                            {% endif %}
+                                        {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if payout.payoutType == 'O' %}
+                                                <span class="text-success">{% set pooa = payout.orderAmount - payout.commissionAmount %}{{ pooa|wk_price('app', storeHash)|raw }}
+                                                </span>
+                                            {% else %}
+                                                <span class="text-danger">{{ payout.payoutAmount|wk_price('app', storeHash)|raw }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ payout.updatedAt|wk_time }}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7" class="text-center text-danger">
+                                            {{ "no_records_found"|trans }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="navigation">
+                        {{ knp_pagination_render(payout_list) }}
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div {{ newTheme ? 'class="tile"' : ""}}>
+                    <table>
+                        <tr>
+                            <th>
+                                <h5>
+                                    {{ 'total_sale'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_total_sale'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}:
+                                </h5>
+                            </th>
+                            <td>
+                                <h5>{{ accounting_total.total_sale|wk_price('app', storeHash)|raw  }}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h5>
+                                    {{ 'total_approved_sale'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_total_approved_sale'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}:
+                                </h5>
+                            </th>
+                            <td>
+                                <h5>{{ accounting_total.total_sale_balance|wk_price('app', storeHash)|raw  }}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>
+                                    {{ 'commission'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_commission'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}:
+                                </h6>
+                            </th>
+                            <td class="{% if area == 'admin' %}text-success{% else %}text-danger{% endif %}">
+                                <h6>{{ accounting_total.total_commission|wk_price('app', storeHash)|raw  }}</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>
+                                    {{ 'total_payout'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_total_payout'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}:
+                                </h6>
+                            </th>
+                            <td class="{% if area == 'admin' %}text-danger{% else %}text-success{% endif %}">
+                                <h6>{{ accounting_total.total_payout|wk_price('app', storeHash)|raw  }}</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>
+                                    {{ 'total_withdraw'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_total_withdraw'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}:
+                                </h6>
+                            </t>
+                            <td class="{% if area == 'admin' %}text-danger{% else %}text-success{% endif %}">
+                                <h6>{{ accounting_total.total_withdraw|wk_price('app', storeHash)|raw  }}</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><hr></td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h5>
+                                    {{ 'balance'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_balance'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}:
+                                </h5>
+                            </th>
+                            {# {% if area == 'admin' %}
+                            <td {% if accounting_total.total_sale - accounting_total.total_commission - accounting_total.total_payout - accounting_total.total_withdraw < 0 %}class="text-danger"{% else %}class="text-success"{% endif %}><h5>{{ (accounting_total.total_sale - accounting_total.total_commission - accounting_total.total_payout - accounting_total.total_withdraw)|wk_price('app', storeHash)|raw  }}</h5></td>
+                            {% else %} #}
+                            <td {% if accounting_total.total_sale_balance - accounting_total.total_commission - accounting_total.total_payout - accounting_total.total_withdraw < 0 %} class="text-danger" {% elseif accounting_total.total_sale_balance - accounting_total.total_commission - accounting_total.total_payout - accounting_total.total_withdraw > 0 %} {% endif %}>
+                                <h5>{{ (accounting_total.total_sale_balance - accounting_total.total_commission - accounting_total.total_payout - accounting_total.total_withdraw)|wk_price('app', storeHash)|raw  }}</h5>
+                            </td>
+                            {# {% endif %} #}
+                        </tr>
+                        <tr>
+                            <td colspan="2"><hr></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% if area == 'admin' %}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endif %}
+
+{% include 'common/filter.html.twig' with {
+        include_path : '@wixmp_twig/view_templates/seller/components/payout_search.html.twig',
+        search: search
+} %}
+
+{# modal  #}
+
+<div class="modal fade" name="add_payout_form" id="add_payout" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    {% if area == 'mp-wix-seller' %}{{ 'create_withdraw'|trans }}
+                    {% else %}{{ 'create_payout'|trans }}
+                    {% endif %}
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add_payout_form" action="{% if area == 'mp-wix-seller' %}{{ path('wix_mp_seller_accounting_payout_add',{storeHash:storeHash}) }}{% else %}{{ path('wixmp_seller_accounting_payout_add',{storeHash:storeHash}) }}{% endif %}" method="post">
+                    <div class="form-group">
+                        <label class="wk-required form-control-label required" for="seller_payout_seller">
+                            {{ "seller"|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_seller'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </label>
+                        <select id="seller_payout_seller" name="seller_payout[seller]" class="form-control">
+                            {% for seller, seller_id in seller_list %}
+                                <option value="{{ seller_id }}">{{ seller }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="wk-required wk-price form-control-label required" for="seller_payout_amount">
+                            {{ "amount"|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_amount'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </label>
+                        <input type="text" id="seller_payout_amount" name="seller_payout[amount]" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label wk-required" for="seller_plan_comment">
+                            {{ "comment"|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_comment'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </label>
+                        <textarea id="seller_plan_comment" name="seller_payout[comment]" class="form-control"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="add_payout_form">{{ 'create'|trans }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'close'|trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>
