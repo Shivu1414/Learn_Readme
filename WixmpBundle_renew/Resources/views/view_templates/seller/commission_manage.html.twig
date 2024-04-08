@@ -1,0 +1,184 @@
+{% if area == 'admin' %}
+    {% set controller_prefix = 'marketplace_seller_' %}
+    {% if storeHash == "Giverb3de9" %}
+        {% set batch_options = [{id:'stripe',text:'Pay Stripe'},{id:'paypal',text:'pay_btn'}] %}
+    {% else %}
+        {% set batch_options = [{id:'pay',text:'pay_btn'}] %}
+    {% endif %}
+{% else %}
+    {% set controller_prefix = 'mp_seller_seller_' %}
+{% endif %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_widget(form._token) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-title-w-btn">
+                    {% if area != 'seller' %}
+                        <h5 class="title">
+                            {% include 'common/list_items.html.twig' %}
+                        </h5>
+                    {% endif %}
+                    <div class="btn-group">
+                        {% if area != 'seller' %}                        
+                            <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}" style="{{ newTheme ? "padding: 8px 15px 0px 15px; margin-bottom: 15px;" : '' }}">
+                                <i class="fa fa-filter"></i>
+                                {% if newTheme %}
+                                    <span class="span-text-bold">
+                                        {{ 'filter'|trans }}
+                                    </span>
+                                {% endif %}
+                            </span> 
+                        {% endif %}
+                        {% if newTheme %}
+                            {% if area == 'admin' %}
+                                <div class="custom-control-inline">
+                                    {% include 'common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'commission'}} %}
+                                </div>
+                            {% endif %}                            
+                        {% endif %}                    
+
+                    </div>
+                </div>
+                {% if not newTheme %}
+                    <div class="tile-title-w-btn">    
+                        <div>
+                            {% if area == 'admin' %}
+                                <div class="custom-control-inline">
+                                    {% include 'common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'commission'}} %}
+                                </div>
+                            {% endif %}                            
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="tile-body">
+                    <table class="table {{ newTheme ? "tile-table" : "table-responsive"}}" id="seller_commission">
+                        <thead>
+                            <tr>
+                                {% if area != 'seller' %}
+                                    <th width="1%">
+                                        <div class="animated-checkbox">
+                                            <label>
+                                                <input type="checkbox" name="check" title="check all" class="wk_checkbox_items"><span class="label-text"> </span>
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        {{ "seller_id"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_seller_id'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                {% endif %}
+                                <th>
+                                    {{ "seller_company"|trans }}
+                                    {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_seller_company'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                </th>
+                                <th>
+                                    {{ "email"|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_email'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                <th>
+                                    {{ "balance"|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_balance'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                {# <th>{{ "last_paid"|trans }}</th>
+                                <th>{{ "last_paid_date"|trans }}</th> #}
+                                {% if area != 'seller' %}
+                                    <th>
+                                        {{ "pay_title"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_pay_title'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in seller_list %}
+                                <tr data-row="seller-{{ data.seller.id }}" class="status-{{ data.seller.status|lower }}">
+                                    {% if area != 'seller' %}
+                                        <td>
+                                            {% if (data.orderAmount - data.commissionAmount - data.payoutAmount)  > 0 %}
+                                                <div class="animated-checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="seller_ids[]" value="{{ data.seller.id }}" class="wk_checkbox_item"><span class="label-text"> </span>
+                                                    </label>
+                                                    <input type="hidden" name="payment_type" value="" class="form-control">
+                                                </div>
+                                            {% else %}
+                                                <div class="animated-checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="seller_ids[]" value="" 
+                                                        disabled="true"
+                                                        class="wk_checkbox_item"><span class="label-text"> </span>
+                                                    </label>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ data.seller.id }}</td>
+                                    {% endif %}
+                                    <td>
+                                        <b>
+                                            <a href="{% if area == 'seller' %}{{ path('mp_seller_seller_update',{seller_id:data.seller.id,storeHash:storeHash}) }}{% else %}{{ path('wixmp_seller_update',{seller_id:data.seller.id,storeHash:storeHash}) }}{% endif %}">{{ data.seller.seller }}</a>
+                                        </b>
+                                    </td>
+                                    <td>{{ data.seller.email }}</td>
+                                    <td>{{ data.orderAmount - data.commissionAmount - data.payoutAmount }}</td>
+                                    {# <td></td>
+                                    <td>{{ data.seller.updatedAt|wk_time('application',storeHash) }}</td> #}
+                                    
+                                    {% if area != 'seller' %}
+                                        <td>
+                                            {% if (data.orderAmount - data.commissionAmount - data.payoutAmount)  > 0 %}
+                                            {% if storeHash == "Giverb3de9" %}
+                                                <a class="pay-single-seller" data-seller-id="{{ data.seller.id}}" href="{{ path('wixmp_seller_commission_pay',{seller_id:data.seller.id,storeHash:storeHash}) }}" data-payment-type="paypal" style="color: #007bff;">
+                                                    <i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i>
+                                                </a>
+                                                <a class="pay-single-seller" data-seller-id="{{ data.seller.id}}" href="{{ path('wixmp_seller_commission_pay',{seller_id:data.seller.id,storeHash:storeHash}) }}" data-payment-type="stripe" style="color: #007bff;">
+                                                    <i class="fa fa-cc-stripe fa-2x" aria-hidden="true"></i>
+                                                </a>
+
+                                            {% else %}
+                                                <a class="btn btn-primary pay-single-seller" data-seller-id="{{ data.seller.id}}" href="{{ path('wixmp_seller_commission_pay',{seller_id:data.seller.id,storeHash:storeHash}) }}">{{'pay_btn'|trans}}</a>
+                                            {% endif %}
+
+                                                
+                                            {% else %}
+                                                {{ 'balance_not_sufficient'|trans}}
+                                            {% endif %}
+                                        </td>
+                                    {% endif %}
+                                    {# set hidden fields #}
+                                    <input type="hidden" name="payoutIds[{{data.seller.id}}]" value="{% if data.seller.id in payout_ids_by_seller|keys%} {{payout_ids_by_seller[data.seller.id]|json_encode()}} {% else %} {{[]|json_encode()}} {% endif %}">
+                                    <input type="hidden" name="payoutAmount[{{data.seller.id}}]" value="{{ data.orderAmount - data.commissionAmount - data.payoutAmount }}">
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="navigation">
+                        {{ knp_pagination_render(seller_list) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{ form_end(form, {'render_rest': false}) }}
+
+{# filters #}
+{% include 'common/filter.html.twig' with {
+    include_path : '@wixmp_twig/view_templates/seller/components/commission_search.html.twig',
+    search: search
+} %}

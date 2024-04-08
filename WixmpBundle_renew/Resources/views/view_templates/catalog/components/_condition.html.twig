@@ -1,0 +1,122 @@
+{% if product is defined and product is not empty and product.description is defined and product.description is not empty %}
+    {% set conditionValue =  unserialize(product.description) %}
+{% else %}
+    {% set conditionValue = [] %}
+{% endif %}
+{% set otherValue = true %}
+
+<div class="form-group">
+
+	<h3>{{ 'wix_wixmp_condition'|trans }}:</h3>
+	<div class="wk-section">
+		<label for="{{ form.condition1.vars.id }}">
+			<i class="fa fa-circle"></i>
+			{{ form_label(form.condition1, 'condition1'|trans,{label_attr:{class:'wk-required'}}) }}
+		</label>
+        {% if villumi %}
+            <i class="fa fa-info-circle" title="{{ 'wixmp_condition1'|trans }}" aria-hidden="true"></i>
+        {% endif %}
+		{# {{ form_widget(form.condition1, {attr: {class:"wk-input-medium", data: conditionValue.condition_1 ? conditionValue.condition_1.value : ""}}) }} #}
+        {# <textarea id="form_condition1" name="form[condition1]" required="required" rows="3" class="wk-input-medium form-control">{{ conditionValue.condition_1 is defined ? conditionValue.condition_1.value : "" }}</textarea> #}
+        <select id="form_condition1" name="form[condition1]" required="required" class="wk-input-medium form-control">
+            <option value=""> {{ "select_stored"|trans }} </option>
+            {% for choice in form.condition1.vars.choices %}
+                <option value="{{ choice.value }}"
+                    {% if (conditionValue.condition_1 is defined and conditionValue.condition_1.value == choice.value) %}
+                        selected="selected"
+                        {% set otherValue = false %}
+                    {% elseif (conditionValue.condition_1.value is defined and choice.value == "Other" and otherValue) %}
+                        selected="selected"
+                    {% endif %}>
+                    {{ choice.label|trans }}
+                </option>
+            {% endfor %}
+        </select>
+        {% if (conditionValue.condition_1.value is defined and otherValue) %}
+            <textarea id="form-condition-add" name="form[conditionAdd]" required="required" rows="3" class="wk-input-medium form-control mt-2"> {{ conditionValue.condition_1.value }} </textarea>
+        {% endif %}
+	</div>
+    </br>
+
+    <div class="wk-section">
+        <label for="{{ form.condition2.vars.id }}">
+            <i class="fa fa-circle"></i>
+            {{ form_label(form.condition2, 'condition2'|trans,{label_attr:{class:'wk-required'}}) }}
+        </label>
+        {% if villumi %}
+            <i class="fa fa-info-circle" title="{{ 'wixmp_condition2'|trans }}" aria-hidden="true"></i>
+        {% endif %}
+        {# {{ form_widget(form.condition2, {attr: {class:"wk-input-medium"}}) }} #}
+        {# <textarea id="form_condition2" name="form[condition2]" required="required" rows="3" class="wk-input-medium form-control">{{ conditionValue.condition_3 is defined ? conditionValue.condition_3.value : "" }}</textarea> #}
+        <select id="form_condition2" name="form[condition2]" required="required" class="wk-input-medium form-control">
+            <option value=""> {{ "select_filling_level_of_the_bottle"|trans }} </option>
+            {% for choice in form.condition2.vars.choices %}
+                <option value="{{ choice.value }}" {{ conditionValue.condition_5 is defined and conditionValue.condition_5.value == choice.value ? 'selected="selected"' : "" }}> {{ choice.label|trans }} </option>
+            {% endfor %}
+        </select>
+    </div>
+    </br>
+
+    <div class="wk-section">
+        <label for="{{ form.condition3.vars.id }}">
+            <i class="fa fa-circle"></i>
+            {{ form_label(form.condition3, 'condition3'|trans,{label_attr:{class:'wk-required'}}) }}
+        </label>
+        {% if villumi %}
+            <i class="fa fa-info-circle" title="{{ 'wixmp_condition3'|trans }}" aria-hidden="true"></i>
+        {% endif %}
+        {# {{ form_widget(form.condition3, {attr: {class:"wk-input-medium"}}) }} #}
+        {# <textarea id="form_condition3" name="form[condition3]" required="required" rows="3" class="wk-input-medium form-control">{{ conditionValue.condition_5 is defined ? conditionValue.condition_5.value : "" }}</textarea> #}
+        <select id="form_condition3" name="form[condition3]" required="required" class="wk-input-medium form-control">
+            <option value=""> {{ "select_condition_of_the_bottle"|trans }} </option>
+            {% for choice in form.condition3.vars.choices %}
+                <option value="{{ choice.value }}" {{ conditionValue.condition_3 is defined and conditionValue.condition_3.value == choice.value ? 'selected="selected"' : "" }}> {{ choice.label|trans }} </option>
+            {% endfor %}
+        </select>
+    </div>
+    </br>
+    
+    <div class="wk-section">
+        <label for="{{ form.condition4.vars.id }}">
+            <i class="fa fa-circle"></i>
+            {{ form_label(form.condition4, 'condition4'|trans,{label_attr:{class:'wk-required'}}) }}
+        </label>
+        {% if villumi %}
+            <i class="fa fa-info-circle" title="{{ 'wixmp_condition4'|trans }}" aria-hidden="true"></i>
+        {% endif %}
+        {# {{ form_widget(form.condition4, {attr: {class:"wk-input-medium"}}) }} #}
+        {# <textarea id="form_condition4" name="form[condition4]" required="required" rows="3" class="wk-input-medium form-control">{{ conditionValue.condition_7 is defined ? conditionValue.condition_7.value : "" }}</textarea> #}
+        <select id="form_condition4" name="form[condition4]" required="required" class="wk-input-medium form-control">
+            <option value=""> {{ "source_of_supply"|trans }} </option>
+            {% set otherValue = true %}
+            {% for choice in form.condition4.vars.choices %}
+                <option value="{{ choice.value }}"
+                    {% if (conditionValue.condition_7 is defined and conditionValue.condition_7.value == choice.value) %}
+                        selected="selected"
+                        {% set otherValue = false %}
+                    {% elseif (conditionValue.condition_7.value is defined and choice.value == "Other" and otherValue) %}
+                        selected="selected"
+                    {% endif %}>
+                    {{ choice.label|trans }}
+                </option>
+            {% endfor %}
+        </select>
+        {% if (conditionValue.condition_7.value is defined and otherValue) %}
+            <textarea id="form-condition-fourth-add" name="form[conditionFourthAdd]" required="required" rows="3" class="wk-input-medium form-control mt-2"> {{ conditionValue.condition_7.value }} </textarea>
+        {% endif %}
+    </div>
+    </br>
+
+    <div class="wk-section">
+        <label for="{{ form.extradetails.vars.id }}">
+            <i class="fa fa-circle"></i>
+            {{ 'extradetails'|trans }}
+        </label>
+        {% if villumi %}
+            <i class="fa fa-info-circle" title="{{ 'wixmp_extra_details'|trans }}" aria-hidden="true"></i>
+        {% endif %}
+        {# {{ form_widget(form.extradetails, {attr: {class:"wk-input-medium"}}) }} #}
+        <textarea id="form_extradetails" name="form[extradetails]" rows="3" class="wk-input-medium form-control">{{ conditionValue.condition_8 is defined ? conditionValue.condition_8.value : "" }}</textarea>
+    </div>
+
+</div>

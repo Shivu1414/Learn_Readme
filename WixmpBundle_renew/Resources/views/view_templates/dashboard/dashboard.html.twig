@@ -1,0 +1,1060 @@
+{% set app_path_prefix = twig_app_path() %}
+{% if area == 'admin' %}
+    {# {% include app_path_prefix ~ '/view_templates/dashboard/components/seller.html.twig' %} #}
+    {% set controller_prefix = 'wixmp_' %}
+{% else %}
+    {# {% include app_path_prefix ~ '/view_templates/dashboard/components/seller.html.twig' %} #}
+    {% set controller_prefix = 'wixmp_seller_' %}
+{% endif %}
+
+<div class="mp-report-filters">
+    <div class="tile-title-w-btn clearfix bam-vspace">
+        <div class="btn-group pull-right">
+            {% if area == 'admin' %}
+                {% if company is not null and (company.storeHash != 'RishabhStore-SAAS727a' and company.storeHash != 'VILLUMIb6f3') %}
+                    {% if settingInfo is defined and settingInfo.value == "UPDATEFEB10" %}
+                        {# <div class="col-sm-6 my-2">
+                            <a href="javascript:void(0)" class="btn btn-secondary" title="{{ 'wix_wixmp_back_to_old_version'|trans }}" id="back-to-old" data-href="{{ path('wixmp_update_theme',{storeHash:storeHash, 'theme':'default'}) }}" data-theme="default">
+                                <i class="fa fa-undo" aria-hidden="true"></i>
+                            </a>
+                        </div>     #}
+                    {% else %}
+                        <a href="" class="btn btn-secondary" title="{{ 'theme'|trans }}" data-toggle="modal" data-target="#theme_settings">
+                            <i class="fa fa-paint-brush"></i>
+                        </a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            {# <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}">
+                <i class="fa fa-cog"></i>
+            </span> #}
+        </div>
+    </div>
+</div>
+{# total summary report #}
+<div class="row">
+    <div class="col-md-6 col-lg-3">
+        <div class="widget-small primary coloured-icon"><i class="icon fa fa-first-order fa-3x"></i>
+            <div class="info">
+                <h4>
+                    {{ 'order'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_order'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h4>
+                <p><b>{{ reportData.summary.orders_count }}</b></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="widget-small warning coloured-icon"><i class="icon fa fa-dollar fa-3x"></i>
+            <div class="info">
+                <h4>
+                    {{ 'sales'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_sales'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h4>
+                <p><b>{{ reportData.summary.total_sales|wk_price('app', storeHash)|raw }}</b></p>
+                <p id="dashboard_mp_total_sale" class="wk-hidden">{{ reportData.summary.total_sales }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="widget-small danger coloured-icon"><i class="icon fa fa-dollar fa-3x"></i>
+            <div class="info">
+                <h4>
+                    {{ 'commission'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_commission'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h4>
+                <p><b>{{reportData.summary.total_commission|wk_price('app', storeHash)|raw }}</b></p>
+                <p id="dashboard_mp_total_commission" class="wk-hidden">{{ reportData.summary.total_commission }}</p>
+            </div>
+        </div>
+    </div>    
+    <div class="col-md-6 col-lg-3">
+        <div class="widget-small info coloured-icon"><i class="icon fa fa-line-chart fa-3x"></i>
+            <div class="info">
+                <h4>
+                    {{ 'avg_daily_sales'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_avg_daily_sales'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h4>
+                <p><b>{{reportData.summary.avg_daily_sales|wk_price('app', storeHash)|raw }}</b></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="widget-small info coloured-icon"><i class="icon fa fa-line-chart fa-3x"></i>
+            <div class="info">
+                <h4>
+                    {{ 'avg_monthly_sales'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_avg_monthly_sales'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h4>
+                <p><b>{{reportData.summary.avg_monthly_sales|wk_price('app', storeHash)|raw }}</b></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="widget-small warning coloured-icon"><i class="icon fa fa-truck fa-3x"></i>
+            <div class="info">
+                <h4>
+                    {{ 'wix_wixmp_total_shipping'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_total_shipping'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h4>
+                <p><b>{{reportData.summary.total_shipping_fees|wk_price('app', storeHash)|raw }}</b></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="widget-small danger coloured-icon"><i class="icon fa fa-percent fa-3x"></i>
+            <div class="info">
+                <h4>
+                    {{ 'wix_wixmp_total_tax'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_total_tax'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h4>
+                <p><b>{{reportData.summary.total_tax|wk_price('app', storeHash)|raw }}</b></p>
+            </div>
+        </div>
+    </div>
+</div>
+{# monthly report #}
+{% if reportData.monthly_sales_report is defined %}
+    <div class="mp-report-monthly-summary">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-header bam-report-header">
+                        <h3 class="panel-title">
+                            {{'SALES_REPORT_MONTHLY_SUMMARY'|trans}}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_SALES_REPORT_MONTHLY_SUMMARY'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </h3>
+                        <ul class="bam-report-action-tab nav nav-tabs">
+                            <li>
+                                <a href="#bymonth-table" data-toggle="tab" class="" aria-expanded="true">
+                                    <span class="fa fa-table"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#bymonth-chart" class="chart-container-trigger active" data-toggle="tab" aria-expanded="false">
+                                    <span class="fa fa-bar-chart"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body bam-report-content">
+                        <div class="report-monthly-summary tab-content">
+                            <div id="bymonth-table" class="wk-table-overflow tab-pane fade">
+                                <table width="100%" class="table {{ newTheme ? 'tile-table' : 'table-bordered table-striped table-hover' }}">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                {{'monthyearmonth'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_monthyearmonth'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{'month'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_month'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{'order_count'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_order_count'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>  
+                                            <th>
+                                                {{'BAMREPORT_TOTAL_SALES'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_BAMREPORT_TOTAL_SALES'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{'BAMREPORT_TOTAL_COMMISSION'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_BAMREPORT_TOTAL_COMMISSION'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{'wix_wixmp_total_shipping'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_total_shipping'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{'wix_wixmp_total_tax'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_total_tax'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for month,monthReport in reportData.monthly_sales_report %}
+                                            <tr>
+                                                <td>{{ monthReport.month ~ monthReport.year }}</td>
+                                                <td>{{ monthReport.formatted_month_year }}</td>
+                                                <td>{{ monthReport.order_count }}</td>
+                                                <td>{{ monthReport.total_sales|wk_price('app', storeHash)|raw }}</td>
+                                                <td>{{ monthReport.total_commission|wk_price('app', storeHash)|raw }}</td>
+                                                <td>{{ monthReport.total_shipping|wk_price('app', storeHash)|raw }}</td>
+                                                <td>{{ monthReport.total_tax|wk_price('app', storeHash)|raw }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="bymonth-chart" class="tab-pane active in">
+                                <div class="">
+                                    <canvas class="embed-responsive-item" id="monthly-mixed-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{# seller reports : seller_sales_report #}
+{% if area == 'admin' %}
+    <div class="mp-seller-report-summary">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-header bam-report-header">
+                        <h3 class="panel-title">
+                            {{'SELLER_REPORT_SUMMARY'|trans}}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_SELLER_REPORT_SUMMARY'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </h3>
+                        <ul class="bam-report-action-tab nav nav-tabs">
+                            <li>
+                                <a href="#byseller-table" data-toggle="tab" class="" aria-expanded="true">
+                                    <span class="fa fa-table"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#byseller-chart" class="chart-container-trigger active" data-toggle="tab" aria-expanded="false">
+                                    <span class="fa fa-pie-chart"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tile-body bam-report-content">
+                        <div class="seller-report-summary tab-content">
+                            <div id="byseller-table" class="wk-table-overflow tab-pane fade">
+                                <table width="100%" class="table {{ newTheme ? 'tile-table' : 'table-bordered table-striped table-hover' }}">
+                                    <thead>
+                                        <tr>
+                                            {# <th>{{'seller_id'|trans}}
+                                            {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_SALES_REPORT_MONTHLY_SUMMARY'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                        </th> #}
+                                            <th>
+                                                {{'seller_name'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_seller_name'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th> 
+                                            <th>
+                                                {{'BAMREPORT_TOTAL_SALES'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_BAMREPORT_TOTAL_SALES'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{'BAMREPORT_TOTAL_COMMISSION'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_BAMREPORT_TOTAL_COMMISSION'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{'wix_wixmp_total_shipping'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_total_shipping'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                            <th>
+                                                {{'wix_wixmp_total_tax'|trans}}
+                                                {% if villumi %}
+                                                    <i class="fa fa-info-circle" title="{{ 'wixmp_total_tax'|trans }}" aria-hidden="true"></i>
+                                                {% endif %}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for sellerid,sellerReport in reportData.seller_sales_report %}
+                                            <tr>                                                
+                                                {% if sellerid %}
+                                                    {# <td>{{ sellerid }}</td> #}
+                                                    <td>
+                                                        <a title="{{ 'view_seller'|trans }}" href="{{ path('wixmp_seller_update',{seller_id:sellerid,storeHash:storeHash}) }}">
+                                                            {{ sellerReport.seller_name ~ "("~ sellerid ~")" }}
+                                                        </a>
+                                                    </td> 
+                                                {% else %}  
+                                                    {# <td>
+                                                        --
+                                                    </td>                                                   #}
+                                                    <td>
+                                                        {{ sellerReport.seller_name|trans }}
+                                                    </td>
+                                                {% endif %}                                                                                               
+                                                <td>{{ sellerReport.total_sales|wk_price('app', storeHash)|raw }}</td>
+                                                <td>{{ sellerReport.total_commission|wk_price('app', storeHash)|raw }}</td>
+                                                <td>{{ sellerReport.total_shipping|wk_price('app', storeHash)|raw }}</td>
+                                                <td>{{ sellerReport.total_tax|wk_price('app', storeHash)|raw }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="byseller-chart" class="tab-pane active in">
+                                <div class="chart-limit-field">
+                                    <label>{{ 'sellers_limit'|trans }}</label>
+                                    <select class="chart-limit-select" id="seller-pie-limit" >
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="0">All</option>
+                                    </select>
+                                </div>
+                                <div class="">
+                                    <canvas class="embed-responsive-item" id="seller-pie-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+{# top products by sales #}
+{% if reportData.top_products_by_sales and reportData.top_products_by_sales|length %}
+    <div class="mp-top-products-chart">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-header bam-report-header">
+                        <h3 class="panel-title">
+                            {{'TOP_PRODUCTS_CHART'|trans}}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_TOP_PRODUCTS_CHART'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </h3>
+                    </div>
+                    <div class="tile-body bam-report-content">
+                        <div class="report-top-products-summary">
+                            <div id="products-sales-pie" class="">
+                                <div class="chart-limit-field">
+                                    <label>Products Limit </label>
+                                    <select class="chart-limit-select" id="products-pie-limit" >
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="0">All</option>
+                                    </select>
+                                </div>
+                                <div class="">
+                                    <canvas class="embed-responsive-item" id="products-pie-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<div class="row">    
+    <div class="col-lg-12">
+        <div class="tile">
+            <div class="wk-heading-mp">
+                {{ "latest_orders"|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_latest_orders'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </div>
+            <div class="table-responsive">
+                <table class="table {{ newTheme ? 'tile-table' : 'borderless' }}">
+                    <thead>
+                        <tr>
+                            <th>
+                                {{ "order_id"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_order_id'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            {% if area == 'admin' %}
+                                <th>
+                                    {{ "seller"|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_seller'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                            {% endif %}
+                            <th>
+                                {{ "customer"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_customer'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ "total"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_total'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ "date"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_date'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ "status"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_status'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in order_list %}
+                        <tr>
+                            <td>#<a href="{{ path(controller_prefix ~ 'sales_order_view',{storeHash:storeHash,order_id:order.id}) }}">{{ order.id }}</a></td>
+                            {% if area == 'admin' %}<td><a href="{{ path('wixmp_seller_update',{storeHash:storeHash,seller_id:order.seller.id}) }}">{{ order.seller.seller }}</a></td>{% endif %}
+                            <td>{{ order.customerName }}</td>
+                            <td>{{ order.total|wk_price('app', storeHash)|raw }}</td>
+                            <td>{{ order.createdAt|wk_time }}</td>
+                            <td>{{ order.sellerStatus|wixmp_status_info|trans }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">{{ "no_records_found"|trans }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {% if area == 'admin' %}
+        <div class="col-lg-6">
+            <div class="tile">
+                <div class="wk-heading-mp">
+                    {{ "latest_sellers"|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_latest_sellers'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </div>
+                <div class="table-responsive">
+
+                    <table class="table {{ newTheme ? 'tile-table' : 'borderless' }}">
+                        <thead><tr>
+                            <th>
+                                {{ "name"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_name'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ "username"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_username'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ "email"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_email'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            {% if area == 'admin' %}
+                                <th>
+                                    {{ "seller"|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_seller'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                            {% endif %}
+                            <th>
+                                {{ "status"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_status'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                        </tr></thead>
+                        <tbody>
+                            {% for user in user_list %}
+                                {% if user.seller.isArchieved is defined and user.seller.isArchieved == 0%}
+                                    <tr>
+                                        {# <td><a href="{{ path(controller_prefix ~ 'user_seller_update',{storeHash:storeHash,user_id:user.id}) }}">{{ user.firstName }} {{ user.lastName }}</a></td> #}
+                                        <td>{{ user.firstName }} {{ user.lastName }}</td>
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.email }}</td>
+                                        {% if user.seller.id is defined and area == 'admin' %}<td><a href="{{ path('wixmp_seller_update',{storeHash:storeHash,seller_id:user.seller.id}) }}">{{ user.seller.seller }}</a></td>{% elseif area == 'admin' %}<td>-</td>{% endif %}
+                                        <td>{% if user.status == 'A' %}{{ "active"|trans }}{% else %}{{ "disabled"|trans }}{% endif %}</td>
+                                    </tr>
+                                {% endif %}
+                            {% else %}
+                            <tr>
+                                <td colspan="5">{{ "no_records_found"|trans }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="col-lg-6">
+        <div class="tile">
+            <div class="wk-heading-mp">
+                {{ "latest_products"|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_latest_products'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </div>
+            <div class="table-responsive">
+
+                <table class="table {{ newTheme ? 'tile-table' : 'borderless' }}">
+                    <thead><tr>
+                        <th>
+                            {{ "image"|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_image'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </th>
+                        <th>
+                            {{ "name"|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_name'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </th>
+                        {% if area == 'admin' %}
+                            <th>
+                                {{ "seller"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_seller'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                        {% endif %}
+                        <th>
+                            {{ "sku"|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_sku'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </th>
+                        <th>
+                            {{ "price"|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_price'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </th>
+                    </tr></thead>
+                    <tbody>
+                        {% for product in product_list %}
+                        <tr>
+                            <td>{% if product.image %}<img width="25" src="{{ product.image }}" alt="{{ 'image'|trans }}">{% else %}<i class="fa fa-image fa-2x"></i>{% endif %}</td>
+                            <td><a href="{{ path(controller_prefix ~ 'catalog_product_update', {storeHash:  storeHash, product_id:product.id}) }}">{{ product.name }}</a></td>
+                            {% if product.seller.id is defined and area == 'admin' %}<td><a href="{{ path('wixmp_seller_update',{storeHash:storeHash,seller_id:product.seller.id}) }}">{{ product.seller.seller }}</a></td>{% elseif area == 'admin' %}<td>-</td>{% endif %}
+                            <td>{% if product.sku is not empty %}{{ product.sku }}{% else %}-{% endif %}</td>
+                            <td>{{ product.price|wk_price('app', storeHash)|raw }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4">{{ "no_records_found"|trans }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% if area == 'admin' %}
+    <div class="row">
+        <div class="col-lg-12">
+            {{ render(controller('App\\Controller\\Application\\Subscription\\SubscriptionController::getCurrentSubscription', {app_code:app_code, storeHash:storeHash, disable_link: false, platform: platform} )) }}
+        </div>
+    </div>
+{% endif %}
+
+{# filters #}
+{% include 'common/filter.html.twig' with {include_path: app_path_prefix ~ '/view_templates/dashboard/components/search.html.twig', search: filter} %}
+
+{# Theme setting list modal #}
+{% if area == 'admin' %}
+    {% include 'common/theme_setting.html.twig' %}
+    {% if settingInfo is not defined or settingInfo is defined and settingInfo.value != "UPDATEFEB10" %}
+        {% include '@wixmp_twig/view_templates/dashboard/components/new_theme.html.twig' %}
+    {% endif %}
+{% endif %}
+
+{# dashboard script #}
+<script src="{{ asset('resource/Wix/WixmpBundle/assets/js/chart.js') }}"></script>
+{# chart script  #}
+{% if company.storeHash == 'RishabhStore-SAAS727a' or company.storeHash == 'VILLUMIb6f3' %}
+    <script>
+    window.storeCurrencyCode = "{{ company.currencyCode }}";
+    window.chartColors = {
+      red: 'rgb(86, 160, 160)',    
+      yellow: 'rgb(255, 205, 86)',
+      green: 'rgb(234, 198, 82)',
+      orange: 'rgb(255, 159, 64)',
+      blue: 'rgb(54, 162, 235)',
+      brown: 'rgb(128,0,0)',
+      grey: 'rgb(201, 203, 207)',
+      purple: 'rgb(153, 102, 255)',
+      teal: 'rgb(0,128,128)',
+      olive: 'rgb(128,128,0)',
+      black: 'rgb(0,0,0)'
+    };
+    var colorNames = Object.keys(window.chartColors);
+    window.sellerPieChart  = null;
+    window.productPieChart  = null;
+    window.onload = function(){
+        window.totalSales = "{{reportData.summary.total_sales}}";
+        
+        // monthly mixed chart  : reverse using twig  to arragne in ascending order
+        var monthlyData = JSON.parse("{{ reportData.monthly_sales_report|json_encode|e('js') }}");
+        // generate datasets 
+        var monthlySalesData = [];
+        var monthlyCommissionData = [];
+        var monthlyChartLabels = [];
+        var orderMonths =  Object.keys(monthlyData);
+        // sort array 
+        orderMonths.sort();
+        orderMonths.map(function(key, index) {
+            monthlyChartLabels.push(monthlyData[key]['formatted_month_year']);
+            monthlySalesData.push(monthlyData[key]['total_sales']);
+            monthlyCommissionData.push(monthlyData[key]['total_commission']);
+        });
+        var chartData = {
+            labels: monthlyChartLabels,
+            datasets: [{
+            type: 'line',
+            label: 'Sales',
+            borderColor: window.chartColors.green,
+            borderWidth: 2,
+            fill: false,
+            data: monthlySalesData
+            },{
+            type: 'bar',
+            label: 'Commission',
+            backgroundColor: window.chartColors.red,
+            data: monthlyCommissionData
+            }]
+
+        };
+        var monthyChartElm = document.getElementById('monthly-mixed-chart');
+        if (monthyChartElm && monthlySalesData.length > 0) { //if there is no sales data do not render chart
+            var monthlyMixedChart = new Chart(monthyChartElm.getContext("2d"), {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: [
+                            'Monthly Sales and Commission Chart', 
+                            'All Prices are in '+ window.storeCurrencyCode
+                        ]
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: true,
+                        callbacks: {
+                            label: function(tooltipItems, data) { 
+                                return (parseFloat(tooltipItems.value)).toFixed(2);
+                            }
+                        }
+                    },
+                    
+                }
+            });
+        } else {
+            var tabElm = document.getElementById('bymonth-chart');
+            var spanElm = document.createElement('span');
+            spanElm.innerText = '{{ 'no_data_to_render_chart'|trans }}';
+            tabElm.appendChild(spanElm);
+        }
+
+        // seller sales chart 
+        var sellerChartElm = document.getElementById('byseller-chart');
+        if (sellerChartElm) {
+            var sellerSalesData = JSON.parse("{{ reportData.seller_sales_report|json_encode|e('js') }}");
+            // generate datasets 
+            var sellerPieLabels = [];
+            var sellerPieData = [];
+            var sellerPieBackgrounds = [];
+            
+            Object.keys(sellerSalesData).map(function(key, index) {
+                if (!key || key == 0) {
+                    sellerPieLabels.push("No Seller");
+                } else {
+                    sellerPieLabels.push(sellerSalesData[key]['seller_name']);
+                }
+                sellerPieData.push(sellerSalesData[key]['total_sales']);
+                var colorName = colorNames[index % colorNames.length];
+                sellerPieBackgrounds.push(window.chartColors[colorName]);
+            });
+            var sellerPieElm = document.getElementById('seller-pie-chart');
+            var sellerCountToRender = 5;
+    
+            renderPieChart('sellerPieChart',sellerPieElm,sellerPieLabels.slice(0,sellerCountToRender),sellerPieData.slice(0,sellerCountToRender),sellerPieBackgrounds,'Seller Sales Chart','byseller-chart', window.totalSales);
+            // re-render seller pie chart 
+            var sellerLimitElm = document.getElementById("seller-pie-limit");
+            if (sellerLimitElm) {
+                sellerLimitElm.addEventListener('change',function(){ 
+                    sellerCountToRender = sellerLimitElm.value;            
+                    if (!sellerCountToRender || sellerCountToRender == 0) { // all data 
+                        renderPieChart('sellerPieChart',sellerPieElm,sellerPieLabels,sellerPieData,sellerPieBackgrounds,'Seller Sales Chart','byseller-chart', window.totalSales);
+                    } else {
+                        renderPieChart('sellerPieChart',sellerPieElm,sellerPieLabels.slice(0,sellerCountToRender),sellerPieData.slice(0,sellerCountToRender),sellerPieBackgrounds,'Seller Sales Chart','byseller-chart', window.totalSales);
+                    }            
+                });
+            }
+        }
+        
+        // product sales chart 
+        var productSalesData = JSON.parse("{{ reportData.top_products_by_sales|json_encode|e('js') }}");
+        // generate datasets 
+        var productPieLabels = [];
+        var productPieData = [];
+        var productPieBackgrounds = [];
+        var productTotalSale = 0;
+        Object.keys(productSalesData).map(function(key, index) {
+            var productName = productSalesData[key]['product_name'];
+            if (productName.length >= 10) {
+                productName = productName.substr(0,10) + "...";
+            }
+            productPieLabels.push(productName);
+            productPieData.push(productSalesData[key]['total_sales']);
+            var colorName = colorNames[index % colorNames.length];
+            productPieBackgrounds.push(window.chartColors[colorName]);
+            productTotalSale += parseFloat(productSalesData[key]['total_sales']);
+        });
+        var productPieElm = document.getElementById('products-pie-chart');
+        var productCountToRender = 5;
+
+        renderPieChart('productPieChart',productPieElm,productPieLabels.slice(0,productCountToRender),productPieData.slice(0,productCountToRender),productPieBackgrounds,'Top Products By Sales','products-sales-pie', productTotalSale);
+        // re-render seller pie chart 
+        var productLimitElm = document.getElementById("products-pie-limit");
+        if (productLimitElm) {
+            productLimitElm.addEventListener('change',function(){ 
+                productCountToRender = productLimitElm.value;            
+                if (!productCountToRender || productCountToRender == 0) { // all data 
+                    renderPieChart('productPieChart',productPieElm,productPieLabels,productPieData,sellerPieBackgrounds,'Top Products By Sales','products-sales-pie', productTotalSale);
+                } else {
+                    renderPieChart('productPieChart',productPieElm,productPieLabels.slice(0,productCountToRender),productPieData.slice(0,productCountToRender),sellerPieBackgrounds,'Top Products By Sales','products-sales-pie', productTotalSale);
+                }            
+            });
+        }
+        
+        
+    };
+
+    function renderPieChart(pieChart,pieElm,pieLabels,pieData,pieBackgrounds,chartTitle,parentTabId, totalSale = 0) {
+        if (pieElm && pieData.length > 0) {
+
+            var pieChartData = {
+                labels: pieLabels,
+                datasets: [{
+                    data: pieData,
+                    backgroundColor: pieBackgrounds,
+                }],
+            }
+            //if there is no sales data do not render chart
+            if (window[pieChart]) {
+                window[pieChart].destroy();
+            }
+            window[pieChart] = new Chart(pieElm.getContext("2d"), {
+                type: 'pie',
+                data: pieChartData,
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: [chartTitle, 'All Prices are in '+window.storeCurrencyCode],
+                    },
+                    tooltips: {          
+                        callbacks: {                
+                            label: function(tooltipItems, data) {                        
+                                var labelValue = data.datasets[tooltipItems.datasetIndex]['data'][tooltipItems.index];
+                                var percentValue = '';
+                                var labelText = data.labels[tooltipItems.index];
+                                if (totalSale) {
+                                    if (data.datasets[tooltipItems.datasetIndex] && data.datasets[tooltipItems.datasetIndex]['data'][tooltipItems.index]) {
+                                        percentValue = (labelValue/totalSale) * 100;
+                                        percentValue     = '('+percentValue.toFixed(2)+'%)';
+                                        
+                                    }
+                                }    
+                                labelValue = labelText +": "+ parseFloat(labelValue).toFixed(2);                    
+                                return labelValue + percentValue;
+                            }
+                        }
+                    },
+                }        
+            });
+        } else {
+            var tabElm = document.getElementById(parentTabId);
+            if (tabElm) {
+                var spanElm = document.createElement('span');
+                spanElm.innerText = '{{ 'no_data_to_render_chart'|trans }}';
+                if(tabElm.childNodes[5]) {
+                    tabElm.removeChild(tabElm.childNodes[5]);
+                }
+                tabElm.appendChild(spanElm);
+            }            
+        }
+    }
+</script>
+{% else %}
+    <script>
+    window.storeCurrencyCode = "{{ company.currencyCode }}";
+    window.chartColors = {
+      red: 'rgb(255, 99, 132)',    
+      yellow: 'rgb(255, 205, 86)',
+      green: 'rgb(75, 192, 192)',
+      orange: 'rgb(255, 159, 64)',
+      blue: 'rgb(54, 162, 235)',
+      brown: 'rgb(128,0,0)',
+      grey: 'rgb(201, 203, 207)',
+      purple: 'rgb(153, 102, 255)',
+      teal: 'rgb(0,128,128)',
+      olive: 'rgb(128,128,0)',
+      black: 'rgb(0,0,0)'
+    };
+    var colorNames = Object.keys(window.chartColors);
+    window.sellerPieChart  = null;
+    window.productPieChart  = null;
+    window.onload = function(){
+        window.totalSales = "{{reportData.summary.total_sales}}";
+        
+        // monthly mixed chart  : reverse using twig  to arragne in ascending order
+        var monthlyData = JSON.parse("{{ reportData.monthly_sales_report|json_encode|e('js') }}");
+        // generate datasets 
+        var monthlySalesData = [];
+        var monthlyCommissionData = [];
+        var monthlyChartLabels = [];
+        var orderMonths =  Object.keys(monthlyData);
+        // sort array 
+        orderMonths.sort();
+        orderMonths.map(function(key, index) {
+            monthlyChartLabels.push(monthlyData[key]['formatted_month_year']);
+            monthlySalesData.push(monthlyData[key]['total_sales']);
+            monthlyCommissionData.push(monthlyData[key]['total_commission']);
+        });
+        var chartData = {
+            labels: monthlyChartLabels,
+            datasets: [{
+            type: 'line',
+            label: 'Sales',
+            borderColor: window.chartColors.green,
+            borderWidth: 2,
+            fill: false,
+            data: monthlySalesData
+            },{
+            type: 'bar',
+            label: 'Commission',
+            backgroundColor: window.chartColors.red,
+            data: monthlyCommissionData
+            }]
+
+        };
+        var monthyChartElm = document.getElementById('monthly-mixed-chart');
+        if (monthyChartElm && monthlySalesData.length > 0) { //if there is no sales data do not render chart
+            var monthlyMixedChart = new Chart(monthyChartElm.getContext("2d"), {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: [
+                            'Monthly Sales and Commission Chart', 
+                            'All Prices are in '+ window.storeCurrencyCode
+                        ]
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: true,
+                        callbacks: {
+                            label: function(tooltipItems, data) { 
+                                return (parseFloat(tooltipItems.value)).toFixed(2);
+                            }
+                        }
+                    },
+                    
+                }
+            });
+        } else {
+            var tabElm = document.getElementById('bymonth-chart');
+            var spanElm = document.createElement('span');
+            spanElm.innerText = '{{ 'no_data_to_render_chart'|trans }}';
+            tabElm.appendChild(spanElm);
+        }
+
+        // seller sales chart 
+        var sellerChartElm = document.getElementById('byseller-chart');
+        if (sellerChartElm) {
+            var sellerSalesData = JSON.parse("{{ reportData.seller_sales_report|json_encode|e('js') }}");
+            // generate datasets 
+            var sellerPieLabels = [];
+            var sellerPieData = [];
+            var sellerPieBackgrounds = [];
+            
+            Object.keys(sellerSalesData).map(function(key, index) {
+                if (!key || key == 0) {
+                    sellerPieLabels.push("No Seller");
+                } else {
+                    sellerPieLabels.push(sellerSalesData[key]['seller_name']);
+                }
+                sellerPieData.push(sellerSalesData[key]['total_sales']);
+                var colorName = colorNames[index % colorNames.length];
+                sellerPieBackgrounds.push(window.chartColors[colorName]);
+            });
+            var sellerPieElm = document.getElementById('seller-pie-chart');
+            var sellerCountToRender = 5;
+    
+            renderPieChart('sellerPieChart',sellerPieElm,sellerPieLabels.slice(0,sellerCountToRender),sellerPieData.slice(0,sellerCountToRender),sellerPieBackgrounds,'Seller Sales Chart','byseller-chart', window.totalSales);
+            // re-render seller pie chart 
+            var sellerLimitElm = document.getElementById("seller-pie-limit");
+            if (sellerLimitElm) {
+                sellerLimitElm.addEventListener('change',function(){ 
+                    sellerCountToRender = sellerLimitElm.value;            
+                    if (!sellerCountToRender || sellerCountToRender == 0) { // all data 
+                        renderPieChart('sellerPieChart',sellerPieElm,sellerPieLabels,sellerPieData,sellerPieBackgrounds,'Seller Sales Chart','byseller-chart', window.totalSales);
+                    } else {
+                        renderPieChart('sellerPieChart',sellerPieElm,sellerPieLabels.slice(0,sellerCountToRender),sellerPieData.slice(0,sellerCountToRender),sellerPieBackgrounds,'Seller Sales Chart','byseller-chart', window.totalSales);
+                    }            
+                });
+            }
+        }
+        
+        // product sales chart 
+        var productSalesData = JSON.parse("{{ reportData.top_products_by_sales|json_encode|e('js') }}");
+        // generate datasets 
+        var productPieLabels = [];
+        var productPieData = [];
+        var productPieBackgrounds = [];
+        var productTotalSale = 0;
+        Object.keys(productSalesData).map(function(key, index) {
+            var productName = productSalesData[key]['product_name'];
+            if (productName.length >= 10) {
+                productName = productName.substr(0,10) + "...";
+            }
+            productPieLabels.push(productName);
+            productPieData.push(productSalesData[key]['total_sales']);
+            var colorName = colorNames[index % colorNames.length];
+            productPieBackgrounds.push(window.chartColors[colorName]);
+            productTotalSale += parseFloat(productSalesData[key]['total_sales']);
+        });
+        var productPieElm = document.getElementById('products-pie-chart');
+        var productCountToRender = 5;
+
+        renderPieChart('productPieChart',productPieElm,productPieLabels.slice(0,productCountToRender),productPieData.slice(0,productCountToRender),productPieBackgrounds,'Top Products By Sales','products-sales-pie', productTotalSale);
+        // re-render seller pie chart 
+        var productLimitElm = document.getElementById("products-pie-limit");
+        if (productLimitElm) {
+            productLimitElm.addEventListener('change',function(){ 
+                productCountToRender = productLimitElm.value;            
+                if (!productCountToRender || productCountToRender == 0) { // all data 
+                    renderPieChart('productPieChart',productPieElm,productPieLabels,productPieData,sellerPieBackgrounds,'Top Products By Sales','products-sales-pie', productTotalSale);
+                } else {
+                    renderPieChart('productPieChart',productPieElm,productPieLabels.slice(0,productCountToRender),productPieData.slice(0,productCountToRender),sellerPieBackgrounds,'Top Products By Sales','products-sales-pie', productTotalSale);
+                }            
+            });
+        }
+        
+        
+    };
+
+    function renderPieChart(pieChart,pieElm,pieLabels,pieData,pieBackgrounds,chartTitle,parentTabId, totalSale = 0) {
+        if (pieElm && pieData.length > 0) {
+
+            var pieChartData = {
+                labels: pieLabels,
+                datasets: [{
+                    data: pieData,
+                    backgroundColor: pieBackgrounds,
+                }],
+            }
+            //if there is no sales data do not render chart
+            if (window[pieChart]) {
+                window[pieChart].destroy();
+            }
+            window[pieChart] = new Chart(pieElm.getContext("2d"), {
+                type: 'pie',
+                data: pieChartData,
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: [chartTitle, 'All Prices are in '+window.storeCurrencyCode],
+                    },
+                    tooltips: {          
+                        callbacks: {                
+                            label: function(tooltipItems, data) {                        
+                                var labelValue = data.datasets[tooltipItems.datasetIndex]['data'][tooltipItems.index];
+                                var percentValue = '';
+                                var labelText = data.labels[tooltipItems.index];
+                                if (totalSale) {
+                                    if (data.datasets[tooltipItems.datasetIndex] && data.datasets[tooltipItems.datasetIndex]['data'][tooltipItems.index]) {
+                                        percentValue = (labelValue/totalSale) * 100;
+                                        percentValue     = '('+percentValue.toFixed(2)+'%)';
+                                        
+                                    }
+                                }    
+                                labelValue = labelText +": "+ parseFloat(labelValue).toFixed(2);                    
+                                return labelValue + percentValue;
+                            }
+                        }
+                    },
+                }        
+            });
+        } else {
+            var tabElm = document.getElementById(parentTabId);
+            if (tabElm) {
+                var spanElm = document.createElement('span');
+                spanElm.innerText = '{{ 'no_data_to_render_chart'|trans }}';
+                if(tabElm.childNodes[5]) {
+                    tabElm.removeChild(tabElm.childNodes[5]);
+                }
+                tabElm.appendChild(spanElm);
+            }            
+        }
+    }
+</script>
+{% endif %}

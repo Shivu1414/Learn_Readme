@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_errors(form) }}
+            {{ form_start(form) }}
+            <div class="tile-title-w-btn">
+                <h5 class="title">
+                </h5>
+                <div class="btn-group">
+                </div>
+            </div>
+            <div class="tile-body">
+                <div class="tab-content">
+                    <div id="general">
+                    <p class="text-right"><strong>{{'wix_wixmp_common_note'|trans}}:</strong> {{'wix_wixmp_sellercr_field_create_name'|trans}}</p>
+                        <div class="form-group">
+                            {{ form_label(form.label,'wix_wixmp_field_name'|trans,{'label_attr': {'class': 'wk-required'}}) }}                            
+                            {{ form_widget(form.label,{required:false,'attr':{'class':'form-control fieldNameInput', 'onkeypress': "return /[0-9a-zA-Z_ ]/i.test(event.key)", 'maxlength': 50 }}) }}   
+                        </div>
+
+                        {% set readonly = false %}
+                        {% set style = false %}
+                        {% if form.vars.value.type is defined and form.vars.value.type is not empty %}
+                        {% set readonly = true %}
+                        {% set style = 'pointer-events: none' %}
+                        {% endif %}
+                        <div class="form-group">
+                            {{ form_label(form.type,'type',{'label_attr': {'class': 'wk-required'}}) }}                            
+                            {{ form_widget(form.type,{required:false,'attr':{'class':'form-control', 'readonly': readonly, 'style': style }}) }}
+                        </div>
+                        <div class="form-group option_data">
+                            {{ form_label(form.options,'Options(add atleast one options and options must not include comma)',{'label_attr': {'class': '' }}) }}
+                            <div>
+                                <span class="btn btn-outline-primary add-options">+ Add More</span>
+                                <p><strong>NOTE:</strong>You can add atmost 5 options.</p>
+                            </div><br>
+                            <div class="options">
+                            {% set optionDatas = form.options.vars.data %}
+                            {% if optionDatas is defined and optionDatas is not empty %}
+                                {% set option_datas = optionDatas|split(',') %}
+                                {% for option_data in option_datas %}
+                                    <div class="form-group new-added-field"><div class="row"><div class="col-md-6"><input type="text" class="form-control addOptionField" name="options[]" value="{{ option_data }}" maxlength="30"></div><div class="remove-added-field"><span class="fa fa-2x fa-minus-circle" id="" style="color: #4B71FC;;"></span></div></div></div>
+                                {% endfor %}
+                            {% else %}
+                                    <div class="form-group new-added-field"><div class="row"><div class="col-md-6"><input type="text" class="form-control addOptionField" name="options[]" maxlength="30"></div><div class="remove-added-field"><span class="fa fa-2x fa-minus-circle" id="" style="color: #4B71FC;;"></span></div></div></div>
+                            {% endif %}
+                            </div>                            
+                        </div>
+                        <div class="form-group is_requied_field">
+                            {{ form_label(form.isRequired,'isRequired',{'label_attr': {'class': '' }}) }}                             
+                            {{ form_widget(form.isRequired,{required:false,'attr':{'class':''}}) }}   
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.status,'status',{'label_attr': {'class': 'wk-required'}}) }}                            
+                            {{ form_widget(form.status,{required:false,'attr':{'class':'form-control'}}) }} 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tile-footer">
+                <button class="btn btn-primary customFieldSave" type="submit">{{'save'|trans}}</button>
+                <a class="btn btn-secondary ml-2" href="{{ path('wixsellercr_index',{storeHash:storeHash}) }}">{{ 'cancel'|trans }}</a>
+            </div>
+            {{ form_widget(form._token) }}
+            {{ form_end(form,{'render_rest':false}) }}
+        </div>
+    </div>
+</div>

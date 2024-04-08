@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+        {% if form is defined %}
+            <div class="tile-body">
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(form) }}
+                <div class="tile-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-6 my-auto">
+                                <div class="tile-header-text">{{ "company"|trans }} : {{ company.name }}</div>
+                            </div>
+                            <div class="col-xs-2 ml-auto my-auto">
+                                <div class="btn-group">
+                                    <a class="btn btn-custom icon-btn wk-pointer btn-sync" title="{{ 'sync'|trans }}" href="{{ path('app_company_profile_settings_sync',{platform: platform, storeHash:storeHash,app_code:app.request.get('app_code')}) }}"><i class="fa fa-refresh"></i></a>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile-body">
+                    {% set continue = false %}
+                    {% for key,field in form.children %}
+                        {% if key =="date_format" and (application_name is not empty and (application_name != "SMS Notification" and application_name != "Marketplace")) %}
+                            {% set continue = true %}
+                        {% elseif key =="_token" %}  
+                            {% set continue = true %}
+                        {% else %}
+                            <div class="form-group">
+                                {{ form_label(attribute(form,key),key, {'label_attr': {'class': 'auction-form-label'}}) }}
+                                {{ form_widget(attribute(form,key),{required:false,value:field.vars.value,'attr':{'class':'auctions-company-form-control'}}) }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {{ form_widget(form._token) }}
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        {% endif %}
+        </div>
+    </div>
+</div>

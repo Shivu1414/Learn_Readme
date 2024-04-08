@@ -1,0 +1,427 @@
+{# create product list to ship and count shippable product #}
+
+{% set totalShippableProducts = 0 %}
+{% set toShipProductList = "" %}
+{% set productList = "" %}
+{% set allowedCustomerDetail = '' %}
+{% set nothingToShow = 0 %}
+{% set pCommission = '' %}
+{% set pCommissionType = '' %}
+{% set customization_store = ['kiff.co0e45','ACotswoldLifestylea3d4','PurpleBookHouse7c95'] %}
+{% set categoryCommissionRate = '' %}
+
+{% for product in platform_order_product %}
+    {% if product.productId in order_product|keys  and  product.lineItemType != 'digital' %}
+        {% set quantityLeftToSHip = (product.quantity - product.refundedQuantity|default(0) - product.quantity_shipped|default(0)) %}   
+        {# set ship product list  #}
+        {% set toShipProduct %}                                     
+            <tr>
+                <td width="80%">{{ product.name }}<br><small>{% if product.sku is defined %}{{ product.sku }} {% endif %}</small></td>
+                <td width="10%">{{ quantityLeftToSHip }}</td>
+                <td class="form-group">
+                    {% if quantityLeftToSHip == 0 %}
+                        <span class="text-success">{{ 'package.already_shipped'|trans}}</span>
+                    {% else %}
+                        <input type="number"  class="form-control shipment-edit-item-quantity" name="shipment[product][{{ order_product[product.productId]['cart_id'] }}]" required="" min="0" max="{{ quantityLeftToSHip }}" value="{{ quantityLeftToSHip }}"/>
+                        {# count shippable products #}
+                        {% set totalShippableProducts = totalShippableProducts + quantityLeftToSHip %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endset %}
+        
+        {% for productDetail in product_details %}
+            {% if (product.productId == productDetail.cartProductId) %}
+                {% set pCommission = productDetail.product.commission %}
+                {% set pCommissionType = productDetail.product.commissionType %}
+            {% endif %}
+        {% endfor %}
+
+        {% for payoutCommission in payout_commissions %}
+            {% if (product.productId == payoutCommission.product.prodId) %}
+                {% set categoryCommissionRate = payoutCommission.commissionRate %}
+            {% endif %}
+        {% endfor %}
+
+        {# set order detail product list  #}
+        {% set singleProduct %}   
+            {% if product.productId in order_product|keys %}
+                <tr>
+                    {% set _prod_id = attribute(order_product, product.productId).product_id %}
+                    
+                    <td>
+                        {% if attribute(order_product, product.productId).is_exists is not empty %}
+                            <a {% if area == 'admin' %}href="{{ path('wixmp_catalog_product_update',{storeHash:storeHash,product_id:_prod_id}) }}"{% else %}href="{{ path('wixmp_seller_catalog_product_update',{storeHash:storeHash,product_id:_prod_id}) }}"{% endif %}>
+                                {{ product.name }}
+                            </a>
+                        {% else %}
+                            {{ product.name }}
+                        {% endif %} 
+                        {# display options  #}
+                        {% if product.product_options is defined and product.product_options is not empty %}
+                            <table>
+                                {% for product_option in product.product_options %}
+                                    <tr>
+                                        <td>{{ product_option.display_name ~ " :" }}</td>
+                                        <td>{{ product_option.display_value }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            
+                        {% endif %}
+                    </td>
+
+                    <td class="text-center">{% if product.sku is defined %}{{ product.sku }} {% endif %}</td>
+                    <td class="text-center">{{ product.quantity }}</td>
+                    {# {% if product.total_inc_tax > 0 %}
+                        <td class="text-right">{{ product.total_inc_tax|wk_price('app', storeHash)|raw }}</td>
+                    {% endif %} #}
+
+                    {% if categoryCommissionRate is defined and categoryCommissionRate is not empty and (payout_data.isCommissionPerCategory != 0 or payout_data.isCommissionPerProduct != 0) %}
+
+                        {% if pCommission is defined and pCommission is not empty and payout_data.isCommissionPerProduct != 0 %}
+                            <td class="text-right">
+                                {% if pCommissionType == 'percentage' %} 
+                                    {{ pCommission }} 
+                                {% else %}
+                                    {{ pCommission|wk_price('app', storeHash)|raw }}
+                                {% endif %}
+
+                                {% if pCommission != 0 and pCommissionType == 'fixed' %} ( {{ 'Fixed' }} ) {% endif %}
+                                {% if pCommission != 0 and pCommissionType == 'percentage' %} ( {{ '%' }} ) {% endif %}
+                            </td>
+                        {% else %}
+                            <td class="text-right">
+                                {{ categoryCommissionRate ~ "%" }}
+                            </td>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if product.price > 0 %}
+                        <td class="text-right">{{ product.price|wk_price('app', storeHash)|raw }}</td>
+                    {% endif %}
+                <tr>
+            {% endif %}
+        {% endset %}
+        {# append product lists to respective var  #}
+        {% set toShipProductList = toShipProductList ~ toShipProduct %}
+        {% set productList = productList ~ singleProduct %}
+    {% endif %}
+{% endfor %}
+
+<div class="row">
+    {% if nothingToShow != 1 %}
+    <div class="col-md-6">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title">
+                    {{ 'customer_details'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_customer_details'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h5>
+                <div class="btn-group"></div>
+            </div>
+            <div class="tile-body">
+                <table class="table">
+                <tbody>
+                {% if store_order_info is not empty and store_order_info.order is defined %}
+                <tr>
+                    <td>
+                        <h6>
+                            {{ 'billing_details'|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_billing_details'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        </h6>
+                        
+                        <p>{{ store_order_info.order.billingInfo.address.fullName.firstName }} {{ store_order_info.order.billingInfo.address.fullName.lastName }}</p>
+                        <p>
+                            {{ store_order_info.order.billingInfo.address.addressLine1 }}
+                           {% if store_order_info.order.billingInfo.address.addressLine2 is defined %} {{ store_order_info.order.billingInfo.address.addressLine2 }} {% endif %}
+                            {{ store_order_info.order.billingInfo.address.city }}
+                        </p>
+                        <p>{{ store_order_info.order.billingInfo.address.country }} {{ store_order_info.order.billingInfo.address.zipCode }}</p>
+                        <p>{{store_order_info.order.billingInfo.address.phone }}</p>
+                        <p>{{store_order_info.order.billingInfo.address.email }}</p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if store_order_shipping_info is not empty and store_order_shipping_info.shipmentDetails is defined %}
+                    <tr>
+                        <td>
+                            <h6>
+                                {{ 'shipping_address'|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_shipping_address'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </h6>
+                            <p>{{ store_order_shipping_info.shipmentDetails.address.fullName.firstName }} {{ store_order_shipping_info.shipmentDetails.address.fullName.lastName }}</p>
+                            <p>
+                                {% if store_order_shipping_info.shipmentDetails.address.street is defined %}
+                                    {{ store_order_shipping_info.shipmentDetails.address.street.number is defined ? store_order_shipping_info.shipmentDetails.address.street.number : ""  }}
+                                    {{ store_order_shipping_info.shipmentDetails.address.street.name is defined ? store_order_shipping_info.shipmentDetails.address.street.name : "" }}
+                                {% else %}
+                                    {{ store_order_shipping_info.shipmentDetails.address.addressLine1  is defined ? store_order_shipping_info.shipmentDetails.address.addressLine1 : "" }},
+                                    {{ store_order_shipping_info.shipmentDetails.address.addressLine2 is defined ? store_order_shipping_info.shipmentDetails.address.addressLine2 : "" }}
+                                {% endif %}
+                            </p>
+                            <p>{{ store_order_shipping_info.shipmentDetails.address.city }}</p>
+                            <p>{{ store_order_shipping_info.shipmentDetails.address.country }} {{ store_order_shipping_info.shipmentDetails.address.zipCode }}</p>
+                            <p>{{store_order_shipping_info.shipmentDetails.address.phone}}</p>
+                            <p>{{store_order_shipping_info.shipmentDetails.address.email }}</p>
+                        </td>
+                    </tr>
+                {% endif %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="col-md-6">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title">
+                    {{ 'payment_shipping_details'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_payment_shipping_details'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h5>
+                <div class="btn-group"></div>
+            </div>
+            <div class="tile-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>
+                                {{ 'order_id'|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_order_id'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                                :
+                            </th>
+                            <td>{{ order_details.id }}</td>
+                        </tr>
+                        {% if area == 'admin' %}
+                        <tr>
+                            <th>
+                                {{ 'platform_order_no'|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_platform_order_no'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                                :
+                            </th>
+                            <td>{{ order_details.storeOrderNo }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>
+                                {{ 'date'|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_date'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                                :
+                            </th>
+                            <td>{{ order_details.createdAt|wk_time }}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ 'status'|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_status'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                                :
+                            </th>
+                            <td>{{ order_details.sellerStatus|wixmp_status_info|trans }}</td>
+                        </tr>
+                        {% if store_order_info is not empty and store_order_info.order.billingInfo.paymentMethod is defined %}
+                            <tr>
+                                <th>
+                                    {{ 'payment'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_payment'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                    :
+                                </th>
+                                <td>{{ store_order_info.order.billingInfo.paymentMethod }}</td>
+                            </tr>
+                        {% endif %}
+                        {% if store_order_shipping_info is not empty and store_order_shipping_info.deliveryOption is defined %}
+                            <tr>
+                                <th>
+                                    {{ 'shipping'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_shipping'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                    :
+                                </th>
+                                <td>{{ store_order_shipping_info.deliveryOption }} 
+                                    {# {% if store_order_info.items_shipped < store_order_info.items_total and  totalShippableProducts > 0 %}
+                                        (
+                                        <b>
+                                            <a href="#" data-toggle="modal" data-target="#shipmentModal">
+                                                {{ 'create_shipment'|trans }}
+                                            </a>
+                                        </b>
+                                        )
+                                    {% endif %} #}
+                                    <br/>
+                                    {# display shipments #}
+                                    {# {% if not order_shipment_info is empty %}                                 
+                                        <b>                                       
+                                            <a href="{% if area == 'admin' %}{{ path('marketplace_sales_shipment_manage',{storeHash:storeHash,order_id:order_details.id}) }}{% else %}{{ path('mp_seller_sales_shipment_manage',{storeHash:storeHash,order_id:order_details.id}) }}{% endif %}">
+                                                {{ 'manage_order_shipments'|trans }}
+                                            </a>
+                                        </b>
+                                    {% endif %} #}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {# <tr>
+                            <th>{{ 'ip_address'|trans }}:</th>
+                            <td>{{ store_order_info.ip_address }}</td>
+                        </tr> #}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title">
+                    {{ 'product_details'|trans }}
+                    {% if villumi %}
+                        <i class="fa fa-info-circle" title="{{ 'wixmp_product_details'|trans }}" aria-hidden="true"></i>
+                    {% endif %}
+                </h5>
+                <div class="btn-group"></div>
+            </div>
+            <div class="tile-body">
+                <table class="table">
+                <tbody>
+                <tr>
+                    <td colspan="3">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <th>
+                                    {{ 'product'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_product'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                <th class="text-center">
+                                    {{ 'wix_wixmp_code'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_code'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                <th class="text-center">
+                                    {{ 'quantity'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_quantity'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                                {% if (categoryCommissionRate is defined and categoryCommissionRate is not empty and payout_data is defined and (payout_data.isCommissionPerCategory != 0 or payout_data.isCommissionPerProduct != 0)) %}
+                                    <th class="text-right">
+                                        {{ 'commission_rate'|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_commission_rate'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                {% endif %}
+                                <th class="text-right">
+                                    {{ 'price'|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_price'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                            </thead>
+                            <tbody>
+                                {{ productList|raw }}
+                            <tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            {{ 'commission'|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_commission'|trans }}" aria-hidden="true"></i>
+                            {% endif %}:
+                            {% if payout_data.commissionAmount is defined %} {{ payout_data.commissionAmount|wk_price('app', storeHash)|raw }} {% endif %}
+                        
+                        {% if (payout_data.isCommissionPerProduct == 0 and payout_data.isCommissionPerCategory == 0) %}
+                            
+                            {% if storeHash in customization_store %}
+                                ({{ payout_data.commission ~ "% of (Subtotal +  Tax) - Discount "}})
+                            {% elseif payout_data.seller.currentPlan.conditions["commission_value_type"] is defined and  storeHash == 'DTMasterCarbon99fa' and payout_data.seller.currentPlan.conditions["commission_value_type"] == 'percentage' %}
+                                ({{ payout_data.commission }}%)
+                            {% elseif payout_data.seller.currentPlan.conditions["commission_value_type"] is defined and  storeHash == 'DTMasterCarbon99fa' and payout_data.seller.currentPlan.conditions["commission_value_type"] == 'fixed'  %}
+
+                            {% else %}
+                                 ({{ payout_data.commission }}%)
+                            {% endif %}
+
+                        {% endif %}
+                        
+                        {# {% if (payout_data.isCommissionPerProduct == 0) %} ({{ payout_data.commission }}%) {% endif %} #}
+                        </p>
+                        <p>
+                            {{ 'payout'|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_payout'|trans }}" aria-hidden="true"></i>
+                            {% endif %}:
+                            {% if payout_data.commissionAmount is defined %} {% set tot_p = order_details.total - payout_data.commissionAmount %}{{ tot_p|wk_price('app', storeHash)|raw }} {% endif %}</p>
+                    </td>
+                    <td colspan="2" class="text-right">                        
+                        <h6>
+                            {{ 'subtotal'|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_subtotal'|trans }}" aria-hidden="true"></i>
+                            {% endif %}:
+                            {{ order_details.subTotal|wk_price('app', storeHash)|raw }}
+                        </h6>
+                        <h6>
+                            {{ 'shipping'|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_shipping'|trans }}" aria-hidden="true"></i>
+                            {% endif %}:
+                            {{ order_details.shipping|wk_price('app', storeHash)|raw }}
+                        </h6>
+                        <h6>
+                            {{ 'product.tax'|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_product_tax'|trans }}" aria-hidden="true"></i>
+                            {% endif %}:
+                            {{ order_details.tax|wk_price('app', storeHash)|raw }}
+                        </h6>
+                        <h6>
+                            {{ 'discount'|trans }}
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_discount'|trans }}" aria-hidden="true"></i>
+                            {% endif %}:
+                            {{ "-" }} {{ order_details.discount|wk_price('app', storeHash)|raw }}
+                        </h6>
+                        <h5>
+                            {{ 'total'|trans }}{% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'wixmp_total'|trans }}" aria-hidden="true"></i>
+                            {% endif %}:
+                            {{ order_details.total|wk_price('app', storeHash)|raw }}
+                        </h5>
+                        {# <h6>
+                            {{ 'tax_included'|trans }}: {{ order_details.tax|wk_price('app', storeHash)|raw }}
+                        </h6> #}
+                    </td>
+                </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

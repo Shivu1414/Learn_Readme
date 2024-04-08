@@ -1,0 +1,55 @@
+{% set primaryCurrency = get_currency('app', storeHash) %}
+{% if product is defined and product is not empty and product.pricedata is defined and product.pricedata is not empty %}
+    {% set pricedata = unserialize(product.pricedata) %}
+{% else %}
+    {% set pricedata = []  %}
+{% endif %}
+<div class="form-row">
+    {% if company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3' %}
+        <div class="form-group">
+            {{ form_label(form.price, 'price'|trans, {label_attr:{class:'wk-required wk-price'}}) }}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_price'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon2">{{ primaryCurrency.symbol }}</span>
+                </div>
+                {{ form_widget(form.price, {attr: {class:'wk-input-large wk-price'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.discount_type, 'discount_type'|trans, {label_attr:{class:''}}) }}
+            {% if villumi %}
+                <i class="fa fa-info-circle" title="{{ 'wixmp_discount_type'|trans }}" aria-hidden="true"></i>
+            {% endif %}
+            <select class="vellum-discount wk-input-large form-control" id="form_discount_type" name="form[discount_type]">
+                <option value="AMOUNT">Fixed</option>
+                <option value="PERCENT">Percentage</option>
+            </select>
+        </div>
+    {% else %}
+        <div class="form-group">
+         <input type="hidden" id="discount_type_form" value="{{ pricedata['discount_type'] is defined ? pricedata['discount_type'] : '' }}"></input>
+            {{ form_label(form.discount_type, 'discount_type'|trans, {label_attr:{class:''}}) }}
+            <select id="form_discount_type" name="form[discount_type]" class="wk-input-large form-control" >
+                <option id="amount" value="AMOUNT">Fixed</option>
+                <option id="percent" value="PERCENT">Percentage</option>
+            </select>
+        </div>
+    {% endif %}
+    <div class="form-group">
+        {{ form_label(form.discount, 'discount'|trans, {label_attr:{class:'wk-price'}}) }}
+        {% if villumi %}
+            <i class="fa fa-info-circle" title="{{ 'wixmp_discount'|trans }}" aria-hidden="true"></i>
+        {% endif %}
+        {{ form_widget(form.discount, {attr: {class:'wk-input-large wk-price'}}) }}
+    </div>  
+    <div class="form-group">
+        {{ form_label(form.sales_price, 'sales_price'|trans, {label_attr:{class:'wk-price'}}) }}
+        {% if villumi %}
+            <i class="fa fa-info-circle" title="{{ 'wixmp_sales_price'|trans }}" aria-hidden="true"></i>
+        {% endif %}
+        {{ form_widget(form.sales_price, {attr: {class:'wk-input-large wk-wix-salesprice'}}) }}
+    </div> 
+</div>

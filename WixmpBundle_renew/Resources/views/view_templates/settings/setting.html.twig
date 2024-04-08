@@ -1,0 +1,187 @@
+ {% set app_path_prefix = twig_app_path() %}
+{% set stripe_feilds = [ 'setting_header_stripe_payout', 'stripe_payout_client_id', 'stripe_payout_secret_key', 'stripe_payout_mode', 'stripe_enable_auto_pay', 'stripe_auto_pay_order_status'] %}
+{% set iButton = ['product_discount', 'products_identifier_enable_product', 'enable_google_captcha'] %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+        {% if form is defined %}
+        
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(form) }}
+                <div class="tile-title-w-btn">
+                    <h5 class="title">
+                    </h5>
+                    <div class="btn-group">
+                    </div>
+                </div>
+                <div class="tile-body">
+                    {% for key,field in form.children %}
+                        
+                        {# temp for customization paypal payout  #}
+                        {% set continue = false %}
+                        
+                        {# setting based on Plan Features #}
+                        {% if key == 'setting_header_commission' or key == "commission_type" %}
+
+                            {% if plan_application_data['commission_per_category'] is not defined %}
+                                {% set continue = true %}
+                            {% elseif plan_application_data['commission_per_category'] is defined and plan_application_data['commission_per_category'] is empty  %}
+                                {% set continue = true %}
+                            {% elseif (plan_application_data['commission_per_category'] is defined and plan_application_data['commission_per_category'] is not empty and plan_application_data['commission_per_category'] == '0') %}
+                                {% set continue = true %}
+                            {% endif %}
+                        {% endif %}
+
+
+                        {# setting based on store hash #}
+                        {# {% if (key in ['setting_header_paypal_payout','paypal_payout_client_id','paypal_payout_secret_key','paypal_payout_mode','enable_auto_pay','auto_pay_order_status']) and companyApplication.company.storeHash not in ['g49lb9sk5a','rdabko64cy'] %}
+                            {% set continue = true %}
+                        {% endif %} #}
+                        {% if not continue %}
+                            {% if key != '_token' and key != 'seller_allowed_categories' and key != 'seller_name_as_brand_name' and key != 'seller_allowed_customer_details' and key != 'show_only_seller_brand' and key != 'doc_skip_email_send_days' and key != 'term_condition' %}
+                                {% if (field.vars.block_prefixes.1 == 'hidden') %}
+                                    {% if company.storehash == "Giverb3de9" or key not in stripe_feilds %}
+                                        <h5><u>{{ field.vars.name|trans }}</u> :</h5>
+                                    {% endif %}    
+                                {% endif %}
+
+                                <div class="form-group" {% if key == "auto_pay_order_status" %} id = "{{ key }}" {% endif %} {% if key == "stripe_auto_pay_order_status" %} id = "{{ key }}" {% endif %}>
+
+                                {% if company.storehash == "Giverb3de9" or key not in stripe_feilds %}
+                                    {% if (field.vars.block_prefixes.1 != 'hidden' and field.vars.required == false) %}
+
+                                        {{ form_label(attribute(form,key),key) }}
+                                        {% if villumi %}
+                                            {% if key not in iButton %}
+                                                {% set transValue = 'wixmp_' ~ key %}
+                                                <i class="fa fa-info-circle" title="{{ transValue|trans }}" aria-hidden="true"></i>
+                                                
+                                            {% endif %}
+                                        {% endif %}
+
+                                    {% elseif field.vars.block_prefixes.1 != 'hidden' %}
+
+                                        {{ form_label(attribute(form,key),key, {'label_attr': {'class': 'wk-required'}}) }}
+
+                                    {% endif %}
+                                    {% if key == 'auto_pay_order_status' %}
+                                        {# <label class="" for="{{ field.vars.id }}">{{'auto_pay_order_status'|trans }}</label> #}
+                                        <select id="{{ field.vars.id }}" name="{{ field.vars.full_name }}" class="form-control">
+                                            {% for choice_options in field.vars.choices %}
+                                                <option value="{{ choice_options.value }}" {% if field.vars.value == choice_options.value  %} selected="selected" {% endif %}>{{ choice_options.value|trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% elseif ( key == 'stripe_auto_pay_order_status') %}
+                                        {# <div class="form-group" {% if key == "stripe_auto_pay_order_status" %} id = "{{ key }}" {% endif %}> #}
+                                            {% if key == 'stripe_auto_pay_order_status' %}
+                                                {# <label class="" for="{{ field.vars.id }}">{{'stripe_auto_pay_order_status'|trans }}</label> #}
+                                                <select id="{{ field.vars.id }}" name="{{ field.vars.full_name }}" class="form-control">
+                                                    {% for choice_options in field.vars.choices %}
+                                                        <option value="{{ choice_options.value }}" {% if field.vars.value == choice_options.value  %} selected="selected" {% endif %}>{{ choice_options.value|trans }}</option>
+                                                    {% endfor %}
+                                                </select> 
+                                            {% endif %}
+                                        {# </div> #}
+                                    {% else %}
+                                        {% if key == 'product_discount' %}
+                                            <div class="form-check">
+                                                <input type="checkbox" id="custom_form_product_discount" name="custom_form[product_discount]" class="form-check-input" {% if field.vars.attr.checked is defined %} checked="checked" {% endif %} value="1">
+                                                <label class="form-check-label" for="custom_form_product_discount"> {{ 'product_discount'|trans}}</label>
+                                            </div>
+                                        {% elseif key == 'products_identifier_enable_product' %}
+                                            <div class="form-check">
+                                                <input type="checkbox" id="custom_form_products_identifier_enable_product" name="custom_form[products_identifier_enable_product]" class="form-check-input" {% if field.vars.attr.checked is defined %} checked="checked" {% endif %} value="1">
+                                                <label class="form-check-label" for="custom_form_products_identifier_enable_product">Products identifier enable product</label>
+                                            </div>
+                                        {% elseif key == 'enable_google_captcha' %}
+                                            <div class="form-check">
+                                                <input type="checkbox" id="custom_form_enable_google_captcha" name="custom_form[enable_google_captcha]" class="form-check-input" {% if field.vars.attr.checked is defined %} checked="checked" {% endif %} value="1">
+                                                <label class="form-check-label" for="custom_form_enable_google_captcha"> {{ key|trans }} </label>
+                                            </div>
+                                        {% else %}
+                                            {{ form_widget(attribute(form,key),{required:false,value:field.vars.value,'attr':{'class':''}}) }}
+                                        {% endif %}
+                                    {% endif %}                                
+                                    {% set continue = true %}
+                                {% endif %}
+
+                                </div>
+                            {% elseif key == 'seller_allowed_categories' %}
+                                {% set categoryTree = getWixCategoryTree(true) %}
+                                <div class="form-group wk-product-manage-category-tree">
+                                    {{ form_label(attribute(form,key),'seller_allowed_collections') }}
+                                    <div>
+                                        <div class="wk-category-tree-view">
+                                            {% include app_path_prefix ~ '/view_templates/catalog/components/_category_list_tree_checkbox.html.twig' with {
+                                                app_path_prefix : app_path_prefix,
+                                                controller_prefix: 'wixmp_setting_',
+                                                categoryTree: categoryTree,
+                                                level: 0,
+                                                selected: field.vars.value,
+                                                hide_status: true,
+                                                fieldName: 'custom_form[seller_allowed_categories][]',
+                                                required: false
+                                            } %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {# {% if key == 'seller_allowed_customer_details' and company.storeHash == 'u3oz6f4oa0' %} #}
+                            {% if key == 'seller_allowed_customer_details' %}
+                                {% if (plan_application_data['seller_allowed_customer_details'] is defined and plan_application_data['seller_allowed_customer_details'] is not empty and plan_application_data['seller_allowed_customer_details']=='1') or (company.storeHash == 'u3oz6f4oa0') %}
+                                <div class="form-group wk-product-manage-category-tree">
+                                    {% set customerDetailTree = getCustomerDetailTree(true) %}
+                                    {{ form_label(attribute(form,key),key) }}
+                                    <div>
+                                        <div class="wk-category-tree-view">
+                                            {% include app_path_prefix ~ '/view_templates/catalog/components/_customer_details_checkbox.html.twig' with {
+                                                app_path_prefix : app_path_prefix,
+                                                controller_prefix: 'wixmp_setting_',
+                                                customerDetailTree: customerDetailTree,
+                                                level: 0,
+                                                selected: field.vars.value,
+                                                hide_status: true,
+                                                fieldName: 'custom_form[seller_allowed_customer_details][]',
+                                                customerDetails : '',
+                                                required: false
+                                            } %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endif %}
+
+                            {# add extra note  #}
+                            {% if key == 'auto_pay_order_status' %}
+                                <div class="form-note">
+                                    <div class="form-group">
+                                        <label class="form-control-label">{{ 'paypal_webhook_url'|trans }}</label>
+                                        <p><i>{{ url('payment_authentication_paypal_payout_webhook',{'id':companyApplication.id}) }}</i></p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                        
+                    {% endfor %}
+                           {% if title == 'settings_domain' %}
+                                {{ 'wixmp_domain_cname_text'|trans|raw }}
+                            {% else %}            
+                            {% endif %}
+                </div>
+                {% if title == 'setting_email' %}
+                    {{ 'save_setting_before_send_test_mail' |trans }}
+                {% endif %}
+                <div class="tile-footer">
+                    <button class="btn btn-primary" type="submit">{{ 'save'|trans }}</button>
+                    {% if title == 'setting_email' %}                    
+                        <a href ="{{ path('wixmp_setting_email', {'storeHash': company.storeHash,'testmail':'testmail'}) }}" class="btn btn-primary"  id="test_email">
+                            {{ 'test_email' |trans }}
+                        </a>
+                    {% endif %}            
+                </div>
+                {{ form_widget(form._token) }}
+            {{ form_end(form, {'render_rest': false}) }}
+        {% endif %}
+        </div>
+    </div>
+</div>

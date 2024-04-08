@@ -1,0 +1,6 @@
+wixsellercr_index:
+    resource: '@WixmpBundle/SubApplications/WixSellerCR/Controller/AdminController/'
+    type: annotation
+    prefix: '/{_locale}/{platform}/app/wixmp/{storeHash}/subapplications/{app_code}'
+    requirements: { _locale: '%app_locales%', platform: wix, app_code: wixsellercr, area: admin }
+    defaults: { _locale: '%app_locales%', platform: wix, app_code: wixsellercr, area: admin }

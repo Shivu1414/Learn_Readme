@@ -1,0 +1,967 @@
+admin_dashboard: Dashboard
+orders: Orders
+products: Products
+product: Product
+message.seller.make_seller_active: You Cannot update inactive seller
+users: Users
+seller_admin: Seller Admin
+seller: Seller
+grape_varity: Grape Variety
+bottle_size: Bottle Size
+accounting: Accounting
+my_company: My Company
+company_profile: Company Profile
+price_vellum: Pricing
+region: Region
+extradetails: Extra Details!!
+classification: Classification
+appelation: Appelation
+awards: Awards
+condition1: How was the wine stored ?
+condition2: Filling level of the bottle ?
+condition3: What is the condition of the bottle ?
+condition4: Source of supply ? 
+company_setting: Company Setting
+sales: Sales
+producer: Producer
+commission: Commission
+order_id: Order ID
+total: Total
+image: Image
+sku: SKU
+store_order_id: Store Order Id
+sync: Sync
+customer_name: Customer Name
+seller_status: Seller Status
+pending: Pending
+shipped: Shipped
+partial_shipped: Partial Shipped
+refunded: Refunded
+cancelled: Cancelled
+declined: Declined
+awaiting_pickup: Awaiting Pickup
+awaiting_shipment: Awaiting Shipment
+completed: Completed
+awaiting_fullfillment: Awaiting fulfillment
+manual_verification_required: Manual Verification Required
+disputed: Disputed
+partial_refunded: Partial Refunded
+order_details: Order Details
+billing_details: Billing Details
+shipping_address: Shipping Address
+platform_order_id: Platform Order ID
+shipping: Shipping
+quantity: Quantity
+payout: Payout
+subtotal: Subtotal
+categories: Categories
+manage_page: Manage Page
+categories_manage_page: Categories Manage
+parent: Parent
+product_manage_page: Product Manage
+product_image: Product Image
+delete: Delete
+block: Block
+under_review: Under Review
+details: Details
+images: Images
+inventory: Inventory
+custom_fields: Custom Fields
+extra_details: Extra Details
+summary: Summary
+Name: Name
+phone2: Phone2
+seller_company_name: Seller Company Name
+tax_class_id: Tax Class Id
+avalara_product_tax_code: Avalara Product Tax Code
+product_tax_code: Tax Provider Tax Code
+product_type: Product Type
+physical: Physical
+digital: Digital
+downloadable_product: Downloadable Product
+product_weight: Weight
+product_width: Width
+product_height: Height
+product_depth: Depth
+product_code: Product Code/SKU
+shipping_free: Free Shipping
+free_shiipping_available_text: Free Shipping
+fixed_cost_shipping_price: Fixed Cost Shipping Price
+desciption: Description
+product_description: Product Description
+availability: Availability
+available: Available
+preorder: Preorder
+preorder_relase_date: Preorder Release Date
+preorder_message: Preorder Message
+is_preorder_only: Is Preorder Only
+remove_preorder_status_on_this_date: Remove Preorder Status On This Date
+inventory_tracking: Inventory Tracking
+do_not_track_inventory: Do Not Track Inventory
+track_inventory_with_option: Track Inventory With Option
+track_inventory: Track Inventory
+product_inventory_level: Product Inventory Level
+product_inventory_warning_level: Product Inventory Warning Level
+value: Value
+no_records_found: No Records Found
+product_identifier: Product Identifier
+Brand iBrandd: ID
+choose_an_existing_brand: Choose An Existing Brand
+Sagaform: Sagaform
+product_upc: Product UPC
+other_details: Other Details
+bin_picking_number: Bin Picking Number
+product_warrenty: Product Warranty
+product_layout_file: Product Layout File
+required: Required
+product_search_keyword: Product Search Keyword
+product_availablity_description: Availability
+visible: Visible
+product_is_visible_on_site: Product Is Visible On Site
+featured_product: Featured Product
+is_this_featured_product: Is This Featured Product
+product_sort_order: Product Sort Order
+product_condition: Product Condition
+New: New
+Used: Used
+Refurbished: Refurbished
+is_condition_shown: Is Condition Shown
+show_condition_at_product_page: Show condition on product
+product_order_minimum_quantity: Product Order Minimum Quantity
+product_order_maximum_quantity: Product Order Maximum Quantity
+product_image_file: Product Image File
+or: Or
+product_image_url: Product Image URL
+add_image: Add Image
+is_root: Is Root
+yes: Yes
+no: No
+update_seller_adminstrator: Update Seller Adminstrator
+profile_info: Profile Info
+first_name: First Name
+last_name: Last Name
+customer_company: Customer Company
+store_credit: Store Credit
+ip: IP
+view: View
+customer_details: Customer Details
+notes: Notes
+updateAt: Updated At
+createdAt: Created At
+update_plan: Update Plan
+general_info: General Info
+contact_info: Address Info
+year: Year
+best_choice: Best Choice
+buy_now: Buy Now
+current_plan: Current Plan
+expire_on: Expire On
+condition: Condition
+free: Free
+max_email: Max Email
+max_product: Max Product
+create_payout: Create Payout
+id: ID
+max_price: Max Price
+min_price: Min Price
+commission_value_type: Commission Value Type
+type: Type
+reference: Reference
+transaction_amount: Transaction Amount
+order_placement: Order Placement
+of: Of
+amount: Amount
+comment: Comment
+create: Create
+close: Close
+total_sale: Total Sale
+total_commission: Total Commission
+total_payout: Total Payout
+total_withdraw: Total Withdraw
+balance: Balance
+setting_seller: Seller Setting
+setting_header_products: Product Setting
+auto_approve_product: Product Auto Approval
+wysiwyg: WYSIWYG
+plain: Plain
+tinymce: Tinymce
+setting_email: Setting Email
+plan_upgrade_list: Plans
+buy: Buy
+company_settings: Company Settings
+message.product.sync.success_%s_result%__skip_%sk_result%: Store Product synced successfully. Success- s_result & Skipped- sk_result
+# Vendor Page
+seller_dashboard: Dashboard
+create_withdraw: Create Withdraw
+approved: Approved
+withdraw: Withdraw
+msg.forgot.password.updated: Your password is reset successfully. Please check your mail.
+sorry_seller_cannot_add_more_products: Product limit quota exhausted!
+message.product.update.updated_successfully: Data updated successfully
+message.product.image.updated_successfully: Image updated successfully
+message.common.record_updated_successfully: Data updated successfully
+message.product.image.deleted_successfully: Image Deleted successfully !!
+message.product.image.image_upload_manadatory: Image upload is manadatory
+update_seller: Update Seller
+message.common.plan_assigned_successfully: Plan assigned successfully
+message.common.record_created_successfully: Data Created successfully
+message.common.seller_setting_updated_successfully: Seller Settings updated Successfully
+
+message.common.domain_not_valid: Domain is not valid. Please check your domain and create CNAME first
+message.common.domain_not_exist: Domain is not exist. Please enter a valid domain
+message.common.testmail_sent: Test mail sent successfully
+message.common.testmail_not_sent: Test mail not sent 
+message.common.required_fields: Please fill required fields
+
+message.order.store_not_having_any_new_order_to_import: Store do not have any new order to import
+seller_control: Seller Control
+sorry_cannot_add_more_products: Product add limit reached
+manage_seller_companies: Seller Companies
+seller_settings: Seller Settings
+seller_plans: Seller Plans
+email_conf: Email Configuration
+message.email_Sent_Success: Email Sent SuccessFully
+message.email_not_sent: Email Not Sent
+max_products: Maximum Products
+max_sellers: Maximum Sellers
+message.seller_register.profile_is_under_review_update_soon_with_mail: Profile is under review. You will be updated soon with email confimation
+message.common.unable_to_change_status: Unable to change status
+message.seller.assign.assigned_successfully: Seller assigned successfully
+register_here: Register Here
+login_here: Login Here
+seller_registration_url: Seller Registation URL
+seller_login_url: Seller Login URL
+settings_setup: Setup Instructions
+add_seller_login_and_register_link: Seller Login and Registration Form on the Hompage
+add_seller_profile_page: Add Seller List/Profile Page
+create_plan: Create Plan
+sync_successfully: Data synchronized successfully
+message.product.add.please_choose_a_category: Please Sync Collections first.
+seller_account_registartion: Seller Registration
+a_new_seller_account_required_action: A new seller registered successfully, Please review his profile & take action accordingly
+thanks_for_contacting_us_your_applciation_is_under_review_we_will_review_and_send_respose_accordiongly: Thanks for contacting us. Your profile is under review by admin.
+profile_updated_successfully: Profile updated successfully
+your_seller_profile_updated_successfully: Seller profile updated successfully
+SELLER_APPLICATION_INFORMATION: SELLER APPLICATION INFORMATION
+status_update: Status update
+withdraw_request_created: Withdraw request created
+a_new_withdraw_request_created_check_details_below: A Withdraw request created by seller, Please review details
+message.common.unable_to_create_record: Unable to create record
+a_new_order_has_been_placed: A new order has been placed
+date: Date
+payout_created_successfully: Payout created successfully
+request_type: Request type
+payout_status_change: Payout status changed Successfully
+payout_status_updated_please_check_details: Payout status changed successfully, please check details below
+seller_plan_changed_successfully: Seller plan changed successfully
+product_add_page: Product Add
+message.common.user_not_exist: User does not exist
+message.common.password_reset_successfully: Password reset successfully
+message.common.password_reset_mail_sent: A new email has been generated and sent to your email
+message.common.username_is_manadatory: Username is manadatory
+message.seller_register.plan_not_found: Plan is manadatory
+message.seller_register.unauthorized_access: Unauthorized access
+message.seller_register.under_review: Thank you for registering with us. Your Profile is under review. We'll notify you soon
+seller_add_quota_exceeded: Seller Add Quota Exceeded.
+seller_add_quota_exceeded_status_change: 'Status cannot be changed from new. Seller quota limit exceeded [maximum seller: max_seller]'
+sorry_cannot_add_more_sellers: Sorry cannot add more sellers. Seller quota limit exceeded.
+sorry_admin_cannot_add_more_products: Sorry cannot add more products. Contact store administrator for more information
+no_seller_company_cannot_add_seller_admin: Cannot add seller admin. No seller company exists.
+message.order.unable_to_import_order: Unable to import order
+message.wix.product.unable_to_import_product: Unable to import product
+message.order.order_imported_successfully: count Order(s) imported successfully.
+create_seller: Create Seller
+use_as_thumbnail: Use as Thumbnail
+make_default: Make default
+create_seller_adminstrator: Create Seller
+add_product_page: Add Product Page
+need_assistance_for_adding_code: Need asistance for code integration
+embed_page: Embed Page
+dashboard: Dashboard
+your_seller_account_updated_successfully: Seller account updated successfully.
+profile_created_successfully: Seller profile created successfully.
+your_profile_created_successfully: Seller profile created successfully
+assign_seller: Assign Seller
+assign_seller_to_product: Assign Seller To Product
+seller_company: Seller Company
+owner: Owner
+choose_plan: Choose Plan
+message.common.record_synced_successfully: Data updated successfully
+catalogue.product.options: Options
+product.options.manage.page: Products Options
+catalog.option.name: Option Name
+catalog.option.displayname: Display Name
+catalog.option.values: 'Values'
+catalog.option.optiontype: Option Type
+catalog.option.filename: File Name
+catalog.option.filesize: File Size
+catalog.option.downloads: Downloads
+catalog.option.maximum_downloads: Maximum Downloads
+catalog.option.disabled_after: Disabled After
+options.Swatch: Swatch
+options.Multiple.choice: Multiple Choice
+options.Date.field : Date Field
+options.checkbox : CheckBox
+options.Multi.line.text.field: Multi line text field
+options.File.upload.field:  File Upload Field
+options.number.only : Number Only
+options.Text.field : Text Field
+options.Product.Pick.List : Product Pick List
+products.options : Product Options
+product.options.optionset: Option Set
+none.option: None
+product.option.view.page: Product option
+sync_products: Sync products
+csv_import_product: CSV import product
+export_product: Export products
+product_info: Product information
+brand_id: Brand id
+preorder_release_date: Preorder release date
+inventory_level: Inventory level
+inventory_warning_level: Inventory warning level
+search_keywords: Search keywords
+availability_description: Availability description
+sort_order: Sort order
+order_quantity_minimum: Order quantity minimum
+order_quantity_maximum: Order quantity maximum
+is_featured: Is featured
+exported_successfully: Exported successfully
+Product Image File : Image
+Product Image URL : Image URL
+Product Order Maximum Quantity: Product Order Maximum Quantity
+Product Order Minimum Quantity : Product Order Minimum Quantity
+Product Condition : Product Condition
+Product Sort Order : Product Sort Order
+Availability : Availability
+Product Search Keyword : Product Search Keyword
+Product Warranty : Product Warranty
+Bin Picking Number : Bin Picking Number
+Product UPC : Product UPC
+Common Good : Common Good
+OFS : OFS
+brand : Brand
+sku.delete : Delete
+sku.copy : Copy
+sku.edit : Edit
+product.sku.variant: 'Variant'
+product.option.image_file : Image
+product.option.price : Price
+product.option.cost_price : Cost Price
+product.option.ean : UPC/EAN
+product.option.sku: SKU
+product.sku.purchasable: 'Purchasable'
+product.sku.action : Action
+product.sku.default_price : Default Price
+product.sku.sales_price : Sale Price
+product.sku.cost : Cost
+product.sku.bpn : BPN
+product.sku.mpn : MPN
+product.sku.upc : UPC
+product.sku.sku_text : SKU
+product.sku.msrp: 'MSRP'
+product.sku.image : Image
+product.sku.stock: 'Stock'
+product.sku.low_stock: 'Low Stock'
+Product Inventory Warning Level : Product Inventory Warning Level
+Product Inventory Level : Product Inventory Level
+Preorder release date : Preorder release date
+Preorder Message : Preorder Message
+Product Description : Product Description
+Fixed Cost Shipping Price : Fixed Cost Shipping Price
+Product Code/SKU : Product Code/SKU
+default_tax_class : Default Tax Class
+product.option.options_for_this_sku : Options for this SKU
+setting_header_products_identifier: Product Identifier
+products_identifier_position: Position
+products_identifier_position_value: Value
+products_identifier_position_value_for_custom: Custom Value
+products_identifier_joiner_value: Identifier Joiner
+products_identifier_enable_product: Enable For Product
+products_identifier_enable_sku: Enable for SKU
+prefix: Prefix
+sufix: Sufix
+seller_id: Seller Id
+seller_name: Seller Name
+custom: Custom
+Product show seller field enable: Show Seller
+Product location field enable: Show Location
+sku_identifier_position: Position
+sku_identifier_position_value: Value
+sku_identifier_position_value_for_custom: Custom Value
+sku_identifier_joiner_value: Identifier Joiner
+sku_identifier_enable_sku: Enable for SKU
+setting_header_sku_identifier: SKU Identifier
+registration: 'Registration'
+days: 'Day(s)'
+unlimited: 'Unlimited'
+plan_title: 'Plan Title'
+plan_code_hint: 'Atleast 3 chracters, Can only contain a-z,0-9'
+label.username.email: 'Username or Email'
+forgot_username: 'Forgot Username'
+message.common.forgot_username_details_send_successfully: "User details sent on your register email"
+shipment: 'Shipment'
+shipment_id: 'Shipment Id'
+payment_shipping_details: 'Payment/Shipment Details'
+create_shipment: 'Create Shipment'
+product_details: 'Product Details'
+Tax: 'Tax'
+ship_items: 'Ship Items'
+qty: 'Quantity'
+qty_left_to_ship: 'Quantity left to ship'
+qty_to_ship: 'Quantity to ship'
+packing_slip_notes: 'Packaging Slip Notes'
+customer_paid: 'Customer paid'
+for_shipping: ' for Shipping'
+how_would_you_like_to_ship: 'How would you like to ship'
+other: 'Other'
+auspost: 'Auspost'
+canadapost: 'Canada Post'
+endicia: 'Endica'
+usps: 'USPS'
+fedex: 'FedEx'
+royalmail: 'Royal Mail'
+ups: 'UPS'
+upsready: 'UPS Ready'
+upsonline: 'UPS Online'
+shipperhq: 'ShipperHQ'
+other_carrier_tracking_option: 'Other carrier'
+tracking_number: 'Tracking Number'
+shipping_method: 'Shipping Method Description'
+package.weight: 'Package Weight'
+package.dimension: 'Package Dimension'
+package.already_shipped: 'Shipped'
+shipment_width: 'W'
+shipment_height: 'H'
+shipment_depth: 'D'
+no_shippable_product: 'No product found to ship'
+manage_order_shipments: 'Manage Shipments'
+shipment_details: 'Shipment Details'
+product.basic_info: 'Basic Information'
+product.add_image: 'Add Images'
+drag_drop_files: 'Drag & Drop image file here'
+modal_close_text: 'Close'
+clear_images: 'Clear'
+browse_files: 'Browse Images'
+add_image_by_url: 'Add'
+pimage_url_label: 'Image URL'
+product.add_custom_field: 'Add Custom Fields'
+customfield_error_msg: 'Custom fields value are not valid'
+delete_item: 'Delete this item!'
+are_you_sure: "Are you sure?"
+cancel_btn: 'Cancel'
+ok_btn: 'Ok'
+product_image_modal_title: 'Product Image Upload'
+configure_options: 'Configure Options'
+product_option_modal_title: 'Configure Product Options'
+product.add_options_btn: 'Add Options'
+product.option_type_radio_buttons: 'Radio'
+product.option_type_rectangles: 'Rectangless'
+product.option_type_swatch: 'Swatch'
+product.option_type_dropdown: 'Dropdown'
+product.add_option: 'Add Option'
+product.option_name: 'Name'
+product.delete_option: 'Delete Option'
+product.option_type: 'Type'
+product.option_values: 'Values'
+product.add_option_value: 'Add Value'
+product.default_text: 'Default'
+product.option_one_color: 'One Color'
+product.option_two_color: 'Two Color'
+product.option_three_color: 'Three Color'
+product.option_pattern: 'Pattern'
+unique_value_required: 'There is an existing option with the display name'
+required_field: 'This field is required'
+fullordering_order_by: 'Sort By'
+sort_table_by: '--sort by--'
+id_asc: 'Id Ascending'
+id_desc: 'Id Descending'
+name_asc: 'Name Ascending'
+name_desc: 'Name Descending'
+status_asc: 'Status Ascending'
+status_desc: 'Status Descending'
+transaction_start_date: 'Start Date'
+transaction_end_date: 'End Date'
+in_cache_exported_successfully: 'Exported Successfully, Data found in cache. If you want fresh export just change the file name before exporting'
+message.product.import.error.seller%pid: 'Csv product(pid) could not be imported due seller permissions'
+message.product.import.exists%pid: 'Csv product(pid) is skipped as it is already exists'
+message.product.import.updated%pid: 'Csv product(pid) updated successfully'
+message.product.import.created%pid: 'Csv product(pid) created successfully'
+message.product.import.failed%pid_%error_message: 'Csv product(pid) could not be imported due to - error_message'
+order.billto: 'Bill To'
+order.shipto: 'Ship To'
+your_profile_updated_successfully: 'Your seller profile updated successfully'
+label.export_only_current_page: 'Export only current page'
+label.batch_action_select: 'Batch Action'
+ajaxjobs.modal_title.disable_product: 'Disabling Seller Products'
+seller.disabled: 'Seller disabled successfully'
+cannot_delete_this_item_already_in_use_%seller_name: 'seller_name - Can not delete this seller is in use'
+cannot_delete_this_item_%seller_name: 'seller_name - Can not delete this seller'
+seller_not_exists: 'Not Exists'
+cannot_delete_product_already_in_use: 'product_name(product_id) - Cannot delete product this product has dependencies on other resources'
+cannot_delete_product: 'product_name(product_id) - Cannot delete product'
+message.product_delete_successfull: 'product_name(product_id) - delete successfully'
+
+shipment_to: 'Shipped To'
+date_shipping: 'Date Shipped'
+tracking_no: 'Tracking Number'
+order_date: 'Order Date'
+view_details: 'View'
+seller_allowed_categories: 'Sellers Allowed Categories'
+product_image_required: 'Product Image is Mandatory'
+Product image required: 'Product Image is Mandatory'
+required_image_error_msg: 'Product image can not be empty'
+product_image_import_note: 'Note: Product images may not get imported along with product if not exists on source'
+hello: 'Hello'
+batch_assign_seller: 'Batch Assign Seller'
+assign: 'Assign'
+message.product.seller_assign.success_%s_result%__skip_%sk_result%: Seller assigned result. Success- s_result & Skipped- sk_result
+view_on_bigcommerce_store: 'View on Store'
+order_status: 'Order Status'
+avg_daily_sales: 'Avg. Daily Sale'
+message.common.domain_setting_cannot_blank: Domain cannot be blank
+avg_monthly_sales: 'Avg. Monthly Sale'
+total_shipping: 'Total Shipping'
+total_tax: 'Total Tax'
+order_count: 'Orders'
+no_seller_orders: 'No Seller'
+commission_update: Categories Updated Successfully!!
+SELLER_REPORT_SUMMARY: 'Sales Report by seller'
+TOP_PRODUCTS_CHART: 'Top Products Chart'
+clear_store_data: 'Clear Store Data'
+clear_mp_store: 'Clear'
+top_sold_seller_products: Top sold products
+no_top_products: 'No product found'
+view_all_seller_products: 'View all Products'
+tax_included: 'Tax Included in Total '
+enable_clear_btn: 'Enable This Action'
+available_on: 'Available On'
+edit_product: 'Edit Product'
+message.product.future_publish_schedule_message: 'This product is set to publish on future date, First Remove future date to publish immediately'
+message.product.publish_to_disable_message: 'This product is set to publish on future date, Mark as disabled for now.'
+message.product.status_ignored_future_date_set%product_id%: 'Product with id product_id is skipped please remove available on first'
+message.product.status_forced_future_date_set%product_id%: 'Product with id product_id has future published date, disabled for now'
+mp_order_status_updated: 'Order status has been changed'
+message.product.update.required_fields_missing_%fields%: 'Missing required data - fields'
+setting_header_layout: 'Layout Settings'
+seller_card_layout: 'Seller Card Contain'
+logo: 'Seller Logo'
+workingHours: 'Working Hours Description'
+profileDescription: 'Profile Description'
+profile_settings: 'Profile Settings'
+profile_gallery_labe: 'Profile Gallery(upto 5 images)'
+# seller commission
+seller_commission: 'Seller Commission'
+manage_seller_commission: 'Manage Seller Commission'
+balance_not_sufficient: 'Balance not sufficient'
+last_paid: 'Last Paid Amt'
+last_paid_date: 'Last paid on'
+complete: 'Complete'
+with_balance: 'Having Balance'
+pay_title: 'Pay'
+pay_btn: 'Pay Now'
+message.seller.payout_email_not_set: 'Seller(seller_id) not set email for PayPal payout'
+message.seller.payout_invalid_amount_or_payout_ids: 'Invalid amount/payouts for Seller(seller_id)'
+enable_auto_pay: Enable Auto Payment to Seller
+auto_pay_order_status: Order status for Auto Payment to Seller
+message.payout.create_fail: 'Payout Transaction create fail'
+message.payout.empty_credentials: 'Empty Payout credentials'
+message.payout.no_payment_method: 'No payment method found for transaction'
+message.seller.payout_success: 'Payout Success with BatchId: batch_id and Status: status'
+payment_initiated: 'Payment Initiated'
+payment_abort: 'Payment Cancel'
+paypal_webhook_url: Webhook URL - Need to set in your PayPal Payout Application
+payout_transactions: 'Payout Transactions'
+batch_id: Batch Id
+message.payout.sync_success: 'Sync successfully'
+total_approved_sale: 'Total Approved Sale'
+shipping_details: 'Shipping Details'
+phone: Phone
+order: Order
+ship_method: 'Shipping Method'
+shipped_items: 'Shipped Items'
+short_qty: Qty
+product_name: Product Name
+order_not_found: Order Not Found
+unable_to_print_slip: 'Unable to print slip'
+packaging_slip_for_shipment: 'Packing Slip for Shipment #'
+comments: 'Comments'
+print: 'Print'
+profile_logo: 'Profile Logo'
+showTopSoldProducts: 'Show top sold products'
+showSellerProducts: 'Show seller products'
+showWorkingHours: 'Show working hours'
+showProfileDescription: 'Show profile description'
+showProfileGallery: 'Show profile gallery'
+paypalPayoutEmail: 'Paypal payout email'
+shipments: 'Shipments'
+latest_orders: 'Latest Orders'
+latest_customers: 'Latest Customers'
+latest_products: 'Latest Products'
+test_email: 'Test Mail'
+save_setting_before_send_test_mail: 'Note: Kindly save the settings before sending the test mail.'
+seller_allowed_customer_details: 'Customer Details Visible to Sellers'
+custom_information: 'Custom Information'
+message.product.copied_success: 'Product Copied Successfully !!'
+add_youtube_video: 'Add Youtube Video From URL'
+only_youtube_url: 'Only Youtube URL'
+product.add_video: 'Add Video'
+video_url_label: 'Video URL'
+enter_valid_url: 'Please Enter Valid URL'
+message.product.video.deleted_successfully: 'Product Video Deleted Successfully !!'
+videos: 'Videos'
+country_of_origin: 'Country of origin'
+commodity_description: 'Commodity Description'
+destination_country: 'Destination Country'
+hs_code: 'HS Code'
+product.add_hs_code: 'Add HS Code'
+cutomer_detail_visible_to_seller: 'Customer Details visible to seller'
+message.product.added_success: 'Product Added Successfully !!'
+seller_type: 'Seller Type'
+product.tax: 'Tax'
+commission_type: 'Commission Type'
+commission_per_product: 'Commission Per Product'
+commission_rate: 'Commission Rate'
+discount: 'Discount'
+manage_documents: 'Manage Documents'
+documents: 'Documents'
+document: 'Document'
+document_name: 'Document Name'
+seller_document_update: 'Seller Document Update'
+questions_answers: 'Questions / Answers'
+answer_type: 'Answer Type'
+options_comma_separated: 'Options (Comma Separated)'
+seller_question_update: 'Seller Question Update'
+manage_questions: 'Manage Questions'
+skip: 'Skip'
+bulk_pricing: 'Bulk Pricing'
+discount_type: 'Discount Type'
+product.add_tier: 'Add Tier'
+showAboutUs: 'Show About Us Page'
+aboutUs: 'About Us'
+showHub: 'Show Hub Page'
+hub: 'Hub'
+showShippingLogistic: 'Show Shipping & Logistic Page'
+shippingLogistic: 'Shippping & Logistic'
+seller_reviews: 'Seller Reviews'
+manage_reviews: 'Manage Reviews'
+review: 'Review'
+seller_review_update: 'Seller Review Update'
+rating: 'Rating'
+publish: 'Published'
+unpublish: 'Un-Published'
+evidence: 'Evidence'
+shown_on_seller_profile: 'Show on Seller Profile'
+doc_skip_email_send_days: 'Seller document Skip email send days'
+upload_docs: 'Upload Documents'
+register: 'Register'
+reviewer: 'Reviewer Name'
+isRequired: 'Required'
+showSellerReview: 'Show Seller Review'
+showDocuments: 'Show Documents'
+include_incomplete : 'Include Incomplete Orders'
+message.order_update_successfully : 'Order Updated Successfully'
+message.payout_update_successfully: 'Payout Updated Successfully'
+store_order: 'Store Order'
+view_on_bc: 'View On Bigcommerce'
+download_packaging_slip: 'Download Packaging Slip'
+message.seller_register.seller_exist: 'Seller with this email is already exist.'
+print_packaging_slip: 'Print Packaging Slip'
+showWhyChooseUs: 'Show Why Choose Us'
+whyChooseUs: 'Why Choose Us'
+showSellerStory: 'Show Seller Story'
+sellerStory: 'Seller Story'
+showPhotosVideosNews&blogs : 'Show Photos, Videos, News & Blogs'
+PhotosVideosNews&blogs: 'Photos, Videos, News & Blogs'
+showShipping&Returns: 'Show Shipping & Returns'
+Shipping&Returns: 'Shipping & Returns'
+showReviews&Recognition: 'Show Reviews & Recognition'
+showBusinessLicences&certifications: 'Show Business Licences & Certifications'
+print_packing_slip: 'Print Packing Slip'
+showProductReviews: 'Show Product Reviews'
+reviews&Recoginition: 'Reviews & Recoginition'
+showAwardsRecoginition: 'Show Awards & Recognition'
+awardsRecoginition: 'Awards & Recognition'
+businessLicences&certifications: 'Business, Licences & Certifications'
+showTestimonial: Show Testimonial
+testimonial: Testimonial
+banner: Banner Image
+max_order_id: Max Store Order Id
+min_order_id: Min Store Order Id
+
+prev: Prev
+next: Next
+questions_answers_review: Question/Answer Preview
+send_email_to_seller_manually: 'Send Order Email to Seller Manually'
+bulk_discount: Bulk Discount
+send_mail: Send Mail
+message.common.mail_sent_successfully: Mail sent successfully
+founder_pic: 'Founder Picture'
+seller_document_download: Seller Document Download
+document_download: Document Download
+select_item_for_download_packing_slip: Select at least one row to download packing slip
+select_item_for_send_bulk_mail: Select at least one row to send bulk mail
+select_item_for_download_document: Select at least one row to download document
+term_condition: "Terms & Conditions"
+message.seller_register.term_condition_mandatory: "Please accept the Term & Conditions"
+platform_order_no: "Platform Order No."
+total_records: "Total Records:"
+view_on_wix_store: "View on Store"
+select_seller: "Select Seller"
+fullfillment_status: "Fulfillment Status"
+trackInventory: Track Inventory
+inStock: In Stock
+settings_support: Support
+dev_info: Developer Info
+app_review: App Review
+leave_review: Leave us a review in the App Market
+review_us: Review us
+enjoying_app: Enjoying our App ?
+need_help: Need Help ?
+contact: Contact
+for_contact: For Contact
+latest_sellers: Latest Sellers
+select_interval: Select Interval
+select_status: Select Status
+payment_cancel: Payment Cancel
+collections: Categories
+collections_manage_page: Categories Manage
+seller_allowed_collections: Seller Allowed Categories
+allowed_collections: Allowed Categories
+sales_price: Sales Price
+fixed: Fixed
+confirmPassword: Confirm Password
+message.seller_register.invalid_captcha: Invalid Captcha
+message.wix.product.unable_to_import_collections: Unable to Import Collections
+total_collections: Total Categories
+message.collection.sync.success_%s_result%__skip_%sk_result%: Store Collections synced successfully. Success- s_result & Skipped- sk_result
+wix.allowed.product.reached: Maximum number of allowed Products reached, Please upgrade your plan to add or import more Products.
+message.common.domain_setting_updated_successfully: Domain Setting updated successfully.
+you_can_not_turnoff_toggle: You cannot turn "Off" the toggle button once marked "On".
+turn_on_toggle: Turn On Toggle If Fullfilled
+seller_order_fullfillment_status: Seller Order Fulfillment Status
+created_start_date:  Created Date From
+created_end_date: Creted Date To
+select_img: Select Image File
+action: Actionn
+wixmp_setup_note: 'Note:'
+wixmp_setup_note_desc: Kindly use above steps for adding both the links
+wixmp_setup_quickacess: "Goto <b>'Quick Access' -> 'Edit Site'</b>"
+wixmp_setup_openmenu: "Open <b>'Menu & Pages'</b> from Side Menu" 
+wixmp_setup_sitemenu: "Click on the <b>'Site Menu'</b> under the <b>'Site Pages'</b>" 
+wixmp_setup_addlink: "Click on the <b>'Add a Link'</b> Button"
+wixmp_setup_web_address: "Now add <b>'Web Address'</b>, then select <b>'New Window'</b> type" 
+wixmp_setup_publish: "In the last step click on the <b>'Publish'</b> button" 
+wixmp_app_review: App Review
+setting_general: General Settings
+wixmp_test_mail: Hi This is a test mail from
+deleted_successfully: Deleted Successfully
+wixmp_js_not_working_error: JS is not working properly on site
+warning_company_name_required: Company name is required
+warning_company_atmost40: Company name must have atmost 40 characters
+warning_company_atleast3: Company name must have atleast 3 characters
+warning_email_required: Email is required
+warning_enter_valid_email: Please enter a valid email
+warning_phone_required: Phone number is required
+warning_phone_invalid: Please enter a valid phone number
+warning_phone_atleast8: Phone number must have atleast 8 digits
+warning_phone_atmost15: Phone number must have atmost 15 digits
+warning_address_required: Address is required
+warning_city_required: City is required
+warning_state_required: State is required
+warning_zip_required : Zipcode is required
+warning_zip_invalid : Please enter a valid zipcode
+warning_zip_atleast4 : Zipcode must have atleast 4 digits
+warning_zip_atmost8 : Zipcode must have atmost 8 digits
+message.common.product_status_changed_successfully: Product Status Changed Successfully!!
+setting_header_google_captcha: Google ReCaptcha
+google_captcha_site_key: Google ReCaptcha Site Key
+google_captcha_secret_key: Google ReCaptcha Secret Key
+enable_google_captcha: Enable Google ReCaptcha
+fullfilled: Fullfilled
+message.can_not_perform_this_action: Can not Perform this action !
+contact_to_admin: Please Contact to Administrator!
+something_went_wrong_google_recaptcha_contact_to_admin: Something went wrong with Google ReCaptcha. Please contact to Administrator!
+or_refresh_the_page: OR Refresh the Page.
+archieve: Archive
+cannot_archieve_this_item_%seller_name: 'seller_name - Can not archive this seller.'
+manage_archieve_seller_companies: Archive Sellers
+manage_seller_archieve: Manage Seller Archive
+unarchieve: Unarchive
+sorry_cannot_unarchive_more_sellers: Can't unarchive more sellers. Seller quota limit exceeded.
+seller.archived: 'Seller Archived successfully'
+message.common.cant_edit_archived_seller: "Can't edit Archived Seller!"
+export_seller: "Export Seller"
+seller_info: "Seller Info"
+export: "Export"
+wix_seller_cr: Wix Seller Custom Registration
+wix_custom_field_create: Wix Custom Field Create
+wix_custom_field_update: Wix Custom Field Update
+message.order.already_exist: Order Already exist!
+message.order.store_not_having_this_order_to_sync: Store not having this order to sync!
+commission_per_category: "Commission Per Category"
+setting_header_commission: "Commission Setting"
+commission_per_order_product: "Commission Per Order / Product"
+commission_per_collection: "Commission Per Collection"
+category_comission_rate_type: "Category Commission Rate Type"
+category_commission_highest_rate: "Category Commission Highest Rate"
+category_commission_lowest_rate: "Category Commission Lowest Rate"
+highest_rate: "Highest Rate"
+commission_per_order: "Commission Per Order"
+stripePayoutEmail: 'Stripe payout email'
+setting_header_stripe_payout: 'Stripe Payout Setting'
+paypal: 'Paypal Setup'
+stripe: 'Stripe Setup'
+message.seller.stripe_payout_not_set: 'Seller(seller_id) not set Stripe payout account'
+stripe_payout_client_id: 'Stripe Client Id'
+stripe_payout_secret_key: 'Stripe Secret Key'
+stripe_payout_mode: 'Mode'
+stripe_enable_auto_pay: 'Enable Auto Payment to Seller (Stripe)'
+stripe_auto_pay_order_status: Order status for Auto Payment to Seller (Stripe)
+wixmp_storeid_comma_separated: Store Order Id ( comma separated )
+wixmp_archive_item_question: Archieve this Item!
+wixmp_domain_cname_text: '<b>Note: </b> Before adding domain kindly add cname'
+wixmp_userguide: User Guide
+wixmp_userguide_blog_setup: Blog User Guide
+wixmp_userguide_video_setup: Video User Guide
+lowest_rate: Lowest Rate
+message.you_not_allowed: You are not allowed to Perform this action
+inventory_status: Status
+in_stock: In Stock
+inventory_quantity_validation: Product Quantity should not be empty and not more than 99999
+bank_details: Bank Details
+payout_bank_details: Payout Bank Details
+bank_name: Bank Name
+bank_iban: IBAN
+awards_value: Awards value
+select_stored: Select how was the wine stored
+select_condition_of_the_bottle: Select condition of the bottle
+select_filling_level_of_the_bottle: Select filling level of the bottle
+source_of_supply: Select source of supply
+product_discount: Product Discount
+please_upload_images_of_your_wine_bottles_and_kindly_refer_to_the_provided_examples: 'Please upload images of your wine bottles, and kindly refer to the provided examples:'
+front_view: 'Front View:'
+back_view: 'Back View:'
+label_photo: 'Label photo:'
+bottle_neck_photo: 'Bottle neck photo:'
+bottle_cap_photo: 'Bottle cap photo:'
+additional_photo: 'Additional photo:'
+maximum_image_size: Maximum image size
+out_of_stock: Out of stock
+
+kitchen: Kitchen
+regular_basement: Regular Basement
+tempered_wine_cellar: Tempered Wine Cellar
+wine_cellar: Wine Cellar
+wine_fridge: Wine Fridge
+# other: Other
+
+high_fill: High fill
+into_neck: Into neck
+lower_mid-shoulder: Lower mid-shoulder
+mid_shoulder: Mid shoulder
+top_shoulder: Top shoulder
+
+damaged: Damaged
+perfect: Perfect
+severely_damaged: Severely Damaged
+slightly_damaged: Slightly Damaged
+slightly_scratched: Slightly Scratched
+very_good: Very Good
+
+wine_shop: Wine Shop
+directly_from_winery: Directly from Winery
+subscription: Subscription
+importer: Importer
+gift: Gift
+inherited: Inherited
+zipcode: Zip Code
+wix_wixmp_update_seller: Update Seller
+wix_wixmp_general_info: General Info
+wix_wixmp_total_shipping: Total Shipping
+wix_wixmp_total_tax: Total Tax
+wix_wixmp_csv_import_product: CSV import product
+wix_wixmp_product_info: Product information
+SKIP_EXISTING_PRODUCT: Skip existing product
+delimiter: Delimiter
+file: File
+fieldType: FieldType
+required_fields: Required Fields
+download_sample_csv: Download Sample csv
+select_bottle_size: Select Bottle Size
+select_grape_variety: Select grape variety
+select_country: Select country
+select_a_region: Select a region
+select_an_appellation: Select an appellation
+select_a_classification: Select a classification
+select_awards: Select awards
+select_awards_value: Select awards value
+confirm_to_process_batch_action: Confirm to process batch action
+alert.select_item_for_batch_action_title: No item selected
+alert.select_item_for_batch_action: Select atleast one row to perform batch action
+edit: Edit
+monthly: Monthly
+week: Week
+quarterly: Quarterly
+half-yearly: Half-yearly
+wix_wixmp_file_name: File Name
+wix_wixmp_output_type: Output type
+wix_wixmp_delimiter: Delimiter
+wix_wixmp_primary_fields: Primary Fields
+wix_wixmp_other_fields: Other Fields
+wix_wixmp_cannot_unarchive_item: Can't Unarchive this Item!
+wix_wixmp_unarchived_item: Unarchived this Item!
+wix_wixmp_Unpaid: Unpaid 
+wix_wixmp_Canceled: Canceled
+wix_wixmp_Paid: Paid
+wix_wixmp_Fulfilled: Fulfilled
+wix_wixmp_NA: NA
+wix_wixmp_Not_Paid: Not Paid
+wix_wixmp_Partially_Refunded: Partially Refunded
+wix_wixmp_Fully_Refunded: Fully Refunded
+wix_wixmp_Pending: Pending
+wix_wixmp_Partially_Paid: Partially Paid
+wix_wixmp_Unfulfilled: Unfulfilled
+wix_wixmp_Partially_Fulfilled: Partially Fulfilled
+wix_wixmp_code: Code
+wix_wixmp_send_payout_question: Are you Sure You Want To Send Payout
+wix_wixmp_stay_signed_in: Stay Signed in
+wix_wixmp_forgot_password: Forgot Password
+wix_wixmp_sign_in: Sign in
+wix_wixmp_reset: reset
+wix_wixmp_back_to_login: Back To Login
+wix_wixmp_email: Email
+wix_wixmp_registration_password_text: ( 8 characters  one uppercase letter, one lowercase letter, one number, and one special character (e.g., @$!%*?&))
+setting_header_paypal_payout: PayPal Payout Setting
+paypal_payout_client_id: Client Id
+paypal_payout_secret_key: Secret Key
+paypal_payout_mode: Mode
+wix_wixmp_intervalType: Interval
+wix_wixmp_intervalValue: Interval Value
+wix_wixmp_status_changed_successfully: Status Changed Successfully
+wix_wixmp_unable_to_change_status: Unable to change status
+wix_sellercr_description: Allow admin to create custom fields for seller registration
+custom_field: Custom Field
+custom_field_create: Add Custom Field
+wix_wixmp_common_note: Note
+wix_wixmp_sellercr_field_create_name: Do not create a field name same as the field already exist in registration form.
+wix_wixmp_field_name: Field name
+data_not_availble: No Data Available
+no_data_to_render_chart: No Data to Display Chart
+wix_wixmp_condition: Condition
+
+# New UI Trans
+wix_wixmp_back_to_old_version: Back to the old version
+wix_wixmp_new_update: New update
+wix_wixmp_we_are_providing_new_ui_ipdate: We are providing new UI update
+wix_wixmp_do_you_want_to_switch: Do you want to switch in UI?
+wix_wixmp_dont_show_again: Don't show again
+wix_wixmp_close: Close
+wix_wixmp_apply: Apply Update
+wix_wixmp_update_installed: Update installed
+wix_wixmp_update_failed: Update failed
+wix_wixmp_downgraded_old_version: Downgraded old version
+wix_wixmp_new_product: New Product
+wix_wixmp_new_seller: New Seller
+wix_wixmp_create_plan: Create Plan
+your_plan_has_expire_in: Your <span class="plan-name"> <b> %plan% </b> </span> plan has expired in
+plan_upgrade: Upgrade

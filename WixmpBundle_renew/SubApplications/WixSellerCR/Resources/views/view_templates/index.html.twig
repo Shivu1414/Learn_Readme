@@ -1,0 +1,140 @@
+{% extends 'application/index.html.twig' %}
+{% set subCompanyApplication = null %}
+{% set sub_app_code = null %}
+
+{% if companyApplication.application.parentApplication.code is defined and companyApplication.application.parentApplication.code is not empty %}
+    {% set app_code  = companyApplication.application.parentApplication.code %}
+    {# {% set subCompanyApplication = companyApplication %}
+    {% set companyApplication = companyApplication.parentCompanyApplication %} #}
+    {% set sub_app_code = companyApplication.application.code %}
+    {# {% set app = subApp.parentApplication %} #}
+{% endif %}
+{% set app_path_prefix = "wixsellercr" %}
+{% block head_stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('resource/Wix/WixmpBundle/assets/css/style.css') }}">
+{% endblock %}
+
+{% block head_script %}
+    {{ parent() }}
+    <script type="text/javascript">
+        window.wkMpTrans = {
+            'delete_item' : "{{ 'delete_item' | trans }}",
+            'are_you_sure': "{{ 'are_you_sure' | trans }}",
+            'cancel_btn'  : "{{ 'cancel_btn' | trans }}",
+            'ok_btn'      : "{{ 'ok_btn' | trans }}",
+            'name'        : "{{ 'name'|trans }}",
+            'value'       : "{{ 'value'|trans }}",
+            'customfield_error_msg': "{{ 'customfield_error_msg'|trans }}",
+            'unique_value_required' : "{{ 'unique_value_required'|trans }}",
+            'required_field' : "{{ 'required_field'|trans }}",
+            'ajaxjobsModalTitle': "{{ 'ajaxjobs.modal_title'|trans }}",
+            'modalClose': "{{ 'modal.close'|trans }}",
+            'ajaxjobsProcessingJobs': "{{ 'ajaxjobs.processing_jobs'|trans }}",
+            'messageText': "{{ 'message_text'|trans }}",
+            'cancelRunningJobs': "{{ 'ajaxjobs.cancel_running_jobs'|trans }}",
+            'select_item_for_batch_action_title': "{{ 'alert.select_item_for_batch_action_title'|trans }}",
+            'select_item_for_batch_action': "{{ 'alert.select_item_for_batch_action'|trans }}",
+            'confirm_batch_action': 'Confirm to process batch action - ',
+            'ajaxjobs_disable_products': "{{ 'ajaxjobs.modal_title.disable_product'|trans }}",
+            'seller_disabled_successfully': "{{ 'seller.disabled'|trans }}",
+            'required_image_error_msg': "{{'required_image_error_msg'|trans}}",
+            'billing_details': "{{ 'billing_details'|trans }}",
+            'shipping_details': "{{ 'shipping_details'|trans }}",
+            'phone': "{{ 'phone'|trans }}",
+            'order': "{{ 'order'|trans }}",
+            'order_date': "{{ 'order_date'|trans }}",
+            'ship_method': "{{ 'ship_method'|trans }}",
+            'date_shipping': "{{ 'date_shipping'|trans }}",
+            'tracking_no': "{{ 'tracking_no'|trans }}",
+            'shipped_items': "{{ 'shipped_items'|trans }}",
+            'short_qty': "{{ 'short_qty'|trans }}",
+            'sku': "{{ 'sku'|trans }}",
+            'product_name': "{{ 'product_name'|trans }}",
+            'bin_picking_number': "{{ 'bin_picking_number'|trans }}",
+            'order_not_found': "{{ 'order_not_found'|trans }}",
+            'unable_to_print_slip': "{{ 'unable_to_print_slip'|trans }}",
+            'packaging_slip_for_shipment': "{{ 'packaging_slip_for_shipment'|trans }}",
+            'comments': "{{ 'comments'|trans }}",
+            'image': "{{ 'image'|trans }}",
+            'enterValidUrl' : "{{ 'enter_valid_url'|trans }}",
+            'select_item_for_download_packing_slip': "{{ 'select_item_for_download_packing_slip'|trans }}",
+            'select_item_for_send_bulk_mail': "{{ 'select_item_for_send_bulk_mail'|trans }}",
+            'select_item_for_download_document': "{{ 'select_item_for_download_document'|trans }}",
+        }
+  
+    </script>
+
+    {{ encore_entry_script_tags('Wix/WixmpBundle/assets/js/script') }}
+{% endblock %}
+
+{% block menu %}
+    {% if menu is defined and menu == true %}
+        <!-- Sidebar menu-->
+        <div class="app-sidebar__overlay" data-toggle="sidebar">
+        </div>
+        <aside class="app-sidebar">
+            {# include user profile summary here #}
+            {% if app.user %}
+                {% include 'application/views/common/user_profile_summary.html.twig' %}
+            {% endif %}
+
+            {% if area == 'mp-wix-seller' %}
+                {% include app_path_prefix ~ '/view_templates/common/menu.html.twig' %}
+            {% else %}
+                {% include 'application/views/common/menu.html.twig' %}
+            {% endif %}
+            
+            {# {% include 'application/views/common/menu.html.twig' %} #}
+        </aside>
+    {% endif %}
+{% endblock %}
+
+{% block main_content %}
+    <div class="wk-overlay">
+        <div class="m-loader mr-4 text-center">
+            <svg class="m-circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"/>
+            </svg>
+        </div>
+    </div>
+    <main class="{% if breadcrums is defined and breadcrums == true %}app-content{% endif %}">
+        {% if breadcrums is defined and breadcrums == true %}
+            {% include 'application/views/common/breadcrums.html.twig' %}
+        {% endif %}
+        
+        {% set menu_list = get_menu_list('subapp',sub_app_code) %}
+        {% set current_route = app.request.attributes.get('_route') %}
+        
+        <ul class="nav nav-tabs">
+            {% for menu_name,menu_data in menu_list %}
+                {% if menu_data.child %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ menu_name|trans }}</a>
+                        <div class="dropdown-menu">
+                            {% for sub_menu_name,sub_menu_data in menu_data.child %}
+                                {% set continue = false %}
+                                {% if sub_menu_data.available_stores is defined and companyApplication is defined%}
+                                    {% if companyApplication.company.storeHash not in sub_menu_data.available_stores %}
+                                        {% set continue = true %}
+                                    {% endif %}
+                                {% endif %}
+                                {% if not continue %}
+                                    <a class="dropdown-item {% if current_route == sub_menu_data.route %} active{% endif %}" href="{% if sub_menu_data.route %}{{ path(sub_menu_data.route, {storeHash: storeHash, app_code: sub_app_code, platform: platform } ) }}{% endif %}">{{ sub_menu_name|trans }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if current_route == menu_data.route %} active{% endif %}" href="{% if menu_data.route %}{{ path(menu_data.route, {storeHash: storeHash, app_code: sub_app_code, platform: platform } ) }}{% endif %}"><i class="app-menu__icon {{ menu_data.icon_class }}"></i><span class="app-menu__label">{{ menu_name|trans }}</span></a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        {% set include_path = get_file_path_to_include(app_path_prefix, '/view_templates/' , template_name) %}
+        {% include include_path %}
+        {# {% include app_path_prefix ~ '/view_templates/' ~ template_name ~ '.html.twig' %} #}
+    </main>
+{% endblock %}

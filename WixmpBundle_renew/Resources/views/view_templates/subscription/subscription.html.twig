@@ -1,0 +1,297 @@
+{% set subAppTabs = [] %}
+{% set subAppTabContents = [] %}
+{% if app.request.get('activeTab') is not empty %}
+    {% set activeTab = app.request.get('activeTab') %}
+{% else %}
+    {% set activeTab = '' %}
+{% endif %}
+
+{% if current_subscription is not null %}
+    {# template for subapplication menus  #}
+    {% for subCompanyApp in current_subscription.companyApplication.subCompanyApplications %}
+        {% if subCompanyApp.application.status == 'A' and subCompanyApp.status != 'U' %}
+            {% set activeClass = '' %}
+            {% if activeTab == 'main-'~ subCompanyApp.application.code %}
+                {% set activeClass = 'active' %}
+            {% endif %}
+            {% set subAppTabData %}
+                {% block subapp_li%}
+                    <li class="nav-item">
+                        <a class="nav-link {{activeClass}}" data-toggle="tab" href="#main-{{subCompanyApp.application.code}}">
+                            {{ subCompanyApp.application.name }}
+                        </a>
+                    </li>
+                {% endblock %}
+            {% endset %}
+
+            {% set subAppTabContentsData %}
+                {% block subapp_content%}
+                    <div class="tab-pane {{activeClass}}" id="main-{{subCompanyApp.application.code}}">
+                        {% if subCompanyApp.subscription is not empty %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ render(controller('App\\Controller\\Application\\Subscription\\SubscriptionController::getCurrentSubscription', {platform: platform, app_code:subCompanyApp.application.code, storeHash:storeHash, extra_options: true} )) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tile" style="border: 1px solid lightgray">
+                                        <h4 class="tile-header">{{ 'subscription_plan_details'|trans }}</h4>
+                                        <div class="tile-body">
+                                            <table class="table">
+                                                <tr>
+                                                    <td>{{ 'subscription_plan'|trans }}</td>
+                                                    <td>{{subCompanyApp.subscription.planApplication.plan.name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ 'billing_cycle'|trans }}</td>
+                                                    <td>
+                                                        {% if subCompanyApp.subscription.planApplication.plan.intervalType == 'Y' %}
+                                                            {{ 'yearly'|trans }}
+                                                        {% elseif subCompanyApp.subscription.planApplication.plan.intervalType == 'H' %}
+                                                            {{ 'half-yearly'|trans }}
+                                                        {% elseif subCompanyApp.subscription.planApplication.plan.intervalType == 'Q' %}
+                                                            {{ 'quarterly'|trans }}
+                                                        {% elseif subCompanyApp.subscription.planApplication.plan.intervalType == 'M' %}
+                                                            {{ 'monthly'|trans }}
+                                                        {% else %}
+                                                            {{ subCompanyApp.subscription.planApplication.plan.intervalValue }}
+                                                            {{ 'days'|trans }}
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                                {% if subCompanyApp.subscription.subscriptionId != null %}
+                                                    <tr>
+                                                        <td>{{ 'next_billing_date'|trans }}</td>
+                                                        <td>
+                                                            {% if subCompanyApp.subscription|plan_expired %}
+                                                                -
+                                                            {% else %}
+                                                                {{subCompanyApp.subscription.nextBillingDate|wk_time('app', storeHash, 'sms_notification')}}
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                {% endif %}
+                                                {% if subCompanyApp.subscription.planApplication.features is not empty %}
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <h5>
+                                                                <u>{{ 'features'|trans }}</u>
+                                                            </h5>
+                                                        </td>
+                                                    </tr>
+                                                    {% for feature_key,feature_value in subCompanyApp.subscription.planApplication.features %}
+                                                        <tr>
+                                                            <td>{{ feature_key|trans }}</td>
+                                                            <td>
+                                                                {% if feature_value == '0' and feature_key=='domain_mapping' %}
+                                                                    {{ 'bam_no'|trans }}
+                                                                {% elseif feature_value==1 and feature_key=='domain_mapping' %}
+                                                                    {{ 'bam_yes'|trans }}
+                                                                {% elseif feature_value == 0 %}
+                                                                    {{ 'unlimited'|trans }}
+                                                                {% else %}
+                                                                    {{ feature_value }}
+                                                                {% endif %}
+                                                            </td>
+                                                        </tr>
+                                                        {# {% if feature_value == "0" and feature_key=='domain_mapping' %}{{ 'bam_no'|trans }}{ else if feature_value=="1" and feature_key=='domain_mapping' }{{ 'bam_yes'|trans }}{ else if feature_value == 0 }{{ 'unlimited'|trans }}{% else %}{{ feature_value }}{% endif %} #}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </table>
+                                            <a href="{{ path('app_subscription_plan_upgrade', {platform: platform, id: subCompanyApp.subscription.id, app_code: app_code, storeHash: storeHash,sub_app_code:subCompanyApp.application.code}) }}" class="btn btn-primary">{{'upgrade_plan'|trans}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tile" style="border: 1px solid lightgray">
+                                        <h4 class="tile-header">{{ 'view_transactions'|trans}}</h4>
+                                        <div class="tile-body">
+                                            <a href="{{ path('app_subscription_transactions', {platform: platform, subscription_id: subCompanyApp.subscription.id, app_code: app_code, storeHash: storeHash,sub_app_code:subCompanyApp.application.code}) }}">{{ 'view_transactions'|trans}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tile" style="border: 1px solid lightgray">
+                                        <h4 class="tile-header">{{ 'choose_plans'|trans}}</h4>
+                                        <div class="tile-body">
+                                            <a href="{{ path('app_subscription_plan_choose', {platform: platform,app_code: app_code, storeHash: storeHash,sub_app_code:subCompanyApp.application.code}) }}">{{ 'choose_plans'|trans}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>   
+                {% endblock %}
+            {% endset %}
+            {% set subAppTabs = subAppTabs|merge([subAppTabData]) %}
+            {% set subAppTabContents = subAppTabContents|merge([subAppTabContentsData]) %}
+        {% endif %}
+    {% endfor %}
+
+    {# tabs for main and sub application subscriptions  #}
+    {% set activeClass = '' %}
+    {% if activeTab is empty or activeTab == 'main-'~current_subscription.companyApplication.application.code %}
+        {% set activeClass = 'active' %}
+    {% endif %}
+    {% if subAppTabs is not empty %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link {{activeClass}}" data-toggle="tab" href="#main-subscription">
+                                {{ current_subscription.companyApplication.application.name }}
+                            </a>
+                        </li>
+                        {% for subAppTab in subAppTabs %}
+                            {{subAppTab}}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>   
+    {% endif %} 
+    <div class="tab-content">
+        <div class="tab-pane {{activeClass}}" id="main-subscription">
+            <div class="row">
+                <div class="col-md-12">
+                    {{ render(controller('App\\Controller\\Application\\Subscription\\SubscriptionController::getCurrentSubscription', {platform: platform, app_code:app_code, storeHash:storeHash, extra_options: true} )) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile" style="border: 1px solid lightgray">
+                        <div class="tile-header">
+                            <div class="tile-header-text">{{'subscription_plan_details'|trans }}</div>
+                        </div>
+                        <div class="tile-body tile-body-text" style="padding-top: 10px;">
+                            <table class="table table-subscription">
+                                <tr>
+                                    <td style="border-top: none;">{{ 'subscription_plan'|trans }}</td>
+                                    <td style="border-top: none;">{{current_subscription.planApplication.plan.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'billing_cycle'|trans }}</td>
+                                    <td>
+                                        {% if current_subscription.planApplication.plan.intervalType == 'Y' %}
+                                            {{ 'yearly'|trans }}
+                                        {% elseif current_subscription.planApplication.plan.intervalType == 'H' %}
+                                            {{ 'half-yearly'|trans }}
+                                        {% elseif current_subscription.planApplication.plan.intervalType == 'Q' %}
+                                            {{ 'quarterly'|trans }}
+                                        {% elseif current_subscription.planApplication.plan.intervalType == 'M' %}
+                                            {{ 'monthly'|trans }}
+                                        {% else %}
+                                            {{ current_subscription.planApplication.plan.intervalValue }}
+                                            {{ 'days'|trans }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% if current_subscription.subscriptionId != null %}
+                                    <tr>
+                                        <td>{{ 'next_billing_date'|trans }}</td>
+                                        <td>
+                                            {% if current_subscription|plan_expired %}
+                                                -
+                                            {% else %}
+                                                {{current_subscription.nextBillingDate|wk_time('app', storeHash, 'sms_notification')}}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if current_subscription.planApplication.features is not empty %}
+                                    <tr>
+                                        <td colspan="2" >
+                                            <h5>
+                                                <u>{{ 'features'|trans }}</u>
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                    {% for feature_key,feature_value in current_subscription.planApplication.features %}
+                                        <tr>
+                                            <td>{{ feature_key|trans }}</td>
+                                            <td>
+                                                {% if feature_value == '0' and feature_key=='domain_mapping' %}
+                                                    {{ 'bam_no'|trans }}
+                                                {% elseif feature_value==1 and feature_key=='domain_mapping' %}
+                                                    {{ 'bam_yes'|trans }}
+                                                {% elseif feature_value == '0' and feature_key=='send_email_to_seller_manually' %}
+                                                    {{ 'bam_no'|trans }}
+                                                {% elseif feature_value==1 and feature_key=='send_email_to_seller_manually' %}
+                                                    {{ 'bam_yes'|trans }}
+                                                {% elseif feature_value == '0' and feature_key=='commission_per_product' %}
+                                                    {{ 'bam_no'|trans }}
+                                                {% elseif feature_value==1 and feature_key=='commission_per_product' %}
+                                                    {{ 'bam_yes'|trans }}
+                                                {% elseif feature_value == '0' and feature_key=='bulk_discount' %}
+                                                    {{ 'bam_no'|trans }}
+                                                {% elseif feature_value==1 and feature_key=='bulk_discount' %}
+                                                    {{ 'bam_yes'|trans }}
+                                                {% elseif feature_value == '0' and feature_key=='seller_allowed_customer_details' %}
+                                                    {{ 'bam_no'|trans }}
+                                                {% elseif feature_value==1 and feature_key=='seller_allowed_customer_details' %}
+                                                    {{ 'bam_yes'|trans }}
+                                                {% elseif feature_value == '0' and feature_key=='custom_information' %}
+                                                    {{ 'bam_no'|trans }}
+                                                {% elseif feature_value==1 and feature_key=='custom_information' %}
+                                                    {{ 'bam_yes'|trans }}
+                                                {% elseif feature_value == '0' and feature_key=='mail_outbid' %}
+                                                    {{ 'bam_no'|trans }}    
+                                                {% elseif feature_value==1 and feature_key=='mail_outbid' %}
+                                                    {{ 'bam_yes'|trans }}
+                                                {% elseif feature_value == '0' and feature_key=='bid_increment' %}
+                                                    {{ 'bam_no'|trans }}    
+                                                {% elseif feature_value==1 and feature_key=='bid_increment' %}
+                                                    {{ 'bam_yes'|trans }}
+                                                {% elseif feature_value == 0 %}
+                                                    {{ 'unlimited'|trans }}
+                                                {% else %}
+                                                    {{ feature_value }}
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile" style="border: 1px solid lightgray">
+                        <div class="tile-header">
+                            <div class="tile-header-text">{{'view_transactions'|trans }}</div>
+                        </div>
+                        <div class="tile-body tile-body-text">
+                            <a class="btn btn-custom"href="{{ path('app_subscription_transactions', {platform: platform, subscription_id: current_subscription.id, app_code: app_code, storeHash: storeHash}) }}">{{'view_transactions'|trans}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for subAppTabContent in subAppTabContents %}
+            {{ subAppTabContent }}
+        {% endfor %}
+    </div>
+    
+{% else %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile" style="border: 1px solid lightgray">
+                <div class="tile-header">
+                    <div class="tile-header-text">{{'no_subscription'|trans }}</div>
+                </div>
+                <div class="tile-body tile-body-text">
+                    {{ 'upgrade_subscription_from_wix'|trans}}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

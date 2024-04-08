@@ -1,0 +1,31 @@
+<div class="form-group">
+    {{ form_label(form.commission_type,'commission_type'|trans) }}
+    {% if villumi %}
+        <i class="fa fa-info-circle" title="{{ 'wixmp_commission_type'|trans }}" aria-hidden="true"></i>
+    {% endif %}
+    {% if area == 'admin' %}
+        {{ form_widget(form.commission_type, {attr: {class:'wk-input-medium'}}) }}
+    {% else %}
+        {% if product.commissionType is defined and product.commissionType != null %}
+            <span class = "wk-input-medium form-control" style = "background: #f7f5f5; cursor: not-allowed">{{ product.commissionType|capitalize }}</span>
+        {% else %}
+            <span class = "wk-input-medium form-control" style = "height: 37px !important; background: #f7f5f5; cursor: not-allowed" title = "Read Only"> </span>
+        {% endif %}
+    {% endif %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.commission,'commission'|trans ,{label_attr:{class:'wk-price'}}) }}
+    {% if villumi %}
+        <i class="fa fa-info-circle" title="{{ 'wixmp_commission'|trans }}" aria-hidden="true"></i>
+    {% endif %}
+    {% if area == 'admin' %}
+        {{ form_widget(form.commission, {attr: {class:'wk-input-medium'}}) }}
+    {% else %}
+        {% if product.commissionType is defined and product.commissionType == 'fixed' %}
+            <span class = "wk-input-medium form-control" style = "background: #f7f5f5; cursor: not-allowed">{{ product.commission|wk_price|raw }}</span>
+        {% elseif product.commission is defined %}
+            <span class = "wk-input-medium form-control span-disabled" style = "height: 37px !important; background: #f7f5f5; cursor: not-allowed"></span>
+        {% endif %}
+    {% endif %}
+</div>

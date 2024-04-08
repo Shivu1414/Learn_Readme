@@ -1,0 +1,166 @@
+<div>
+	<div>
+		<strong>
+			{{company.name}}
+		</strong>
+	</div>
+	<div>
+		{{company.address}}
+	</div>
+	<div>
+		{{company.address2}}
+	</div>
+	<div>
+		{{company.city}}
+		{% if company.city %},
+		{% endif %}
+		{{company.zipcode}}
+	</div>
+	<div>
+		{{company.state}}
+		{% if company.state and company.country %}/
+		{% endif %}
+		{{company.country}}
+	</div>
+</div>
+<hr/>
+<div style="font-size:14px;display:inline-block;min-width:32%;vertical-align:top; margin:10px auto;">
+	<div>
+		<span>
+			<b>
+				{{ "order_id"|trans }}
+				:
+			</b>
+		</span>
+		<span>
+			#{{ order.id }}
+		</span>
+	</div>
+	<div>
+		<span>
+			<b>{{ "status"|trans }}
+				:</b>
+		</span>
+		<span>
+			{{ order.status|wixmp_status_info|trans }}
+		</span>
+	</div>
+	<div>
+		<span>
+			<b>{{ "date"|trans }}
+				:</b>
+		</span>
+		<span>
+			{{ order.createdAt|wk_time }}
+		</span>
+	</div>
+</div>
+{% if bcOrder is defined %}
+	<div style="display:inline-block;min-width:32%;vertical-align:top; margin:10px auto;">
+		<div style="margin:5px auto;">
+			<strong>
+				{{ 'order.billto'|trans }}
+			</strong>
+		</div>
+		{% if bcOrder.billingInfo is defined %}
+			<div>
+				<b>{{(bcOrder.billingInfo.address.fullName.firstName ~ " " ~ bcOrder.billingInfo.address.fullName.lastName)|title}}</b>
+			</div>
+			<div>{{bcOrder.billingInfo.address.email}}</div>
+			<div>{{bcOrder.billingInfo.address.phone}}</div>
+			<div>{{bcOrder.billingInfo.address.addressLine1}}</div>
+			<div>
+				{{bcOrder.billingInfo.address.city}}
+				{{bcOrder.billingInfo.address.zipCode}}
+			</div>
+			<div>
+				{{bcOrder.billingInfo.address.country}}
+			</div>
+		{% endif %}
+	</div>
+{% endif %}
+{% if shipping_address is defined %}
+	<div style="display:inline-block;min-width:32%;vertical-align:top; margin:10px auto;">
+		<div style="margin:5px auto;">
+			<strong>
+				{{ 'order.shipto'|trans }}
+			</strong>
+		</div>
+		{% if shipping_address.shipmentDetails.address is defined %}
+			<div><b>{{ (shipping_address.shipmentDetails.address.fullName.firstName ~ " " ~ shipping_address.shipmentDetails.address.fullName.lastName)|title}}</b></div>
+			<div>{{ shipping_address.shipmentDetails.address.email }}</div>
+			<div>{{ shipping_address.shipmentDetails.address.phone }}</div>
+			<div>{{ shipping_address.shipmentDetails.address.addressLine1 }}</div>
+			<div>
+				{{ shipping_address.shipmentDetails.address.city }}
+				{{ shipping_address.shipmentDetails.address.zipCode }}
+			</div>
+			<div>
+				{{ shipping_address.shipmentDetails.address.country }}
+			</div>
+		{% endif %}
+	</div>
+	<hr/>
+{% endif %}
+
+{% if product_list is defined %}
+	<table cellspacing="0" cellpadding="10" border="0" width="100%" style="font-size:14px; border-collapse:collapse;">
+		<thead class="thead-light" style="border-bottom:1px solid black;">
+			<th style="text-align:left">{{ 'product'|trans }}</th>
+			<th style="text-align:left">{{ 'product_code'|trans }}</th>
+			<th style="text-align:left">{{ 'quantity'|trans }}</th>
+			<th style="text-align:left">{{ 'amount'|trans }}</th>
+		</thead>
+		<tbody>
+			{% for product in product_list %}
+				<tr style="border-bottom:1px solid black;">
+					<td style="text-align:left">
+						{{ product.name }}
+					</td>
+					<td style="text-align:left">{% if product.sku is defined %}{{ product.sku }}{% endif %}</td>
+					<td style="text-align:left">{{ product.quantity }}</td>
+					<td style="text-align:left">
+						{{ product.price|wk_price('app', storeHash)|raw }}
+					</td>
+				</tr>
+			{% endfor %}
+			<tr>
+				<td colspan="2"></td>
+				<td>
+					<strong>{{"subtotal"|trans}}</strong>
+				</td>
+				<td>
+					{{ order.subtotal|wk_price('app', storeHash)|raw }}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"></td>
+				<td>
+					<strong>{{"Tax"|trans}}</strong>
+				</td>
+				<td>
+					{{ order.tax|wk_price('app', storeHash)|raw }}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"></td>
+				<td>
+					<strong>{{"Shipping"|trans}}</strong>
+				</td>
+				<td>
+					{{ order.shipping|wk_price('app', storeHash)|raw }}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"></td>
+				<td style="border:1px solid black; border-width: 1px 0px;">
+					<strong>{{"total"|trans}}
+					</strong>
+				</td>
+				<td style="border:1px solid black; border-width: 1px 0px;">
+					{{ order.total|wk_price('app', storeHash)|raw }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+{% endif %}

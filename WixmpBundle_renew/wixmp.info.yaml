@@ -1,0 +1,72 @@
+name: Multi Vendor
+app_id: wixmp
+description: Allow add seller functionality
+version: 1.2.0
+author: Webkul
+load_redirect: wixmp_index
+auth_redirect: wixmp_dashboard
+app_path: Modules/Wix/WixmpBundle
+plan_features:
+    max_products:
+       label: maximum_number_of_products
+       input:
+         type: input
+         class: wk-integer
+         default: 4
+    max_sellers:
+       label: maximum_number_of_sellers
+       input:
+         type: input
+         class: wk-integer
+         default: 2
+    domain_mapping:
+        label: mapping_url_domain
+        input:
+          type: list
+          empty_select: false 
+          default: 0
+          options:
+              1: bam_yes
+              0: bam_no
+    send_email_to_seller_manually:
+        label: send_email_to_seller_manually
+        input:
+          type: list
+          empty_select: false
+          default: 0
+          options: 
+                1: bam_yes
+                0: bam_no
+    commission_per_product:
+       label: commission_per_product
+       input:
+          type: list
+          empty_select: false 
+          default: 0
+          options:
+              1: bam_yes
+              0: bam_no
+    commission_per_category:
+       label: commission_per_category
+       input:
+          type: list
+          empty_select: false 
+          default: 0
+          options:
+              1: bam_yes
+              0: bam_no
+api_permissions:
+  - store_v2_customers_read_only
+  - store_v2_default
+  - store_v2_information_read_only
+  - users_basic_information
+  - store_v2_orders_read_only
+  - store_v2_transactions_read_only
+  - store_v2_products
+routes:
+  wixmp: 
+    controller: "Controller/Admin/"
+    area: admin
+  wixmp_seller: 
+    controller: "Controller/Seller/"
+    area: mp-wix-seller

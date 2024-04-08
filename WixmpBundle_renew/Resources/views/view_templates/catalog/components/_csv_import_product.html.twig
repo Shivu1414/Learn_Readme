@@ -1,0 +1,27 @@
+<div class="modal fade" id="csvImportWixProducts" tabindex="-1" role="dialog" aria-labelledby="csvImportProductsTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ 'wix_wixmp_csv_import_product'|trans }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% if area == 'admin' %}
+          {% set controller_link = 'Webkul\\Modules\\Wix\\WixmpBundle\\Controller\\Admin\\ImportExport\\ImportController::get_admin_import_product' %}
+        {% else %}
+          {% set controller_link = 'Webkul\\Modules\\Wix\\WixmpBundle\\Controller\\Seller\\ImportExport\\ImportController::get_seller_import_product' %}
+        {% endif %}
+        
+        {{ render(controller(controller_link, {app_code:app_code, storeHash:storeHash, area: area, formId: 'WixImportForm'} )) }}
+
+        <a class="wk-wix-export-csv" href="#" data-href="{{ path(importexport_controller_prefix ~ 'export_sample_product_csv', {storeHash: storeHash, filename: "sample_file_" ~ random() ~ ".csv"}) }}">{{'download_sample_csv'|trans}}</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonImportFormClose">{{ 'close'|trans }}</button>
+        <button type="submit" class="btn btn-primary" form="WixImportForm">{{ 'import'|trans }}</button>
+      </div>
+    </div>
+  </div>
+</div>

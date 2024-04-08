@@ -1,0 +1,353 @@
+seller:
+  fields:
+    setting_header_products:
+      type: HiddenType
+      default_value: null
+      label_class: null
+      class: null
+    auto_approve_product:
+      type: ChoiceType
+      placeholder: false
+      default_value: N
+      class: null
+      label_class: null
+      variants:
+        yes: 'Y'
+        no: 'N'
+    text_editor:
+      type: ChoiceType
+      default_value: plain
+      placeholder: false
+      class: null
+      label_class: null
+      variants:
+        plain: 'plain'
+        tinymce: 'tinymce'
+    seller_allowed_categories:
+      type: CategoriesType
+      required: false
+      default_value: ''
+      class: null
+      label_class: null   
+      typeClass:  Webkul\Modules\Wix\WixmpBundle\Form\Type\CategoriesType
+      empty_data: ''
+      allow_extra_fields: true
+      compound: true
+    # seller_allowed_customer_details:
+    #   type: CustomerDetailsType
+    #   required: false
+    #   default_value: ''
+    #   class: null
+    #   label_class: null   
+    #   empty_data: ''
+    #   allow_extra_fields: true
+    #   compound: true  
+    product_discount:
+      type: CheckboxType
+      default_value: null
+      class: null
+      label_class: null
+      required: false
+    # show_only_seller_brand:
+    #   type: CheckboxType
+    #   default_value: null
+    #   class: null
+    #   label_class: null
+    #   required: false
+    # product_image_required:
+    #   type: CheckboxType
+    #   default_value: null
+    #   class: null
+    #   label_class: null
+    #   required: false
+    # product_location_field_enable:
+    #   type: CheckboxType
+    #   default_value: null
+    #   class: null
+    #   label_class: null
+    # product_show_seller_field_enable:
+    #   type: CheckboxType
+    #   default_value: null
+    #   class: null
+    #   label_class: null
+    setting_header_products_identifier:
+      type: HiddenType
+      default_value: null
+      label_class: null
+      class: null
+    products_identifier_enable_product:
+      type: CheckboxType
+      default_value: '0'
+      class: null
+      label_class: null
+    products_identifier_position:
+      type: ChoiceType
+      default_value: N
+      placeholder: false
+      class: null
+      label_class: null
+      variants:
+        prefix: 'P'
+        sufix: 'S'
+    products_identifier_position_value:
+      type: ChoiceType
+      default_value: N
+      placeholder: false
+      class: null
+      label_class: ''
+      variants:
+        #seller_id: 'SI'
+        seller_name: 'SN'
+        #custom: 'CU'
+    # products_identifier_position_value_for_custom:
+    #   type: TextType
+    #   default_value: 'SE-'
+    #   class: null
+    #   label_class: null
+    #   required: false
+    products_identifier_joiner_value:
+      type: TextType
+      default_value: ' : '
+      class: null
+      label_class: null
+      help: "Value to join Identifier"
+      required: false
+    # setting_header_sku_identifier:
+    #   type: HiddenType
+    #   default_value: null
+    #   label_class: null
+    #   class: null
+    # sku_identifier_enable_sku:
+    #   type: CheckboxType
+    #   default_value: null
+    #   class: null
+    #   label_class: null
+    # sku_identifier_position:
+    #   placeholder: false
+    #   type: ChoiceType
+    #   default_value: N
+    #   class: null
+    #   label_class: null
+    #   variants:
+    #     prefix: 'P'
+    #     sufix: 'S'
+    # sku_identifier_position_value:
+    #   type: ChoiceType
+    #   default_value: N
+    #   placeholder: false
+    #   class: null
+    #   label_class: ''
+    #   variants:
+    #     seller_id: 'SI'
+    #     seller_name: 'SN'
+    #     custom: 'CU'
+    # sku_identifier_position_value_for_custom:
+    #   type: TextType
+    #   default_value: 'SE-'
+    #   class: null
+    #   label_class: null
+    #   required: false
+    # sku_identifier_joiner_value:
+    #   type: TextType
+    #   default_value: ' : '
+    #   class: null
+    #   label_class: null
+    #   required: false
+    #   help: "Value to join Identifier"
+    # setting_header_layout:
+    #   type: HiddenType
+    #   default_value: null
+    #   label_class: null
+    #   class: null
+    # seller_card_layout:
+    #   type: ChoiceType
+    #   placeholder: false
+    #   default_value: 'details'
+    #   class: null
+    #   label_class: null
+    #   variants:
+    #     details: 'details'
+    #     logo: 'logo'
+    # doc_skip_email_send_days:
+    #   type: TextType
+    #   default_value: ' : '
+    #   class: null
+    #   label_class: 'wk-integer'
+    #   required: false
+    #   help: "Value to join Identifier"
+    setting_header_google_captcha:
+      type: HiddenType
+      default_value: null
+      label_class: null
+      class: null
+    enable_google_captcha:
+      type: CheckboxType
+      default_value: '0'
+      class: null
+      label_class: null
+    google_captcha_site_key:
+      type: TextType
+      class: null
+      label_class: null
+      help: "Value to join Identifier"
+      required: false
+    google_captcha_secret_key:
+      type: TextType
+      class: null
+      label_class: null
+      help: "Value to join Identifier"
+      required: false
+email:
+  fields:
+    setting_header_email_smtp_configuration:
+      type: HiddenType
+      default_value: null
+      label_class: null
+      class: null
+    host:
+      type: TextType
+      default_value: null
+      class: null
+      label_class: wk-required
+    port:
+      type: TextType
+      default_value: null
+      class: null
+      label_class: wk-required
+    username:
+      type: TextType
+      default_value: null
+      class: null
+      label_class: wk-required
+    password:
+      type: PasswordType
+      default_value: null
+      class: null
+      label_class: wk-required
+    encryption:
+      type: ChoiceType
+      default_value: null
+      class: null
+      label_class: null
+      variants:
+        TLS: tls
+        SSL: ssl
+    email_from:
+      type: EmailType
+      default_value: null
+      class: null
+      label_class: wk-required
+general: 
+  fields:
+    # locale:
+    #   type: ChoiceType
+    #   default_value: 'en'
+    #   placeholder: false
+    #   class: null
+    #   label_class: ''
+    #   variants:
+    #     English: 'en'
+    #     Spanish: 'es'
+    #     Russian: 'ru'
+    #     Chinese: 'zh'
+    # theme:
+    #   type: ThemeType
+    #   default_value: '#2758ea'
+    #   class: theme-type
+    #   placeholder: false
+    setting_header_paypal_payout:
+      type: HiddenType
+      default_value: null
+      label_class: null
+      class: null
+    paypal_payout_client_id:
+      type: TextType
+      default_value: null
+      label_class: null
+      class: null
+      required: false
+    paypal_payout_secret_key:
+      type: TextType
+      default_value: null
+      label_class: null
+      class: null
+      required: false
+    paypal_payout_mode:
+      type: ChoiceType
+      default_value: 'sandbox'
+      placeholder: false
+      class: null
+      label_class: ''
+      variants:
+        sandbox: 'sandbox'
+        live: 'live'
+    enable_auto_pay:
+      type: ChoiceType
+      default_value: 0
+      placeholder: false
+      class: null
+      label_class: ''
+      variants:
+        no: '0'
+        Yes: '1'
+    auto_pay_order_status:      
+      type: OrderStatusesType
+      required: false
+      default_value: ''
+      class: null
+      label_class: null   
+      typeClass:  Webkul\Modules\Wix\WixmpBundle\Form\Type\OrderStatusesType
+      empty_data: ''
+      allow_extra_fields: true
+    setting_header_stripe_payout:
+      type: HiddenType
+      default_value: null
+      label_class: null
+      class: null
+    stripe_payout_client_id:
+      type: TextType
+      default_value: null
+      label_class: null
+      class: null
+      required: false
+    stripe_payout_secret_key:
+      type: TextType
+      default_value: null
+      label_class: null
+      class: null
+      required: false
+    stripe_payout_mode:
+      type: ChoiceType
+      default_value: 'sandbox'
+      placeholder: false
+      class: null
+      label_class: ''
+      variants:
+        sandbox: 'sandbox'
+        live: 'live'
+    stripe_enable_auto_pay:
+      type: ChoiceType
+      default_value: 0
+      placeholder: false
+      class: null
+      label_class: ''
+      variants:
+        no: '0'
+        Yes: '1'
+    stripe_auto_pay_order_status:      
+      type: OrderStatusesType
+      required: false
+      default_value: ''
+      class: null
+      label_class: null   
+      typeClass:  Webkul\Modules\Wix\WixmpBundle\Form\Type\OrderStatusesType
+      empty_data: ''
+      allow_extra_fields: true
+domain:
+  fields:
+    domain_mapping:
+      type: TextType
+      default_value: null
+      label_class: null
+      class: null
+      required: false

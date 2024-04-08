@@ -1,0 +1,126 @@
+{% set app_path_prefix = twig_app_path() %}
+{% set current_url = path(app.request.get('_route'), app.request.get('_route_params')) %}
+{% if area == 'admin' %}
+    {% set controller_prefix = 'wixmp_catalog_category_' %}
+{% else %}
+    {% set controller_prefix = 'mp_seller_catalog_category_' %}
+{% endif %}
+<div class="row">
+    <div class="col-md-12">
+        <form method = "post">
+            <div class="tile">
+                <div class="tile-title-w-btn">
+                    <div>
+                        {% if not newTheme %}
+                            <div style = "float:left">
+                                {% if categoryTree is defined %}<b>{{ 'total_collections'|trans ~ ": " ~ categoryTree|length }}</b>{% endif %}
+                            </div>
+                            {% if villumi %}
+                                <i class="fa fa-info-circle" title="{{ 'total_collections'|trans }}" aria-hidden="true"></i>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="btn-group">
+                        {% if area == 'admin' %}
+                            {#<button class="btn btn-success float-right" data-toggle="modal" data-target="#add_category" title="{{'add category'|trans}}"><i class="fa fa-plus"></i></button>#}
+                            
+                            {# <a class="btn btn-success float-right"  id="sync-collections" data-toggle="ajaxjobs" href="{{ path('wixmp_catalog_category_sync', {storeHash: storeHash}) }}" title="{{'sync'|trans}}"><i class="fa fa-refresh"></i></a> #}
+                            
+                            <span id="sync-collections" data-toggle="ajaxjobs" class="btn btn-success float-right btn-sync" title="{{ 'sync'|trans }}" data-href="{{ path('wixmp_catalog_category_sync', {storeHash: storeHash}) }}">
+                            <i class="fa fa-refresh"></i>
+                            </span>
+
+                            {% if planApplicationData is defined and planApplicationData is not empty and planApplicationData['commission_per_category'] is defined and planApplicationData['commission_per_category'] == 1 %}
+                                <button type="submit"  class="{{ newTheme ? 'btn btn-outline-custom' : 'btn btn-outline-success' }}">{{"save"|trans}}</button>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="tile-body">
+                    {% if categoryTree is not empty %}
+                        
+                        <table class="table {{ newTheme ? 'tile-table' : 'table-responsive' }}" id="">
+                            <thead>
+                                <tr>
+                                    <th class = "" width="5%">
+                                        {{ 'collections'|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'Categories'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+
+                                    {# <th class = "" width="5%">{{ 'collections'|trans }}</th> #}
+                                {% if area == 'admin' %}
+                                    {% if planApplicationData is defined and planApplicationData is not empty and planApplicationData['commission_per_category'] is defined and planApplicationData['commission_per_category'] == 1 %}
+                                        <th class = "" width="5%">
+                                            {{ 'commission'|trans }}
+                                            {% if villumi %}
+                                                <i class="fa fa-info-circle" title="{{ 'provision'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                        </th>
+                                    {% endif %}
+                                        {# <th class = "" width="5%">{{ 'commission'|trans }}</th> #}
+                                {% endif %}
+                                {% if area == 'mp-wix-seller' %}
+                                     {% if sellerplan is defined and sellerplan is not empty and sellerplan['commission_type'] is defined and sellerplan['commission_type'] == 'commission_per_category' %}
+                                        <th class = "" width="5%">{{ 'commission'|trans }}</th>
+                                     {% endif %}
+                                {% endif %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for category in categoryTree %}
+                                    <tr>
+                                        <td>{{ category.name }}</td>
+
+                                        {% if area == "mp-wix-seller" %}
+                                            {% if sellerplan is defined and sellerplan is not empty and sellerplan['commission_type'] is defined and sellerplan['commission_type'] == 'commission_per_category' %}
+                                                <td>
+                                                    <div class="input-container-commission">    
+                                                        <span class = "form-control commission-input-field">
+                                                            {{ category.comission }}
+                                                        </span>  <i class="fa fa-percent commission-icon"></i> 
+                                                    </div>
+                                                </td>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if area == "admin" %}
+                                            {% if planApplicationData is defined and planApplicationData is not empty and planApplicationData['commission_per_category'] is defined and planApplicationData['commission_per_category'] == 1 %}
+                                                <td>
+                                                    <div class="input-container-commission" style="{{ newTheme ? 'justify-content: center;' : '' }}">
+                                                        <input type="text" maxlength="2" class="form-control commission-input-field" id="category_commission" name="category_commission[{{category.id}}]" value="{% if category.comission is defined and category.comission is not empty %}{{ category.comission }}{% endif %}" onkeypress="return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)"  {% if area == 'seller' %}disabled{% endif %}><i class="fa fa-percent commission-icon"></i>
+                                                    </div>
+                                                </td>
+                                        {% endif %}
+                                    {% endif %}
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if area != 'seller' %}
+                            {# <form method="post">
+                                <button type="submit" class="btn btn-primary">{{"save"|trans}}</button>
+                            </form> #}
+                        {% endif %}
+                        {# <div class="navigation">
+                            {{ knp_pagination_render(categoryTree) }}
+                        </div> #}
+                    {% else %}
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td colspan="4">{{ 'no_records_found'|trans }}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

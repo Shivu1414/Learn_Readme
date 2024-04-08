@@ -1,0 +1,60 @@
+{% if filter.seller_status is defined %}
+    {% set selectedOrderStatus = filter.seller_status %}
+{% else %}
+    {% set selectedOrderStatus = {} %}
+{% endif %}
+{% if filter.seller is defined %}
+    {% set seller = filter.seller %}
+{% else %}
+    {% set seller = {} %}
+{% endif %}
+{% if filter.from_date is defined %}
+    {% set selected_from = filter.from_date %}
+{% else %}
+    {% set selected_from = '' %}
+{% endif %}
+{% if filter.to_date is defined %}
+    {% set selected_to = filter.to_date %}
+{% else %}
+    {% set selected_to = '' %}
+{% endif %}
+
+<form method="post" id="revenue-report-form">
+    <div class="bam-vspace">
+        {# <div class="btn-group pull-right text-right">
+            <a title="Download Revenue Report" type="button" id="wk-revenue-report" class="btn btn-default wk-revenue-report">
+                <i class="fa fa-download"></i>
+            </a>
+        </div>
+        <div class="clearfix"></div> #}
+    </div>
+
+    <div class="filter-fields">
+        <div class="form-group">
+            {# order status  #}
+            {% include 'common/select_combo_box.html.twig' with {data: { selected:selectedOrderStatus,name:'dashboard[filter][seller_status][]',label:'order_status',placeholder:'select order status',options:platformOrderStatuses(),multiple:true, value:"index"}} %}
+        </div>
+        <div class="form-group">
+           {# select seller: if admin  #}
+           {% if area == 'A' or area == 'admin' %}
+                <div class="form-group">
+                    {% include 'common/select_combo_box.html.twig'  with {data: {selected:seller,name:'dashboard[filter][seller]',label:'seller',options:getCompanySellerList(),ajax:true, text:'seller'}} %}
+                </div>
+            {% endif %}            
+        </div>
+        <div class='form-group'>
+            {% include 'common/date_range_box.html.twig'  with {
+                data: {
+                    to_name:'dashboard[filter][to_date]',
+                    from_name:'dashboard[filter][from_date]',
+                    selected_to: selected_to,
+                    selected_from: selected_from
+                }
+            } %}                     
+        </div>  
+    </div>
+    <div class="filter-btn-block">
+        <button type="submit" class="btn btn-primary">{{ 'submit'|trans }}</button>
+        <button type="button" class="btn btn-secondary filter-close">{{ 'cancel'|trans }}</button>
+    </div>
+</form>

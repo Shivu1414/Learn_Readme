@@ -1,0 +1,282 @@
+{% set batch_options = [] %}
+
+{# {% if order_statuses is defined and order_statuses is not empty %}
+    {% for key,order_status in order_statuses %}
+        {% set status = {id: key, text: order_status} %}
+        {% set batch_options = batch_options|merge([status]) %}
+    {% endfor %}
+{% endif %} #}
+
+{% set batch_options = [{id: 1, text: 'Fullfilled'}] %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-title-w-btn">
+                    <h5 class="title">
+                        {% include 'common/list_items.html.twig' %}
+                    </h5>
+                    <div class="btn-group">
+                        <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}" style="{{ area != 'admin' and newTheme ? "padding: 8px 15px 0px 15px;" : '' }}">
+                            <i class="fa fa-filter"></i>
+                            {% if newTheme %}
+                                <span class="span-text-bold">
+                                    {{ 'filter'|trans }}
+                                </span>
+                            {% endif %}
+                        </span>
+                        {% if area == 'admin' %}
+                            {# <span id="sync-order" class="btn btn-secondary icon-btn" title="{{ 'sync'|trans }}" data-href="{{ path('marketplace_sales_order_sync',{storeHash:storeHash}) }}">
+                                <i class="fa fa-refresh"></i>
+                            </span> #}
+                        
+                        {% if (plan_application_data['send_email_to_seller_manually'] is defined and plan_application_data['send_email_to_seller_manually'] is not empty and plan_application_data['send_email_to_seller_manually']=='1') %}
+                            <span class="btn btn-secondary icon-btn bulk-email" id = "bulkMail-alert" title="{{ 'send_bulk_mail'|trans }}" data-href="{{ path('wixmp_sales_order_send_bulk_mail',{storeHash:storeHash}) }}">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+
+                            <span class="btn btn-secondary icon-btn d-none bulk-email" id = "bulkMail" title="{{ 'send_bulk_mail'|trans }}" data-href="{{ path('wixmp_sales_order_send_bulk_mail',{storeHash:storeHash}) }}">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        {% endif %}
+
+                            <span id="" class="btn btn-success icon-btn btn-sync" title="{{ 'sync'|trans }}"  href="#" data-toggle="modal" data-target="#orderSyncModal">
+                                <i class="fa fa-refresh"></i>
+                            </span>
+                            
+                            {# <button type="button" title="{{ 'sync'|trans }}" class="btn btn-primary" id="sync-order" data-href="{{ path('wixmp_sales_order_sync',{storeHash:storeHash}) }}"><i class="fa fa-refresh"></i></button> #}
+
+                            {# <span class="btn btn-secondary icon-btn" id = "printSlip-alert" title="{{ 'print_packing_slip'|trans }}" data-href="{{ path('marketplace_sales_order_print_slip',{storeHash:storeHash}) }}">
+                                <i class="fa fa-file-pdf-o"></i>
+                            </span>
+
+                            <span class="btn btn-secondary icon-btn d-none" id = "printSlip" title="{{ 'print_packing_slip'|trans }}" data-href="{{ path('marketplace_sales_order_print_slip',{storeHash:storeHash}) }}">
+                                <i class="fa fa-file-pdf-o"></i> #}
+                            </span>
+                        {% else %}
+                            {# <span class="btn btn-secondary icon-btn" id = "printSlip-alert" title="{{ 'print_packing_slip'|trans }}" data-href="{{ path('mp_seller_sales_order_print_slip',{storeHash:storeHash}) }}">
+                                <i class="fa fa-file-pdf-o"></i>
+                            </span>
+
+                            <span class="btn btn-secondary icon-btn d-none" id = "printSlip" title="{{ 'print_packing_slip'|trans }}" data-href="{{ path('mp_seller_sales_order_print_slip',{storeHash:storeHash}) }}">
+                                <i class="fa fa-file-pdf-o"></i>
+                            </span>     #}
+                        {% endif %}
+                        {% if area != "admin" and newTheme %}
+                            {% include '@wixmp_twig/view_templates/common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'order_status', 'name' : 'seller_order_fullfillment_batch_action'}} %}
+                        {% endif %}
+
+                    </div>
+                    <div class="dropdown-menu">
+                        {# <a class="dropdown-item" href="#" data-href="{{ path(orderPathExportValue,{storeHash:storeHash}) }}" id="export" data-title="orders">
+                            {{ 'export_selected_order'|trans }}
+                        </a> #}
+                        {# <a class="dropdown-item" href="#" data-href="{{ path(orderPathExportValue,{storeHash:storeHash}) }}" id="" data-title="Orders" data-toggle="modal" data-target="#exportBulkOrderModal">
+                            {{ 'export_bulk_order'|trans }}
+                        </a> #}
+                    </div>
+                    
+                </div>
+                <div class="tile-title-w-btn">  
+                    {% if not newTheme %}
+                        {% if area != "admin" %}
+                            <div>
+                                <div class="custom-control-inline">
+                                    {% include '@wixmp_twig/view_templates/common/batch_action.html.twig' with {data:{options:batch_options, 'formName':'order_status', 'name' : 'seller_order_fullfillment_batch_action'}} %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    <div></div>
+                    <span>
+                        {% if not newTheme %}
+                            {% if orders is defined and orders is not empty %}
+                                <b>
+                                    {{ 'total_records'|trans ~ ": " ~ orders.totalItemCount }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_total_records'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </b>
+                            {% endif %}
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="tile-body">
+                    
+                    <div class="table-responsive">
+                        <table class="table {{ newTheme ? 'tile-table' : '' }}" id="manage_order">
+                            <thead>
+                                <tr>
+                                    {# {% if area == "admin" %} #}
+                                        <th width="1%">
+                                            <div class="animated-checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="check" title="check all" class="wk_checkbox_items"><span class="label-text"> </span>
+                                                </label>
+                                            </div>
+                                        </th>
+                                    {# {% endif %} #}
+                                    <th>
+                                        {{ "order_id"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_order_id'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    {# {% if area == 'admin' %} #}
+                                        <th>
+                                            {{ "store_order_id"|trans }}
+                                            {% if villumi %}
+                                                <i class="fa fa-info-circle" title="{{ 'wixmp_store_order_id'|trans }}" aria-hidden="true"></i>
+                                            {% endif %}
+                                        </th>
+                                    {# {% endif %} #}
+                                    <th>
+                                        {{ "seller"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_seller'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "customer_name"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_customer_name'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "total"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_total'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th>
+                                        {{ "date"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_date'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    {% if area == 'admin' %}
+                                    {# <th width="15%" class="text-center">{{ "status"|trans }}</th> #}
+                                    {% endif %}
+                                    <th width="" class="text-center">
+                                        {{ "payment_status"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_payment_status'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th width="" class="text-center">
+                                        {{ "fullfillment_status"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_fullfillment_status'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                    <th width = "13%">
+                                        {% if area is defined and area != "admin" %}
+                                            {{ "turn_on_toggle" |trans}}
+                                            {% if villumi %}
+                                                <i class="fa fa-info-circle" title="{{ 'wixmp_turn_on_toggle'|trans }}" aria-hidden="true"></i>
+                                            {% endif %}
+                                        {% else %}
+                                            {{ "seller_order_fullfillment_status"|trans }}
+                                            {% if villumi %}
+                                                <i class="fa fa-info-circle" title="{{ 'wixmp_seller_order_fullfillment_status'|trans }}" aria-hidden="true"></i>
+                                            {% endif %}
+                                        {% endif %}
+                                    </th>
+                                    <th width="15%">
+                                        {{ "action"|trans }}
+                                        {% if villumi %}
+                                            <i class="fa fa-info-circle" title="{{ 'wixmp_action'|trans }}" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                    <tr data-row="order-{{ order.id }}" class="status-{{ order.status|lower }}">
+                                        {# {% if area == "admin" %} #}
+                                            <td>
+                                                <div class="animated-checkbox">
+                                                    <label>
+                                                        <input type="checkbox" name="order_ids[]" value="{{ order.id }}" class="wk_checkbox_item" {% if order.sellerFullfillmentStatus is defined and order.sellerFullfillmentStatus == 1 %} disabled = "true" {% endif %}><span class="label-text"> </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        {# {% endif %} #}
+                                        <td>
+                                            <a href="{% if area == 'mp-wix-seller' %}{{ path('wixmp_seller_sales_order_view',{storeHash:storeHash,order_id:order.id}) }}{% else %}{{ path('wixmp_sales_order_view',{storeHash:storeHash,order_id:order.id}) }}{% endif %}">{{ order.id }}</a>
+                                        </td>
+                                        {# {% if area == 'admin' %} #}
+                                            <td>{{ order.storeOrderNo }}</td>
+                                        {# {% endif %} #}
+                                        <td> {{ order.seller.seller }}</td>
+                                        <td> {{ order.customerName }}</td>
+                                        <td> {{ order.total|wk_price('app', storeHash)|raw }}</td>
+                                        <td> {{ order.createdAt|wk_time }}</td>
+                                        <td class="text-center">
+                                            {{ order.sellerStatus|wixmp_status_info|trans }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ order.fullfillmentStatus|wixmp_fullfillment_status_info|trans }}
+                                        </td>
+                                        <td>
+                                            {% if area is defined and area != "admin" %}
+                                                
+                                                {% if order.sellerFullfillmentStatus is defined and order.sellerFullfillmentStatus == 1 %}
+                                                    <img src="{{ asset('resource/images/truck.png') }}" alt="{{ 'fullfilled'|trans }}" width="34px" class="pro-img" data-toggle="tooltip" title="{{ 'fullfilled'|trans }}" style = "margin-left: 21px;">
+                                                {% else %}
+                                                    
+                                                    <input type="checkbox" for="seller_fullfillment_status" name="seller_fullfillment_status" id="seller_fullfillment_status-{{order.id}}" class="wk-bam-switch-input wk-wix-seller-fullfillment_status" value="1" data-base-url = "{{ path('wixmp_seller_sales_order_fullfillment', {order_id:order.id, storeHash:storeHash}) }}" {% if order.sellerFullfillmentStatus is defined and order.sellerFullfillmentStatus == 1 %} checked = "checked" disabled = "true" {% endif %} title = "{{ 'you_can_not_turnoff_toggle'|trans }}">
+                                                    <label for="seller_fullfillment_status-{{order.id}}" class="wk-bam-switch-label notification-toggle mt-0"></label>
+                                                {% endif %}
+                                                
+                                            {% else %}
+                                                {% if order.sellerFullfillmentStatus is defined and order.sellerFullfillmentStatus == 1 %}
+                                                    {{ "yes"|trans }}
+                                                {% else %}
+                                                    {{ "no"|trans }}
+                                                {% endif %}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if not newTheme %}
+                                                <a title="{{ 'sync'|trans }}" href="{% if area == 'mp-wix-seller' %}{{ path('wixmp_seller_sales_order_view',{storeHash:storeHash,order_id:order.id}) }}{% else %}{{ path('wixmp_sales_order_view',{storeHash:storeHash,order_id:order.id}) }}{% endif %}"><i class="btn btn-info fa fa-info"></i></a>
+                                                {% if (area == 'admin') and (plan_application_data['send_email_to_seller_manually'] is defined and plan_application_data['send_email_to_seller_manually'] is not empty and plan_application_data['send_email_to_seller_manually']=='1') %}
+                                                    <a href="{{ path('wixmp_sales_order_send_mail',{storeHash:storeHash,order_id:order.id}) }}" title="{{ 'send_mail'|trans }}"><i class="btn btn-md btn-primary fa fa-envelope"></i></a>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if newTheme %}
+                                                <div class="btn-group-action">
+                                                    <a class="btn btn-outline-action" title="{{ 'sync'|trans }}" href="{% if area == 'mp-wix-seller' %}{{ path('wixmp_seller_sales_order_view',{storeHash:storeHash,order_id:order.id}) }}{% else %}{{ path('wixmp_sales_order_view',{storeHash:storeHash,order_id:order.id}) }}{% endif %}">
+                                                        <i class="fa fa-info"></i>
+                                                    </a>
+                                                    {% if (area == 'admin') and (plan_application_data['send_email_to_seller_manually'] is defined and plan_application_data['send_email_to_seller_manually'] is not empty and plan_application_data['send_email_to_seller_manually']=='1') %}
+                                                        <a class="btn btn-outline-action" href="{{ path('wixmp_sales_order_send_mail',{storeHash:storeHash,order_id:order.id}) }}" title="{{ 'send_mail'|trans }}"><i class="fa fa-envelope"></i></a>
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="8" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="navigation">
+                        {{ knp_pagination_render(orders) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{# {{ form_widget(form._token) }} #}
+{{ form_end(form, {'render_rest': false}) }}    
+{% include 'common/filter.html.twig' with {include_path: '@wixmp_twig/view_templates/sales/components/search.html.twig', search: search} %}
+
+{% set import_include_path = get_file_path_to_include(app_path_prefix, '/view_templates/' , 'sales/components/_sync_order_modal') %}
+{% include import_include_path %}

@@ -1,0 +1,24 @@
+<div class="modal fade" id="csvExportSellers" tabindex="-1" role="dialog" aria-labelledby="csvExportSellersTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ 'export_seller'|trans }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% if area == 'admin' %}
+          {% set controller_link = 'Webkul\\Modules\\Wix\\WixmpBundle\\Controller\\Admin\\ImportExport\\ExportController::sellerExport' %}
+          {{ render(controller(controller_link, {app_code:app_code, storeHash:storeHash, area: area, formId: 'wixMpSellerExportForm'},{filterParams:app.request.query.all} )) }}
+        {% endif %}
+
+        {# <a class="wk-export-csv" href="#" data-href="{{ path( importexport_controller_prefix ~ 'export_sample_product_csv', {storeHash: storeHash, filename: "sample_file_"~ random() ~".csv"}) }}">Download Sample csv</a> #}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonExportFormClose">{{ 'close'|trans }}</button>
+        <button type="submit" class="btn btn-primary" form="wixMpSellerExportForm">{{ 'export'|trans }}</button>
+      </div>
+    </div>
+  </div>
+</div>

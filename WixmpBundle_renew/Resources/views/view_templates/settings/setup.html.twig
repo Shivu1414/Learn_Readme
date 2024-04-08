@@ -1,0 +1,61 @@
+{% set seller_login_url = url('mp_wix_seller_secure_login',{storeHash: storeHash}) %}
+{% set seller_register_url = url('mp_wix_seller_secure_register',{storeHash: storeHash}) %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title"></h5>
+                <div class="btn-group"></div>
+            </div>
+            <div class="tile-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th  width="180px">{{ 'seller_login_url'|trans }}:</th>
+                            <td><a href="{{ url('mp_wix_seller_secure_login',{storeHash: storeHash}) }}" target="_blank">{{ url('mp_wix_seller_secure_login',{storeHash: storeHash}) }}</a></td>
+                        </tr>
+                        <tr>
+                            <th  width="180px">{{ 'seller_registration_url'|trans }}:</th>
+                            <td><a href="{{ url('mp_wix_seller_secure_register',{storeHash: storeHash}) }}" target="_blank">{{ url('mp_wix_seller_secure_register',{storeHash: storeHash}) }}</a></td>
+                        </tr>
+                        <tr>
+                            <th  width="180px">{{ 'add_seller_login_and_register_link'|trans }}:</th>
+                            <td>
+                                <p>
+                                    <ul>
+                                        <li>{{'wixmp_setup_quickacess'|trans|raw}} (<a href="https://nimb.ws/UIJr6A" target = "_blank"> https://nimb.ws/UIJr6A</a>) </li>
+                                        <li>{{'wixmp_setup_openmenu'|trans|raw}} (<a href="https://prnt.sc/zz2MVflCEEYs" target = "_blank"> https://prnt.sc/zz2MVflCEEYs</a>) </li>
+                                        <li>{{'wixmp_setup_sitemenu'|trans|raw}} ( <a href="https://prnt.sc/J_JyqXIIcXDj" target = "_blank"> https://prnt.sc/J_JyqXIIcXDj </a>) </li>
+                                        <li>{{'wixmp_setup_addlink'|trans|raw}} ( <a href="https://prnt.sc/4QAyaTtJPSAD" target = "_blank"> https://prnt.sc/4QAyaTtJPSAD </a>) </li>
+                                        <li>{{'wixmp_setup_web_address'|trans|raw}} ( <a href="https://prnt.sc/cxJnzknKWRyC" target = "_blank"> https://prnt.sc/cxJnzknKWRyC </a>)</li>
+                                        <li>{{'wixmp_setup_publish'|trans|raw}} ( <a href="https://prnt.sc/Ho15g3E4QClA" target = "_blank"> https://prnt.sc/Ho15g3E4QClA </a>) </li>
+                                    </ul>
+                                </p>
+                                <p>
+                                    <b>{{ 'wixmp_setup_note'|trans }}</b>{{ 'wixmp_setup_note_desc'|trans }}.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title"></h5>
+            </div>
+            <div class="tile-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th  width="180px">{{ 'wixmp_app_review'|trans }}</th>
+                            <td>
+                                <a target = "_blank" href="https://www.wix.com/app-market/add-review/900d43b5-d736-4513-948c-391e919db789">https://www.wix.com/app-market/add-review/900d43b5-d736-4513-948c-391e919db789 </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<h4>{{ 'filter'|trans }}</h4>
+
+<form method="get">
+    <div class="form-group">
+        <label for="transaction_id">{{ 'id'|trans }}</label>
+        <input type="text" class="form-control auctions-form-control" style="width: 100% !important;" id="search_id" name="id" value="{% if search.id is defined %}{{ search.id }}{% endif %}" maxlength="30" onkeypress='return event.charCode >= 48 && event.charCode <= 57' >
+    </div>
+    {% if companyApplication.subCompanyApplications is not empty %}
+        <div class="form-group">
+            <label class="form-control-label" for="sub_app_code">{{ 'sub_app_code'|trans }}</label>
+            <select class="form-control" data-toggle="select2" name="sub_app_code" >
+                <option value="">{{'select_blank_option'|trans}}</option>
+                {% for subCompanyApplication in companyApplication.subCompanyApplications %}
+                    <option value="{{subCompanyApplication.application.code}}" {% if search.sub_app_code is defined and search.sub_app_code == subCompanyApplication.application.code %}selected{% endif %}>
+                        {{subCompanyApplication.application.name}}
+                    </option>
+                {% endfor %}
+            </select>
+        </div> 
+    {% endif %}
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="transaction_id">{{ 'transaction_start_date'|trans }}</label>
+                <input type="text" class="form-control  auctions-form-control wk_subscribe_start_date" style="width: 100% !important;" value="{% if search.transaction_start_date is defined %}{{ search.transaction_start_date }}{% endif %}" name="transaction_start_date" autocomplete="off" readonly="readonly">
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="transaction_id">{{ 'transaction_end_date'|trans }}</label>
+                <input type="text" class="form-control auctions-form-control wk_subscribe_end_date" style="width: 100% !important;" value="{% if search.transaction_end_date is defined %}{{ search.transaction_end_date }}{% endif %}" name="transaction_end_date" autocomplete="off" readonly="readonly">
+            </div>
+        </div>
+    </div>
+   
+    <button type="submit" class="btn btn-custom">{{ 'submit'|trans }}</button>
+    <button type="button" class="btn btn-custom-danger btn-clear">{{ 'search.clear'|trans }}</button>
+    <button type="button" class="btn btn-custom-danger filter-close">{{ 'cancel'|trans }}</button>
+</form>

@@ -1,0 +1,59 @@
+    {% set count = 0 %}
+    {% for customField in custom_field_list %}
+        {% set customFieldValue = '' %}
+        {% if custom_fields is defined and custom_fields is not empty %}
+            {% for key, value in custom_fields %}
+                {% if customField.id == key %}
+                    {% set customFieldValue = value %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% set optionArray = [] %}
+        {% if customField.options is defined and customField.options is not empty %}
+            {% set optionArray = customField.options|split(',') %}
+        {% endif %}
+        {% set required = false %}
+        {% set checked = "checked" %}
+        {% set class = '' %}
+        {% set feildName = customField.feildName %}
+        {% set label = customField.label %}
+        {% if customField.isRequired == true %}
+            {% set required = true %}
+            {% set class = 'wk-required' %}
+        {% endif %}
+         {% if customField.class is defined and customField.class is not empty %}
+            {% set class = class ~' '~ customField.class %}
+        {% endif %}
+        {% set count = count + 1 %}
+    {% if count % 2 != 0 %}    
+    <div class = "row">
+    {% endif %}
+        <div class="col-md-6">
+            <div class="form-group">
+            {% if customField.type == "checkbox" %}
+                <label class="form-check-label">{{label}}{% if required == true %}<span class="text-danger">*</span>{% endif %}</label>
+                <div class="form-check {% if required == true %}checkboxvalidate{% endif %}">
+                    {% for key, value in optionArray  %}
+                        <input type="{{customField.type}}" id="seller_form_{{feildName}}_{{key}}" name="seller_form[{{feildName}}][]" class="form-check-input" value="{{value}}" {% if value in customFieldValue %}{{checked}}{% endif %} {% if required == true %}required="required"{% endif %}>
+                        <label class="form-check-label" for="seller_form_{{feildName}}_{{key}}">{{value}}</label><br />
+                    {% endfor %}
+                </div>
+            {% elseif customField.type == "radio" %}
+                <label class="form-check-label">{{label}}{% if required == true %}<span class="text-danger">*</span>{% endif %}</label>
+                <div class="form-check {% if required == true %}radiovalidate{% endif %}">
+                    {% for key, value in optionArray  %}
+                        <input type="{{customField.type}}" id="seller_form_{{feildName}}_{{key}}" name="seller_form[{{feildName}}][]" class="form-check-input" value="{{value}}" {% if value in customFieldValue %}{{checked}}{% endif %} {% if required == true %}required="required"{% endif %}>
+                        <label class="form-check-label" for="seller_form_{{feildName}}_{{key}}">{{value}}</label><br />
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form_label(form.children[feildName],label , {'label_attr': {'class': class }}) }}
+                {{ form_widget(form.children[feildName],{'attr': {'placeholder' : label, 'class': class }, required: false, value: customFieldValue}) }}
+                <div class="text-danger reg-doc-error"></div>
+            {% endif %}
+            </div>
+        </div>
+    {% if count % 2 == 0 or count == custom_field_list|length %}
+    </div>
+    {% endif %}
+    {% endfor %}

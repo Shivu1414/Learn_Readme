@@ -1,0 +1,136 @@
+<form method="get">
+    <div class="filter-fields">
+        {# <div class="form-group">
+            <label for="search_id">{{ 'id'|trans }}</label>
+            <input type="text" class="form-control" id="search_id" name="id" value="{% if search.id is defined %}{{ search.id }}{% endif %}">
+        </div> #}
+        {# seller filter for admin #}
+        {# {{ dump(getWixCompanySellerList()) }} #}
+        {% if area == 'A' or area == 'admin' %}
+            <div class="form-group">
+                {% if villumi %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:filter,name:'seller',label:'seller',options:getWixCompanySellerList(),ajax:true, text:'seller', tooltip: 'wixmp_seller'|trans }} %}
+                {% else %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:filter,name:'seller',label:'seller',options:getWixCompanySellerList(),ajax:true, text:'seller'}} %}
+                {% endif %}
+            </div>
+        {% endif %}
+        {# filters for both seller and admin #}
+        {# no category mapping so filter can not be provided on category for products #}
+        {# <div class="form-group">    
+            {% include 'common/select_combo_box.html.twig'  with {data: {params:filter,name:'category',label:'category',options:getWixCategoryTree(), text:'name',multiple:true} } %}
+        </div> #}
+        <div class="form-group">
+            <label for="search_name">
+                {{ 'name'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_name'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="search_name" name="name" value="{% if filter.name is defined %}{{ filter.name }}{% endif %}">
+        </div>
+        {# <div class="form-group">
+            {% include 'common/date_range_box.html.twig'  with {
+                data: {
+                    to_name       : 'end_date',
+                    from_name     : 'start_date',
+                    selected_to   : "now"|date('Y-m-d'),
+                    selected_from : "now"|date('Y-m-d')
+                }
+            } %}    
+        </div><br><br> #}
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="transaction_id">
+                        {{ 'created_start_date'|trans }}
+                        {% if villumi %}
+                            <i class="fa fa-info-circle" title="{{ 'wixmp_created_start_date'|trans }}" aria-hidden="true"></i>
+                        {% endif %}
+                    </label>
+                    <input type="text" class="form-control wix_end_date" value="{% if search['start_date'] is defined %}{{ search['start_date'] }}{% endif %}" name="start_date">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="transaction_id">
+                        {{ 'created_end_date'|trans }}
+                        {% if villumi %}
+                            <i class="fa fa-info-circle" title="{{ 'wixmp_created_end_date'|trans }}" aria-hidden="true"></i>
+                        {% endif %}
+                    </label>
+                    <input type="text" class="form-control wix_end_date" value="{% if search['end_date'] is defined %}{{ search['end_date'] }}{% endif %}" name="end_date">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="min_price">
+                {{ 'price'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_price'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="min_price" name="min_price" value="{% if filter.min_price is defined %}{{ filter.min_price }}{% endif %}" placeholder="{{ 'min_price'|trans }}">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="max_price" name="max_price" value="{% if filter.max_price is defined %}{{ filter.max_price }}{% endif %}" placeholder="{{ 'max_price'|trans }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="search_sku">
+                {{ 'sku'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_sku'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="search_sku" name="sku" value="{% if filter.sku is defined %}{{ filter.sku }}{% endif %}">
+        </div>
+        <div class="form-group">
+            {% if villumi %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:filter,name:'status',label:'status',options:[{id:'N',text:'under_review'},{id:'A',text:'active'},{id:'D',text:'disabled'},{id:'B',text:'block'}], tooltip: 'wixmp_status'|trans }} %}
+            {% else %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:filter,name:'status',label:'status',options:[{id:'N',text:'under_review'},{id:'A',text:'active'},{id:'D',text:'disabled'},{id:'B',text:'block'}]}} %}
+            {% endif %}
+            {# <label for="search_status">{{ 'status'|trans }}</label>
+            <select class="form-control" id="search_status" name="status">
+                <option value {% if  filter.status is not defined %}selected{% endif %}>{{ 'all'|trans }}</option>
+                {% if area == 'admin' %}
+                    <option value="N" {% if  filter.status is defined and filter.status == 'N' %}selected{% endif %}>{{ 'new'|trans }}</option>
+                {% else %}
+                    <option value="N" {% if  filter.status is defined and filter.status == 'N' %}selected{% endif %}>{{ 'under_review'|trans }}</option>
+                {% endif %}
+                <option value="A" {% if  filter.status is defined and filter.status == 'A' %}selected{% endif %}>{{ 'active'|trans }}</option>
+                <option value="D" {% if  filter.status is defined and filter.status == 'D' %}selected{% endif %}>{{ 'disabled'|trans }}</option>
+                <option value="B" {% if  filter.status is defined and filter.status == 'B' %}selected{% endif %}>{{ 'block'|trans }}</option>
+            </select> #}
+        </div>
+        <div class="form-group">
+            {% if villumi %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:filter,name:'fullordering',label:'fullordering_order_by',options:[{id:'id ASC',text:'id_asc'},{id:'id DESC',text:'id_desc'},{id:'name ASC',text:'name_asc'},{id:'name DESC',text:'name_desc'},{id:'status ASC',text:'status_asc'},{id:'status DESC',text:'status_desc'}], tooltip: 'wixmp_fullordering_order_by'|trans }} %}
+            {% else %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:filter,name:'fullordering',label:'fullordering_order_by',options:[{id:'id ASC',text:'id_asc'},{id:'id DESC',text:'id_desc'},{id:'name ASC',text:'name_asc'},{id:'name DESC',text:'name_desc'},{id:'status ASC',text:'status_asc'},{id:'status DESC',text:'status_desc'}]}} %}
+            {% endif %}
+            
+
+            {# <label for="fullordering">{{ 'fullordering_order_by'|trans }}</label>
+            <select id="fullordering" name="fullordering" onchange="this.form.submit();" class="form-control">
+                <option value="">{{ 'sort_table_by'|trans }}</option>
+                <option value="id ASC" {% if  filter.fullordering is defined and filter.fullordering == 'id ASC' %}selected{% endif %}>{{ 'id_asc'|trans }}</option>
+                <option value="id DESC" {% if  filter.fullordering is defined and filter.fullordering == 'id DESC' %}selected{% endif %}>{{ 'id_desc'|trans }}</option>
+                <option value="name ASC" {% if  filter.fullordering is defined and filter.fullordering == 'name ASC' %}selected{% endif %}>{{ 'name_asc'|trans }}</option>
+                <option value="name DESC" {% if  filter.fullordering is defined and filter.fullordering == 'name DESC' %}selected{% endif %}>{{ 'name_desc'|trans }}</option>
+                <option value="status ASC" {% if  filter.fullordering is defined and filter.fullordering == 'status ASC' %}selected{% endif %}>{{ 'status_asc'|trans }}</option>
+                <option value="status DESC" {% if  filter.fullordering is defined and filter.fullordering == 'status DESC' %}selected{% endif %}>{{ 'status_desc'|trans }}</option>
+            </select> #}
+        </div>
+
+    </div>
+    <div class="filter-btn-block">
+        <button type="submit" class="btn btn-primary">{{ 'submit'|trans }}</button>
+        <button type="button" class="btn btn-danger btn-clear">{{ 'search.clear'|trans }}</button>
+        <button type="button" class="btn btn-secondary filter-close">{{ 'cancel'|trans }}</button>
+    </div>
+</form>

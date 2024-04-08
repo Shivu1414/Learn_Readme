@@ -1,0 +1,19 @@
+<div class="btn-group">
+    {% if area != 'mp-wix-seller' %}
+        <a title="{{ 'add'|trans }}" href="{{ path('wixmp_seller_add',{storeHash:storeHash}) }}" class="btn btn-outline-custom">
+            <span class="">
+                <i class="fa fa-plus"></i>
+            </span>
+            {{ 'wix_wixmp_new_seller'|trans }}
+        </a>
+
+        <button type="button" class="btn btn-secondary wk-setting-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-cog"></i>
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#csvExportSellers">
+                {{ 'export_seller'|trans }}
+            </a>
+        </div>
+    {% endif %}
+</div>

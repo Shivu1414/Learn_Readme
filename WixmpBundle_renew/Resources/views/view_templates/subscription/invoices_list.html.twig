@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title">
+                    {% include 'common/list_items.html.twig' %}
+                </h5>
+                <div class="btn-group">
+                    <span class="btn btn-secondary icon-btn wk-pointer wk-filter  wk-auctions-filter" title="{{ 'filter'|trans }}"><i class="fa fa-filter"></i>Filter</span>
+                    {% include 'common/filter.html.twig' with {include_path: '@auctions_twig/view_templates/subscription/components/search.html.twig', search: search} %}
+                </div>
+            </div>
+            <div class="tile-body table-body-text">
+                <section class="transaction">
+                    <div class="row mb-4">
+                        {# <div class="col-12">
+                            <h2 class="page-header">{{ title|trans }}</h2>
+                        </div> #}
+                    </div>
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            {% if orders is defined and orders is not empty %}
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'id'|trans }}</th>
+                                            <th>{{ 'plan'|trans }} / <small>({{ 'price'|trans }})</small></th>
+                                            <th>{{ 'application'|trans }} / <small>({{ 'company'|trans }})</small></th>
+                                            <th>{{ 'payment_method'|trans }} / <small>({{ 'subscription_id'|trans }})</small></th>
+                                            <th>{{ 'transaction_status'|trans }}</th>
+                                            <th>{{ 'date'|trans }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ path('app_subscription_transaction_view', { platform: platform, storeHash: storeHash, app_code: app_code, id: order.id}) }}">#{{ order.id }}</a>
+                                                </td>
+                                                {% if order.subscription is not null %}
+                                                    <td>
+                                                        {{ order.subscription.planApplication.plan.name }}
+                                                        <br>
+                                                        <small>({{ order.subscription.planApplication.plan.price|wk_price('super_admin')|raw }})</small>
+                                                    </td>
+                                                    <td>
+                                                        {{ order.companyApplication.application.name }}
+                                                        <br>
+                                                        <small>({{ order.companyApplication.company.name }})</small>
+                                                    </td>
+                                                    <td>
+                                                        {% if order.subscription.payment.name is defined %}{{ order.subscription.payment.name }}{% else %}-{% endif %}
+                                                        <br>
+                                                        <small>{% if order.subscription.subscriptionId is null %}-{% else %}{{ order.subscription.subscriptionId}}{% endif %}</small>
+                                                    </td>
+                                                {% else %}
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                    <td>
+                                                        {{ order.companyApplication.application.name }}
+                                                        <br>
+                                                        <small>({{ order.companyApplication.company.name }})</small>
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                    <td>
+                                                        -
+                                                    </td>
+                                                {% endif %}
+                                                <td>{{ order.status|order_status_label }}</td>
+                                                <td>{{ order.createdAt|wk_time('app', storeHash, 'sms_notification') }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="navigation">
+                                    {{ knp_pagination_render(orders) }}
+                                </div>
+                            {% else %}
+                                <div class="text-center text-danger">{{ 'no_records_found'|trans }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

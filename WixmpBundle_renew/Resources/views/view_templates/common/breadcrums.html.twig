@@ -1,0 +1,22 @@
+<div class="app-title">
+	{% if title is defined %}
+		<div>
+			<span>{{ title|trans }}</span>&ensp;
+			{% if list_count is defined %}
+				<span class="title-total">{{ list_count }}</span>
+			{% endif %}
+		</div>
+		{% if settingInfo is defined and settingInfo.value == "UPDATEFEB10" and downgrade is defined and downgrade %}
+			<div class="btn-group pull-right">
+				<div class="col-sm-6 my-2">
+					<a href="javascript:void(0)" class="btn btn-secondary" title="{{ 'wix_wixmp_back_to_old_version'|trans }}" id="back-to-old" data-href="{{ path('wixmp_update_theme',{storeHash:storeHash, 'theme':'default'}) }}" data-theme="default">
+						<i class="fa fa-undo" aria-hidden="true"></i>
+					</a>
+				</div>
+			</div>
+		{% endif %}
+	{% endif %}
+
+	{{ include(app_path_prefix ~ '/view_templates/' ~ template_name ~ '_breacrums_button.html.twig', ignore_missing = true) }}
+
+</div>

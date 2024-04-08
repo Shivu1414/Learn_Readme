@@ -1,0 +1,71 @@
+{# <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> #}
+  <script>
+//   $( function() {
+    
+//     $('#sortable-img').sortable({
+//         cursor: "move",
+//         connectWith: '#sortable-img',
+//         update: function(event, ui) {
+//             var changedList = this.id;
+//             var order = $(this).sortable('toArray');
+//             var positions = order.join(',');
+//             $("#image_sort").val(positions);
+//         }
+//     }); 
+//     $( "#sortable-img" ).disableSelection();
+//   } );
+  </script>
+{% if images is defined %}
+    <div class="wk-section">
+        <input type='hidden' value='' id="image_sort" name='form[image_sorting]'>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="90%">{{ 'image'|trans }}</th>
+                    {# <th width="50%">{{ 'description'|trans }}</th> #}
+                    <th width="10%">{{ 'action'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody id="sortable-img">
+            {#    {% if images is defined %} #}
+
+                    {% for key,image in images %}
+                        <tr class="ui-state-default" id="{{image.id}}">
+                            <td>
+                                <input type="hidden" name="form[product_image][{{ image.id }}][id]" value="image.id">
+                                {% if image.image is defined %}
+                                    {% include app_path_prefix ~ '/view_templates/catalog/components/_image.html.twig' with {image_url: image.image.url} %}
+                                {% endif %}
+                            </td>
+                            {#<td>
+                                <span class="" name="form[product_image][{{ image.id }}][description]">{{ image.description }}</span>
+                            </td>#}
+                            {# <td> #}
+                                {# {% if not image.is_thumbnail %}                                    
+                                    <a class="btn btn-primary thumb-btn" href="{{ path(controller_prefix ~ 'product_image_update_make_default', {storeHash:storeHash, product_id:prod_id, api_product_id:api_product.id, image_id:image.id, current_url:current_url}) }}">{{ 'make_default'|trans }}</a>                                    
+                                {% else %}
+                                    {{ 'default'|trans }}
+                                {% endif %} #}
+                            {# </td> #}
+                            <td>
+                                {# {% if not image.is_thumbnail %} #}
+                                    {% if sellerSettings.product_image_required is not defined or (sellerSettings.product_image_required is defined and sellerSettings.product_image_required.value is empty ) or (sellerSettings.product_image_required is defined and sellerSettings.product_image_required.value and key != 0) %}
+                                        {# <a class="text-danger wk-post" href="{{ path(controller_prefix ~ 'product_image_delete', {storeHash:storeHash, platform_product_id:api_product.id, product_id:prod_id, image_id:image.id, current_url:current_url}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a> #}
+
+                                        <a class=" text-danger wk-delete-row-js" href="#" data-url="{{ path(controller_prefix ~ 'product_image_delete', {storeHash:storeHash, platform_product_id:api_product.id, product_id:prod_id, image_id:image.id, current_url:current_url}) }}" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+                                    {% endif %}
+                                {# {% endif %} #}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {# {% else %}
+                    <tr>
+                        <td colspan="4">{{ 'no_records_found'|trans }}</td>
+                    </tr>
+                {% endif %} #}
+            </tbody>
+        </table>
+    </div>
+{% endif %}

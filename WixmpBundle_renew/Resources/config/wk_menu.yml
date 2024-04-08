@@ -1,0 +1,150 @@
+dashboard:
+  icon_class: fa fa-home
+  route: wixmp_dashboard
+  child: null
+orders:
+  icon_class: fa fa-shopping-cart
+  routes:
+    - wixmp_sales_order_manage
+    #- wixmp_sales_shipment_manage
+  child:
+    order:
+        icon_class: fa fa-shopping-cart
+        route: wixmp_sales_order_manage
+    # shipment:
+    #     icon_class: fa fa-truck
+    #     #route: wixmp_sales_shipment_manage
+products:
+  icon_class: fa fa-product-hunt
+  routes:
+    - wixmp_catalog_category_manage
+    - wixmp_catalog_product_manage
+    #- wixmp_catalog_product_options_manage
+  child:
+    categories:
+      icon_class: fa fa-list-ul
+      route: wixmp_catalog_category_manage
+    product:
+      icon_class: fa fa-product-hunt
+      route: wixmp_catalog_product_manage
+    # catalogue.product.options:
+    #     icon_class: fa fa-cubes
+    #     route: wixmp_catalog_product_options_manage
+# users:
+#   icon_class: fa fa-users
+#   routes:
+#     - wixmp_user_seller_manage
+#     - wixmp_user_seller_manage
+#   child:
+#     seller_admin:
+#         icon_class: fa fa-user
+#         route: wixmp_user_seller_manage
+#     customer:
+#         icon_class: fa fa-user
+#         route: wixmp_user_customer_manage
+seller_control:
+  icon_class: fa fa-building
+  routes:
+    - wixmp_seller_manage
+    - wixmp_seller_archieve_manage
+    - wixmp_seller_plan_manage
+    - wixmp_seller_accounting_manage
+    - wixmp_seller_commission_manage
+    - wixmp_seller_accounting_payout_transactions
+#     - wixmp_seller_documents_manage
+#     - wixmp_seller_questions_manage
+  child:
+    manage_seller_companies:
+      icon_class: fa fa-building
+      route: wixmp_seller_manage
+    manage_archieve_seller_companies:
+      icon_class: fa fa-archive
+      route: wixmp_seller_archieve_manage
+    seller_plans:
+      icon_class: fa fa-money
+      route: wixmp_seller_plan_manage
+    accounting:
+        icon_class: fa fa-calculator
+        route: wixmp_seller_accounting_manage
+    seller_commission:
+        icon_class: fa fa-percent
+        route: wixmp_seller_commission_manage
+#         # available_stores: 
+#         #   [
+#         #     g49lb9sk5a,
+#         #     rdabko64cy
+#         #   ]
+    payout_transactions:
+        icon_class: fa fa-money
+        route: wixmp_seller_accounting_payout_transactions
+#         # available_stores: 
+#         #   [
+#         #     g49lb9sk5a,
+#         #     rdabko64cy
+#         #   ]
+    
+#     documents:
+#         icon_class: fa fa-file
+#         route: wixmp_seller_documents_manage
+#         available_stores: 
+#           [
+#             gnuypjm22u
+#           ]
+    
+#     questions_answers:
+#         icon_class: fa fa-question-circle
+#         route: wixmp_seller_questions_manage
+#         available_stores: 
+#           [
+#             gnuypjm22u
+#           ]
+
+#     seller_reviews:
+#         icon_class: fa fa-star-half-o
+#         route: wixmp_seller_review_manage
+#         available_stores: 
+#           [
+#             gnuypjm22u
+#           ]
+setting:
+  icon_class: fa fa-cogs
+  routes:
+    - wixmp_setting_setup
+    - wixmp_setting_general
+    - wixmp_setting_email
+    - wixmp_setting_support
+    - wixmp_setting_seller
+    - wixmp_setting_domain
+  child:
+    settings_setup:
+      icon_class: fa fa-cog
+      route: wixmp_setting_setup
+    general:
+      icon_class: fa fa-cog
+      route:  wixmp_setting_general
+    setting_seller:
+      icon_class: fa fa-cog
+      route: wixmp_setting_seller
+    email_conf:
+      icon_class: fa fa-cog
+      route: wixmp_setting_email   
+    settings_domain:
+      condition: domain_mapping
+      icon_class: fa fa-globe
+      route:  wixmp_setting_domain
+    support:
+      icon_class: fa fa-cog
+      route:  wixmp_setting_support 
+wixmp_userguide: 
+  icon_class: fa fa-book
+  routes:
+    - wixmp_setting_userguide_blog
+    - wixmp_setting_userguide_video
+  target: _blank
+  child:
+    wixmp_userguide_blog_setup:
+      icon_class: fa fa-rss-square
+      route: wixmp_setting_userguide_blog
+    wixmp_userguide_video_setup:
+      icon_class: fa fa-play
+      route:  wixmp_setting_userguide_video

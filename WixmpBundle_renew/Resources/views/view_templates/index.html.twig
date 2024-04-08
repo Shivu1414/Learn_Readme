@@ -1,0 +1,165 @@
+{% extends 'application/index.html.twig' %}
+{% block head_stylesheet %}
+   {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('resource/Wix/WixmpBundle/assets/css/style.css') }}">
+    {% if settingInfo is defined and settingInfo.value == "UPDATEFEB10" %}
+        <link rel="stylesheet" href="{{ asset('resource/Wix/WixmpBundle/assets/css/new_style.css') }}">
+    {% endif %}
+    {% if companyApplication is not null and (companyApplication.company.storehash == 'RishabhStore-SAAS727a' or companyApplication.company.storehash == 'VILLUMIb6f3') %}
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Fahkwang:ital,wght@0,500;1,200;1,400&family=Inter:wght@500;600&family=Montserrat:wght@200&display=swap" rel="stylesheet" class="Montserrat">
+            <style>
+        body {
+            font-family: 'Fahkwang', sans-serif;
+            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .input-group-text {
+                font-family: 'YourPrimaryFont', Arial, sans-serif;
+        }
+        </style>
+    {% endif %}
+
+{% endblock %}
+
+{% block head_script %}
+    {{ parent() }} 
+    <script type="text/javascript">
+        window.wkMpTrans = {
+            'delete_item' : "{{ 'delete_item' | trans }}",
+            'are_you_sure': "{{ 'are_you_sure' | trans }}",
+            'cancel_btn'  : "{{ 'cancel_btn' | trans }}",
+            'ok_btn'      : "{{ 'ok_btn' | trans }}",
+            'name'        : "{{ 'name'|trans }}",
+            'value'       : "{{ 'value'|trans }}",
+            'customfield_error_msg': "{{ 'customfield_error_msg'|trans }}",
+            'unique_value_required' : "{{ 'unique_value_required'|trans }}",
+            'required_field' : "{{ 'required_field'|trans }}",
+            'ajaxjobsModalTitle': "{{ 'ajaxjobs.modal_title'|trans }}",
+            'modalClose': "{{ 'modal.close'|trans }}",
+            'ajaxjobsProcessingJobs': "{{ 'ajaxjobs.processing_jobs'|trans }}",
+            'messageText': "{{ 'message_text'|trans }}",
+            'cancelRunningJobs': "{{ 'ajaxjobs.cancel_running_jobs'|trans }}",
+            'select_item_for_batch_action_title': "{{ 'alert.select_item_for_batch_action_title'|trans }}",
+            'select_item_for_batch_action': "{{ 'alert.select_item_for_batch_action'|trans }}",
+            'confirm_batch_action': "{{ 'confirm_to_process_batch_action'|trans }}",
+            'ajaxjobs_disable_products': "{{ 'ajaxjobs.modal_title.disable_product'|trans }}",
+            'seller_disabled_successfully': "{{ 'seller.disabled'|trans }}",
+            'required_image_error_msg': "{{'required_image_error_msg'|trans}}",
+            'billing_details': "{{ 'billing_details'|trans }}",
+            'shipping_details': "{{ 'shipping_details'|trans }}",
+            'phone': "{{ 'phone'|trans }}",
+            'order': "{{ 'order'|trans }}",
+            'order_date': "{{ 'order_date'|trans }}",
+            'ship_method': "{{ 'ship_method'|trans }}",
+            'date_shipping': "{{ 'date_shipping'|trans }}",
+            'tracking_no': "{{ 'tracking_no'|trans }}",
+            'shipped_items': "{{ 'shipped_items'|trans }}",
+            'short_qty': "{{ 'short_qty'|trans }}",
+            'sku': "{{ 'sku'|trans }}",
+            'product_name': "{{ 'product_name'|trans }}",
+            'bin_picking_number': "{{ 'bin_picking_number'|trans }}",
+            'order_not_found': "{{ 'order_not_found'|trans }}",
+            'unable_to_print_slip': "{{ 'unable_to_print_slip'|trans }}",
+            'packaging_slip_for_shipment': "{{ 'packaging_slip_for_shipment'|trans }}",
+            'comments': "{{ 'comments'|trans }}",
+            'image': "{{ 'image'|trans }}",
+            'enterValidUrl' : "{{ 'enter_valid_url'|trans }}",
+            'select_item_for_download_packing_slip': "{{ 'select_item_for_download_packing_slip'|trans }}",
+            'select_item_for_send_bulk_mail': "{{ 'select_item_for_send_bulk_mail'|trans }}",
+            'select_item_for_download_document': "{{ 'select_item_for_download_document'|trans }}",
+            'warning_company_name_required' : "{{ 'warning_company_name_required'|trans }}",
+            'warning_company_atleast3' : "{{ 'warning_company_atleast3'|trans }}",
+            'warning_company_atmost40' : "{{ 'warning_company_atmost40'|trans }}",
+            'warning_email_required' : "{{ 'warning_email_required'|trans }}",
+            'warning_enter_valid_email' : "{{ 'warning_enter_valid_email'|trans }}",
+            'warning_phone_required' : "{{ 'warning_phone_required'|trans }}",
+            'warning_phone_invalid' : "{{ 'warning_phone_invalid'|trans }}",
+            'warning_phone_atleast8' : "{{ 'warning_phone_atleast8'|trans }}",
+            'warning_phone_atmost15' : "{{ 'warning_phone_atmost15'|trans }}",
+            'warning_address_required' : "{{ 'warning_address_required'|trans }}",
+            'warning_city_required' : "{{ 'warning_city_required'|trans }}",
+            'warning_state_required' : "{{ 'warning_state_required'|trans }}",
+            'warning_zip_required' : "{{ 'warning_zip_required'|trans }}",
+            'warning_zip_invalid' : "{{ 'warning_zip_invalid'|trans }}",
+            'warning_zip_atleast4' : "{{ 'warning_zip_atleast4'|trans }}",
+            'warning_zip_atmost8' : "{{ 'warning_zip_atmost3'|trans }}",
+            'seller_archived_successfully': "{{ 'seller.archived'|trans }}",
+            'wixmp_archive_item_question' : "{{ 'wixmp_archive_item_question'|trans }}",
+            'storeHash' :"{{ companyApplication.getCompany.getStoreHash }}",
+            'area' : "{{area}}",
+            'no_data' :  "{{ 'data_not_availble'|trans }}",
+            'select_a_region' :  "{{ 'select_a_region'|trans }}",
+            'select_an_appellation' :  "{{ 'select_an_appellation'|trans }}",
+            'select_a_classification' :  "{{ 'select_a_classification'|trans }}",
+            'select_awards' :  "{{ 'select_awards'|trans }}",
+            'select_awards_value' :  "{{ 'select_awards_value'|trans }}",
+            'confirm_to_process_batch_action' :  "{{ 'confirm_to_process_batch_action'|trans }}",
+            'wix_wixmp_cannot_unarchive_item': "{{ 'wix_wixmp_cannot_unarchive_item'|trans }}",
+            'wix_wixmp_unarchived_item': "{{ 'wix_wixmp_unarchived_item'|trans }}",
+            'wix_wixmp_send_payout_question': "{{ 'wix_wixmp_send_payout_question'|trans }}",
+            'wix_wixmp_back_to_old_version': "{{ 'wix_wixmp_back_to_old_version'|trans }}",
+            'wix_wixmp_update_installed': "{{ 'wix_wixmp_update_installed'|trans }}",
+            'wix_wixmp_update_failed': "{{ 'wix_wixmp_update_failed'|trans }}",
+            'wix_wixmp_downgraded_old_version': "{{ 'wix_wixmp_downgraded_old_version'|trans }}",
+        }
+    </script>
+
+    {{ encore_entry_script_tags('Wix/WixmpBundle/assets/js/script') }}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}
+
+{% block menu %}
+    {% if menu is defined and menu == true %}
+        <!-- Sidebar menu-->
+        <div class="app-sidebar__overlay" data-toggle="sidebar">
+        </div>
+        <aside class="app-sidebar">
+            {# include user profile summary here #}
+
+{# Not able to find that reference twig. #}
+
+            {% if app.user %}
+                {% include 'application/views/common/user_profile_summary.html.twig' %}
+            {% endif %}
+            
+            {% if area == 'mp-wix-seller' %}
+                {% include app_path_prefix ~ '/view_templates/common/menu.html.twig' %}
+            {% else %}
+                {% include 'application/views/common/menu.html.twig' %}
+            {% endif %}
+        </aside>
+    {% endif %}
+{% endblock %}
+
+{% block main_content %}
+    {# <div class="wk-hidden wk-overlay"> #}
+    
+    <div class="wk-overlay">
+        <div class="m-loader mr-4 text-center">
+            <svg class="m-circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"/>
+            </svg>
+        </div>
+    </div>
+    <main class="{% if breadcrums is defined and breadcrums == true %}app-content{% endif %}">
+        {% if breadcrums is defined and breadcrums == true %}
+            {% if settingInfo is defined and settingInfo.value == "UPDATEFEB10" %}
+            {# <h1>  hello </h1> #}
+                {% include app_path_prefix ~ '/view_templates/common/breadcrums.html.twig' %}
+            {% else %}
+            {# <h1>  hello </h1> #}
+                {% include 'application/views/common/breadcrums.html.twig' %}
+            {% endif %}
+        {% endif %}
+        {# {% include app_path_prefix ~ '/view_templates/' ~ template_name ~ '.html.twig' %} #}
+
+        {% set include_path = get_file_path_to_include(app_path_prefix, '/view_templates/' , template_name) %}
+        {{template_name}}
+        {{ dump(include_path) }}
+        {% include include_path %}
+       
+    </main>
+{% endblock %}
+

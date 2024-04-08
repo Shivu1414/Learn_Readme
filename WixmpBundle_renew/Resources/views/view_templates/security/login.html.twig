@@ -1,0 +1,213 @@
+<section class="material-half-bg">
+    <div class="cover"></div>
+</section>
+<div class="messages" style="display: none" id = "wix-login-captcha-msg">
+  <div class="alert alert-dismissible alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <span id = "wix-login-captcha-msg-span"></span>
+    </div>
+</div>
+<section class="login-content">
+    <div class="logo">
+        <div class="company-logo">
+            {% if company is not null and company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3' %}
+                    <svg class="villum-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 514.6 144.14">
+                            <defs>
+                                <style>.cls-1, .cls-2 { fill: #fff; } .cls-2 { font-size: 30px; margin-left:10%; font-family: Montserrat-Light, Montserrat; font-weight: 300; letter-spacing: 0.1em; } .cls-3 { letter-spacing: 0.1em; } .cls-4 { letter-spacing: 0.1em; }</style>
+                            </defs>
+                            <g id="Layer_2" data-name="Layer 2">
+                                <g id="Capa_1" data-name="Capa 1">
+                                <path class="cls-1" d="M84.06,0,43.33,90.55H40.74L0,0H3L42,87.05,81.09,0Z"/>
+                                <path class="cls-1" d="M100.62,0h2.59V90.55h-2.59Z"/>
+                                <path class="cls-1" d="M137.61,0h2.58V88.09h53.93v2.46H137.61Z"/>
+                                <path class="cls-1" d="M212.62,0h2.58V88.09h53.93v2.46H212.62Z"/>
+                                <path class="cls-1" d="M477.61,0V90.55H475v-85L433.77,77.74h-1.55L391,5.83V90.55h-2.59V0h2.2L433,74.25,475.41,0Z"/>
+                                <path class="cls-1" d="M512,0h2.59V90.55H512Z"/>
+                                <path class="cls-1" d="M350.06,68.22a53,53,0,0,0,2.1-15.71V0h2.59V52.64q0,18.89-9.18,28.58t-25.74,9.7q-16.56,0-25.74-9.7t-9.18-28.58V0h2.59V52.51Z"/>
+                                <text class="cls-2" x="90" y="120">A</text>
+                                <text class="cls-2" style="text-transform:lowercase" x="140" y="120">drop of wine</text>
+                                </g>
+                            </g>
+                    </svg>
+
+                    {# <svg class="villum-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 514.6 144.14"><defs><style>.cls-1,.cls-2{fill:#fff;}.cls-2{font-size:23.08px;font-family:Montserrat-Light, Montserrat;font-weight:300;letter-spacing:0.17em;}.cls-3{letter-spacing:0.15em;}.cls-4{letter-spacing:0.17em;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Capa_1" data-name="Capa 1"><path class="cls-1" d="M84.06,0,43.33,90.55H40.74L0,0H3L42,87.05,81.09,0Z"/><path class="cls-1" d="M100.62,0h2.59V90.55h-2.59Z"/><path class="cls-1" d="M137.61,0h2.58V88.09h53.93v2.46H137.61Z"/><path class="cls-1" d="M212.62,0h2.58V88.09h53.93v2.46H212.62Z"/><path class="cls-1" d="M477.61,0V90.55H475v-85L433.77,77.74h-1.55L391,5.83V90.55h-2.59V0h2.2L433,74.25,475.41,0Z"/><path class="cls-1" d="M512,0h2.59V90.55H512Z"/><path class="cls-1" d="M350.06,68.22a53,53,0,0,0,2.1-15.71V0h2.59V52.64q0,18.89-9.18,28.58t-25.74,9.7q-16.56,0-25.74-9.7t-9.18-28.58V0h2.59V52.51Z"/><text class="cls-2" transform="translate(150.4 138.11)">A d<tspan class="cls-3" x="49.27" y="0">r</tspan><tspan x="61.87" y="0">op of wi</tspan><tspan class="cls-4" x="182.06" y="0">n</tspan><tspan x="201.45" y="0">e</tspan></text></g></g></svg> #}
+            {% endif %}
+            {% if company.logoUrl is not empty %}
+                <img src="{{ company.logoUrl }}" alt="" />
+            {% endif %}
+        </div>
+        {% if company is defined and (company.storehash != 'RishabhStore-SAAS727a' and company.storehash != 'VILLUMIb6f3') %}
+            <h2>{{ company.name }}</h2>
+        {% endif %}
+    </div>
+    <div class="login-box">
+        {% if error is defined and error != null %}
+            <div class="text-danger text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <form class="login-form" method="post" id = "wix-seller-login-form">
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>{{ "wix_wixmp_sign_in"|trans }}</h3>
+            <div class="form-group">
+                <label class="control-label wk-required" for="username">{{ "username"|trans }}</label>
+                <input id="username" class="form-control" name="_username" type="text" placeholder="{{ 'username'|trans }}" autofocus>
+            </div>
+            <div class="form-group">
+                <label class="control-label wk-required" for="password">{{ "password"|trans }}</label>
+                <input id="password" class="form-control" name="_password" type="password" placeholder="{{ 'password'|trans }}">
+            </div>
+            
+            {% set isBtnDisabled = false %}
+            {% if setting_data['enable_google_captcha'] is defined and setting_data['enable_google_captcha'].value == 1 %}
+                
+                {% set google_captcha_site_key = "" %}
+                {% if setting_data['google_captcha_site_key'] is defined and setting_data['google_captcha_site_key'].value != null %}
+                    {% set google_captcha_site_key = setting_data['google_captcha_site_key'].value %}
+                {% endif %}
+
+                {% set google_captcha_secret_key = "" %}
+                {% if setting_data['google_captcha_secret_key'] is defined and setting_data['google_captcha_secret_key'].value != null %}
+                    {% set google_captcha_secret_key = setting_data['google_captcha_secret_key'].value %}
+                {% endif %}
+
+                {% if google_captcha_site_key != "" and google_captcha_secret_key != "" %}
+                    {% set isBtnDisabled = true %}
+                    <div class="row">
+                        <div class = "col-md-4">
+                            <div class="g-recaptcha" id = "g-recaptcha" data-callback = "reCaptchaCheck" data-expired-callback = "reCaptchaExpired" data-error-callback = "reCaptchaExpired" data-sitekey="{{ google_captcha_site_key }}" style = "transform:scale(0.89); transform-origin:0 0;" data-href = "{{ path('mp_wix_seller_secure_verify_captcha_cred',{storeHash:storeHash}) }}"></div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div class="form-group">
+                <div class="utility">
+                    <div class="animated-checkbox">
+                        <label>
+                            <input type="checkbox" id="remember_me" name="_remember_me" checked><span class="label-text">{{ 'wix_wixmp_stay_signed_in'|trans }}</span>
+                        </label>
+                    </div>
+                    <p class="semibold-text mb-2"><a href="#" data-flip="2" data-toggle="flip">{{ 'wix_wixmp_forgot_password'|trans }} ?</a></p>
+                </div>
+            </div><br>
+            <div class="form-group btn-container mb-2">
+                <button class="btn btn-primary btn-block" id = "wix_seller_login_btn" {% if isBtnDisabled %} disabled {% endif %}><i class="fa fa-sign-in fa-lg fa-fw"></i>{{ "wix_wixmp_sign_in"|trans }}</button>
+            </div>
+            <div class="text-center"><a href="{{ path('mp_wix_seller_secure_register',{storeHash:storeHash}) }}">{{ "register_here"|trans }}</a></div>
+        </form>
+
+        {% form_theme seller_forgot_pwd 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(seller_forgot_pwd, {attr:{ class:"forget-form" }, action: path('mp_wix_seller_secure_forgot_password', {storeHash:storeHash}) }   )  }}
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>{{ 'wix_wixmp_forgot_password'|trans }} ?</h3>
+            <div class="form-group">
+                {{ form_widget(seller_forgot_pwd) }}
+            </div>
+            <div class="form-group btn-container">
+                <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>{{ 'wix_wixmp_reset'|trans }}</button>
+            </div>
+            <div class="form-group mt-3">
+                <div class="utility">
+                    <p class="semibold-text mb-0">
+                        <a href="#" data-flip="1" data-toggle="flip">
+                            <i class="fa fa-angle-left fa-fw"></i> 
+                            {{ 'back_to_login'|trans }}
+                        </a>
+                    </p>
+                    <p class="semibold-text mb-2">
+                        <a href="#" data-flip="3" data-toggle="flip">{{ 'forgot_username'|trans }} ?</a>
+                    </p>
+                </div>
+            </div>
+        {{ form_end(seller_forgot_pwd) }}
+        {#  #}
+        <form class="forget-username-form" naem="forget_username" method="post" action={{ path('mp_wix_seller_secure_forgot_username', {storeHash:storeHash}) }}>
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>{{ "forgot_username"|trans }} ?</h3>
+            <div class="form-group">
+                <label class="control-label wk-required" for="email">{{ "wix_wixmp_email"|trans }}</label>
+                <input id="email" class="form-control" name="_email" type="text" placeholder="{{ 'wix_wixmp_email'|trans }}" autofocus>
+            </div>
+            <div class="form-group btn-container">
+                <button class="btn btn-primary btn-block">
+                    {{ 'submit'|trans }}
+                </button>
+            </div>
+            <div class="form-group mt-3">
+                <div class="utility">
+                    <p class="semibold-text mb-0">
+                        <a href="#" data-flip="1" data-toggle="flip">
+                            <i class="fa fa-angle-left fa-fw"></i> 
+                            {{ 'wix_wixmp_back_to_login'|trans }}
+                        </a>
+                    </p>
+                    {# <p class="semibold-text mb-2">
+                        <a href="#" data-flip="2" data-toggle="flip">{{ 'forgot_password'|trans }} ?</a>
+                    </p> #}
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<script>
+    function reCaptchaCheck()
+    {
+        var response = grecaptcha.getResponse();
+        var targetUrl = document.getElementById("g-recaptcha").getAttribute('data-href');
+
+        var formData = new FormData();
+        formData.append('captchaResponse', response);
+
+        localStorage.removeItem('isGoogleCaptchaCredVerified');
+
+        fetch(targetUrl, {
+            method: 'POST',
+            body: formData,
+        }).then((response) => response.json())
+        .then((data) => { 
+            
+            if (data.status) {
+
+                let errorEle = `<div class="alert alert-dismissible alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <span id = "wix-login-captcha-msg-span"></span>
+                    </div>`;
+
+                document.getElementById("wix-login-captcha-msg").innerHTML = errorEle;
+                document.getElementById("wix-login-captcha-msg").style.display = "block";
+                document.getElementById("wix-login-captcha-msg-span").innerHTML = data.msg;
+                document.getElementById("wix_seller_login_btn").setAttribute("disabled", true); 
+                
+                document.addEventListener('contextmenu', e => e.preventDefault());
+
+                document.onkeydown = function(e) {
+                    if(event.keyCode == 123) {
+                        return false;
+                    }
+                    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                        return false;
+                    }
+                    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                        return false;
+                    }
+                    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                        return false;
+                    }
+                    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                        return false;
+                    }
+                }
+
+            } else {
+                localStorage.setItem('isGoogleCaptchaCredVerified', true);
+                document.getElementById("wix-login-captcha-msg").style.display = "none";
+                document.getElementById("wix_seller_login_btn").removeAttribute("disabled");
+            }
+        });
+
+        //document.getElementById("wix_seller_login_btn").removeAttribute("disabled");
+    }
+
+    function reCaptchaExpired(){
+        document.getElementById("wix_seller_login_btn").setAttribute("disabled", true);
+    }
+</script>

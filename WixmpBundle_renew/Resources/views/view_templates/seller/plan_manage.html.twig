@@ -1,0 +1,136 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                <h5 class="title">
+                    {% include 'common/list_items.html.twig' %}
+                </h5>
+                <div class="btn-group">
+                    <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}">
+                        <i class="fa fa-filter"></i>
+                        {% if newTheme %}
+                            <span class="span-text-bold">
+                                {{ 'filter'|trans }}
+                            </span>
+                        {% endif %}
+                    </span>
+                    {% if not newTheme %}
+                        <a title="{{ 'add'|trans }}" href="{{ path('wixmp_seller_plan_add',{storeHash:storeHash}) }}" class="btn btn-primary icon-btn wk-pointer"><span ><i class="fa fa-plus"></i></span></a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="tile-body">
+                <table class="table {{ newTheme ? 'tile-table' : 'table-responsive' }}" id="manage_user">
+                    <thead>
+                        <tr>
+                            {# <th width="1%">
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" name="check" title="check all" class="wk_checkbox_items">
+                                        <span class="label-text"></span>
+                                    </label>
+                                </div>
+                            </th> #}
+                            <th width="50%">
+                                {{ "plan"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_plan'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ "interval"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_interval'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ "updated_at"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_updated_at'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th width="15%">
+                                {{ "status"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_status'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th width="5%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for plan in plan_list %}
+                            <tr data-row="plan-{{ plan.id }}" class="status-{{ plan.status|lower }}">
+                                {# <td>
+                                    <div class="animated-checkbox">
+                                        <label>
+                                            <input type="checkbox" name="plan_ids[]" value="{{ plan.id }}" class="wk_checkbox_item">
+                                            <span class="label-text"></span>
+                                        </label>
+                                    </div>
+                                </td> #}
+                                <td>
+                                    <b>
+                                        <a href="{{ path('wixmp_seller_plan_update',{id:plan.id,storeHash:storeHash}) }}">{{ plan.plan }}</a>
+                                    </b><br>
+                                    <small>{{ plan.code }}</small>
+                                </td>
+                                <td>
+                                    {% if plan.intervalType == 'Y' %}{{ 'yearly'|trans }}
+                                    {% elseif plan.intervalType == 'H' %}{{ 'half-yearly'|trans }}
+                                    {% elseif plan.intervalType == 'Q' %}{{ 'quarterly'|trans }}
+                                    {% elseif plan.intervalType == 'M' %}{{ 'monthly'|trans }}
+                                    {% else %}{{ 'days'|trans }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ plan.updatedAt|wk_time('application',storeHash) }}</td>
+                                <td>
+                                    {% include "@marketplace_twig/view_templates/common/select_status.html.twig" with {
+                                        object : plan,
+                                        current_status: plan.status,
+                                        route: 'wixmp_seller_plan_status_change',
+                                        status_list: {
+                                            'A': 'active',
+                                            'D': 'disabled'
+                                        },
+                                        current_url:app.request.uri
+                                    } %}
+                                </td>
+                                <td>
+                                    {% if newTheme %}
+                                        <div class="btn-group-action">
+                                            <a class="btn btn-outline-action" href="{{ path('wixmp_seller_plan_update',{id:plan.id, storeHash:storeHash}) }}" title="{{ 'edit'|trans }}"><i class="fa fa-lg fa-edit"></i></a>
+                                            <a type="button" class="btn btn-outline-action btn-delete wk-delete-row-js" href="#" data-url="{{ path('wixmp_seller_plan_delete', {plan_id:plan.id, storeHash:storeHash}) }}" title="{{ 'delete'|trans }}"><i class="fa fa-lg fa-trash"></i></a>
+                                        </div>
+                                    {% else %}
+                                        <div class="btn-group text-center float-right">
+                                            <a class="btn btn-info" href="{{ path('wixmp_seller_plan_update',{id:plan.id, storeHash:storeHash}) }}" title="{{ 'edit'|trans }}">
+                                                <i class="fa fa-lg fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-info wk-delete-row-js" href="#" data-url="{{ path('wixmp_seller_plan_delete', {plan_id:plan.id, storeHash:storeHash}) }}" title="{{ 'delete'|trans }}">
+                                                <i class="fa fa-lg fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation">
+                    {{ knp_pagination_render(plan_list) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{# filter modal #}
+{% include 'common/filter.html.twig' with {
+    include_path : '@wixmp_twig/view_templates/seller/components/plan_search.html.twig',
+    search: search
+} %}

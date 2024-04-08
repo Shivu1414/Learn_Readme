@@ -1,0 +1,217 @@
+{% if area == 'admin' %}
+    {% set controller_prefix = 'wixmp_seller_' %}
+{% else %}
+    {% set controller_prefix = 'wixmp_seller_seller_' %}
+{% endif %}
+
+{% if area == 'admin' %}
+    {% set batch_options = [{id:'archive',text:'archieve'}] %}
+{% endif %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-title-w-btn">
+                {% if area != 'mp-wix-seller' %}
+                    <h5 class="title">
+                        {% include 'common/list_items.html.twig' %}
+                    </h5>
+                {% endif %}
+                               
+
+                <div class="btn-group">
+                    {% if area != 'mp-wix-seller' and not newTheme %}
+                        <a title="{{ 'add'|trans }}" href="{{ path('wixmp_seller_add',{storeHash:storeHash}) }}" class="btn btn-primary icon-btn wk-pointer">
+                            <span class="">
+                                <i class="fa fa-plus"></i> 
+                            </span>
+                        </a>
+                        
+                        <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}">
+                            <i class="fa fa-filter"></i>
+                        </span>
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#csvExportSellers">
+                                {{ 'export_seller'|trans }}
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if newTheme %}
+                        {% if area == 'admin' %}
+                            <span class="btn btn-secondary icon-btn wk-pointer wk-filter" title="{{ 'filter'|trans }}" style="padding: 8px 15px 0px 15px;">
+                                <i class="fa fa-filter"></i>
+                                <span class="span-text-bold">
+                                    {{ 'filter'|trans }}
+                                </span>
+                            </span>
+                            {% include app_path_prefix ~ '/view_templates/common/sellerBatchAction.html.twig' with {data:{options:batch_options, 'formName':'batch_action','name' : 'batch_action'}} %}
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="tile-title-w-btn">    
+                <div>  
+                {% if not newTheme%}
+                    {% if area == 'admin' %}
+                        <div class="custom-control-inline">
+                            {% include app_path_prefix ~ '/view_templates/common/sellerBatchAction.html.twig' with {data:{options:batch_options, 'formName':'batch_action','name' : 'batch_action'}} %}
+                        </div>
+                    {% endif %}  
+                {% endif %}  
+                </div>
+            </div>
+            <div class="tile-body">
+                <table class="table {{ newTheme ? 'tile-table' : 'table-responsive' }}" id="manage_user">
+                    <thead>
+                        <tr>
+                            {% if area != 'mp-wix-seller' %}
+                                <th width="1%">
+                                    <div class="animated-checkbox">
+                                        <label>
+                                            <input type="checkbox" name="check" title="check all" class="wk_checkbox_items"><span class="label-text"> </span>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th width="10%">
+                                    {{ "seller_id"|trans }}
+                                    {% if villumi %}
+                                        <i class="fa fa-info-circle" title="{{ 'wixmp_seller_id'|trans }}" aria-hidden="true"></i>
+                                    {% endif %}
+                                </th>
+                            {% endif %}
+                            <th width="20%">
+                                {{ "seller_company"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_seller_company'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th width="25%">
+                                {{ "email"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_email'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th width="10%">
+                                {{ "phone"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_phone'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th width="12%">
+                                {{ "updated_at"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_updated_at'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th width="15%" class="text-center">
+                                {{ "status"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_status'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ "action"|trans }}
+                                {% if villumi %}
+                                    <i class="fa fa-info-circle" title="{{ 'wixmp_action'|trans }}" aria-hidden="true"></i>
+                                {% endif %}
+                            </th>
+                            <th width="5%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for seller in seller_list %}
+                            <tr data-row="seller-{{ seller.id }}" class="status-{{ seller.status|lower }}">
+                                {% if area != 'mp-wix-seller' %}
+                                    <td>
+                                        <div class="animated-checkbox">
+                                            <label>
+                                                <input type="checkbox" name="seller_ids[]" value="{{ seller.id }}" class="wk_checkbox_item"><span class="label-text"> </span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>{{ seller.id }}</td>
+                                {% endif %}
+                                <td>
+                                    <b>
+                                        <a href="{% if area == 'mp-wix-seller' %}{{ path('wixmp_seller_seller_update',{seller_id:seller.id,storeHash:storeHash}) }}{% else %}{{ path('wixmp_seller_update',{seller_id:seller.id,storeHash:storeHash}) }}{% endif %}">{{ seller.seller }}</a>
+                                    </b><br>
+                                    <small>{{ seller.currentPlan.plan }}</small>
+                                </td>
+                                <td>{{ seller.email }}</td>
+                                <td>{{ seller.phone }}</td>
+                                <td>{{ seller.updatedAt|wk_time('application',storeHash) }}</td>
+                                <td class="text-center">
+                                    {% if area == 'mp-wix-seller' %}
+                                        {% if seller.status == 'A' %}{{ "active"|trans }}
+                                        {% else %}{{ "disabled"|trans }}
+                                        {% endif %}
+                                    {% else %}
+                                        {% if seller.status == 'N' %}
+                                            {% include "@wixmp_twig/view_templates/common/select_status.html.twig" with {object:seller,current_status:seller.status,route:'wixmp_seller_status_change',status_list:{'N':'new','A':'active','D':'disabled'}, current_url:app.request.uri|b64_encode,class:"seller-status" } %}
+                                        {% else %}
+                                            {% include "@wixmp_twig/view_templates/common/select_status.html.twig" with {object:seller,current_status:seller.status,route:'wixmp_seller_status_change',status_list:{'A':'active','D':'disabled'}, current_url:app.request.uri|b64_encode, class:"seller-status" } %}
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% include "@wixmp_twig/view_templates/seller/components/_dropdown_action.html.twig" with {
+                                        object : seller,
+                                        controller_prefix: controller_prefix,
+                                        extra: {}
+                                    } %}
+                                </td>
+                                <td>
+                                    {% if not newTheme%}
+                                        <div class="btn-group text-center float-right">
+                                            <a class="btn btn-info" href="{% if area == 'mp-wix-seller' %}{{ path('wixmp_seller_seller_update',{seller_id:seller.id,storeHash:storeHash}) }}{% else %}{{ path('wixmp_seller_update',{seller_id:seller.id,storeHash:storeHash}) }}{% endif %}" title="{{ 'edit'|trans }}">
+                                                <i class="fa fa-lg fa-edit"></i>
+                                            </a>
+                                            {% if area == 'admin' %}
+                                                {# <a class="btn btn-info wk-delete-row-js" href="#" data-url="{{ path('marketplace_seller_delete', {seller_id:seller.id, storeHash:storeHash}) }}">
+                                                <i class="fa fa-lg fa-trash"></i>
+                                            </a> #}
+                                            {% endif %}
+                                            {# <a class="btn btn-info" href="#"><i class="fa fa-lg fa-trash"></i></a> #}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if newTheme%}
+                                        <div class="btn-group-action">
+                                            <a class="btn btn-outline-action" href="{% if area == 'mp-wix-seller' %}{{ path('wixmp_seller_seller_update',{seller_id:seller.id,storeHash:storeHash}) }}{% else %}{{ path('wixmp_seller_update',{seller_id:seller.id,storeHash:storeHash}) }}{% endif %}" title="{{ 'edit'|trans }}"><i class="fa fa-lg fa-edit"></i></a>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="8" class="text-center text-danger">{{ "no_records_found"|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="navigation">
+                    {{ knp_pagination_render(seller_list) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{# {{ form_widget(form._token) }} #}
+{{ form_end(form, {'render_rest': false}) }}
+{% if area != 'mp-wix-seller' %}
+    {% include 'common/filter.html.twig' with {
+        include_path : '@wixmp_twig/view_templates/seller/components/seller_search.html.twig',
+        search: search
+    } %}
+{% endif %}
+
+{% set export_include_path = get_file_path_to_include(app_path_prefix, '/view_templates/' , 'seller/components/_export_seller') %}
+{% include export_include_path %}

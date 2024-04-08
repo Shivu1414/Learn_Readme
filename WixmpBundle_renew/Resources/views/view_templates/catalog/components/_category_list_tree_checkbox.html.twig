@@ -1,0 +1,45 @@
+{% if fieldName is not defined %}
+    {% set fieldName = "form[categories][]" %}
+{% endif %}
+{% if required is not defined or required %}
+    {% set requiredClass = "wk-categories-required wk-categories-label" %}
+{% else %}
+    {% set requiredClass = "wk-categories-label" %}
+{% endif %}
+{% for category_data in categoryTree %}
+            <table class="table table-hover category_table category_checkbox is-expanded">
+                <tbody>
+                    <tr width="100%">
+                        {% if level is not defined %}
+                            {% set level = 0 %}
+                        {% endif %}
+                        <td width="1%">
+                            <div class="animated-checkbox">
+                                <label class="{{requiredClass}}" for="{{ 'form_categories_' ~ category_data.collectionId }}">
+                                    <input id="{{ 'form_categories_' ~ category_data.collectionId }}" type="checkbox" name={{fieldName}} value="{{ category_data.collectionId }}" class="custom-control-input wk-categories-input wk_checkbox_item" {% if category_data.collectionId in selected %}checked{% endif %}/>
+                                    <span class="label-text"> </span>
+                                </label>
+                            </div>
+                        </td>
+                        <td width="50%">
+                            <div style="padding-left:{{ level }}px;" {% if category_data.children is defined and category_data.children is not empty %} class="hasChild" data-toggle="category_treeview" data-child-category="wkcategory_child_{{category_data.collectionId}}"{% endif %}>
+                                {% if category_data.children is defined and category_data.children is not empty %}<i class="treeview-indicator fa fa-angle-right"></i> {% endif %}<span class="">
+                                    {{ category_data.name }}
+                                </span>
+                            <div>
+                        </td>
+                        {% if hide_status is defined and hide_status == true %}
+                        {% else %}
+                            <td width="10%">{% if category_data.is_visible %} {{ "active"|trans }} {% else %} {{ "disabled"|trans }} {% endif %}</td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+            {% if category_data.children is defined and category_data.children is not empty %}
+                <div class="category-child-con is-expanded" id="wkcategory_child_{{category_data.collectionId}}">
+                    <div>
+                        {% include app_path_prefix ~ '/view_templates/catalog/components/_category_list_tree_checkbox.html.twig'  with {app_path_prefix:app_path_prefix, controller_prefix:controller_prefix, categoryTree: category_data.children, level: level + 20} %}
+                    </div>
+                </div>
+        {% endif %}
+{% endfor %}

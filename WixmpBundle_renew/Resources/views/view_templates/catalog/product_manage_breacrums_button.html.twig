@@ -1,0 +1,25 @@
+{% if area == 'admin' %}
+    {% set controller_prefix = 'wixmp_catalog_product_' %}
+{% else %}
+    {% set controller_prefix = 'wixmp_seller_catalog_product_' %}
+{% endif %}
+
+<div class="btn-group">
+	<a class="btn btn-outline-custom" title="{{ 'add'|trans }}" href="{{ path(controller_prefix ~ 'add',{storeHash:storeHash}) }}">
+		<i class="fa fa-plus"></i>
+		{{ 'wix_wixmp_new_product'|trans }}
+	</a>
+	<span class="btn btn-secondary wk-setting-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<i class="fa fa-cog"></i>
+	</span>
+	<div class="dropdown-menu">
+		{% if area == 'admin' %}
+			<span id="sync-products" data-toggle="ajaxjobs" class="dropdown-item wk-pointer" title="{{ 'sync'|trans }}" data-href="{{ path(controller_prefix ~ 'sync', {storeHash:storeHash}) }}">
+				{{ "sync_products"|trans }}
+			</span>
+		{% endif %}
+		<a class="dropdown-item" href="#" data-toggle="modal" data-target="#csvImportWixProducts">
+			{{ 'wix_wixmp_csv_import_product'|trans }}
+		</a>
+	</div>
+</div>

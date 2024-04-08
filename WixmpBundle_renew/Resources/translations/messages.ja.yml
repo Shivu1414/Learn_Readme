@@ -1,0 +1,798 @@
+admin_dashboard: ダッシュボード
+orders: 注文状況
+products: 商品
+product: 商品
+users: ユーザー
+seller_admin: 販売者管理者
+seller: 販売者
+accounting: 会計
+my_company: 私の会社
+company_profile: 会社概要
+company_setting: 会社設定
+sales: 売上高
+commission: コミッション
+order_id: 注文ID
+total: 合計
+image: 画像
+sku: SKU
+store_order_id: ストア注文Id
+sync: 同期
+customer_name: お客様のお名前
+seller_status: 販売状況
+pending: 保留
+shipped: 出荷
+partial_shipped: 一部出荷
+refunded: 払い戻し
+cancelled: キャンセル
+declined: 辞退
+awaiting_pickup: 集荷待ち
+awaiting_shipment: 出荷待ち
+completed: 完了
+awaiting_fullfillment: フルフィルメント待ち
+manual_verification_required: 手動による検証が必要
+disputed: 議論する
+partial_refunded: 一部返済
+order_details: 注文の詳細
+billing_details: 請求の詳細
+shipping_address: 配送先住所
+platform_order_id: プラットフォーム 注文ID
+shipping: 出荷
+quantity: 数量
+payout: お支払い
+subtotal: 小計
+categories: カテゴリ
+manage_page: 管理ページ
+categories_manage_page: カテゴリー管理
+parent: 親
+product_manage_page: 製品管理ページ
+product_image: 製品画像
+delete: 削除
+block: ブロック
+under_review: 審査中
+details: 詳細
+images: 画像
+inventory: 在庫
+custom_fields: カスタムフィールド
+extra_details: その他詳細
+summary: 概要
+Name: 名前
+phone2: 電話番号2
+seller_company_name: 販売企業名
+tax_class_id: 税クラスID
+avalara_product_tax_code: Avalara製品税コード
+product_tax_code: 納税者　税コード
+product_type: 製品タイプ
+physical: 物理的
+digital: デジタル
+downloadable_product: ダウンロード可能な製品
+product_weight: 重さ
+product_width: 横幅
+product_height: 縦幅
+product_depth: 製品の高さ
+product_code: 製品コード/SKU
+shipping_free: 送料無料
+free_shiipping_available_text: 送料無料
+fixed_cost_shipping_price: 固定コスト出荷価格
+desciption: 説明
+product_description: 製品概要
+availability: 可用性
+available: 利用可能
+preorder: 予約
+preorder_relase_date: 予約販売開始日
+preorder_message: 予約メッセージ
+is_preorder_only: 予約販売のみ
+remove_preorder_status_on_this_date: この日の予約状況を削除します
+inventory_tracking: 在庫追跡
+do_not_track_inventory: 在庫を追跡しない
+track_inventory_with_option: オプションにより在庫を管理
+track_inventory: 在庫追跡
+product_inventory_level: 製品在庫レベル
+product_inventory_warning_level: 製品在庫の警告レベル
+value: 価値
+no_records_found: レコードが見つかりません
+product_identifier: 製品識別番号
+Brand iBrandd: ID
+choose_an_existing_brand: 既存のブランドを選択します
+Sagaform: Sagaform
+product_upc: 製品UPC
+other_details:  その他詳細
+bin_picking_number: ビンピッキング番号
+product_warrenty: 製品保証
+product_layout_file: 製品レイアウトファイル
+required: 必須
+product_search_keyword: 製品検索キーワード
+product_availablity_description: 可用性
+visible: 見える
+product_is_visible_on_site: サイト上で製品を確認できます
+featured_product: 注目製品
+is_this_featured_product: この注目商品ですか？
+product_sort_order: 製品の並び順
+product_condition: 製品状態
+New: 新規
+Used: 中古
+Refurbished: 再生品
+is_condition_shown: 状態は表示されています
+show_condition_at_product_page: 製品に状態を表示します
+product_order_minimum_quantity: 製品注文の最小数量
+product_order_maximum_quantity: 製品注文の最大数量
+product_image_file: 製品画像ファイル
+or: または
+product_image_url: 商品画像URL
+add_image: 画像追加
+is_root: ルート
+yes: はい
+no: いいえ
+update_seller_adminstrator: 販売者管理者を更新します
+profile_info: プロフィール情報
+first_name: 氏名
+last_name: 姓名
+customer_company: 顧客企業
+store_credit: ストアクレジット
+ip: IP
+view: 表示
+customer_details: 顧客詳細
+notes: ノート
+updateAt: 更新日時
+createdAt: 作成日
+update_plan: 更新予定
+general_info: 一般情報
+contact_info: アドレス情報
+year: 年
+best_choice: ベストチョイス
+buy_now: 今すぐ購入
+current_plan: 現在の計画
+expire_on: 有効期限
+condition: 状態
+free: 無料
+max_email: 最大メール
+max_product: 最大製品
+create_payout: お支払いを作成
+id: ID
+max_price: 最高価格
+min_price: 最低価格
+type: タイプ
+reference: 参考
+transaction_amount: 取引金額
+order_placement: 発注先
+of: の
+amount: 金額
+comment: コメント
+create: 作成
+close: 閉じる
+total_sale: 総売上
+total_commission: 手数料の合計
+total_payout: お支払いの合計
+total_withdraw: 出金額の合計
+balance: バランス
+setting_seller: 販売者設定
+setting_header_products: 製品設定
+auto_approve_product: 製品自動承認
+wysiwyg: WYSIWYG
+plain: レーン
+tinymce: Tinymce
+setting_email: Eメール設定
+plan_upgrade_list: プラン
+buy: 購入
+company_settings: 企業設定
+message.product.sync.success_%s_result%__skip_%sk_result%: ストア製品は正常に同期されました Success- s_result & Skipped- sk_result
+seller_dashboard: ダッシュボード
+create_withdraw: 出金を作成する
+approved: 承認
+withdraw: 出金
+msg.forgot.password.updated: パスワードのリセットに成功しました。メールをご確認ください。
+sorry_seller_cannot_add_more_products: 製品の制限を超えています
+message.product.update.updated_successfully: データの更新に成功しました
+message.product.image.updated_successfully: 画像の更新に成功しました
+message.common.record_updated_successfully: データの更新に成功しました
+message.product.image.deleted_successfully: 画像の削除に成功しました
+message.product.image.image_upload_manadatory: 画像のアップロードは必須です
+update_seller: 販売者の更新
+message.common.plan_assigned_successfully: プランの割り当てが成功しました
+message.common.record_created_successfully: データ作成成功
+message.common.seller_setting_updated_successfully: 販売者設定の更新が完了しました
+message.common.domain_not_valid: ドメインが有効ではありません。あなたのドメインを確認しCNAMEを初めに作成してください。
+message.common.domain_not_exist: ドメインが存在しません。有効なドメインを提示してください。
+message.common.testmail_sent: テストメールが正常に作成されました
+message.common.testmail_not_sent: テストメールが送信されていません
+message.common.required_fields: 必須項目を入力してください
+message.order.store_not_having_any_new_order_to_import: インポートする新しい注文はありません
+seller_control: 販売者管理
+sorry_cannot_add_more_products: 製品追加数の制限に達しました
+manage_seller_companies: 販売会社管理
+seller_settings: 販売者設定
+seller_plans: 販売者プラン
+email_conf: Eメール設定
+max_products: 最大製品数
+max_sellers: 最大販売者数
+message.seller_register.profile_is_under_review_update_soon_with_mail: プロフィールは現在審査中です。近日中にメールでお知らせします。
+message.common.unable_to_change_status: ステータスを変更できません
+message.seller.assign.assigned_successfully: 販売者は正常に割り当てられました
+message.email_Sent_Success: 電子メールを正常に送信
+message.email_not_sent: メールが送信されませんでした
+register_here: 登録はこちら
+login_here: ログインはこちら
+seller_registration_url: 販売者登録URL
+seller_login_url: 販売者ログインURL
+settings_setup: Setup Instructions
+add_seller_login_and_register_link: 販売者ログイン＆登録フォームをホームページ上に設置します
+add_seller_profile_page: 出品者リスト／プロフィールページの追加
+create_plan: プランの作成
+sync_successfully: データの同期に成功しました
+message.product.add.please_choose_a_category: 初めにカテゴリを選択してください
+seller_account_registartion: 販売者登録
+a_new_seller_account_required_action: 新規販売者が正常に登録されました。プロフィールは審査中ですのでお待ちください。
+thanks_for_contacting_us_your_applciation_is_under_review_we_will_review_and_send_respose_accordiongly: ご連絡ありがとうございます。あなたのプロフィールは管理者が確認中です。
+profile_updated_successfully: プロフィールが正常に更新されました
+your_seller_profile_updated_successfully: 販売者プロフィールが正常に更新されました
+SELLER_APPLICATION_INFORMATION: 販売者アプリケーション情報
+status_update: ステータス更新
+withdraw_request_created: 出金リクエストを更新する
+a_new_withdraw_request_created_check_details_below: 販売者によって作成された出金リクエストの詳細を確認してください。
+message.common.unable_to_create_record: レコードを作成できません
+a_new_order_has_been_placed: 新しい注文が入りました
+date: 日付
+payout_created_successfully: お支払いが正常に作成されました。
+request_type: お支払いステータスは正常に変更されました
+payout_status_change: お支払いステータスは正常に変更されました
+payout_status_updated_please_check_details: 支払い状況が正常に変更されましたので、以下の詳細をご確認ください。
+seller_plan_changed_successfully: 販売者プランが正常に変更されました
+product_add_page: 製品追加ページ
+message.common.user_not_exist: ユーザーが存在しません
+message.common.password_reset_successfully: パスワードが正常にリセットされました
+message.common.password_reset_mail_sent: 新しいメールが作成され、あなたに送信されました。
+message.common.username_is_manadatory: ユーザーネームは必須です
+message.seller_register.plan_not_found: プランは必須です
+message.seller_register.unauthorized_access: 不正アクセスです
+message.seller_register.under_review: ご登録ありがとうございます。あなたのプロフィールは審査中です。すぐにお知らせします。
+seller_add_quota_exceeded: 販売者の追加数が超過しました
+seller_add_quota_exceeded_status_change: ステータスを新規から変更することはできません。販売者枠の上限を超過しました。[最大販売者数：max_seller]
+sorry_cannot_add_more_sellers: 申し訳ございません。これ以上販売者を追加することができません。販売者数の上限を超過しています。
+sorry_admin_cannot_add_more_products: 申し訳ございません。これ以上製品を追加することができません。ストア管理者にお問い合わせください。
+no_seller_company_cannot_add_seller_admin: 販売者管理者を追加できません。販売会社が存在しません。
+message.order.unable_to_import_order: 注文をインポートできません。
+message.wix.product.unable_to_import_product: 製品をインポートできません。
+message.order.order_imported_successfully: 注文数　正常にインポートしました。
+create_seller: 販売者を作成
+use_as_thumbnail: サムネイルとして使用します
+make_default: デフォルトの作成
+create_seller_adminstrator: 販売者を作成
+add_product_page: 製品ページを追加
+need_assistance_for_adding_code: コード統合のためのサポートが必要です
+embed_page: エンベデッドページ
+dashboard: ダッシュボード
+your_seller_account_updated_successfully: 販売者アカウントが正常に更新されました
+profile_created_successfully: 販売者プロフィールが正常に作成されました
+your_profile_created_successfully: 販売者プロフィールが正常に作成されました
+assign_seller: 販売者を指定
+assign_seller_to_product: 製品に販売者を割り当てる
+seller_company: 販売会社
+owner: オーナー
+choose_plan: プランを選択
+message.common.record_synced_successfully: データの更新に成功しました
+catalogue.product.options: オプション
+product.options.manage.page: 製品オプション
+catalog.option.name: オプション名
+catalog.option.displayname: 表示名
+catalog.option.values: 価値
+catalog.option.optiontype: オプションタイプ
+catalog.option.filename: ファイル名
+catalog.option.filesize: ファイルサイズ
+catalog.option.downloads: ダウンロード
+catalog.option.maximum_downloads: ダウンロードの最大数
+catalog.option.disabled_after: 無効化後
+options.Swatch: スウォッチ
+options.Multiple.choice: 複数選択
+options.Date.field : 日付欄
+options.checkbox : チェックボックス
+options.Multi.line.text.field: 複数行のテキスト欄
+options.File.upload.field:  ファイルアップロード欄
+options.number.only : 数字のみ
+options.Text.field : テキスト欄
+options.Product.Pick.List : 製品出荷リスト
+products.options : 製品オプション
+product.options.optionset: オプションセット
+none.option: 無し
+product.option.view.page: 製品オプション
+sync_products: 同期された製品
+csv_import_product: CSVインポート製品
+export_product: エクスポート製品
+product_info: 製品情報
+brand_id: ブランドID
+preorder_release_date: 予約販売開始日
+inventory_level: 在庫レベル
+inventory_warning_level: 在庫警告レベル
+search_keywords: 検索キーワード
+availability_description: 利用に関する説明
+sort_order: 並べ替え順
+order_quantity_minimum: 注文の最小数
+order_quantity_maximum: 注文の最大数
+is_featured: 注目された
+exported_successfully: 正常に出荷されました
+Product Image File : 画像
+Product Image URL : 画像URL 
+Product Order Maximum Quantity: 製品の最大注文数
+Product Order Minimum Quantity : 製品の最小注文数
+Product Condition : 製品の状態
+Product Sort Order : 製品の並び順
+Availability : 利用可能
+Product Search Keyword : 製品検索キーワード
+Product Warranty : 製品保証
+Bin Picking Number : ビンピッキングナンバー
+Product UPC : 製品UPC
+Common Good : 良い
+OFS : OFS
+brand : ブランド
+sku.delete : 削除
+sku.copy : コピー
+sku.edit : 編集
+product.sku.variant: バリアント
+product.option.image_file : 画像
+product.option.price : 価格
+product.option.cost_price : コスト価格
+product.option.ean : UPC/EAN
+product.option.sku: SKU
+product.sku.purchasable: 購入可能
+product.sku.action : アクション
+product.sku.default_price : デフォルト価格
+product.sku.sales_price : セール価格
+product.sku.cost : コスト
+product.sku.bpn : BPN
+product.sku.mpn : MPN
+product.sku.upc : UPC
+product.sku.sku_text : SKU
+product.sku.msrp: 'MSRP'
+product.sku.image : 画像
+product.sku.stock:  在庫
+product.sku.low_stock: 在庫残小
+Product Inventory Warning Level : 製品在庫の警告レベル
+Product Inventory Level : 製品在庫レベル
+Preorder release date : 予約販売開始日
+Preorder Message : 予約メッセージ
+Product Description : 製品概要
+Fixed Cost Shipping Price : 固定費 出荷価格
+Product Code/SKU : 製品コード/SKU
+default_tax_class : デフォルトの税クラス
+product.option.options_for_this_sku : このSKUに対するオプション
+setting_header_products_identifier: 製品ID
+products_identifier_position: ポジション
+products_identifier_position_value: 価値
+products_identifier_position_value_for_custom: カスタムされた値
+products_identifier_joiner_value: IDジョイナー
+products_identifier_enable_product: 使用可能な製品
+products_identifier_enable_sku: 使用可能なSKU
+prefix: Prefix
+sufix: Sufix
+seller_id: 販売者ID
+seller_name: 販売者名
+custom: カスタム
+Product show seller field enable: 販売者を表示
+Product location field enable: 位置を表示
+sku_identifier_position: ポジション
+sku_identifier_position_value: 価格
+sku_identifier_position_value_for_custom: カスタムされた値
+sku_identifier_joiner_value: IDジョイナー
+sku_identifier_enable_sku: 利用可能なSKU
+setting_header_sku_identifier: SKU ID
+registration: 登録
+days: 日
+unlimited: 無制限
+plan.title: プラン名
+plan_code_hint: 少なくとも3文字、a~Z、0~9のみを含めることができます
+label.username.email: ユーザー名またはEメール
+forgot_username: ユーザー名を忘れました
+message.common.forgot_username_details_send_successfully: ユーザーの詳細は登録Eメールに送信しました
+shipment: 出荷
+shipment_id: 出荷ID
+payment_shipping_details: 支払い/発送詳細
+create_shipment: 出荷の作成
+product_details: 製品詳細
+Tax: 税
+ship_items: 出荷アイテム
+qty: 量
+qty_left_to_ship: 出荷する残りの数量
+qty_to_ship: 出荷する数量
+packing_slip_notes: 梱包伝票メモ
+customer_paid: お客様がお支払いしました
+for_shipping: 出荷のために
+how_would_you_like_to_ship: 発送方法を教えてください
+other: その他
+auspost: Auspost
+canadapost: Canada Post
+endicia: Endica
+usps: USPS
+fedex: FedEx
+royalmail: Royal Mail
+ups: UPS
+upsready: UPS準備
+upsonline: UPSオンライン
+shipperhq: ShipperHQ'
+other_carrier_tracking_option: その他の配送
+tracking_number: 追跡番号
+shipping_method: 配送方法の説明
+package.weight: 荷物の重量
+package.dimension: 荷物の数方
+package.already_shipped: 発送済み
+shipment_width: 'W'
+shipment_height: 'H'
+shipment_depth: 'D'
+no_shippable_product: '出荷する製品が見つかりません'
+manage_order_shipments: 出荷の管理
+shipment_details: 出荷の詳細
+product.basic_info: 基本情報
+product.add_image: 画像を追加
+drag_drop_files: 画像ファイルをここにドラッグ＆ドロップ
+modal_close_text: 閉じる
+clear_images: クリア
+browse_files: 画像を閲覧
+add_image_by_url: 追加
+pimage_url_label: 画像URL
+product.add_custom_field: カスタムフィールドを追加
+customfield_error_msg: カスタムフィールドの値が無効です
+delete_item:  このアイテムを削除します
+are_you_sure: よろしいですか？
+cancel_btn: キャンセル
+ok_btn: 'Ok'
+product_image_modal_title: 商品画像のアップロード
+configure_options: オプションの設定
+product_option_modal_title: 製品オプションの設定
+product.add_options_btn:  オプション追加
+product.option_type_radio_buttons: ラジオ
+product.option_type_rectangles:  長方形
+product.option_type_swatch:  スウォッチ
+product.option_type_dropdown: ドロップダウン
+product.add_option: 追加オプション
+product.option_name: 名前
+product.delete_option: 削除オプション
+product.option_type: タイプ
+product.option_values: 価格
+product.add_option_value: 価格を追加
+product.default_text: デフォルト
+product.option_one_color: 1色
+product.option_two_color: 2色
+product.option_three_color: 3色
+product.option_pattern: パターン
+unique_value_required: 表示名の既存オプションがあります
+required_field: これは必須項目です
+fullordering_order_by: 並び替え
+sort_table_by: 並び替え
+id_asc: ID昇順
+id_desc: ID降順
+name_asc: 名前昇順
+name_desc: 名前降順
+status_asc: ステータス昇順
+status_desc: ステータス降順
+transaction_start_date: 開始日
+transaction_end_date: 終了日
+in_cache_exported_successfully: エクスポートに成功し、データがキャッシュに見つかりました。新たにエクスポートする場合は、ファイル名を変更してからエクスポートしてください。
+message.product.import.error.seller%pid: CSV製品(pid)は販売者の権限によりインポートできません。
+message.product.import.exists%pid: CSV製品(pid)は既に存在するためスキップされます。
+message.product.import.updated%pid: CSV製品(pid)が正常に更新されました。
+message.product.import.created%pid: CSV製品(pid)が正常に作成されました。
+message.product.import.failed%pid_%error_message: エラーメッセージのため、CSV製品(pid)をインポートできませんでした。
+order.billto: 請求書送付先
+order.shipto:  発送先
+your_profile_updated_successfully: あなたの販売者プロフィールが正常に更新されました
+label.export_only_current_page: 現在のページのみをエクスポートします
+label.batch_action_select: バッチアクションを選択
+ajaxjobs.modal_title.disable_product: 'Disabling Seller Products'
+ajaxjobs　モーダルタイトル　無効な商品 : 販売者の商品を無効にします
+seller.disabled: 販売者を正常に無効化しました
+cannot_delete_this_item_already_in_use_%seller_name: ユーザーネーム　この販売者は使用中のため削除できません
+cannot_delete_this_item_%seller_name: 販売者名 この販売者を削除できません
+seller_not_exists: 存在しません
+cannot_delete_product_already_in_use: 製品名（product_id） この製品は他と紐づいているため削除できません
+cannot_delete_product: 製品名（product_id) 製品を削除できません
+message.product_delete_successfull: 製品名（product_id) 正常に削除しました
+shipment_to: 出荷先
+date_shipping: 発送日
+tracking_no: 追跡番号
+order_date: 注文日
+view_details: 表示
+seller_allowed_categories: 販売者が許可するカテゴリー
+product_image_required: 製品画像は必須です
+Product image required: 製品画像は必須です
+required_image_error_msg:  製品画像は空にできません
+product_image_import_note: 商品画像がソースに存在しない場合、商品と一緒にインポートされないことがあります。
+hello: こんにちは
+batch_assign_seller: 販売者の一括割り当て
+assign: 割り当て
+message.product.seller_assign.success_%s_result%__skip_%sk_result%: 販売者が正常に割り当てられました。 Success- s_result & Skipped- sk_result
+view_on_bigcommerce_store: ストアで表示
+bigcommerceストアでの表示 : 
+order_status: 注文状況
+avg_daily_sales: 日次売上高
+avg_monthly_sales: 月次売上高
+total_shipping: 送料合計
+total_tax: 税金合計
+order_count: 注文数
+no_seller_orders: 販売者が存在しません
+SELLER_REPORT_SUMMARY: 販売者売上報告
+TOP_PRODUCTS_CHART: トップ製品一覧
+clear_store_data: ストアデータをクリアします
+clear_mp_store: クリア
+top_sold_seller_products: 最も売れた製品
+no_top_products: 製品が見つかりません
+view_all_seller_products: すべての製品を表示
+tax_included: 税込の金額
+enable_clear_btn: このアクションを有効にします
+available_on: 発売日
+edit_product: 製品を編集
+message.product.future_publish_schedule_message: この製品は未来の日付に発売されるように設定されています。すぐに販売するためには、未来の日付を削除してください。
+message.product.publish_to_disable_message: この製品は、未来の日付で公開されるように設定されています。現時点では無効としてマークしてください。
+message.product.status_ignored_future_date_set%product_id%: 製品ID の商品はスキップされました。最初に利用可能なものを削除してください。
+message.product.status_forced_future_date_set%product_id%: 製品ID の製品は未来の公開かつ現在は無効になっています。
+mp_order_status_updated: 注文ステータスは変更されました。
+message.product.update.required_fields_missing_%fields%: 必須データの欠落 - フィールド
+setting_header_layout: レイアウト設定
+seller_card_layout: 販売者カード含む
+logo: 販売者ロゴ
+workingHours: 稼働時間の説明
+profileDescription: プロフィール説明
+profile_settings: プロフィール設定
+profile_gallery_labe: プロフィールギャラリー(5枚まで)
+seller_commission: 販売者手数料
+manage_seller_commission: 販売者手数料の管理
+balance_not_sufficient: バランス不足
+last_paid: 最終支払額
+last_paid_date: 最終支払日
+complete: バランスを取る
+pay_title: お支払い
+pay_btn: 今すぐ支払う
+message.seller.payout_email_not_set: 販売者(seller_id)がPayPal決済のためのEメールを設定していません。
+message.seller.payout_invalid_amount_or_payout_ids:  販売者(seller_id)の支払額/支払回数が無効です。
+enable_auto_pay: 販売者への自動支払いを有効化します
+auto_pay_order_status: 販売者への自動支払の注文ステータス
+message.payout.create_fail: 支払い取引のファイルを作成する
+message.payout.empty_credentials: 支払い情報が空です
+message.payout.no_payment_method: 取引に対する支払い方法が見つかりません
+message.seller.payout_success: バッチID 支払いに成功
+payment_initiated: 支払い開始
+payment_abort: 支払いキャンセル
+paypal_webhook_url: Webhook URL - PayPal 支払いアプリケーションで設定する必要があります
+PayPal webhook URL: Webhook URL　あなたのPayPal支払いのアプリケーション設定が必要です
+payout_transactions: 取引のお支払い
+batch_id: バッチID
+message.payout.sync_success: 同期に成功しました
+total_approved_sale: 販売承認総額
+shipping_details: 発送詳細
+phone: 電話番号
+order: 注文
+ship_method: 発送方法
+shipped_items: 荷されるアイテム
+short_qty: Qty
+product_name: 製品名
+order_not_found: 注文が見つかりません
+unable_to_print_slip: 伝票印刷ができません
+packaging_slip_for_shipment: 出荷時の梱包明細書
+comments: コメント
+print: 印刷
+profile_logo: プロフィールロゴ
+showTopSoldProducts: トップセラーの製品を表示
+showSellerProducts: 販売者の製品を表示
+showWorkingHours: 稼働時間を表示
+showProfileDescription: プロフィールの説明を表示
+showProfileGallery: プロフィールギャラリーを表示
+paypalPayoutEmail: PayPalお支払いEメール
+shipments: 出荷台数
+latest_orders: 最新の受注状況
+latest_customers: 最新の顧客
+latest_products: 最新製品
+test_email: テストメール
+save_setting_before_send_test_mail: テストメールを送信する前に設定を保存してください
+seller_allowed_customer_details: 販売者に表示される顧客の詳細
+custom_information: カスタム情報
+message.product.copied_success: 製品を正常にコピーしました
+add_youtube_video: 'Add Youtube Video From URL'
+YouTube動画を追加 : URLからYouTube動画を追加
+only_youtube_url: YouTubeのURLのみ
+product.add_video: 動画を追加
+video_url_label:  動画URL
+enter_valid_url: 有効なURLを提示してください
+message.product.video.deleted_successfully: 製品のビデオが正常に削除されました
+videos: 動画
+country_of_origin: 原産国
+commodity_description: 商品説明
+destination_country: お届けの国
+hs_code: HSコード
+product.add_hs_code:  HDコードを追加
+cutomer_detail_visible_to_seller: 販売者に表示される顧客の詳細
+message.product.added_success: 製品が正常に追加されました
+seller_type: 販売者タイプ
+product.tax: 税
+commission_type: 手数料のタイプ
+commission_per_product: 製品ごとの手数料
+commission_rate: 手数料のレート
+discount: 割引
+manage_documents: ドキュメントを管理する
+documents: ドキュメント
+document: ドキュメント
+document_name: ドキュメント名
+seller_document_update: 販売者のドキュメントを更新
+questions_answers: 質問 / 回答
+answer_type: 回答のタイプ
+options_comma_separated: オプション(カンマ区切り)
+seller_question_update: 販売者の質問を更新
+manage_questions: 質問を管理する
+skip: スキップ
+bulk_pricing: 一括価格
+discount_type: 割引タイプ
+product.add_tier: 層の追加
+showAboutUs: わたしたちについてのページを表示する
+aboutUs: わたしたちについて
+showHub: ハブページを表示
+hub: ハブ
+showShippingLogistic: 配送と物流のページを表示
+shippingLogistic: 配送と物流
+seller_reviews: 販売者レビュー
+manage_reviews: 管理者レビュー
+review: レビュー
+seller_review_update: 販売者レビューを更新
+rating: 評価
+publish: 公開
+unpublish: 非公開
+evidence: 証拠
+shown_on_seller_profile: 販売者プロフィールに表示する
+doc_skip_email_send_days: 販売者ドキュメント Eメール送信日をスキップ
+upload_docs: ドキュメントを更新する
+register: 登録
+reviewer: レビュー者の名前
+isRequired: 必須
+showSellerReview: 販売者のレビューを表示
+showDocuments: ドキュメントを表示
+include_incomplete : 不完全な注文を含みます
+message.order_update_successfully : 注文は正常に更新されました
+message.payout_update_successfully: お支払いは正常に更新されました
+store_order: ストアの注文
+view_on_bc: Bigcommerceで見る
+download_packaging_slip: 伝票をダウンロード
+message.seller_register.seller_exist: このメールアドレスの販売者は既に存在します
+print_packaging_slip: 伝票を印刷
+showWhyChooseUs: 私たちを選ぶ理由を示してください
+whyChooseUs: 私たちを選ぶ理由
+showSellerStory: 販売者のストーリーを表示する
+sellerStory: 販売者ストーリー
+showPhotosVideosNews&blogs : 写真・動画・おしらせ・ブログを表示
+PhotosVideosNews&blogs: 写真・動画・おしらせ・ブログ
+showShipping&Returns: 配送と返品を表示
+Shipping&Returns: 配送と返品
+showReviews&Recognition: レビューと評価を表示
+showBusinessLicences&certifications: ビジネスライセンスと認証を表示
+print_packing_slip: 伝票を印刷
+showProductReviews: 製品レビューを表示
+reviews&Recoginition: レビューと評価
+showAwardsRecoginition: 賞と表彰を表示
+awardsRecoginition: 賞と表彰
+businessLicences&certifications: ビジネスライセンス・認証
+showTestimonial: 証言を表示
+testimonial: お客様の声
+banner: Banner Image
+max_order_id: ストアの注文IDの最大数
+min_order_id: ストアの注文IDの最小数
+prev: 前へ
+next: 次へ
+questions_answers_review: 質問/回答 戻る
+send_email_to_seller_manually: "販売者への注文メールを手動で送信する"
+bulk_discount: まとめ買い割引
+send_mail: メール送信
+message.common.mail_sent_successfully: メールを正常に送信しました
+founder_pic: 創設者の写真
+seller_document_download: 販売者のドキュメントをダウンロード
+document_download: ドキュメントダウンロード
+select_item_for_download_packing_slip: 伝票をダウンロードするには、少なくとも 1 つの行を選択してください
+select_item_for_send_bulk_mail: 一括メールを送信するには、少なくとも 1 つの行を選択してください
+select_item_for_download_document: ドキュメントをダウンロードするには、少なくとも 1 つの行を選択してください
+term_condition: 利用規約
+message.seller_register.term_condition_mandatory: "利用規約に同意してください"
+platform_order_no: プラットフォーム注文No.
+total_records: すべての記録
+view_on_wix_store: "ストアで見る"
+select_seller: 販売者を選択する
+fullfillment_status: 遂行状況
+trackInventory: 在庫を追跡する
+inStock: ストック
+settings_support: サポート
+dev_info: 開発者情報
+app_review: アプリのレビュー
+leave_review: App Market にレビューを残してください
+review_us: わたしたちをレビューしてください
+enjoying_app: 私たちのアプリは満足ですか？
+need_help: お問い合わせ
+contact: お問い合わせ
+for_contact: 連絡先
+latest_sellers: 最新の販売者
+select_interval: 間隔を選択
+select_status: ステータスを選択
+payment_cancel: お支払いをキャンセル
+collections: コレクション
+collections_manage_page: コレクション管理
+seller_allowed_collections: 販売者が許可したコレクション
+allowed_collections: 許可されたコレクション
+sales_price: セール価格
+fixed: 修正済み
+confirmPassword: パスワードを認証する
+message.seller_register.invalid_captcha: 無効なキャプチャ
+message.wix.product.unable_to_import_collections: コレクションにインポートできません
+total_collections: すべてのコレクション
+message.collection.sync.success_%s_result%__skip_%sk_result%: ストア コレクションが正常に同期されました。. Success- s_result & Skipped- sk_result
+wix.allowed.product.reached: 許可された製品の最大数に達しました。プランをアップグレードして、さらに製品を追加またはインポートしてください。
+message.common.domain_setting_updated_successfully: ドメイン設定が正常に更新 されました。
+you_can_not_turnoff_toggle: 一度「オン」とマークされたトグル ボタンを「オフ」にすることはできません。
+turn_on_toggle: もしいっぱいになったらトグルをオンにする「
+seller_order_fullfillment_status: 出品者の注文処理状況
+created_start_date: '作成日: 開始日'
+created_end_date:  作成し終えた日付
+action: アクション
+wixmp_setup_note: "注："
+wixmp_setup_note_desc: 上記の手順を使用して、両方のリンクを追加してください
+wixmp_setup_quickacess: "<b>[クイック アクセス] -> [サイトの編集]</b> に移動"
+wixmp_setup_openmenu: "サイドメニューから <b>[メニューとページ]</b> を開きます"
+wixmp_setup_sitemenu: "<b>「サイト ページ」</b> の下の <b>「サイト メニュー」</b> をクリックします"
+wixmp_setup_addlink: "<b>[リンクを追加]</b> ボタンをクリックします"
+wixmp_setup_web_address: "<b>'Webアドレス'</b> を追加し、<b>'新しいウィンドウ'</b> タイプを選択します"
+wixmp_setup_publish: "最後のステップで、<b>[公開]</b>] ボタンをクリックします"
+wixmp_app_review: アプリレビュー
+setting_general: 全般設定
+wixmp_test_mail: こんにちは　これはテストメールです
+deleted_successfully: 正常に削除しました
+wixmp_js_not_working_error: サイトでJSが正しく動作していません
+warning_company_name_required: 企業名は必須です
+warning_company_atmost40: 企業名は40文字以内にする必要があります
+warning_company_atleast3: 企業名は3文字以上にする必要があります
+warning_email_required: Eメールは必須です
+warning_enter_valid_email: 正しいメールアドレスを入力してください
+warning_phone_required: 電話番号は必須です
+warning_phone_invalid: 有効な電話番号を入力して下さい
+warning_phone_atleast8: 電話番号は8桁以上である必要があります
+warning_phone_atmost15: 電話番号は15桁以下にする必要があります
+warning_address_required: 住所は必須です
+warning_city_required: 市は必須です
+warning_state_required: 州は必須です
+warning_zip_required : 郵便番号は必須です
+warning_zip_invalid : 正しい郵便場号を入力してください
+warning_zip_atleast4 : 郵便番号は4桁以上にする必要があります
+warning_zip_atmost8 : 郵便番号は8桁以下にする必要があります
+message.common.product_status_changed_successfully: 製品のステータスが正常に変更されました
+setting_header_google_captcha: Google ReCaptcha
+google_captcha_site_key: Google ReCaptcha サイト キー
+google_captcha_secret_key: Google ReCaptchaシークレットキー
+fullfilled: 遂行済み
+message.can_not_perform_this_action: このアクションを実行できません
+contact_to_admin: 管理者にお問い合わせください
+something_went_wrong_google_recaptcha_contact_to_admin: Google ReCaptcha で問題が発生しました。管理者に連絡してください！
+Google ReCaptchaに何か悪いことが起きました。管理者にご連絡ください。 : Google ReCaptchaに何か悪いことが起ました。管理者にご連絡ください。
+or_refresh_the_page: またはページを再読み込みしてください。
+archieve: アーカイブ
+cannot_archieve_this_item_%seller_name: 販売者名 この販売者はアーカイブできません
+manage_archieve_seller_companies: 販売者をアーカイブする
+manage_seller_archieve: 販売者アーカイブ管理 
+unarchieve: 元に戻す
+sorry_cannot_unarchive_more_sellers: これ以上の販売者をアーカイブできません。販売者の限度を超過しています。
+seller.archived: 販売者を正常にアーカイブしました
+message.common.cant_edit_archived_seller: アーカイブ済みの販売者を編集できません。
+export_seller: 販売者をエクスポートする
+seller_info: 販売者情報
+export: エクスポート
+wix_seller_cr: Wix Seller Custom Registration
+WIX 販売者CR: WIX販売者　カスタム登録
+wix_custom_field_create: Wixカスタムフィールドの作成
+wix_custom_field_update: Wixカスタムフィールドの更新
+message.order.already_exist: 注文はすでに存在しています
+message.order.store_not_having_this_order_to_sync: この注文を同期するストアがありません
+wixmp_storeid_comma_separated: 店舗注文ID - カンマ区切り
+submit: 送信
+import: 輸入
+wixmp_archive_item_question: このアイテムを手に入れよう！
+wixmp_domain_cname_text: '<b>注: </b> ドメインを追加する前に、cname を追加してください'
+wixmp_userguide: ユーザーガイド
+wixmp_userguide_blog_setup: ブログ ユーザー ガイド
+wixmp_userguide_video_setup: ビデオ ユーザー ガイド
+inventory_status: 状態
+in_stock: 在庫あり
+inventory_quantity_validation: 製品数量は空であってはならず、99999 以下である必要があります。
+zipcode: Zip Code
+wix_wixmp_update_seller: Update Seller
+wix_wixmp_general_info: General Info
+wix_wixmp_total_shipping: Total Shipping
+wix_wixmp_total_tax: Total Tax
+wix_wixmp_csv_import_product: CSV import product
+wix_wixmp_product_info: Product information

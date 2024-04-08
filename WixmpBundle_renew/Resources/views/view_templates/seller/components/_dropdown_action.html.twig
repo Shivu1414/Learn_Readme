@@ -1,0 +1,16 @@
+<div class="dropdown show">
+    <a class="btn dropdown-toggle" href="#" role="button" id="dropdown-action-{{ object.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+    <div class="dropdown-menu dropdown-menu-arrow" aria-labelledby="dropdown-action-{{ object.id }}">
+        {% if object.isArchieved is defined and object.isArchieved == 0 %}
+            <a class="dropdown-item" href="{{ path(controller_prefix ~ 'update', {storeHash:  storeHash, seller_id:object.id}) }}" >{{ 'edit'|trans }}</a>
+        {% endif %}
+        {% if area =='admin' %}
+            {# <a class="dropdown-item wk-delete-row-js" href="#" data-url="{{ path(controller_prefix ~ 'delete', {storeHash:  storeHash, seller_ids:[object.id]}) }}" >{{ 'delete'|trans }}</a> #}
+            {% if object.isArchieved is defined and object.isArchieved == 0 %}
+                <a class="dropdown-item wk-archieve-row-js" href="#" data-url="{{ path(controller_prefix ~ 'archieve', {storeHash:  storeHash, seller_ids:[object.id]}) }}" >{{ 'archieve'|trans }}</a>
+            {% elseif object.isArchieved is defined and object.isArchieved == 1 %}
+                <span class="dropdown-item wk-unarchieve-row-js wk-pointer" data-url="{{ path(controller_prefix ~ 'unarchieve', {storeHash:  storeHash, seller_ids:[object.id]}) }}" >{{ 'unarchieve'|trans }}</span>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

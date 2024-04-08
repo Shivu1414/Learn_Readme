@@ -1,0 +1,57 @@
+<div class="modal fade" id="orderSyncModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">{{ 'sync'|trans }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {# <div class="row">
+                    <div class="col-md-12">
+                        <div class='form-group'>
+                            {% include 'common/date_range_box.html.twig'  with {
+                                data: {
+                                    to_name       : 'order[sync][to_date]',
+                                    from_name     : 'order[sync][from_date]',
+                                    selected_to   : "now"|date('Y-m-d'),
+                                    selected_from : "now"|date('Y-m-d')
+                                }
+                            } %}            
+                        </div>  
+                    </div>
+                </div><br> #}
+                {# <div class = "row">
+                    <div class = "col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="wk-price" for="min_order_id">{{ 'min_order_id'|trans }}</label>
+                                    <input type="text" class="form-control" id = "min_order_id" name="order[sync][min_order_id]" placeholder="{{ 'min_order_id'|trans }}">
+                                </div>
+                                <div class="col">
+                                 <label class="wk-price" for="max_order_id">{{ 'max_order_id'|trans }}</label>
+                                    <input type="text" class="form-control" id = "max_order_id" name="order[sync][max_order_id]" placeholder="{{ 'max_order_id'|trans }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <center>OR</center> #}
+                <div class = "row">
+                    <div class = "col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label">{{ 'wixmp_storeid_comma_separated'|trans }}</label>
+                            <textarea name = "order[sync][store_order_ids]" class = "wk-input form-control" id = "syncOrderIds"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonImportFormClose">{{ 'close'|trans }}</button>
+                <button type="button" class="btn btn-primary" id="sync-order" data-href="{{ path('wixmp_sales_order_sync',{storeHash:storeHash}) }}">{{ 'sync'|trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>

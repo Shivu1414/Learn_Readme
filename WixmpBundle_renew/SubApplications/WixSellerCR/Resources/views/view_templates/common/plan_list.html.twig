@@ -1,0 +1,62 @@
+{% set sadmin_currency = get_currency('app', storeHash) %}
+{% set total_count = 0 %}
+{% for key,plan in plan_list %}
+    {% if current_plan.id == plan.id or plan.status == 'A' %}
+        {% set total_count = total_count + 1 %}
+    {% endif %}
+{% endfor %}
+
+{% set count = 0 %}
+{% for key,plan in plan_list %}
+    {% if current_plan.id == plan.id or plan.status == 'A' %}
+        {% set row_change = (count+1)%3 %}
+        {% if row_change == '1' %}
+            <div class="row list-{{ row_change }}" style="padding:10px 0px">
+        {% endif %}
+        <div class="col-sm-4" style="margin:0 auto">
+            <div class="card profile-plan-list-plan" style="{% if current_plan and current_plan.id == plan.id %}border: 2px solid gray{% endif %}">
+                <div class="card-header text-center bg-default">
+                    <h5 class="profile-plan-list-plan-name">{{ plan.plan }}</h5>
+                    <p class="text-primary"><b>{% if plan.price %}{{ sadmin_currency.symbol ~ ' ' ~ plan.price }}{% else %}<span class="profile-plan-list-plan-price">{{ 'free'|trans }}</span>{% endif %} / <span>{% if plan.intervalType == 'D' %}{{ plan.intervalValue }} {{ "days"|trans }}{% elseif plan.intervalType == 'W' %}{{ "week"|trans }}{% elseif plan.intervalType == 'M' %}{{ "monthly"|trans }}{% elseif plan.intervalType == 'Q' %}{{ "quarterly"|trans }}{% elseif plan.intervalType == 'H' %}{{ "half-yearly"|trans }}{% elseif plan.intervalType == 'Y' %}{{ "year"|trans }}{% endif %} </span></b></p>
+                    {% if plan.bestChoice == 'Y' %}<span class="plan_best_choice">{{ "best_choice"|trans }}</span>{% endif %}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <table class="table table-borderless">
+                            <tbody>
+                                {% for key,value in plan.conditions %}
+                                <tr>
+                                    <td class="text-left">{{ key|trans }}</td>
+                                    <td class="text-right">{{ value }}</td>
+                                </tr>
+                                {% endfor %}
+                                {# <tr>
+                                    <td class="text-left">{{ 'best_choice'|trans }}</td>
+                                    <td class="text-right">{% if plan.bestChoice == 'Y' %}{{ 'yes'|trans }}{% else %}{{ 'no'|trans }}{% endif %}</td>
+                                </tr> #}
+                            </tbody>
+                        </table>
+                    </p>
+                </div>
+                <div class="card-footer bg-default text-center">
+                    {% if current_plan and current_plan.id == plan.id %}
+                        <div class="text-center text-success profile-plan-list-buy-now"><b>{{ 'current_plan'|trans }}</b><br></div>
+                        <div class="text-center"><small>{{ "expire_on"|trans }}: {{ expiry_date|wk_time('app', storeHash, 'marketplace') }}</small></div>
+                    {% else %}
+                        {% if area == 'seller' %}
+                            <a href="{{ path('mp_seller_seller_buy_plan',{storeHash:storeHash,plan_id:plan.id,seller_id:seller.id}) }}" class="btn btn-primary profile-plan-list-buy-now"><b>{{ 'buy_now'|trans }}</b></a>
+                        {% else %}
+                            <a href="{{ path('marketplace_seller_buy_plan',{storeHash:storeHash,plan_id:plan.id,seller_id:seller.id}) }}" class="btn btn-primary profile-plan-list-buy-now"><b>{{ 'assign'|trans }}</b></a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% set count = count + 1 %}
+        {% if row_change == 0 or count == total_count %}
+            </div>
+        {% endif %}
+    {% endif %}    
+{% else %}
+<div class="text-danger text-center">{{ 'records_not_found'|trans }}</div>
+{% endfor %}

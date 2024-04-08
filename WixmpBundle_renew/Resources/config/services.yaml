@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+    Webkul\Modules\Wix\WixmpBundle\:
+        resource: "../../../WixmpBundle/*"
+        exclude: "../../../WixmpBundle/{Entity}"
+
+    Webkul\Modules\Wix\WixmpBundle\Twig\AppRuntime:
+        public: false
+        tags: ['twig.runtime']
+
+    Webkul\Modules\Wix\WixmpBundle\EventListener\RequestListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }

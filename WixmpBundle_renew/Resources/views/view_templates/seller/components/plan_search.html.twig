@@ -1,0 +1,83 @@
+<h4>{{ 'filter'|trans }}</h4>
+<form method="get">
+    <div class="filter-fields">
+        <div class="form-group">
+            <label for="search_plan">
+                {{ 'plan'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_plan'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="search_plan" name="plan" value="{% if search.plan is defined %}{{ search.plan }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+            <label for="search_code">
+                {{ 'wix_wixmp_code'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_code'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="search_code" name="code" value="{% if search.code is defined %}{{ search.code }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+            <label for="search_interval">
+                {{ 'interval'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_interval'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            {% if companyApplication.company.storehash == 'RishabhStore-SAAS727a' or companyApplication.company.storehash == 'VILLUMIb6f3' %}
+            <select class="form-control" id="search_interval_vellum" name="interval">
+                <option value {% if  search.interval is not defined %}selected{% endif %}>{{ 'select_interval'|trans }}</option>
+                <option value="D" {% if  search.interval is defined and search.interval == 'D' %}selected{% endif %}>{{ 'days'|trans }}</option>
+                {# <option value="W" {% if  search.interval is defined and search.interval == 'W' %}selected{% endif %}>{{ 'weekly'|trans }}</option> #}
+                <option value="M" {% if  search.interval is defined and search.interval == 'M' %}selected{% endif %}>{{ 'monthly'|trans }}</option>
+                <option value="Q" {% if  search.interval is defined and search.interval == 'Q' %}selected{% endif %}>{{ 'quaterly'|trans }}</option>
+                <option value="H" {% if  search.interval is defined and search.interval == 'H' %}selected{% endif %}>{{ 'half-yearly'|trans }}</option>
+                <option value="Y" {% if  search.interval is defined and search.interval == 'Y' %}selected{% endif %}>{{ 'yearly'|trans }}</option>
+            </select>
+            {% else %}
+            <select class="form-control" id="search_interval" name="interval">
+                <option value {% if  search.interval is not defined %}selected{% endif %}>{{ 'select_interval'|trans }}</option>
+                <option value="D" {% if  search.interval is defined and search.interval == 'D' %}selected{% endif %}>{{ 'days'|trans }}</option>
+                {# <option value="W" {% if  search.interval is defined and search.interval == 'W' %}selected{% endif %}>{{ 'weekly'|trans }}</option> #}
+                <option value="M" {% if  search.interval is defined and search.interval == 'M' %}selected{% endif %}>{{ 'monthly'|trans }}</option>
+                <option value="Q" {% if  search.interval is defined and search.interval == 'Q' %}selected{% endif %}>{{ 'quaterly'|trans }}</option>
+                <option value="H" {% if  search.interval is defined and search.interval == 'H' %}selected{% endif %}>{{ 'half-yearly'|trans }}</option>
+                <option value="Y" {% if  search.interval is defined and search.interval == 'Y' %}selected{% endif %}>{{ 'yearly'|trans }}</option>
+            </select>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="search_status">
+                {{ 'status'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_status'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            {% if companyApplication.company.storehash == 'RishabhStore-SAAS727a' or  companyApplication.company.storehash == 'VILLUMIb6f3' %}
+                <select class="form-control" id="search_status_vellum" name="status">
+                    <option value {% if  search.status is not defined %}selected{% endif %}>{{ 'select_status'|trans }}</option>
+                    <option value="A" {% if  search.status is defined and search.status == 'A' %}selected{% endif %}>{{ 'active'|trans }}</option>
+                    <option value="D" {% if  search.status is defined and search.status == 'D' %}selected{% endif %}>{{ 'disabled'|trans }}</option>
+                </select>
+            {% else %}
+                 <select class="form-control" id="search_status" name="status">
+                    <option value {% if  search.status is not defined %}selected{% endif %}>{{ 'select_status'|trans }}</option>
+                    <option value="A" {% if  search.status is defined and search.status == 'A' %}selected{% endif %}>{{ 'active'|trans }}</option>
+                    <option value="D" {% if  search.status is defined and search.status == 'D' %}selected{% endif %}>{{ 'disabled'|trans }}</option>
+                </select>
+            {% endif %}
+            
+        </div>
+    
+    </div>
+    <div class="filter-btn-block">
+        <button type="submit" class="btn btn-primary">{{ 'submit'|trans }}</button>
+        <button type="button" class="btn btn-danger btn-clear">{{ 'search.clear'|trans }}</button>
+        <button type="button" class="btn btn-secondary filter-close">{{ 'cancel'|trans }}</button>
+    </div>
+</form>

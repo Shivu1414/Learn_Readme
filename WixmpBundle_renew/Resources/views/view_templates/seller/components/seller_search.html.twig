@@ -1,0 +1,63 @@
+<h4>{{ 'filter'|trans }}</h4>
+<form method="get">
+    <div class="filter-fields">
+
+        {% if page is defined and page == "seller_achived" %}
+            <div class="form-group">
+                {% if villumi %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'seller',label:'seller',options:getWixCompanyArchivedSellerList(),ajax:true, text:'seller', tooltip: 'wixmp_seller'|trans }} %}
+                {% else %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'seller',label:'seller',options:getWixCompanyArchivedSellerList(),ajax:true, text:'seller'}} %}
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="form-group">
+                {% if villumi %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'seller',label:'seller',options:getWixCompanySellerList(),ajax:true, text:'seller', tooltip: 'wixmp_seller'|trans }} %}
+                {% else %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'seller',label:'seller',options:getWixCompanySellerList(),ajax:true, text:'seller'}} %}
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {# <div class="form-group">
+            <label for="search_seller">{{ 'seller'|trans }}</label>
+            <input type="text" class="form-control" id="search_seller" name="name" value="{% if search.name is defined %}{{ search.name }}{% endif %}">
+        </div> #}
+        
+        <div class="form-group">
+            <label for="search_email">
+                {{ 'email'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_email'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="search_email" name="email" value="{% if search.email is defined %}{{ search.email }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+            <label for="search_phone">
+                {{ 'phone'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_phone'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="search_phone" name="phone" value="{% if search.phone is defined %}{{ search.phone }}{% endif %}">
+        </div>
+        {% if page is defined and page == "seller_manage" %}
+            <div class="form-group">
+                {% if villumi %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'status',label:'status',options:[{id:"A",text: "active"},{id:"D",text: "disabled"},{id:"N",text: "new"}], tooltip: 'wixmp_status'|trans}} %}
+                {% else %}
+                    {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'status',label:'status',options:[{id:"A",text: "active"},{id:"D",text: "disabled"},{id:"N",text: "new"}]}} %}
+                {% endif %}
+            </div>
+        {% endif %}   
+        
+    </div>
+    <div class="filter-btn-block">
+        <button type="submit" class="btn btn-primary">{{ 'submit'|trans }}</button>
+        <button type="button" class="btn btn-danger btn-clear">{{ 'search.clear'|trans }}</button>
+        <button type="button" class="btn btn-secondary filter-close">{{ 'cancel'|trans }}</button>
+    </div>
+</form>

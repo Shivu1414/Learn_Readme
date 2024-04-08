@@ -1,0 +1,150 @@
+{% set primaryCurrency = get_currency('app', storeHash) %}
+<div class="wk-section">
+    {# {% include 'common/_header_section.twig' with {'headerName': 'summary'|trans, 'attachId': 'summaryInfo'} %} #}
+    <div id="summaryInfo">    
+        <div class="form-row">
+            <div class="form-group">
+                {{ form_label(form.name,'name'|trans,{label_attr:{class:'wk-required'}}) }}
+                {{ form_widget(form.name,{required:false,'attr':{'class':'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.sku,'product_code'|trans,{label_attr:{class:'wk-required'}}) }}
+                {{ form_widget(form.sku) }}
+                <input type="hidden" name="previous_sku" value="{{ form.sku.vars.data }}"/>
+            </div>
+        </div>
+        <div class="form-row">
+         {% if company.storehash != 'RishabhStore-SAAS727a' and company.storehash != 'VILLUMIb6f3' %}
+            <div class="form-group">
+                {{ form_label(form.price,'price'|trans ~ '(' ~ primaryCurrency.symbol ~ ')',{label_attr:{class:'wk-required wk-price'}}) }}
+                {{ form_widget(form.price,{required:false}) }}
+            </div>
+        {% endif %}
+            <div class="form-group">
+                {{ form_label(form.productType,'product_type'|trans) }}
+                {{ form_widget(form.productType, {attr: {onchange: 'if(this.value == "physical"){ document.getElementById("productPhysicalType").classList.remove("d-none"); document.getElementById("productShippingSection").classList.remove("d-none"); document.getElementById("tab_inventory").classList.remove("d-none");}else{ document.getElementById("productPhysicalType").classList.add("d-none"); document.getElementById("productShippingSection").classList.add("d-none"); document.getElementById("tab_inventory").classList.add("d-none");}', 'class':'form-control'}}) }}
+            </div>  
+        {% if company is not null and (company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3' )  %}
+            <div class="form-group">
+                 {{ form_label(form.awards, 'awards'|trans) }}
+                 <div>
+                      {{ form_widget(form.awards, {attr: {'class':'form-control'}}) }}
+                </div>
+            </div>
+        {% endif %}
+        </div>
+        {% if company is not null and (company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3') %}
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(form.brand,'producer'|trans,{label_attr:{class:'wk-required'}}) }}
+                    {{ form_widget(form.brand, {attr: {'class':'form-control wk-required'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.grape_varity,'grape_varity'|trans,{label_attr:{class:'wk-required'}}) }}
+                    {{ form_widget(form.grape_varity, {attr: {'class':'form-control'}}) }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(form.BottleSize,'bottle_size'|trans) }}
+                    {{ form_widget(form.BottleSize, {attr: {'class':"form-control"}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.vintage, 'Vintage'|trans,{label_attr:{class:'wk-required'}}) }}
+                    <div class="vintage">
+                        {{ form_widget(form.vintage, {attr: {'class':" wk-required form-control"}}) }}
+                    </div>
+                </div>
+            </div>
+        <div class="form-row">
+            <div class="form-group">
+                {{ form_label(form.country, 'country'|trans,{label_attr:{class:'wk-required'}}) }} 
+                <div class="country">
+                    {{ form_widget(form.country, {attr: {'class': "form-control", id: "country-select"}}) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form_label(form.region, 'region'|trans,{label_attr:{class:'wk-required'}}) }}
+                <div class="region">
+                    {{ form_widget(form.region, {attr: {'class': "form-control", id: "region-select"}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                {{ form_label(form.classification, 'classification'|trans) }} 
+                <div class="classification">
+                    {{ form_widget(form.classification, {attr: {'class': "form-control", id: "classification-select"}}) }}
+                </div>
+            </div>
+                <div class="form-group">
+                    {{ form_label(form.appelation, 'appelation'|trans) }}
+                    <div class="appelation">
+                        {{ form_widget(form.appelation, {attr: {'class': 'form-control', id: "appelation-select"}}) }}
+                    </div>
+                </div>
+        </div>
+        <div class="form-row">
+        </div>
+         {% endif %}
+        {# <div class="form-row">
+            <div class="form-group">
+                {{ form_label(form.discount_type,'discount_type'|trans ,{label_attr:{class:'wk-required '}}) }}
+                {{ form_widget(form.discount_type,{attr: {required:false, class:'wk-input-medium'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.discount,'discount'|trans) }}
+                {{ form_widget(form.discount, {attr: { class:'wk-input-medium'}}) }}
+            </div>  
+            <div class="form-group">
+                {{ form_label(form.sales_price,'sales_price'|trans) }}
+                {{ form_widget(form.sales_price, {attr: {class:'wk-input-medium'}}) }}
+            </div> 
+        </div> #}
+        <div class="form-row">
+            <div id="productPhysicalType" class="">
+                {% include app_path_prefix ~ '/view_templates/catalog/components/_product_physical.html.twig' with {controller_prefix: controller_prefix} %}
+            </div>
+            {% if company.storeHash == 'RishabhStore-SAAS727a' or  company.storeHash == 'VILLUMIb6f3'%}
+                <div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="form-control-label wk-required">{{ 'Categories'|trans }}</label></br>
+                    {% include app_path_prefix ~ '/view_templates/catalog/components/_category_list_tree_checkbox_vellum.html.twig'  with {app_path_prefix:app_path_prefix, controller_prefix:controller_prefix, categoryTree: categoryTree, level: 0, selected:selected_cats, hide_status: true} %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-row">
+            <div class="form-group wk-product-manage-category-tree">
+                {# <label class="form-control-label wk-required">{{ 'collections'|trans }}</label> #}
+                {% if company.storehash !='RishabhStore-SAAS727a' and company.storehash !='VILLUMIb6f3' %}
+                    <label class="form-control-label">{{ 'Categories'|trans }}</label>
+                    <div>
+                        <div class="wk-category-tree-view">
+                            {% include app_path_prefix ~ '/view_templates/catalog/components/_category_list_tree_checkbox.html.twig'  with {app_path_prefix:app_path_prefix, controller_prefix:controller_prefix, categoryTree: categoryTree, level: 0, selected:selected_cats, hide_status: true} %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wk-section">
+  
+    {% if company is defined  and   (company.storehash != 'RishabhStore-SAAS727a' and company.storehash != 'VILLUMIb6f3') %}
+    {% include 'common/_header_section.twig' with {'headerName': 'desciption'|trans, 'attachId': 'desciption'} %}
+    <div id="desciption">
+        <div class="form-group wk-form-group">
+            {{ form_label(form.description,'product_description'|trans, {label_attr: {class: "form-control-label"}}) }}
+            {% if area == 'admin' %}
+                {{ form_widget(form.description,{attr:{class:'wk-editor'}}) }}
+            {% else %}
+                {% set seller_allow_tinymce = get_setting_section_value('seller','text_editor',companyApplication.company,companyApplication.application,false) %}
+                {% if seller_allow_tinymce == 'tinymce' %}
+                    {{ form_widget(form.description,{attr:{class:'wk-editor'}}) }}
+                {% else %}
+                    {{ form_widget(form.description) }}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>

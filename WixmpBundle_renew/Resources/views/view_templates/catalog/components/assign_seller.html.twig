@@ -1,0 +1,29 @@
+<div class="modal fade" id="productWixSellerAssignModal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="currencyModalLongTitle">{{ 'assign_seller_to_product'|trans }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {# <form id="formAssignProductSeller" method="post" action="{{ path('marketplace_catalog_product_assign_seller', {storeHash: storeHash} ) }}"> #}
+                    {# <input name="product_id" type="hidden" value="0"> #}
+                    {# <input type="hidden" name="redirect_uri" value="{{ app.request.uri }}"> #}
+                    {# <div class="form-group">
+                        <label for="form_seller" class="form-control-label required">{{ 'product'|trans }}</label>
+                        <span class="form-control wk-product-name"></span>
+                    </div> #}
+                    <div class="form-group">
+                        {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'seller',label:'seller',options:getWixCompanySellerList(),ajax:true, text:'seller', all_option:'No'}} %}
+                    </div>
+                {# </form> #}
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="assign-seller-close" class="btn btn-dark" data-dismiss="modal">{{ 'close'|trans }}</button>
+                <button type="submit" id="assign-wix-seller-submit" name="assign_seller" class="btn btn-primary" {# form="formAssignProductSeller" #}>{{ 'assign'|trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>

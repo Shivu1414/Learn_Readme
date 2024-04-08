@@ -1,0 +1,302 @@
+{% if product.id is defined %}
+    {% set prod_id = product.id %}
+{% else %}
+    {% set prod_id = 0 %}
+{% endif %}
+
+{% if area == 'admin' %}
+    {% set controller_prefix = 'wixmp_catalog_product_' %}
+{% else %}
+    {% set controller_prefix = 'wixmp_seller_catalog_product_' %}
+{% endif %}
+
+{% form_theme form _self %}
+
+{% if company is not null  and (company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3' ) %}
+    {% set imageSizeText = 'maximum_image_size'|trans ~ ': 5 MB' %}
+    {% set imageFormat = 'support_format'|trans ~ '.jpg, .jpeg, .png, .heic' %}
+    {% set pimageblock1 %} {# <-- omit this assignment if you want the default #}
+        {% block _form_images1_row %}  
+                {{ form_widget(form.images1) }}
+        {% endblock %} 
+    {% endset %}
+    {% set pimageblock2 %}
+            {% block _form_images2_row %}
+                {{ form_widget(form.images2) }}
+            {% endblock %}
+    {% endset %}
+    {% set pimageblock3 %}
+        {% block _form_images3_row %}
+            {{ form_widget(form.images3) }}
+        {% endblock %}
+    {% endset %}
+    {% set pimageblock4 %}
+        {% block _form_images4_row %}
+            {{ form_widget(form.images4) }}
+        {% endblock %}
+    {% endset %}
+    {% set pimageblock5 %}
+        {% block _form_images5_row %}
+            {{ form_widget(form.images5) }}
+        {% endblock %}
+    {% endset %}
+    {% set pimageblock6 %}
+        {% block _form_images6_row %}
+            {{ form_widget(form.images6) }}
+        {% endblock %}
+    {% endset %}
+{% else %}
+    {% set pimageblock %} {# <-- omit this assignment if you want the default #}
+        {% block _form_images_row %}  
+                {{ form_widget(form.images) }}
+        {% endblock %} 
+{% endset %}
+{% endif %}
+{% set current_url = path(app.request.get('_route'), app.request.get('_route_params')) %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(form, {'name': 'wixmp_product_form','attr': {'id': 'wixmp-product-form'}}) }}
+            {{ form_errors(form) }}
+            {% set active_tab = app.request.get('active_tab') %}
+            {% if active_tab == null %} {% set active_tab = 'basicinfo' %} {% endif %}
+            <input type="hidden" name="active_tab" id = "wix_product_active_tab" value="{{ active_tab }}">
+            <div class="tile-title-w-btn">
+                <h5 class="title"></h5>
+                <div class="btn-group"></div>
+            </div>
+            <div class="tile-body">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_tab == 'basicinfo' %} active {% endif %}" data-toggle="tab" href="#basicinfo">{{ 'product.basic_info'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_tab == 'images' %} active {% endif %}" data-toggle="tab" href="#images">{{ 'images'|trans }}</a>
+                    </li>
+                    {% if company is defined and (company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3') %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_tab == 'condition' %} active {% endif %}" data-toggle="tab" href="#condition">{{ 'condition'|trans }}</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_tab == 'inventory' %} active {% endif %}" data-toggle="tab" href="#inventory">{{ 'inventory'|trans }}</a>
+                    </li>
+                   
+                    {% if area == "admin" or (area == "mp-wix-seller" and isProductDiscountForSeller is defined and isProductDiscountForSeller == 1) and company is defined  %}
+                        {% if company.storehash == 'RishabhStore-SAAS727a' or  company.storehash == 'VILLUMIb6f3'%}
+                            <li class="nav-item">
+                                <a class="nav-link {% if active_tab == 'discount' %} active {% endif %}" data-toggle="tab" id = "discountTab" href="#discount">{{ 'price_vellum'|trans }}</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if active_tab == 'discount' %} active {% endif %}" data-toggle="tab" id = "discountTab" href="#discount">{{ 'discount'|trans }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    
+                    {% if area == 'mp-wix-seller' and (company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3') %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_tab == 'discount' %} active {% endif %}" data-toggle="tab" id = "discountTab" href="#discount">{{ 'price_vellum'|trans }}</a>
+                        </li>
+                    {% endif %}
+                    {% if company is not null  and (company.storehash != 'RishabhStore-SAAS727a' and company.storehash != 'VILLUMIb6f3')  %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_tab == 'extra_details' %} active {% endif %}" data-toggle="tab" href="#extra_details">{{ 'extra_details'|trans }}</a>
+                        </li>
+                    {% endif %}
+                    {% if ( plan_application_data['commission_per_product'] is defined and plan_application_data['commission_per_product'] == 1 and (area == 'admin' or (seller is defined and seller.currentPlan.conditions['commission_type'] is defined and seller.currentPlan.conditions['commission_type'] == "commission_per_product"))) %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_tab == 'commission' %} active {% endif %}" data-toggle="tab" href="#commission">{{ 'commission'|trans }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <div class="tab-content">
+                    <br><br>
+                    {# basic tab #}
+                    {% if company.storeHash != 'RishabhStore-SAAS727a' and company.storeHash != 'VILLUMIb6f3' %}
+                          <div class="tab-pane {% if active_tab == 'basicinfo' %} active {% else %} fade {% endif %}" id="basicinfo">
+                            {% include app_path_prefix ~ '/view_templates/catalog/components/_detail.html.twig'  with {controller_prefix:controller_prefix} %}
+                         </div>
+                    {% else %}
+                           <div class="tab-pane {% if active_tab == 'basicinfo' %} active {% else %} fade {% endif %}" id="basicinfo">
+                            {% include app_path_prefix ~ '/view_templates/catalog/components/_detail_vellum.html.twig'  with {controller_prefix:controller_prefix} %}
+                         </div>
+                    {% endif %}
+                    {# images tab #}
+                    <div class="tab-pane {% if active_tab == 'images' %} active {% else %} fade {% endif %}" id="images">
+                        {% include 'common/_header_section.twig' with {'headerName': 'images'|trans, 'attachId': 'images'} %}                        
+                        <div class="wk-section">
+                            {# <a href="" class="btn btn-primary" data-toggle="modal" data-target="#add_image">
+                            {{ 'product.add_image'|trans}}
+                            </a> #}
+                            {% if company is defined and (company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3' ) %}
+                             <h5> {{ 'please_upload_images_of_your_wine_bottles_and_kindly_refer_to_the_provided_examples'|trans}}</h5>
+                           
+                                <big class="rq"> {{ 'front_view'|trans }}</big>
+                                <small><br> {{ imageSizeText is defined ? imageSizeText : ''}} </small>
+                                <div id="container1"  class="container-wrapper">
+                                     <div id="wk-image-drag-container" class="wk-uploader vellum">
+                                         <h3 class="mb-5 mt-5 text-muted" style="margin-bottom: 0% !important;"><i class="fa fa-upload"></i> </h3>
+                                        {# <input type="file" id="pimages" name="form[pimages][]" accept=".jpg, .png, .jpeg" multiple="true" title='' /> #}
+                                        {{ pimageblock1 }}
+                                        <small>{{ imageFormat is defined ? imageFormat : ''}}</small>
+                                    </div>
+                                    <div  class="pimage-preview-container villum-container-preview pre1">
+                                        <img src="{{ asset('resource/images/submodules/customizations/Front&Back.png') }}" class="vellum-wine"></img>
+                                        {# <span class="btn btn-primary pimage-clear-all">{{'clear_images'|trans}}</span> #}
+                                    </div>
+                                </div>
+
+                                <big class="rq">{{ 'back_view'|trans }}</big>
+                                <small><br> {{ imageSizeText is defined ? imageSizeText : ''}} </small>
+                                <div id="container2"  class="container-wrapper">
+                                     <div id="wk-image-drag-container" class="wk-uploader vellum">
+                                        <h3 class="mb-5 mt-5 text-muted" style="margin-bottom: 0% !important;"><i class="fa fa-upload"></i></h3>
+                                        {# <input type="file" id="pimages" name="form[pimages][]" accept=".jpg, .png, .jpeg" multiple="true" title='' /> #}
+                                        {{ pimageblock2 }}
+                                        <small>{{ imageFormat is defined ? imageFormat : ''}}</small>
+                                    </div>
+                                    <div class="pimage-preview-container villum-container-preview pre2">
+                                        {# <span class="btn btn-primary pimage-clear-all">{{'clear_images'|trans}}</span> #}
+                                        <img src="{{ asset('resource/images/submodules/customizations/Front&Back.png') }}" class="vellum-wine"></img>
+                                    </div>
+                                </div>
+
+                                <big class="rq">{{ 'label_photo'|trans }}</big>
+                                <small><br> {{ imageSizeText is defined ? imageSizeText : ''}} </small>
+                                <div id="container3" class="container-wrapper">
+                                     <div id="wk-image-drag-container" class="wk-uploader vellum">
+                                        <h3 class="mb-5 mt-5 text-muted" style="margin-bottom: 0% !important;"><i class="fa fa-upload"></i></h3>
+                                        {# <input type="file" id="pimages" name="form[pimages][]" accept=".jpg, .png, .jpeg" multiple="true" title='' /> #}
+                                        {{ pimageblock3 }}
+                                        <small>{{ imageFormat is defined ? imageFormat : ''}}</small>
+                                    </div>  
+                                    <div class="pimage-preview-container villum-container-preview pre3">
+                                        {# <span class="btn btn-primary pimage-clear-all">{{'clear_images'|trans}}</span> #}
+                                        <img src="{{ asset('resource/images/submodules/customizations/Lable.png') }}" class="vellum-wine"></img>
+                                    </div>
+                                </div>
+
+                                <big class="rq">{{ 'bottle_neck_photo'|trans }}</big>
+                                <small><br> {{ imageSizeText is defined ? imageSizeText : ''}} </small>
+                                <div id="container4" class="container-wrapper">
+                                     <div id="wk-image-drag-container" class="wk-uploader vellum">
+                                        <h3 class="mb-5 mt-5 text-muted" style="margin-bottom: 0% !important;"><i class="fa fa-upload"></i></h3>
+                                        {# <input type="file" id="pimages" name="form[pimages][]" accept=".jpg, .png, .jpeg" multiple="true" title='' /> #}
+                                        {{ pimageblock4 }}
+                                        <small>{{ imageFormat is defined ? imageFormat : ''}}</small>
+                                    </div>  
+                                    <div class="pimage-preview-container villum-container-preview pre4">
+                                        {# <span class="btn btn-primary pimage-clear-all">{{'clear_images'|trans}}</span> #}
+                                        <img src="{{ asset('resource/images/submodules/customizations/BottleNeck.png') }}" class="vellum-wine"></img>
+                                    </div>
+                                </div>
+
+                                <big class="rq">{{ 'bottle_cap_photo'|trans }}</big>
+                                <small><br> {{ imageSizeText is defined ? imageSizeText : ''}} </small>
+                                <div id="container5" class="container-wrapper">
+                                     <div id="wk-image-drag-container" class="wk-uploader vellum">
+                                        <h3 class="mb-5 mt-5 text-muted" style="margin-bottom: 0% !important;"><i class="fa fa-upload"></i></h3>
+                                        {# <input type="file" id="pimages" name="form[pimages][]" accept=".jpg, .png, .jpeg" multiple="true" title='' /> #}
+                                        {{ pimageblock5 }}
+                                        <small>{{ imageFormat is defined ? imageFormat : ''}}</small>
+                                    </div>  
+                                    <div class="pimage-preview-container villum-container-preview pre5">
+                                        {# <span class="btn btn-primary pimage-clear-all">{{'clear_images'|trans}}</span> #}
+                                        <img src="{{ asset('resource/images/submodules/customizations/BottleCap.png') }}" class="vellum-wine"></img>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <big> {{ 'additional_photo'|trans }} </big>
+                                    <small><br> {{ imageSizeText is defined ? imageSizeText : ''}} </small>
+                                    <div id="container6" class="container-wrapper">
+                                        <div id="wk-image-drag-container" class="wk-uploader vellum">
+                                            <h3 class="mb-5 mt-5 text-muted" style="margin-bottom: 0% !important;"><i class="fa fa-upload"></i></h3>
+                                            {# <input type="file" id="pimages" name="form[pimages][]" accept=".jpg, .png, .jpeg" multiple="true" title='' /> #}
+                                            {{ pimageblock6 }}
+                                            <small>{{ imageFormat is defined ? imageFormat : ''}}</small>
+                                        </div>
+                                        <div class="pimage-preview-container villum-container-preview pre6">
+                                            {# <span class="btn btn-primary pimage-clear-all">{{'clear_images'|trans}}</span> #}
+                                            <img src="{{ asset('resource/images/submodules/customizations/Front&Back.png') }}" class="vellum-wine"></img>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                 <div id="wk-image-drag-container" class="wk-uploader">
+                                    <h3 class="mb-5 mt-5 text-muted" style="margin-bottom: 0% !important;">{{'drag_drop_files'|trans}}</h3>
+                                    {# <input type="file" id="pimages" name="form[pimages][]" accept=".jpg, .png, .jpeg" multiple="true" title='' /> #}
+                                    {{ pimageblock }}                                
+                                </div>
+                                <div class="pimage-preview-container">
+                                    {# <span class="btn btn-primary pimage-clear-all">{{'clear_images'|trans}}</span> #}
+                                </div>
+                            {% endif %}                     
+                        </div>
+                    
+                        {# already added images  #}
+                        <div id="images">
+                            {% include app_path_prefix ~ '/view_templates/catalog/components/_images_list.html.twig' %}
+                        </div>
+                    </div>
+                    {% if company is defined and (company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3') %}
+                        <div class="tab-pane {% if active_tab == 'condition' %} active {% else %} fade {% endif %}" id="condition">
+                         {% include app_path_prefix ~ '/view_templates/catalog/components/_condition.html.twig' with {controller_prefix:controller_prefix} %}
+                        </div>
+                    {% endif %}
+
+                    {# Tab Inventory #}
+                    <div class="tab-pane {% if active_tab == 'inventory' %} active {% else %} fade {% endif %}" id="inventory">
+                        {% include app_path_prefix ~ '/view_templates/catalog/components/_inventory.html.twig' with {controller_prefix:controller_prefix} %}
+                    </div>
+
+                    {# Tab Discount #}
+                    {% if area == "admin" or (area == "mp-wix-seller" and isProductDiscountForSeller is defined and isProductDiscountForSeller == 1) or (company.storehash != 'RishabhStore-SAAS727a' and  company.storehash != 'VILLUMIb6f3') %}
+                        <div class="tab-pane {% if active_tab == 'discount' %} active {% else %} fade {% endif %}" id="discount">
+                            {% include app_path_prefix ~ '/view_templates/catalog/components/_discount.html.twig' with {controller_prefix:controller_prefix} %}
+                        </div>
+                    {% endif %}
+                    
+                    {% if area == 'mp-wix-seller' and (company.storehash == 'RishabhStore-SAAS727a' or company.storehash == 'VILLUMIb6f3') %}
+                        <div class="tab-pane {% if active_tab == 'discount' %} active {% else %} fade {% endif %}" id="discount">
+                            {% include app_path_prefix ~ '/view_templates/catalog/components/_discount.html.twig' with {controller_prefix:controller_prefix} %}
+                        </div>
+                    {% endif %}
+
+                    {# Tab extra_details #}
+                    {% if company.storehash != 'RishabhStore-SAAS727a' and  company.storehash != 'VILLUMIb6f3' %}
+                        <div class="tab-pane {% if active_tab == 'extra_details' %} active {% else %} fade {% endif %}" id="extra_details">
+                            {% include app_path_prefix ~ '/view_templates/catalog/components/_extra_details.html.twig' with {controller_prefix:controller_prefix} %}
+                        </div>
+                    {% endif %}
+                    {# Tab commission #}
+                    <div class="tab-pane {% if active_tab == 'commission' %} active {% else %} fade {% endif %}" id="commission">
+                        {% include app_path_prefix ~ '/view_templates/catalog/components/_commission.html.twig' with {controller_prefix:controller_prefix} %}
+                    </div>
+                </div>
+            </div>
+            <div class="tile-footer">
+                <button class="btn btn-primary" id = "wix_product_btn" type="submit" data-bind="click:productSubmit">
+                    {% if product is not empty and product.id %}{{ 'save'|trans }}{% else %}{{ 'create'|trans }}{% endif %}
+                </button>
+                {# <a class="btn dropdown-toggle product-btns  btn-primary" href="#" role="button" id="dropdown-action" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                <div class="dropdown-menu dropdown-menu-arrow" aria-labelledby="dropdown-action">
+                    <a class="dropdown-item product-add-btns" href="#" data-url="save" >Save</a>
+                    <a class="dropdown-item product-add-btns" href="#" data-url="add" >Save & New</a>
+                    <a class="dropdown-item product-add-btns" href="#" data-url="copy" >Save & Copy</a>
+                </div> #}
+
+                    {# <a class="btn btn-secondary ml-2" href="{% if app.request.query.get('return_uri') is not empty %}{{ app.request.query.get('return_uri')|b64_decode }}{% else %}{{ path(controller_prefix ~ 'manage',{storeHash:storeHash}) }}{% endif %}">{{ 'cancel'|trans }}</a> #}
+            </div>
+            {{ form_widget(form._token) }}
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
+</div>
+
+
+

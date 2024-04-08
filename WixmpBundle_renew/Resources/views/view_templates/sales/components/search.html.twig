@@ -1,0 +1,105 @@
+<h4>{{ 'filter'|trans }}</h4>
+{% set order_statuses = order_statuses | filter((value, key) => key != 'incomplete') %}
+{% set fullfillment_order_statuses = { "1": "Yes"} %}
+
+<form method="get">
+    <div class="filter-fields" style = "height: 0px !important;">
+        <div class="form-group">
+            <label for="search_orderId">
+                {{ 'orderId'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_order_id'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="search_orderId" name="order_id" value="{% if search.order_id is defined %}{{ search.order_id }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+            <label for="search_store_order_id">
+                {{ 'store_order_id'|trans }}
+                {% if villumi %}
+                    <i class="fa fa-info-circle" title="{{ 'wixmp_store_order_id'|trans }}" aria-hidden="true"></i>
+                {% endif %}
+            </label>
+            <input type="text" class="form-control" id="search_store_order_id" name="store_order_no" value="{% if search.store_order_no is defined %}{{ search.store_order_no }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+            {% if villumi %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'seller_status',label:'payment_status',options:order_statuses,value: 'index', tooltip: 'wixmp_payment_status'|trans }} %}
+            {% else %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'seller_status',label:'payment_status',options:order_statuses,value: 'index'}} %}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {% if villumi %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'fullfillment_status',label:'fullfillment_status',options:wix_fullfillment_order_statuses,value: 'index', tooltip: 'wixmp_fullfillment_status'|trans }} %}
+            {% else %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'fullfillment_status',label:'fullfillment_status',options:wix_fullfillment_order_statuses,value: 'index'}} %}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {% if villumi %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'seller_fullfillment_status',label:'seller_order_fullfillment_status',options:fullfillment_order_statuses,value: 'index', tooltip: 'wixmp_seller_order_fullfillment_status'|trans }} %}
+            {% else %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'seller_fullfillment_status',label:'seller_order_fullfillment_status',options:fullfillment_order_statuses,value: 'index'}} %}
+            {% endif %}
+        </div>
+
+        {# <div class="form-group">
+            <input type="checkbox" class="" id="include_incomplete" name="include_incomplete_orders" value="1" {% if search.include_incomplete_orders is defined and search.include_incomplete_orders == 1 %} checked = "checked" {% endif %}>
+            <label for="include_incomplete">{{ 'include_incomplete'|trans }}</label>
+        </div> #}
+
+        <div class="form-group">
+            {% if villumi %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'fullordering',label:'fullordering_order_by',options:[{id:'id ASC',text:'id_asc'},{id:'id DESC',text:'id_desc'},{id:'createdAt ASC',text:'date_asc'},{id:'createdAt DESC',text:'date_desc'},{id:'total ASC',text:'total_asc'},{id:'total DESC',text:'total_desc',}], tooltip: 'wixmp_fullordering_order_by'|trans }} %}
+            {% else %}
+                {% include 'common/select_combo_box.html.twig'  with {data: {params:search,name:'fullordering',label:'fullordering_order_by',options:[{id:'id ASC',text:'id_asc'},{id:'id DESC',text:'id_desc'},{id:'createdAt ASC',text:'date_asc'},{id:'createdAt DESC',text:'date_desc'},{id:'total ASC',text:'total_asc'},{id:'total DESC',text:'total_desc'}]}} %}
+            {% endif %}
+        </div>
+
+        {# <div class="form-group">
+            {% include 'common/date_range_box.html.twig'  with {
+                data: {
+                    to_name       : 'end_date',
+                    from_name     : 'start_date',
+                    selected_to   : "now"|date('Y-m-d'),
+                    selected_from : "now"|date('Y-m-d')
+                }
+            } %}    
+        </div><br> #}
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="transaction_id">
+                        {{ 'created_start_date'|trans }}
+                        {% if villumi %}
+                            <i class="fa fa-info-circle" title="{{ 'wixmp_created_start_date'|trans }}" aria-hidden="true"></i>
+                        {% endif %}
+                    </label>
+                    <input type="text" class="form-control wix_end_date" value="{% if search['start_date'] is defined %}{{ search['start_date'] }}{% endif %}" name="start_date">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="transaction_id">
+                        {{ 'created_end_date'|trans }}
+                        {% if villumi %}
+                            <i class="fa fa-info-circle" title="{{ 'wixmp_created_end_date'|trans }}" aria-hidden="true"></i>
+                        {% endif %}
+                    </label>
+                    <input type="text" class="form-control wix_end_date" value="{% if search['end_date'] is defined %}{{ search['end_date'] }}{% endif %}" name="end_date">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="filter-btn-block">
+        <button type="submit" class="btn btn-primary">{{ 'submit'|trans }}</button>
+        <button type="button" class="btn btn-danger btn-clear">{{ 'search.clear'|trans }}</button>
+        <button type="button" class="btn btn-secondary filter-close">{{ 'cancel'|trans }}</button>
+    </div>
+</form>
